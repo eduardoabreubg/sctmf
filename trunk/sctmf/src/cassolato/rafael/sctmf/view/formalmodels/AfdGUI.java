@@ -28,12 +28,62 @@ public class AfdGUI extends FormalModelGUI {
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
         pRolagem = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         pCard = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        pCadAlf = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList();
+        jPanel1 = new javax.swing.JPanel();
+        addRemButtonsPanel2 = new view.AddRemButtonsPanel();
+        jPanel2 = new javax.swing.JPanel();
+        letterNumber1 = new view.LetterNumber();
+        pCadEst = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        letterNumber2 = new view.LetterNumber();
+        jPanel10 = new javax.swing.JPanel();
+        addRemButtonsPanel6 = new view.AddRemButtonsPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jList6 = new javax.swing.JList();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        addRemButtonsPanel1 = new view.AddRemButtonsPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel24 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jComboBox4 = new javax.swing.JComboBox();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel25 = new javax.swing.JPanel();
+        addRemButtonsPanel5 = new view.AddRemButtonsPanel();
+        jPanel26 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jList5 = new javax.swing.JList();
+        pCadFuncTrans = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -51,8 +101,185 @@ public class AfdGUI extends FormalModelGUI {
 
         pCard.setLayout(new java.awt.CardLayout());
 
-        jTextField1.setText("jTextField1");
-        pCard.add(jTextField1, "card2");
+        pCadAlf.setLayout(new java.awt.GridLayout(1, 0));
+
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jLabel1.setPreferredSize(new java.awt.Dimension(0, 15));
+        jPanel3.add(jLabel1, java.awt.BorderLayout.NORTH);
+
+        jLabel3.setPreferredSize(new java.awt.Dimension(35, 0));
+        jPanel3.add(jLabel3, java.awt.BorderLayout.EAST);
+
+        jLabel4.setPreferredSize(new java.awt.Dimension(35, 0));
+        jPanel3.add(jLabel4, java.awt.BorderLayout.WEST);
+
+        jLabel5.setPreferredSize(new java.awt.Dimension(0, 14));
+        jPanel3.add(jLabel5, java.awt.BorderLayout.SOUTH);
+
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        jLabel6.setFont(new java.awt.Font("Verdana", 0, 18));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("E");
+        jPanel4.add(jLabel6, java.awt.BorderLayout.NORTH);
+
+        jList1.setBackground(new java.awt.Color(247, 247, 214));
+        jList1.setFont(new java.awt.Font("Tahoma", 0, 14));
+        jList1.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList1.setValueIsAdjusting(true);
+        jScrollPane1.setViewportView(jList1);
+
+        jPanel4.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel3.add(jPanel4, java.awt.BorderLayout.CENTER);
+
+        pCadAlf.add(jPanel3);
+
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.ipady = 1;
+        gridBagConstraints.insets = new java.awt.Insets(8, 8, 8, 8);
+        jPanel1.add(addRemButtonsPanel2, gridBagConstraints);
+
+        pCadAlf.add(jPanel1);
+
+        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 20));
+
+        jPanel2.add(letterNumber1);
+
+        pCadAlf.add(jPanel2);
+
+        pCard.add(pCadAlf, "card2");
+
+        pCadEst.setLayout(new javax.swing.BoxLayout(pCadEst, javax.swing.BoxLayout.Y_AXIS));
+
+        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.X_AXIS));
+
+        pCadEst.add(jPanel5);
+
+        jPanel6.setLayout(new java.awt.GridLayout(2, 0));
+
+        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.X_AXIS));
+
+        jPanel7.setMinimumSize(new java.awt.Dimension(100, 40));
+        jPanel7.setPreferredSize(new java.awt.Dimension(100, 40));
+        jPanel7.add(letterNumber2);
+
+        jPanel10.add(addRemButtonsPanel6);
+
+        jPanel7.add(jPanel10);
+
+        jPanel11.setLayout(new java.awt.BorderLayout());
+
+        jPanel11.setMinimumSize(new java.awt.Dimension(50, 42));
+        jLabel13.setFont(new java.awt.Font("Verdana", 1, 14));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Estados");
+        jPanel11.add(jLabel13, java.awt.BorderLayout.NORTH);
+
+        jList6.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jList6.setPreferredSize(new java.awt.Dimension(33, 50));
+        jScrollPane6.setViewportView(jList6);
+
+        jPanel11.add(jScrollPane6, java.awt.BorderLayout.CENTER);
+
+        jLabel14.setPreferredSize(new java.awt.Dimension(40, 0));
+        jPanel11.add(jLabel14, java.awt.BorderLayout.WEST);
+
+        jLabel15.setPreferredSize(new java.awt.Dimension(40, 0));
+        jPanel11.add(jLabel15, java.awt.BorderLayout.EAST);
+
+        jPanel7.add(jPanel11);
+
+        jPanel6.add(jPanel7);
+
+        jPanel8.setLayout(new java.awt.GridLayout(2, 0));
+
+        jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.X_AXIS));
+
+        jPanel13.setLayout(new java.awt.BorderLayout());
+
+        jLabel7.setText("Estado Inicial");
+        jPanel13.add(jLabel7, java.awt.BorderLayout.NORTH);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel13.add(jComboBox1, java.awt.BorderLayout.CENTER);
+
+        jLabel11.setText("jLabel11");
+        jPanel13.add(jLabel11, java.awt.BorderLayout.SOUTH);
+
+        jPanel9.add(jPanel13);
+
+        jPanel14.add(addRemButtonsPanel1);
+
+        jPanel9.add(jPanel14);
+
+        jList2.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList2);
+
+        jPanel15.add(jScrollPane2);
+
+        jPanel9.add(jPanel15);
+
+        jPanel8.add(jPanel9);
+
+        jPanel12.setLayout(new javax.swing.BoxLayout(jPanel12, javax.swing.BoxLayout.X_AXIS));
+
+        jPanel24.setLayout(new java.awt.BorderLayout());
+
+        jLabel10.setText("Estados Finais");
+        jPanel24.add(jLabel10, java.awt.BorderLayout.NORTH);
+
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel24.add(jComboBox4, java.awt.BorderLayout.CENTER);
+
+        jLabel12.setText("jLabel12");
+        jPanel24.add(jLabel12, java.awt.BorderLayout.SOUTH);
+
+        jPanel12.add(jPanel24);
+
+        jPanel25.add(addRemButtonsPanel5);
+
+        jPanel12.add(jPanel25);
+
+        jList5.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane5.setViewportView(jList5);
+
+        jPanel26.add(jScrollPane5);
+
+        jPanel12.add(jPanel26);
+
+        jPanel8.add(jPanel12);
+
+        jPanel6.add(jPanel8);
+
+        pCadEst.add(jPanel6);
+
+        pCard.add(pCadEst, "card3");
+
+        pCard.add(pCadFuncTrans, "card4");
 
         add(pCard, java.awt.BorderLayout.CENTER);
 
@@ -60,22 +287,88 @@ public class AfdGUI extends FormalModelGUI {
 
     public void setFormalModel(FormalModel fm) {
         AFD afd = (AFD)fm;
-        this.jTextField1.setText(afd.getTeste());
+        //this.jTextField1.setText(afd.getTeste());
     }
 
     public FormalModel getFormalModel() {
         AFD afd = new AFD();
-        afd.setTeste(this.jTextField1.getText());
+        //afd.setTeste(this.jTextField1.getText());
         
         return afd;
     }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.AddRemButtonsPanel addRemButtonsPanel1;
+    private view.AddRemButtonsPanel addRemButtonsPanel2;
+    private view.AddRemButtonsPanel addRemButtonsPanel3;
+    private view.AddRemButtonsPanel addRemButtonsPanel4;
+    private view.AddRemButtonsPanel addRemButtonsPanel5;
+    private view.AddRemButtonsPanel addRemButtonsPanel6;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JComboBox jComboBox4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JList jList1;
+    private javax.swing.JList jList2;
+    private javax.swing.JList jList3;
+    private javax.swing.JList jList4;
+    private javax.swing.JList jList5;
+    private javax.swing.JList jList6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private view.LetterNumber letterNumber1;
+    private view.LetterNumber letterNumber2;
+    private javax.swing.JPanel pCadAlf;
+    private javax.swing.JPanel pCadEst;
+    private javax.swing.JPanel pCadFuncTrans;
     private javax.swing.JPanel pCard;
     private javax.swing.JPanel pRolagem;
     // End of variables declaration//GEN-END:variables
