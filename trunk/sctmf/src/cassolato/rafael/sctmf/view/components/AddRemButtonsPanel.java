@@ -27,16 +27,25 @@ public class AddRemButtonsPanel extends javax.swing.JPanel {
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         bAdd = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         bRemove = new javax.swing.JButton();
 
-        setLayout(new java.awt.GridLayout(4, 0, 0, 12));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
+        jLabel2.setText(" ");
+        add(jLabel2);
+
+        jLabel1.setText(" ");
         add(jLabel1);
 
         bAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Add24.gif")));
         add(bAdd);
+
+        jLabel3.setText(" ");
+        add(jLabel3);
 
         bRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Remove24.gif")));
         add(bRemove);
@@ -51,6 +60,8 @@ public class AddRemButtonsPanel extends javax.swing.JPanel {
     private javax.swing.JButton bAdd;
     private javax.swing.JButton bRemove;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
     
 }

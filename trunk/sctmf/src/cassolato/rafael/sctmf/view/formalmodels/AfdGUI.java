@@ -9,6 +9,10 @@ package cassolato.rafael.sctmf.view.formalmodels;
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.FormalModel;
 import cassolato.rafael.sctmf.view.FormalModelGUI;
+import java.util.Iterator;
+import java.util.Vector;
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 
 /**
  *
@@ -30,6 +34,8 @@ public class AfdGUI extends FormalModelGUI {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        bAdd = new javax.swing.JButton();
+        bRemove = new javax.swing.JButton();
         pRolagem = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -44,46 +50,55 @@ public class AfdGUI extends FormalModelGUI {
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
-        jPanel1 = new javax.swing.JPanel();
-        addRemButtonsPanel2 = new view.AddRemButtonsPanel();
-        jPanel2 = new javax.swing.JPanel();
-        letterNumber1 = new view.LetterNumber();
+        listAlf = new javax.swing.JList();
+        addRemoveButtons = new view.AddRemButtonsPanel();
+        letterNumberCA = new view.LetterNumber();
         pCadEst = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
+        pNort = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
         letterNumber2 = new view.LetterNumber();
         jPanel10 = new javax.swing.JPanel();
-        addRemButtonsPanel6 = new view.AddRemButtonsPanel();
+        addRemButtonsPanel3 = new view.AddRemButtonsPanel();
         jPanel11 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jList6 = new javax.swing.JList();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
+        pSul = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
-        jLabel11 = new javax.swing.JLabel();
-        jPanel14 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
         addRemButtonsPanel1 = new view.AddRemButtonsPanel();
-        jPanel15 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList2 = new javax.swing.JList();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        jPanel24 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox();
-        jLabel12 = new javax.swing.JLabel();
-        jPanel25 = new javax.swing.JPanel();
-        addRemButtonsPanel5 = new view.AddRemButtonsPanel();
-        jPanel26 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jList5 = new javax.swing.JList();
         pCadFuncTrans = new javax.swing.JPanel();
+
+        bAdd.setText("jButton3");
+        bAdd = addRemoveButtons.getButton(addRemoveButtons.ADD);
+        bAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAddActionPerformed(evt);
+            }
+        });
+
+        bRemove.setText("jButton3");
+        bRemove = addRemoveButtons.getButton(addRemoveButtons.REMOVE);
+        bRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bRemoveActionPerformed(evt);
+            }
+        });
 
         setLayout(new java.awt.BorderLayout());
 
@@ -101,11 +116,12 @@ public class AfdGUI extends FormalModelGUI {
 
         pCard.setLayout(new java.awt.CardLayout());
 
-        pCadAlf.setLayout(new java.awt.GridLayout(1, 0));
+        pCadAlf.setLayout(new java.awt.GridBagLayout());
 
+        pCadAlf.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), " Cadastro do Alfabeto ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(51, 51, 255)));
         jPanel3.setLayout(new java.awt.BorderLayout());
 
-        jLabel1.setPreferredSize(new java.awt.Dimension(0, 15));
+        jLabel1.setPreferredSize(new java.awt.Dimension(0, 5));
         jPanel3.add(jLabel1, java.awt.BorderLayout.NORTH);
 
         jLabel3.setPreferredSize(new java.awt.Dimension(35, 0));
@@ -124,60 +140,59 @@ public class AfdGUI extends FormalModelGUI {
         jLabel6.setText("E");
         jPanel4.add(jLabel6, java.awt.BorderLayout.NORTH);
 
-        jList1.setBackground(new java.awt.Color(247, 247, 214));
-        jList1.setFont(new java.awt.Font("Tahoma", 0, 14));
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jList1.setValueIsAdjusting(true);
-        jScrollPane1.setViewportView(jList1);
+        listAlf.setBackground(new java.awt.Color(247, 247, 214));
+        listAlf.setFont(new java.awt.Font("Tahoma", 0, 14));
+        listAlf.setValueIsAdjusting(true);
+        jScrollPane1.setViewportView(listAlf);
 
         jPanel4.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel3.add(jPanel4, java.awt.BorderLayout.CENTER);
 
-        pCadAlf.add(jPanel3);
-
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 111;
+        gridBagConstraints.ipady = 172;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(15, 8, 8, 1);
+        pCadAlf.add(jPanel3, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 1;
-        gridBagConstraints.ipady = 1;
-        gridBagConstraints.insets = new java.awt.Insets(8, 8, 8, 8);
-        jPanel1.add(addRemButtonsPanel2, gridBagConstraints);
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(40, 28, 0, 0);
+        pCadAlf.add(addRemoveButtons, gridBagConstraints);
 
-        pCadAlf.add(jPanel1);
-
-        jPanel2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 20));
-
-        jPanel2.add(letterNumber1);
-
-        pCadAlf.add(jPanel2);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 31, 0, 17);
+        pCadAlf.add(letterNumberCA, gridBagConstraints);
 
         pCard.add(pCadAlf, "card2");
 
-        pCadEst.setLayout(new javax.swing.BoxLayout(pCadEst, javax.swing.BoxLayout.Y_AXIS));
+        pCadEst.setLayout(new java.awt.GridLayout(2, 0));
 
-        jPanel5.setLayout(new javax.swing.BoxLayout(jPanel5, javax.swing.BoxLayout.X_AXIS));
+        pCadEst.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED), " Cadastro de Estados ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(51, 51, 255)));
+        pNort.setLayout(new javax.swing.BoxLayout(pNort, javax.swing.BoxLayout.X_AXIS));
 
-        pCadEst.add(jPanel5);
+        pNort.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pNort.setMinimumSize(new java.awt.Dimension(40, 40));
+        pNort.setPreferredSize(new java.awt.Dimension(30, 40));
+        jPanel16.add(letterNumber2);
 
-        jPanel6.setLayout(new java.awt.GridLayout(2, 0));
+        pNort.add(jPanel16);
 
-        jPanel7.setLayout(new javax.swing.BoxLayout(jPanel7, javax.swing.BoxLayout.X_AXIS));
+        addRemButtonsPanel3.setPreferredSize(new java.awt.Dimension(59, 100));
+        jPanel10.add(addRemButtonsPanel3);
 
-        jPanel7.setMinimumSize(new java.awt.Dimension(100, 40));
-        jPanel7.setPreferredSize(new java.awt.Dimension(100, 40));
-        jPanel7.add(letterNumber2);
-
-        jPanel10.add(addRemButtonsPanel6);
-
-        jPanel7.add(jPanel10);
+        pNort.add(jPanel10);
 
         jPanel11.setLayout(new java.awt.BorderLayout());
 
@@ -187,6 +202,7 @@ public class AfdGUI extends FormalModelGUI {
         jLabel13.setText("Estados");
         jPanel11.add(jLabel13, java.awt.BorderLayout.NORTH);
 
+        jScrollPane6.setPreferredSize(new java.awt.Dimension(37, 40));
         jList6.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -203,30 +219,46 @@ public class AfdGUI extends FormalModelGUI {
         jLabel15.setPreferredSize(new java.awt.Dimension(40, 0));
         jPanel11.add(jLabel15, java.awt.BorderLayout.EAST);
 
-        jPanel7.add(jPanel11);
+        pNort.add(jPanel11);
 
-        jPanel6.add(jPanel7);
+        pCadEst.add(pNort);
 
-        jPanel8.setLayout(new java.awt.GridLayout(2, 0));
+        pSul.setLayout(new java.awt.GridLayout(1, 2));
 
-        jPanel9.setLayout(new javax.swing.BoxLayout(jPanel9, javax.swing.BoxLayout.X_AXIS));
+        pSul.setPreferredSize(new java.awt.Dimension(10, 150));
+        jPanel9.setLayout(new java.awt.BorderLayout());
 
-        jPanel13.setLayout(new java.awt.BorderLayout());
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), " Estado Inicial ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(19, 92, 34)));
+        jLabel8.setPreferredSize(new java.awt.Dimension(0, 5));
+        jPanel9.add(jLabel8, java.awt.BorderLayout.SOUTH);
 
-        jLabel7.setText("Estado Inicial");
-        jPanel13.add(jLabel7, java.awt.BorderLayout.NORTH);
+        jLabel9.setPreferredSize(new java.awt.Dimension(10, 0));
+        jPanel9.add(jLabel9, java.awt.BorderLayout.WEST);
 
+        jPanel5.setLayout(new java.awt.GridLayout(1, 3));
+
+        jPanel6.setLayout(new java.awt.GridLayout(5, 1));
+
+        jLabel7.setPreferredSize(new java.awt.Dimension(34, 30));
+        jPanel6.add(jLabel7);
+
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel13.add(jComboBox1, java.awt.BorderLayout.CENTER);
+        jPanel6.add(jComboBox1);
 
-        jLabel11.setText("jLabel11");
-        jPanel13.add(jLabel11, java.awt.BorderLayout.SOUTH);
+        jPanel5.add(jPanel6);
 
-        jPanel9.add(jPanel13);
+        jPanel7.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
 
-        jPanel14.add(addRemButtonsPanel1);
+        addRemButtonsPanel1.setPreferredSize(new java.awt.Dimension(59, 140));
+        jPanel7.add(addRemButtonsPanel1);
 
-        jPanel9.add(jPanel14);
+        jPanel5.add(jPanel7);
+
+        jPanel8.setLayout(new java.awt.BorderLayout());
+
+        jLabel10.setPreferredSize(new java.awt.Dimension(40, 15));
+        jPanel8.add(jLabel10, java.awt.BorderLayout.NORTH);
 
         jList2.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -235,47 +267,25 @@ public class AfdGUI extends FormalModelGUI {
         });
         jScrollPane2.setViewportView(jList2);
 
-        jPanel15.add(jScrollPane2);
+        jPanel8.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
-        jPanel9.add(jPanel15);
+        jLabel16.setPreferredSize(new java.awt.Dimension(15, 0));
+        jPanel8.add(jLabel16, java.awt.BorderLayout.EAST);
 
-        jPanel8.add(jPanel9);
+        jLabel17.setPreferredSize(new java.awt.Dimension(15, 0));
+        jPanel8.add(jLabel17, java.awt.BorderLayout.WEST);
+
+        jPanel5.add(jPanel8);
+
+        jPanel9.add(jPanel5, java.awt.BorderLayout.CENTER);
+
+        pSul.add(jPanel9);
 
         jPanel12.setLayout(new javax.swing.BoxLayout(jPanel12, javax.swing.BoxLayout.X_AXIS));
 
-        jPanel24.setLayout(new java.awt.BorderLayout());
+        pSul.add(jPanel12);
 
-        jLabel10.setText("Estados Finais");
-        jPanel24.add(jLabel10, java.awt.BorderLayout.NORTH);
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel24.add(jComboBox4, java.awt.BorderLayout.CENTER);
-
-        jLabel12.setText("jLabel12");
-        jPanel24.add(jLabel12, java.awt.BorderLayout.SOUTH);
-
-        jPanel12.add(jPanel24);
-
-        jPanel25.add(addRemButtonsPanel5);
-
-        jPanel12.add(jPanel25);
-
-        jList5.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane5.setViewportView(jList5);
-
-        jPanel26.add(jScrollPane5);
-
-        jPanel12.add(jPanel26);
-
-        jPanel8.add(jPanel12);
-
-        jPanel6.add(jPanel8);
-
-        pCadEst.add(jPanel6);
+        pCadEst.add(pSul);
 
         pCard.add(pCadEst, "card3");
 
@@ -284,6 +294,46 @@ public class AfdGUI extends FormalModelGUI {
         add(pCard, java.awt.BorderLayout.CENTER);
 
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddActionPerformed
+        Character c = this.letterNumberCA.getLetter(); 
+        boolean add = true;
+        Vector<Character> vector = new Vector<Character>();
+         
+        for(int i=0;i<this.listAlf.getModel().getSize();i++)
+            vector.add((Character)this.listAlf.getModel().getElementAt(i)); 
+         
+        Iterator i = vector.iterator();         
+        while(i.hasNext()) 
+             if(i.next().equals(c))
+                 add = false;
+           
+         if(add) {
+        	 DefaultListModel dlm = new DefaultListModel();
+        	 for(int j=0;j<vector.size();j++)
+        		 dlm.addElement(vector.get(j));
+        	 
+        	 dlm.addElement(c);
+        	 
+             this.listAlf.setModel(dlm);
+             this.listAlf.repaint();
+         }
+            
+    }//GEN-LAST:event_bAddActionPerformed
+
+    private void bRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoveActionPerformed
+        int[] o = this.listAlf.getSelectedIndices();
+        if(o.length>0) {            
+            int pos = this.listAlf.getSelectedIndex();
+            if (pos > -1) {
+                lm = this.listAlf.getModel();
+            //this.lm.removeElementAt(pos);                        
+            }    
+        }
+              
+        
+	
+    }//GEN-LAST:event_bRemoveActionPerformed
 
     public void setFormalModel(FormalModel fm) {
         AFD afd = (AFD)fm;
@@ -297,27 +347,24 @@ public class AfdGUI extends FormalModelGUI {
         return afd;
     }
     
+   private ListModel lm = null;
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private view.AddRemButtonsPanel addRemButtonsPanel1;
-    private view.AddRemButtonsPanel addRemButtonsPanel2;
     private view.AddRemButtonsPanel addRemButtonsPanel3;
-    private view.AddRemButtonsPanel addRemButtonsPanel4;
-    private view.AddRemButtonsPanel addRemButtonsPanel5;
-    private view.AddRemButtonsPanel addRemButtonsPanel6;
+    private view.AddRemButtonsPanel addRemoveButtons;
+    private javax.swing.JButton bAdd;
+    private javax.swing.JButton bRemove;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -326,31 +373,12 @@ public class AfdGUI extends FormalModelGUI {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
     private javax.swing.JList jList2;
-    private javax.swing.JList jList3;
-    private javax.swing.JList jList4;
-    private javax.swing.JList jList5;
     private javax.swing.JList jList6;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
-    private javax.swing.JPanel jPanel24;
-    private javax.swing.JPanel jPanel25;
-    private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -360,17 +388,17 @@ public class AfdGUI extends FormalModelGUI {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private view.LetterNumber letterNumber1;
     private view.LetterNumber letterNumber2;
+    private view.LetterNumber letterNumberCA;
+    private javax.swing.JList listAlf;
     private javax.swing.JPanel pCadAlf;
     private javax.swing.JPanel pCadEst;
     private javax.swing.JPanel pCadFuncTrans;
     private javax.swing.JPanel pCard;
+    private javax.swing.JPanel pNort;
     private javax.swing.JPanel pRolagem;
+    private javax.swing.JPanel pSul;
     // End of variables declaration//GEN-END:variables
     
 }
