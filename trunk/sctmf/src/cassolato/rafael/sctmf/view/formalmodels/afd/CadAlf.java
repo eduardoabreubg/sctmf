@@ -119,12 +119,12 @@ public class CadAlf extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoveActionPerformed
-        this.genericJList.addItem(
-                this.letterNumberCA.getLetter());
+        this.genericJList.removeItens();         
     }//GEN-LAST:event_bRemoveActionPerformed
 
     private void bAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddActionPerformed
-         this.genericJList.removeItens();  
+          this.genericJList.addItem(
+                this.letterNumberCA.getLetter());
     }//GEN-LAST:event_bAddActionPerformed
       
     // Variables declaration - do not modify//GEN-BEGIN:variables

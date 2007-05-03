@@ -40,7 +40,7 @@ public class AddRemButtonsPanel extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
     
-    public javax.swing.JButton getButton(int codButton){
+    public javax.swing.JButton getButton(int codButton){        
         return (codButton==ADD?this.bAdd:this.bRemove);
     }
     
