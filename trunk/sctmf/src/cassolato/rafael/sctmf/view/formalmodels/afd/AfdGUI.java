@@ -4,7 +4,7 @@
  * Created on 4 de Abril de 2007, 09:41
  */
 
-package cassolato.rafael.sctmf.view.formalmodels;
+package cassolato.rafael.sctmf.view.formalmodels.afd;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.FormalModel;
@@ -17,6 +17,7 @@ import java.util.Vector;
  * @author  rafael2009_00
  */
 public class AfdGUI extends FormalModelGUI {
+    CadAlf pCadAlf = new CadAlf();
     
     /** Creates new form AfdGUI */
     public AfdGUI() {
@@ -30,26 +31,6 @@ public class AfdGUI extends FormalModelGUI {
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
-
-        bAdd = new javax.swing.JButton();
-        bRemove = new javax.swing.JButton();
-        pRolagem = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        pCard = new javax.swing.JPanel();
-        pCadAlf = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        genericJList = new cassolato.rafael.sctmf.view.components.GenericJList();
-        addRemoveButtons = new view.AddRemButtonsPanel();
-        letterNumberCA = new view.LetterNumber();
         pCadEst = new javax.swing.JPanel();
         pNort = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
@@ -62,10 +43,9 @@ public class AfdGUI extends FormalModelGUI {
         jLabel16 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jList6 = new javax.swing.JList();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        genericJList1 = new cassolato.rafael.sctmf.view.components.GenericJList();
         pSul = new javax.swing.JPanel();
         pEstIni = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -78,8 +58,7 @@ public class AfdGUI extends FormalModelGUI {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
+        genericJList3 = new cassolato.rafael.sctmf.view.components.GenericJList();
         pEstFin = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -91,95 +70,12 @@ public class AfdGUI extends FormalModelGUI {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jPanel18 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList();
-        pCadFuncTrans = new javax.swing.JPanel();
-
-        bAdd.setText("jButton3");
-        bAdd = addRemoveButtons.getButton(addRemoveButtons.ADD);
-        bAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bAddActionPerformed(evt);
-            }
-        });
-
-        bRemove.setText("jButton3");
-        bRemove = addRemoveButtons.getButton(addRemoveButtons.REMOVE);
-        bRemove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bRemoveActionPerformed(evt);
-            }
-        });
-
-        setLayout(new java.awt.BorderLayout());
-
-        pRolagem.setLayout(new java.awt.GridLayout(1, 4, 20, 0));
-
-        jButton2.setText("<<");
-        pRolagem.add(jButton2);
-
-        pRolagem.add(jLabel2);
-
-        jButton1.setText(">>");
-        pRolagem.add(jButton1);
-
-        add(pRolagem, java.awt.BorderLayout.SOUTH);
-
-        pCard.setLayout(new java.awt.CardLayout());
-
-        pCadAlf.setLayout(new java.awt.GridBagLayout());
-
-        pCadAlf.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), " Cadastro do Alfabeto ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(51, 51, 255)));
-        jPanel3.setLayout(new java.awt.BorderLayout());
-
-        jLabel1.setPreferredSize(new java.awt.Dimension(0, 5));
-        jPanel3.add(jLabel1, java.awt.BorderLayout.NORTH);
-
-        jLabel3.setPreferredSize(new java.awt.Dimension(35, 0));
-        jPanel3.add(jLabel3, java.awt.BorderLayout.EAST);
-
-        jLabel4.setPreferredSize(new java.awt.Dimension(35, 0));
-        jPanel3.add(jLabel4, java.awt.BorderLayout.WEST);
-
-        jLabel5.setPreferredSize(new java.awt.Dimension(0, 14));
-        jPanel3.add(jLabel5, java.awt.BorderLayout.SOUTH);
-
-        jPanel4.setLayout(new java.awt.BorderLayout());
-
-        jLabel6.setFont(new java.awt.Font("Verdana", 0, 18));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("E");
-        jPanel4.add(jLabel6, java.awt.BorderLayout.NORTH);
-
-        jPanel4.add(genericJList, java.awt.BorderLayout.CENTER);
-
-        jPanel3.add(jPanel4, java.awt.BorderLayout.CENTER);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 126;
-        gridBagConstraints.ipady = 173;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(24, 6, 3, 0);
-        pCadAlf.add(jPanel3, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
-        gridBagConstraints.insets = new java.awt.Insets(79, 4, 0, 0);
-        pCadAlf.add(addRemoveButtons, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 28, 0, 30);
-        pCadAlf.add(letterNumberCA, gridBagConstraints);
-
-        pCard.add(pCadAlf, "card2");
+        genericJList2 = new cassolato.rafael.sctmf.view.components.GenericJList();
+        pCard = new javax.swing.JPanel();
+        pRolagem = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         pCadEst.setLayout(new java.awt.GridLayout(2, 0));
 
@@ -220,18 +116,13 @@ public class AfdGUI extends FormalModelGUI {
         jLabel13.setText("Estados");
         jPanel11.add(jLabel13, java.awt.BorderLayout.NORTH);
 
-        jScrollPane6.setPreferredSize(new java.awt.Dimension(37, 40));
-        jList6.setFont(new java.awt.Font("Tahoma", 1, 14));
-        jList6.setPreferredSize(new java.awt.Dimension(33, 50));
-        jScrollPane6.setViewportView(jList6);
-
-        jPanel11.add(jScrollPane6, java.awt.BorderLayout.CENTER);
-
         jLabel14.setPreferredSize(new java.awt.Dimension(40, 0));
         jPanel11.add(jLabel14, java.awt.BorderLayout.WEST);
 
         jLabel15.setPreferredSize(new java.awt.Dimension(40, 0));
         jPanel11.add(jLabel15, java.awt.BorderLayout.EAST);
+
+        jPanel11.add(genericJList1, java.awt.BorderLayout.CENTER);
 
         pNort.add(jPanel11);
 
@@ -274,9 +165,7 @@ public class AfdGUI extends FormalModelGUI {
 
         jPanel8.setLayout(new java.awt.BorderLayout());
 
-        jScrollPane2.setViewportView(jList2);
-
-        jPanel8.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+        jPanel8.add(genericJList3, java.awt.BorderLayout.CENTER);
 
         jPanel5.add(jPanel8);
 
@@ -318,9 +207,7 @@ public class AfdGUI extends FormalModelGUI {
 
         jPanel18.setLayout(new java.awt.BorderLayout());
 
-        jScrollPane3.setViewportView(jList3);
-
-        jPanel18.add(jScrollPane3, java.awt.BorderLayout.CENTER);
+        jPanel18.add(genericJList2, java.awt.BorderLayout.CENTER);
 
         panel.add(jPanel18);
 
@@ -330,22 +217,25 @@ public class AfdGUI extends FormalModelGUI {
 
         pCadEst.add(pSul);
 
-        pCard.add(pCadEst, "card3");
+        setLayout(new java.awt.BorderLayout());
 
-        pCard.add(pCadFuncTrans, "card4");
+        pCard.setLayout(new java.awt.CardLayout());
 
         add(pCard, java.awt.BorderLayout.CENTER);
 
+        pRolagem.setLayout(new java.awt.GridLayout(1, 4, 20, 0));
+
+        jButton2.setText("<<");
+        pRolagem.add(jButton2);
+
+        pRolagem.add(jLabel2);
+
+        jButton1.setText(">>");
+        pRolagem.add(jButton1);
+
+        add(pRolagem, java.awt.BorderLayout.SOUTH);
+
     }// </editor-fold>//GEN-END:initComponents
-
-    private void bAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddActionPerformed
-        this.genericJList.addItem(
-           this.letterNumberCA.getLetter());                                     
-    }//GEN-LAST:event_bAddActionPerformed
-
-    private void bRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoveActionPerformed
-        this.genericJList.removeItens();        	
-    }//GEN-LAST:event_bRemoveActionPerformed
 
     public void setFormalModel(FormalModel fm) {
         AFD afd = (AFD)fm;
@@ -363,15 +253,13 @@ public class AfdGUI extends FormalModelGUI {
     private view.AddRemButtonsPanel addRemButtonsPanel1;
     private view.AddRemButtonsPanel addRemButtonsPanel2;
     private view.AddRemButtonsPanel addRemButtonsPanel3;
-    private view.AddRemButtonsPanel addRemoveButtons;
-    private javax.swing.JButton bAdd;
-    private javax.swing.JButton bRemove;
-    private cassolato.rafael.sctmf.view.components.GenericJList genericJList;
+    private cassolato.rafael.sctmf.view.components.GenericJList genericJList1;
+    private cassolato.rafael.sctmf.view.components.GenericJList genericJList2;
+    private cassolato.rafael.sctmf.view.components.GenericJList genericJList3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -385,36 +273,21 @@ public class AfdGUI extends FormalModelGUI {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList2;
-    private javax.swing.JList jList3;
-    private javax.swing.JList jList6;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane6;
     private view.LetterNumber letterNumber2;
-    private view.LetterNumber letterNumberCA;
-    private javax.swing.JPanel pCadAlf;
     private javax.swing.JPanel pCadEst;
-    private javax.swing.JPanel pCadFuncTrans;
     private javax.swing.JPanel pCard;
     private javax.swing.JPanel pEstFin;
     private javax.swing.JPanel pEstIni;

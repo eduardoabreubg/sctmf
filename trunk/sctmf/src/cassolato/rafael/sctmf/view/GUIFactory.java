@@ -9,7 +9,7 @@
 
 package cassolato.rafael.sctmf.view;
 
-import cassolato.rafael.sctmf.view.formalmodels.AfdGUI;
+import cassolato.rafael.sctmf.view.formalmodels.afd.AfdGUI;
 
 /**
  *
