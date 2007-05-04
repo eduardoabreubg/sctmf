@@ -24,21 +24,281 @@ public class CadFunTrans extends javax.swing.JPanel {
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
+        pWest = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel19 = new javax.swing.JLabel();
+        cbEstOri = new javax.swing.JComboBox();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        cbSimb = new javax.swing.JComboBox();
+        jLabel15 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        cbEstDes = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel15 = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        pCenter = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        addRemButtonsPanel1 = new view.AddRemButtonsPanel();
+        jLabel6 = new javax.swing.JLabel();
+        pEast = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        genericJList1 = new cassolato.rafael.sctmf.view.components.GenericJList();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.X_AXIS));
+
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, " Cadastro das Fun\u00e7\u00f5es de Transi\u00e7\u00e3o de Estados ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(51, 51, 255)));
+        pWest.setLayout(new javax.swing.BoxLayout(pWest, javax.swing.BoxLayout.Y_AXIS));
+
+        pWest.setPreferredSize(new java.awt.Dimension(220, 100));
+        jPanel2.setLayout(new java.awt.GridLayout(2, 6));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLabel9.setFont(new java.awt.Font("Verdana", 0, 18));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("\u03B4 :");
+        jPanel2.add(jLabel9);
+
+        jLabel10.setFont(new java.awt.Font("Verdana", 0, 18));
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("S");
+        jPanel2.add(jLabel10);
+
+        jLabel12.setFont(new java.awt.Font("Verdana", 0, 18));
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("x");
+        jPanel2.add(jLabel12);
+
+        jLabel14.setFont(new java.awt.Font("Verdana", 0, 18));
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("\u03a3");
+        jPanel2.add(jLabel14);
+
+        jLabel16.setFont(new java.awt.Font("Arial", 1, 30));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("\u2192");
+        jPanel2.add(jLabel16);
+
+        jLabel17.setFont(new java.awt.Font("Verdana", 0, 18));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("S");
+        jPanel2.add(jLabel17);
+
+        jPanel2.add(jLabel11);
+
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        jLabel19.setPreferredSize(new java.awt.Dimension(40, 20));
+        jPanel5.add(jLabel19, java.awt.BorderLayout.SOUTH);
+
+        cbEstOri.setForeground(new java.awt.Color(51, 204, 0));
+        jPanel5.add(cbEstOri, java.awt.BorderLayout.CENTER);
+
+        jPanel2.add(jPanel5);
+
+        jPanel2.add(jLabel13);
+
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        jLabel21.setPreferredSize(new java.awt.Dimension(0, 20));
+        jPanel4.add(jLabel21, java.awt.BorderLayout.SOUTH);
+
+        cbSimb.setForeground(new java.awt.Color(255, 204, 0));
+        cbSimb.setPreferredSize(new java.awt.Dimension(40, 22));
+        jPanel4.add(cbSimb, java.awt.BorderLayout.CENTER);
+
+        jPanel2.add(jPanel4);
+
+        jPanel2.add(jLabel15);
+
+        jPanel6.setLayout(new java.awt.BorderLayout());
+
+        jLabel23.setPreferredSize(new java.awt.Dimension(0, 20));
+        jPanel6.add(jLabel23, java.awt.BorderLayout.SOUTH);
+
+        cbEstDes.setForeground(new java.awt.Color(255, 102, 102));
+        cbEstDes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { ".", "Sf" }));
+        jPanel6.add(cbEstDes, java.awt.BorderLayout.CENTER);
+
+        jPanel2.add(jPanel6);
+
+        pWest.add(jPanel2);
+
+        jLabel4.setPreferredSize(new java.awt.Dimension(0, 30));
+        pWest.add(jLabel4);
+
+        jPanel3.setLayout(new java.awt.GridLayout(3, 0));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Legenda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(153, 0, 153)));
+        jPanel3.setPreferredSize(new java.awt.Dimension(100, 100));
+        jPanel7.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
+
+        jPanel10.setBackground(new java.awt.Color(51, 204, 0));
+        jPanel7.add(jPanel10);
+
+        jPanel11.setLayout(new java.awt.BorderLayout());
+
+        jLabel24.setFont(new java.awt.Font("Dialog", 1, 10));
+        jLabel24.setText("Estado de Origem");
+        jPanel11.add(jLabel24, java.awt.BorderLayout.CENTER);
+
+        jPanel7.add(jPanel11);
+
+        jPanel3.add(jPanel7);
+
+        jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
+
+        jPanel12.setBackground(new java.awt.Color(255, 204, 0));
+        jPanel8.add(jPanel12);
+
+        jPanel13.setLayout(new java.awt.BorderLayout());
+
+        jLabel25.setFont(new java.awt.Font("Dialog", 1, 10));
+        jLabel25.setText("S\u00edmbolo do Alfabeto");
+        jPanel13.add(jLabel25, java.awt.BorderLayout.CENTER);
+
+        jPanel8.add(jPanel13);
+
+        jPanel3.add(jPanel8);
+
+        jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
+
+        jPanel14.setBackground(new java.awt.Color(255, 102, 102));
+        jPanel9.add(jPanel14);
+
+        jPanel15.setLayout(new java.awt.BorderLayout());
+
+        jLabel26.setFont(new java.awt.Font("Dialog", 1, 10));
+        jLabel26.setText("Estado de Destino");
+        jPanel15.add(jLabel26, java.awt.BorderLayout.CENTER);
+
+        jPanel9.add(jPanel15);
+
+        jPanel3.add(jPanel9);
+
+        pWest.add(jPanel3);
+
+        jLabel18.setPreferredSize(new java.awt.Dimension(40, 5));
+        pWest.add(jLabel18);
+
+        add(pWest);
+
+        pCenter.setLayout(new java.awt.BorderLayout());
+
+        pCenter.setOpaque(false);
+        pCenter.setPreferredSize(new java.awt.Dimension(2, 10));
+        jLabel1.setPreferredSize(new java.awt.Dimension(0, 70));
+        pCenter.add(jLabel1, java.awt.BorderLayout.NORTH);
+
+        jLabel2.setPreferredSize(new java.awt.Dimension(0, 70));
+        pCenter.add(jLabel2, java.awt.BorderLayout.SOUTH);
+
+        pCenter.add(addRemButtonsPanel1, java.awt.BorderLayout.CENTER);
+
+        jLabel6.setPreferredSize(new java.awt.Dimension(10, 0));
+        pCenter.add(jLabel6, java.awt.BorderLayout.WEST);
+
+        add(pCenter);
+
+        pEast.setLayout(new java.awt.BorderLayout());
+
+        pEast.setPreferredSize(new java.awt.Dimension(60, 100));
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Fun\u00e7\u00f5es de Transi\u00e7\u00e3o");
+        jLabel3.setPreferredSize(new java.awt.Dimension(0, 25));
+        pEast.add(jLabel3, java.awt.BorderLayout.NORTH);
+
+        genericJList1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pEast.add(genericJList1, java.awt.BorderLayout.CENTER);
+
+        jLabel7.setPreferredSize(new java.awt.Dimension(0, 10));
+        pEast.add(jLabel7, java.awt.BorderLayout.SOUTH);
+
+        jLabel8.setPreferredSize(new java.awt.Dimension(10, 0));
+        pEast.add(jLabel8, java.awt.BorderLayout.EAST);
+
+        jLabel5.setPreferredSize(new java.awt.Dimension(10, 0));
+        pEast.add(jLabel5, java.awt.BorderLayout.WEST);
+
+        add(pEast);
+
     }// </editor-fold>//GEN-END:initComponents
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private view.AddRemButtonsPanel addRemButtonsPanel1;
+    private javax.swing.JComboBox cbEstDes;
+    private javax.swing.JComboBox cbEstOri;
+    private javax.swing.JComboBox cbSimb;
+    private cassolato.rafael.sctmf.view.components.GenericJList genericJList1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel pCenter;
+    private javax.swing.JPanel pEast;
+    private javax.swing.JPanel pWest;
     // End of variables declaration//GEN-END:variables
     
 }

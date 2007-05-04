@@ -83,7 +83,7 @@ public class CadAlf extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("Verdana", 0, 18));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("E");
+        jLabel6.setText("\u03a3");
         jPanel4.add(jLabel6, java.awt.BorderLayout.NORTH);
 
         jPanel4.add(genericJList, java.awt.BorderLayout.CENTER);

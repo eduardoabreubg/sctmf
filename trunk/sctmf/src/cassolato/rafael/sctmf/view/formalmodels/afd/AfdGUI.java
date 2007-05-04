@@ -19,6 +19,7 @@ import java.util.Vector;
 public class AfdGUI extends FormalModelGUI {
     CadAlf pCadAlf = new CadAlf();
     CadEst pCadEst = new CadEst();
+    CadFunTrans pCadFunTrans = new CadFunTrans();
     
     /** Creates new form AfdGUI */
     public AfdGUI() {
@@ -73,7 +74,8 @@ public class AfdGUI extends FormalModelGUI {
     
     private void addCards() {
         //pCard.add(this.pCadAlf, "cadAlf");
-        pCard.add(this.pCadEst, "cadEst");
+        //pCard.add(this.pCadEst, "cadEst");
+        pCard.add(this.pCadFunTrans,"cadFunTrans");
         
     }
     
