@@ -16,6 +16,8 @@ import cassolato.rafael.sctmf.model.pojo.FormalModel;
  * @author rafael2009_00
  */
 public abstract class FormalModelGUI extends javax.swing.JPanel{
+    protected static final int PREVIOUS = 0;
+    protected static final int NEXT = 1;
     
     /** Creates a new instance of FomalModelGUI */
     public FormalModelGUI() {
