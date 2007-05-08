@@ -10,7 +10,7 @@ package cassolato.rafael.sctmf.view.formalmodels.afd;
  *
  * @author  rafael2009_00
  */
-public class ValSeq extends javax.swing.JPanel {
+class ValSeq extends javax.swing.JPanel {
     
     /** Creates new form ValSeq */
     public ValSeq() {

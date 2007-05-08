@@ -7,9 +7,10 @@
 package cassolato.rafael.sctmf.view.formalmodels.afd;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
+import cassolato.rafael.sctmf.model.pojo.Automato;
 import cassolato.rafael.sctmf.model.pojo.FormalModel;
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.view.FormalModelGUI;
-import com.sun.org.apache.bcel.internal.classfile.JavaClass;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -17,13 +18,16 @@ import java.util.Vector;
  *
  * @author  rafael2009_00
  */
-public class AfdGUI extends FormalModelGUI {
+public class AfdGUI extends FormalModelGUI {    
+    private final CadAlf pCadAlf = new CadAlf();
+    private final CadEst pCadEst = new CadEst();
+    private final CadFunTrans pCadFunTrans = new CadFunTrans();
+    private final ValSeq vs = new ValSeq();
+    
+    private final Automato automato = new Automato();
+    
     private String[] cardNames;
     private int activeCard;
-    CadAlf pCadAlf = new CadAlf();
-    CadEst pCadEst = new CadEst();
-    CadFunTrans pCadFunTrans = new CadFunTrans();
-    ValSeq vs = new ValSeq();
     
     /** Creates new form AfdGUI */
     public AfdGUI() {
@@ -83,7 +87,7 @@ public class AfdGUI extends FormalModelGUI {
         
         this.changeCards(NEXT);
         
-        if(this.cardNames[this.activeCard].startsWith("last"))
+        if(cardNames[activeCard].startsWith("last"))
             bNext.setEnabled(false);
         
     }//GEN-LAST:event_bNextActionPerformed
@@ -93,7 +97,7 @@ public class AfdGUI extends FormalModelGUI {
         
         this.changeCards(PREVIOUS);
         
-        if(this.cardNames[this.activeCard].startsWith("first"))
+        if(cardNames[activeCard].startsWith("first"))
             bBack.setEnabled(false);
          
     }//GEN-LAST:event_bBackActionPerformed
@@ -110,8 +114,8 @@ public class AfdGUI extends FormalModelGUI {
         return afd;
     }
     
-    private void addCards() {
-        cardNames = new String[4];
+    private void addCards() {        
+        cardNames = new String[4];        
         cardNames[0] = "first-cadAlf";
         cardNames[1] = "cadEst";
         cardNames[2] = "cadFunTrans";
@@ -125,18 +129,22 @@ public class AfdGUI extends FormalModelGUI {
         bBack.setEnabled(false);                
     }
     
-    private void changeCards(final int direction) {
+    protected void changeCards(final int direction) {
         switch(direction) {
             case NEXT :
+                if(activeCard==1)
+                    for(Simbolo s : pCadAlf.getSimbolos())
+                        System.out.println(s.getNome());
+                    
                 activeCard++;
                 break;
-            case PREVIOUS :
+            case PREVIOUS : 
                 activeCard--;
                 break;
         }
         
         ((java.awt.CardLayout)pCard.getLayout()).
-                show(pCard,cardNames[this.activeCard]);
+                show(pCard,cardNames[activeCard]);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

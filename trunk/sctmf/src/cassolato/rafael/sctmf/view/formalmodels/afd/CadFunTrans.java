@@ -10,7 +10,7 @@ package cassolato.rafael.sctmf.view.formalmodels.afd;
  *
  * @author  rafael2009_00
  */
-public class CadFunTrans extends javax.swing.JPanel {
+class CadFunTrans extends javax.swing.JPanel {
     
     /** Creates new form CadFunTrans */
     public CadFunTrans() {

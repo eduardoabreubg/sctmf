@@ -6,6 +6,9 @@
 
 package cassolato.rafael.sctmf.view.components;
 
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import javax.swing.DefaultListModel;
 
 /**
@@ -36,11 +39,7 @@ public class GenericJList extends javax.swing.JScrollPane {
 
     }// </editor-fold>//GEN-END:initComponents
     
-    public DefaultListModel getListModel() {
-        return this.dlm;
-    }
-    
-    public void removeItens() {
+    public void removeItens() {        
         Object[] itens = this.jList.getSelectedValues();
         
         if(itens.length>0)
@@ -48,9 +47,28 @@ public class GenericJList extends javax.swing.JScrollPane {
                 this.dlm.removeElement(itens[i]);
     }
     
-    public void addItem(Character c) {
-        if(!this.dlm.contains(c))
-            this.dlm.addElement(c);
+    public void addItem(Character item) {
+        if(!this.dlm.contains(item))
+            this.dlm.addElement(item);
+    }
+    
+    public void addItem(String item) {
+        if(!this.dlm.contains(item))
+            this.dlm.addElement(item);
+    }
+    
+    public void removeAllItens() {
+            this.dlm.removeAllElements();
+    }
+    
+    public Collection<Object> getAllItens() {        
+        Set<Object> itens = new LinkedHashSet<Object>();    
+        int size = this.dlm.size();
+        
+        for(int i=0;i<size;i++)
+            itens.add(this.dlm.getElementAt(i));
+        
+        return itens;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -19,11 +19,12 @@ public abstract class FormalModelGUI extends javax.swing.JPanel{
     protected static final int PREVIOUS = 0;
     protected static final int NEXT = 1;
     
+        
     /** Creates a new instance of FomalModelGUI */
     public FormalModelGUI() {
     }
     
     public abstract void setFormalModel(FormalModel fm);
     public abstract FormalModel getFormalModel(); 
-    
+   
 }

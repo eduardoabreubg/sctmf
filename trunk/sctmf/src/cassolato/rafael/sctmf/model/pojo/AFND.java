@@ -9,26 +9,26 @@
 
 package cassolato.rafael.sctmf.model.pojo;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  *
  * @author rafael2009_00
  */
 public class AFND extends Automato {
-    
-    private String ola;
-    
-    
+    private Set<Estado> estadosIniciais = new LinkedHashSet<Estado>();
     
     /** Creates a new instance of AFND */
     public AFND() {
     }
-
-    public String getOla() {
-        return ola;
+    
+    public void addEstadoInicial(Estado ei) {
+        estadosIniciais.add(ei);        
     }
-
-    public void setOla(String ola) {
-        this.ola = ola;
+    
+    public void removeEstadoInicial(Estado ei) {
+        estadosIniciais.remove(ei);        
     }
     
 }

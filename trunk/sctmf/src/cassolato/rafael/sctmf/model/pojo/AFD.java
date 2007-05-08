@@ -14,19 +14,18 @@ package cassolato.rafael.sctmf.model.pojo;
  * @author rafael2009_00
  */
 public class AFD extends Automato {
-    
-    private String teste;
+    private Estado estadoInicial;
     
     /** Creates a new instance of AFD */
     public AFD() {
     }
 
-    public String getTeste() {
-        return teste;
+    public Estado getEstadoInicial() {
+        return estadoInicial;
     }
 
-    public void setTeste(String teste) {
-        this.teste = teste;
-    }
-           
+    public void setEstadoInicial(Estado ei) {
+        this.estadoInicial = ei;
+    }       
+        
 }

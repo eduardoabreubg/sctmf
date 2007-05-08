@@ -6,11 +6,15 @@
 
 package cassolato.rafael.sctmf.view.formalmodels.afd;
 
+import cassolato.rafael.sctmf.model.pojo.Estado;
+import java.util.Collection;
+import java.util.Iterator;
+
 /**
  *
  * @author  rafael2009_00
  */
-public class CadEst extends javax.swing.JPanel {
+class CadEst extends javax.swing.JPanel {
     
     /** Creates new form CadEst */
     public CadEst() {
@@ -37,7 +41,7 @@ public class CadEst extends javax.swing.JPanel {
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
-        genericJList6 = new cassolato.rafael.sctmf.view.components.GenericJList();
+        listEstados = new cassolato.rafael.sctmf.view.components.GenericJList();
         pSul = new javax.swing.JPanel();
         pEstIni = new javax.swing.JPanel();
         jLabel77 = new javax.swing.JLabel();
@@ -50,7 +54,7 @@ public class CadEst extends javax.swing.JPanel {
         jLabel79 = new javax.swing.JLabel();
         jLabel80 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        genericJList11 = new cassolato.rafael.sctmf.view.components.GenericJList();
+        listEstIni = new cassolato.rafael.sctmf.view.components.GenericJList();
         pEstFin = new javax.swing.JPanel();
         jLabel81 = new javax.swing.JLabel();
         jLabel82 = new javax.swing.JLabel();
@@ -62,7 +66,7 @@ public class CadEst extends javax.swing.JPanel {
         jLabel83 = new javax.swing.JLabel();
         jLabel84 = new javax.swing.JLabel();
         jPanel42 = new javax.swing.JPanel();
-        genericJList12 = new cassolato.rafael.sctmf.view.components.GenericJList();
+        listEstFin = new cassolato.rafael.sctmf.view.components.GenericJList();
 
         setLayout(new java.awt.GridLayout(2, 0));
 
@@ -106,7 +110,7 @@ public class CadEst extends javax.swing.JPanel {
         jLabel48.setPreferredSize(new java.awt.Dimension(40, 0));
         jPanel27.add(jLabel48, java.awt.BorderLayout.EAST);
 
-        jPanel27.add(genericJList6, java.awt.BorderLayout.CENTER);
+        jPanel27.add(listEstados, java.awt.BorderLayout.CENTER);
 
         pNorte.add(jPanel27);
 
@@ -149,7 +153,7 @@ public class CadEst extends javax.swing.JPanel {
 
         jPanel8.setLayout(new java.awt.BorderLayout());
 
-        jPanel8.add(genericJList11, java.awt.BorderLayout.CENTER);
+        jPanel8.add(listEstIni, java.awt.BorderLayout.CENTER);
 
         jPanel5.add(jPanel8);
 
@@ -191,7 +195,7 @@ public class CadEst extends javax.swing.JPanel {
 
         jPanel42.setLayout(new java.awt.BorderLayout());
 
-        jPanel42.add(genericJList12, java.awt.BorderLayout.CENTER);
+        jPanel42.add(listEstFin, java.awt.BorderLayout.CENTER);
 
         panel.add(jPanel42);
 
@@ -203,58 +207,41 @@ public class CadEst extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
     
+    void setEstados(Collection<Estado> estados) {
+        this.listEstados.removeAllItens();
+        
+        Iterator<Estado> i = estados.iterator();
+        while(i.hasNext())
+            this.listEstados.addItem(i.next().getNome());
+    }
+    
+    Collection<Estado> getEstados() {
+        //this.listEstados.
+        return null;
+    }
+    
+    void setEstadoInicial(Estado ei) {
+        
+    }
+    
+    Estado getEstadoInicial() {
+        return null;
+    }
+    
+    void setEstadosFinais(Collection<Estado> ef) {
+        
+    }
+    
+    Collection<Estado> getEstadosFinais() {
+        return null;
+    }    
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
     private view.AddRemButtonsPanel addRemButtonsPanel1;
     private view.AddRemButtonsPanel addRemButtonsPanel2;
-    private view.AddRemButtonsPanel addRemButtonsPanel3;
-    private view.AddRemButtonsPanel addRemButtonsPanel4;
-    private view.AddRemButtonsPanel addRemButtonsPanel5;
-    private view.AddRemButtonsPanel addRemButtonsPanel6;
-    private view.AddRemButtonsPanel addRemButtonsPanel7;
     private view.AddRemButtonsPanel addRemButtonsPanel8;
-    private cassolato.rafael.sctmf.view.components.GenericJList genericJList1;
-    private cassolato.rafael.sctmf.view.components.GenericJList genericJList11;
-    private cassolato.rafael.sctmf.view.components.GenericJList genericJList12;
-    private cassolato.rafael.sctmf.view.components.GenericJList genericJList2;
-    private cassolato.rafael.sctmf.view.components.GenericJList genericJList3;
-    private cassolato.rafael.sctmf.view.components.GenericJList genericJList4;
-    private cassolato.rafael.sctmf.view.components.GenericJList genericJList5;
-    private cassolato.rafael.sctmf.view.components.GenericJList genericJList6;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
@@ -262,32 +249,14 @@ public class CadEst extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel77;
     private javax.swing.JLabel jLabel78;
     private javax.swing.JLabel jLabel79;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel82;
     private javax.swing.JLabel jLabel83;
     private javax.swing.JLabel jLabel84;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
-    private javax.swing.JPanel jPanel22;
-    private javax.swing.JPanel jPanel23;
-    private javax.swing.JPanel jPanel24;
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
@@ -298,20 +267,12 @@ public class CadEst extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private view.LetterNumber letterNumber2;
-    private view.LetterNumber letterNumber3;
-    private view.LetterNumber letterNumber4;
-    private view.LetterNumber letterNumber5;
-    private view.LetterNumber letterNumber6;
     private view.LetterNumber letterNumber7;
-    private javax.swing.JPanel pCadEst;
+    private cassolato.rafael.sctmf.view.components.GenericJList listEstFin;
+    private cassolato.rafael.sctmf.view.components.GenericJList listEstIni;
+    private cassolato.rafael.sctmf.view.components.GenericJList listEstados;
     private javax.swing.JPanel pEstFin;
     private javax.swing.JPanel pEstIni;
-    private javax.swing.JPanel pNort;
-    private javax.swing.JPanel pNort1;
-    private javax.swing.JPanel pNort10;
-    private javax.swing.JPanel pNort11;
-    private javax.swing.JPanel pNort2;
     private javax.swing.JPanel pNorte;
     private javax.swing.JPanel pSul;
     private javax.swing.JPanel panel;

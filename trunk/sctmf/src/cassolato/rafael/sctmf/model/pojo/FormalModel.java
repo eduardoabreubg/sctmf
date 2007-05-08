@@ -14,7 +14,7 @@ package cassolato.rafael.sctmf.model.pojo;
  * @author rafael2009_00
  */
 public abstract class FormalModel {
-    
+      
     /** Creates a new instance of FormalModel */
     public FormalModel() {
     }
