@@ -104,12 +104,11 @@ public class AfdGUI extends FormalModelGUI {
 
     public void setFormalModel(FormalModel fm) {
         AFD afd = (AFD)fm;
-        //this.jTextField1.setText(afd.getTeste());
+        
     }
 
     public FormalModel getFormalModel() {
         AFD afd = new AFD();
-        //afd.setTeste(this.jTextField1.getText());
         
         return afd;
     }
@@ -129,7 +128,7 @@ public class AfdGUI extends FormalModelGUI {
         bBack.setEnabled(false);                
     }
     
-    protected void changeCards(final int direction) {
+    private void changeCards(final int direction) {
         switch(direction) {
             case NEXT :
                 if(activeCard==1)

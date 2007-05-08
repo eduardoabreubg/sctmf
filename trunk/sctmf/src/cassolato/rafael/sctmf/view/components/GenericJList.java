@@ -39,28 +39,76 @@ public class GenericJList extends javax.swing.JScrollPane {
 
     }// </editor-fold>//GEN-END:initComponents
     
-    public void removeItens() {        
+    /**
+     * Add o Item na JList, se o item foi add com sucesso
+     * retorna true, caso não retorna false;
+     *
+     * @param item
+     * @return boolean
+     */
+    public boolean addItem(Character item) {
+        if(!this.dlm.contains(item)) {
+            this.dlm.addElement(item); 
+            return true;
+            
+        }else
+            return false;
+    }
+    
+    /**
+     * Add o Item na JList, se o item foi add com sucesso
+     * retorna true, caso não retorna false;
+     *
+     * @param item
+     * @return boolean
+     */
+    public boolean addItem(String item) {
+        if(!this.dlm.contains(item)) {
+            this.dlm.addElement(item);
+            return true;
+            
+        }else
+            return false;
+            
+    }
+    
+    /**
+     * Remove o item recebido no parametro da JList.
+     *
+     * @param item
+     */
+    public void removeItem(Object item) {
+        this.dlm.removeElement(item);
+    }
+    
+    /**
+     * Remove todos os itens da JList
+     */
+    public void removeAllItens() {
+        this.dlm.removeAllElements();        
+    }
+    
+    /**
+     * Remove os Itens selecionados na JList
+     *
+     */
+    public Object[] removeItens() {        
         Object[] itens = this.jList.getSelectedValues();
         
         if(itens.length>0)
             for(int i=0;i<itens.length;i++)
                 this.dlm.removeElement(itens[i]);
+        
+        return itens;
+        
     }
     
-    public void addItem(Character item) {
-        if(!this.dlm.contains(item))
-            this.dlm.addElement(item);
-    }
-    
-    public void addItem(String item) {
-        if(!this.dlm.contains(item))
-            this.dlm.addElement(item);
-    }
-    
-    public void removeAllItens() {
-            this.dlm.removeAllElements();
-    }
-    
+    /**
+     * Retorna todos os itens da JList em uma<br>
+     * coleção de Object.
+     * 
+     * @return Collection
+     */
     public Collection<Object> getAllItens() {        
         Set<Object> itens = new LinkedHashSet<Object>();    
         int size = this.dlm.size();

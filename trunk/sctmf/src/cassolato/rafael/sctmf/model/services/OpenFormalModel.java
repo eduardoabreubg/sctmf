@@ -43,7 +43,7 @@ public class OpenFormalModel implements Open {
     
     private AFD getAFD(File file) throws OpenException {
         AFD afd = new AFD();
-        afd.setTeste("Conteúdo");
+        
         return afd;        
     }
     

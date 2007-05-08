@@ -17,15 +17,12 @@ public class Estado {
     private String nome;
     
     /** Creates a new instance of Estado */
-    public Estado() {
+    public Estado(String nome) {
+        this.nome = nome;
     }
 
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
 }
