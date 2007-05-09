@@ -336,7 +336,7 @@ class CadEst extends javax.swing.JPanel {
         Set<Estado> estados = new LinkedHashSet<Estado>();
         Iterator<Object> i = this.listEstados.getAllItens().iterator();
         while(i.hasNext())
-            estados.add(new Estado(i.toString()));  
+            estados.add(new Estado(i.next().toString()));
         
         return estados;        
     }

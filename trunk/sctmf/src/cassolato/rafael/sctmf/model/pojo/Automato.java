@@ -42,6 +42,11 @@ public abstract class Automato extends FormalModel {
         simbolos.remove(s);
     }
     
+    public void addAllEstados(Collection<Estado> c) {        
+        this.estados.clear();
+        this.estados.addAll(c);
+    }
+    
     public void addEstado(Estado e) {
         estados.add(e);        
     }

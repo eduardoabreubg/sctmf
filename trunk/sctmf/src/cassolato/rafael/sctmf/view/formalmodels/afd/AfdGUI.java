@@ -108,8 +108,11 @@ public class AfdGUI extends FormalModelGUI {
     public FormalModel getFormalModel() {
         AFD afd = new AFD();
         afd.addAllSimbolos(pCadAlf.getSimbolos());
+        
+        afd.addAllEstados(pCadEst.getEstados());
         afd.setEstadoInicial(pCadEst.getEstadoInicial());
         afd.addAllEstFinais(pCadEst.getEstadosFinais());
+        
         // Add transactions
                 
         return afd;
@@ -137,11 +140,12 @@ public class AfdGUI extends FormalModelGUI {
     private void changeCards(final int direction) {
         switch(direction) {
             case NEXT :
-                if(activeCard==1)
-                    for(Simbolo s : pCadAlf.getSimbolos())
-                        System.out.println(s.getNome());
-                    
                 activeCard++;
+                
+                if(activeCard==2)
+                    pCadFunTrans.addEstadosSimbolosComboBox(
+                            pCadEst.getEstados(),pCadAlf.getSimbolos());
+                
                 break;
             case PREVIOUS : 
                 activeCard--;
