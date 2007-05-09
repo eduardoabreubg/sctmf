@@ -17,7 +17,7 @@ import java.util.Set;
  *
  * @author rafael2009_00
  */
-public class Automato extends FormalModel {
+public abstract class Automato extends FormalModel {
     
     private Set<Simbolo> simbolos = new HashSet<Simbolo>();
     private Set<Estado> estados = new HashSet<Estado>();
@@ -57,6 +57,11 @@ public class Automato extends FormalModel {
     public void removeTransicao(Transicao t) {
         if(transicoes.contains(t))
             transicoes.remove(t);
+    }
+    
+    public void addAllEstFinais(Collection<Estado> c) {        
+        this.estadosFinais.clear();
+        this.estadosFinais.addAll(c);
     }
     
     public void addEstadoFinal(Estado ef) {

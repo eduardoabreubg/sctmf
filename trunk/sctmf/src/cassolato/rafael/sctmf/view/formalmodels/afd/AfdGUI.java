@@ -23,9 +23,7 @@ public class AfdGUI extends FormalModelGUI {
     private final CadEst pCadEst = new CadEst();
     private final CadFunTrans pCadFunTrans = new CadFunTrans();
     private final ValSeq vs = new ValSeq();
-    
-    private final Automato automato = new Automato();
-    
+        
     private String[] cardNames;
     private int activeCard;
     
@@ -109,10 +107,18 @@ public class AfdGUI extends FormalModelGUI {
 
     public FormalModel getFormalModel() {
         AFD afd = new AFD();
-        
+        afd.addAllSimbolos(pCadAlf.getSimbolos());
+        afd.setEstadoInicial(pCadEst.getEstadoInicial());
+        afd.addAllEstFinais(pCadEst.getEstadosFinais());
+        // Add transactions
+                
         return afd;
     }
     
+    /**
+     * Create a String[] and add cards into<br>
+     * standard card.
+     */
     private void addCards() {        
         cardNames = new String[4];        
         cardNames[0] = "first-cadAlf";

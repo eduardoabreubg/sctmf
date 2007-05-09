@@ -346,6 +346,9 @@ class CadEst extends javax.swing.JPanel {
     }
     
     Estado getEstadoInicial() {
+        for(Object o :listEstIni.getAllItens())
+            return new Estado(o.toString());
+        
         return null;
     }
     
@@ -354,7 +357,12 @@ class CadEst extends javax.swing.JPanel {
     }
     
     Collection<Estado> getEstadosFinais() {
-        return null;
+        Set<Estado> estados = new LinkedHashSet<Estado>();
+        Iterator<Object> i = this.listEstFin.getAllItens().iterator();
+        while(i.hasNext())
+            estados.add(new Estado(i.toString()));  
+        
+        return estados;
     }    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
