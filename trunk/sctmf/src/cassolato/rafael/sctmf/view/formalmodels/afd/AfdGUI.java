@@ -113,7 +113,7 @@ public class AfdGUI extends FormalModelGUI {
         afd.setEstadoInicial(pCadEst.getEstadoInicial());
         afd.addAllEstFinais(pCadEst.getEstadosFinais());
         
-        // Add transactions
+        afd.addAllTransicoes(pCadFunTrans.getFuncTrans());
                 
         return afd;
     }
@@ -145,6 +145,8 @@ public class AfdGUI extends FormalModelGUI {
                 if(activeCard==2)
                     pCadFunTrans.addEstadosSimbolosComboBox(
                             pCadEst.getEstados(),pCadAlf.getSimbolos());
+                else if(activeCard==3)                    
+                    vs.managerAFD((AFD)getFormalModel());
                 
                 break;
             case PREVIOUS : 

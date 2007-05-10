@@ -357,12 +357,12 @@ class CadEst extends javax.swing.JPanel {
     }
     
     Collection<Estado> getEstadosFinais() {
-        Set<Estado> estados = new LinkedHashSet<Estado>();
+        Set<Estado> estFin = new LinkedHashSet<Estado>();
         Iterator<Object> i = this.listEstFin.getAllItens().iterator();
         while(i.hasNext())
-            estados.add(new Estado(i.toString()));  
+            estFin.add(new Estado(i.next().toString()));
         
-        return estados;
+        return estFin;  
     }    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -6,11 +6,17 @@
 
 package cassolato.rafael.sctmf.view.formalmodels.afd;
 
+import cassolato.rafael.sctmf.model.pojo.AFD;
+import cassolato.rafael.sctmf.model.pojo.Estado;
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
+import cassolato.rafael.sctmf.model.pojo.Transicao;
+
 /**
  *
  * @author  rafael2009_00
  */
 class ValSeq extends javax.swing.JPanel {
+    private AFD afd = null;
     
     /** Creates new form ValSeq */
     public ValSeq() {
@@ -110,7 +116,30 @@ class ValSeq extends javax.swing.JPanel {
         add(jPanel3);
 
     }// </editor-fold>//GEN-END:initComponents
+    void managerAFD(AFD afd) {
+    }
     
+    void teste(AFD afd) {
+        System.out.println("Simbolos");
+        for(Simbolo s : afd.getSimbolos())
+            System.out.println(s.getNome());
+        
+        System.out.println("\nEstados");
+        for(Estado e : afd.getEstados())
+            System.out.println(e.getNome());
+        
+        System.out.println("Estado Inicial "+afd.getEstadoInicial().getNome());
+        System.out.println("\nEstados Finais");
+        for(Estado e : afd.getEstadosFinais())
+            System.out.println(e.getNome());
+        
+        System.out.println("\nTransicoes");
+        for(Transicao t : afd.getTransicoes())
+            System.out.println(
+                "E: ("+t.getEstOri().getNome()+" ,"
+                +t.getSimbolo().getNome()+") = "+t.getEstDest().getNome()
+                );
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -21,8 +21,7 @@ public abstract class Automato extends FormalModel {
     
     private Set<Simbolo> simbolos = new HashSet<Simbolo>();
     private Set<Estado> estados = new HashSet<Estado>();
-    private Set<Transicao> transicoes = new HashSet<Transicao>();   
-    
+    private Set<Transicao> transicoes = new HashSet<Transicao>();       
     private Set<Estado> estadosFinais = new HashSet<Estado>();
     
     /** Creates a new instance of Automato */
@@ -55,6 +54,11 @@ public abstract class Automato extends FormalModel {
         estados.remove(e);
     }
     
+    public void addAllTransicoes(Collection<Transicao> c) {        
+        this.transicoes.clear();
+        this.transicoes.addAll(c);
+    }
+    
     public void addTransicao(Transicao t) {
         transicoes.add(t);
     }
@@ -77,6 +81,22 @@ public abstract class Automato extends FormalModel {
     public void removeEstadoFinal(Estado ef) {
         if(estadosFinais.contains(ef))
             estadosFinais.remove(ef);
+    }
+        
+    public Collection<Simbolo> getSimbolos() {
+        return this.simbolos;
+    }
+    
+    public Collection<Estado> getEstados() {
+        return this.estados;
+    }
+    
+    public Collection<Estado> getEstadosFinais() {
+        return this.estadosFinais;
+    }    
+    
+    public Collection<Transicao> getTransicoes() {
+        return this.transicoes;
     }
     
 }

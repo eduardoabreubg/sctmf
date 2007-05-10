@@ -21,6 +21,12 @@ public class Transicao {
     /** Creates a new instance of Transicao */
     public Transicao() {
     }
+    
+    public Transicao(Estado estOri, Simbolo simbolo, Estado estDest) {
+        this.estOri = estOri;
+        this.simbolo = simbolo;
+        this.estDest = estDest;
+    }
 
     public Estado getEstOri() {
         return estOri;
