@@ -12,7 +12,6 @@ import cassolato.rafael.sctmf.model.pojo.FormalModel;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.view.FormalModelGUI;
 import java.util.Iterator;
-import java.util.Vector;
 
 /**
  *

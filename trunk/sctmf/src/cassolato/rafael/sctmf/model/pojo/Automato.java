@@ -10,7 +10,7 @@
 package cassolato.rafael.sctmf.model.pojo;
 
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -19,10 +19,10 @@ import java.util.Set;
  */
 public abstract class Automato extends FormalModel {
     
-    private Set<Simbolo> simbolos = new HashSet<Simbolo>();
-    private Set<Estado> estados = new HashSet<Estado>();
-    private Set<Transicao> transicoes = new HashSet<Transicao>();       
-    private Set<Estado> estadosFinais = new HashSet<Estado>();
+    private Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
+    private Set<Estado> estados = new LinkedHashSet<Estado>();
+    private Set<Transicao> transicoes = new LinkedHashSet<Transicao>();       
+    private Set<Estado> estadosFinais = new LinkedHashSet<Estado>();
     
     /** Creates a new instance of Automato */
     public Automato() {
@@ -83,19 +83,19 @@ public abstract class Automato extends FormalModel {
             estadosFinais.remove(ef);
     }
         
-    public Collection<Simbolo> getSimbolos() {
+    public Set<Simbolo> getSimbolos() {
         return this.simbolos;
     }
     
-    public Collection<Estado> getEstados() {
+    public Set<Estado> getEstados() {
         return this.estados;
     }
     
-    public Collection<Estado> getEstadosFinais() {
+    public Set<Estado> getEstadosFinais() {
         return this.estadosFinais;
     }    
     
-    public Collection<Transicao> getTransicoes() {
+    public Set<Transicao> getTransicoes() {
         return this.transicoes;
     }
     

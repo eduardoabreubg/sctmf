@@ -10,12 +10,13 @@ import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
+import cassolato.rafael.sctmf.model.services.ValidaSequencia;
 
 /**
  *
  * @author  rafael2009_00
  */
-class ValSeq extends javax.swing.JPanel {
+class ValSeq extends javax.swing.JPanel {   
     private AFD afd = null;
     
     /** Creates new form ValSeq */
@@ -38,13 +39,13 @@ class ValSeq extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        fSequencia = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        bValidar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        aInfor = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -59,7 +60,7 @@ class ValSeq extends javax.swing.JPanel {
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 30));
 
-        jLabel1.setFont(new java.awt.Font("DialogInput", 3, 14));
+        jLabel1.setFont(new java.awt.Font("DialogInput", 1, 14));
         jLabel1.setText("Digite a seq\u00fc\u00eancia a ser testada");
         jPanel1.add(jLabel1);
 
@@ -73,9 +74,8 @@ class ValSeq extends javax.swing.JPanel {
         jLabel6.setPreferredSize(new java.awt.Dimension(34, 10));
         jPanel4.add(jLabel6, java.awt.BorderLayout.SOUTH);
 
-        jTextField1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 24));
-        jTextField1.setText("abcdef");
-        jPanel4.add(jTextField1, java.awt.BorderLayout.CENTER);
+        fSequencia.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 24));
+        jPanel4.add(fSequencia, java.awt.BorderLayout.CENTER);
 
         jLabel7.setPreferredSize(new java.awt.Dimension(20, 14));
         jPanel4.add(jLabel7, java.awt.BorderLayout.EAST);
@@ -87,18 +87,24 @@ class ValSeq extends javax.swing.JPanel {
 
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 10));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Preferences24.gif")));
-        jButton1.setText("Validar");
-        jButton1.setPreferredSize(new java.awt.Dimension(150, 40));
-        jPanel5.add(jButton1);
+        bValidar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Preferences24.gif")));
+        bValidar.setText("Validar");
+        bValidar.setPreferredSize(new java.awt.Dimension(150, 40));
+        bValidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bValidarActionPerformed(evt);
+            }
+        });
+
+        jPanel5.add(bValidar);
 
         jPanel2.add(jPanel5);
 
         jSplitPane1.setRightComponent(jPanel2);
 
-        jTextArea1.setRows(5);
-        jTextArea1.setText("E = {1,2,2,2}");
-        jScrollPane1.setViewportView(jTextArea1);
+        aInfor.setEditable(false);
+        aInfor.setRows(5);
+        jScrollPane1.setViewportView(aInfor);
 
         jSplitPane1.setLeftComponent(jScrollPane1);
 
@@ -116,7 +122,20 @@ class ValSeq extends javax.swing.JPanel {
         add(jPanel3);
 
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bValidarActionPerformed
+        if(ValidaSequencia.getInstance().validaAFD(
+                this.afd, this.fSequencia.getText()))
+            javax.swing.JOptionPane.showMessageDialog(
+                    this, "Seqüencia ACEITA");
+        else
+            javax.swing.JOptionPane.showMessageDialog(
+                    this, "Seqüencia REJEITADA");
+    }//GEN-LAST:event_bValidarActionPerformed
+    
     void managerAFD(AFD afd) {
+        this.afd = afd;
+        this.setInformacoes(afd);
     }
     
     void teste(AFD afd) {
@@ -141,8 +160,48 @@ class ValSeq extends javax.swing.JPanel {
                 );
     }
     
+    void setInformacoes(AFD afd) {
+        aInfor.setText("");
+        StringBuffer sb = new StringBuffer(
+                "V = <\u03a3, S, S\u2080, \u03B4, F>\n");
+        
+        sb.append("\u03a3 = {");  // Add Simbolos
+        for(Simbolo s : afd.getSimbolos())
+            sb.append(s.getNome()+", ");                
+        formataSb(sb);
+        
+        sb.append("S = {");
+        for(Estado e : afd.getEstados())
+            sb.append("<"+e.getNome()+">, ");          
+        formataSb(sb);
+        
+        sb.append("S\u2080 = <"+ afd.getEstadoInicial().getNome()+">\n");
+        
+        sb.append("F = {");
+        for(Estado e : afd.getEstadosFinais())
+            sb.append("<"+e.getNome()+">, "); 
+        formataSb(sb);
+        sb.append("\n");
+        
+        for(Transicao t : afd.getTransicoes())
+        sb.append("\u03B4(<"+
+                t.getEstOri().getNome()+">, "+
+                t.getSimbolo().getNome()+") = <"+
+                t.getEstDest().getNome()+">\n" );         
+        
+        aInfor.setText(sb.toString());
+    }
+    
+    private void formataSb(StringBuffer sb) {
+        int size = sb.length();
+        sb.delete(size-2,size);
+        sb.append("}\n");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextArea aInfor;
+    private javax.swing.JButton bValidar;
+    private javax.swing.JTextField fSequencia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -158,8 +217,6 @@ class ValSeq extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
     
 }
