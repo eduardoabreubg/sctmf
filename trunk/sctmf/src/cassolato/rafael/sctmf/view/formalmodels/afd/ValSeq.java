@@ -161,27 +161,32 @@ class ValSeq extends javax.swing.JPanel {
     }
     
     void setInformacoes(AFD afd) {
-        aInfor.setText("");
-        StringBuffer sb = new StringBuffer(
-                "V = <\u03a3, S, S\u2080, \u03B4, F>\n");
+        aInfor.setText("V = <\u03a3, S, S\u2080, \u03B4, F>\n");
+        StringBuffer sb = new StringBuffer();
         
         sb.append("\u03a3 = {");  // Add Simbolos
         for(Simbolo s : afd.getSimbolos())
             sb.append(s.getNome()+", ");                
-        formataSb(sb);
-        
+        sb = formataSb(sb);
+                
         sb.append("S = {");
         for(Estado e : afd.getEstados())
             sb.append("<"+e.getNome()+">, ");          
-        formataSb(sb);
-        
-        sb.append("S\u2080 = <"+ afd.getEstadoInicial().getNome()+">\n");
+        sb = formataSb(sb);
+               
+        Estado aux = afd.getEstadoInicial();
+        sb.append("S\u2080 = <");
+        if(aux!=null)
+             sb.append(aux.getNome());        
+        sb.append(">\n");
+        aInfor.append(sb.toString());
+        sb = new StringBuffer();
         
         sb.append("F = {");
         for(Estado e : afd.getEstadosFinais())
             sb.append("<"+e.getNome()+">, "); 
-        formataSb(sb);
-        sb.append("\n");
+        sb = formataSb(sb);        
+        aInfor.append("\n");
         
         for(Transicao t : afd.getTransicoes())
         sb.append("\u03B4(<"+
@@ -189,13 +194,20 @@ class ValSeq extends javax.swing.JPanel {
                 t.getSimbolo().getNome()+") = <"+
                 t.getEstDest().getNome()+">\n" );         
         
-        aInfor.setText(sb.toString());
+        aInfor.append(sb.toString());
     }
     
-    private void formataSb(StringBuffer sb) {
-        int size = sb.length();
-        sb.delete(size-2,size);
-        sb.append("}\n");
+    private StringBuffer formataSb(StringBuffer sb) {
+        int size = sb.length();        
+        if(size>5)
+            sb.delete(size-2,size);
+            
+        sb.append("}\n");  
+        aInfor.append(sb.toString());
+        sb = new StringBuffer();
+        
+        return sb;
+                    
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

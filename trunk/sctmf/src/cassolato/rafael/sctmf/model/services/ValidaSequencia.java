@@ -15,6 +15,7 @@ import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import java.util.Set;
 
+
 /**
  *
  * @author rafael2009_00
@@ -38,27 +39,23 @@ public class ValidaSequencia {
     public boolean validaAFD(AFD afd, String sequencia) {
         // Estado Inicial
         Estado estadoAtual = afd.getEstadoInicial();
-        
-        // Transicoes Cadastradas
-        Set<Transicao> transicoes = afd.getTransicoes();
-        
-        //Simbolos da Sequencia
-        String[] simbolos = new String[sequencia.length()];
-        for(int i=0;i<simbolos.length;i++)
-            simbolos[i] = String.valueOf(sequencia.charAt(i));
-        
-        for(int i=0;i<sequencia.length();i++) 
-            for(Transicao t : transicoes) {
-                Estado e = t.getEstOri();
-                Simbolo s = t.getSimbolo();
-                if(estadoAtual.getNome().equals(e.getNome())
-                    &&simbolos[i].equals(s.getNome())) {
-                    
-                    estadoAtual = t.getEstDest();
-                    break;
+                                
+        for(char c : sequencia.toCharArray())
+            if(this.charPertenceAlfabeto(afd.getSimbolos(),c)) 
+                for(Transicao t : afd.getTransicoes()) {
+                    Estado e = t.getEstOri();
+                    Simbolo s = t.getSimbolo();
+                    if(estadoAtual.getNome().equals(e.getNome())
+                        &&c==(s.getNome())) {
+
+                        estadoAtual = t.getEstDest();
+                        break;
+                    }
+
                 }
                 
-            }
+            else
+                return false;
         
         // Verifica se o Estado atual é algum
         // Dos estados finais
@@ -69,6 +66,15 @@ public class ValidaSequencia {
         return false;
         
     }
+    
+    private boolean charPertenceAlfabeto(Set<Simbolo> sim, char c) {                                 
+        for(Simbolo s : sim)                                                
+             if(c==s.getNome())
+                 return true ;              
+                    
+         return false;
+    }
+    
     
     public static ValidaSequencia getInstance() {
         return singleton;
