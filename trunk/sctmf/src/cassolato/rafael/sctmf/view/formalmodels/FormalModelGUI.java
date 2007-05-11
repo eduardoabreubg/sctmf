@@ -10,6 +10,8 @@
 package cassolato.rafael.sctmf.view;
 
 import cassolato.rafael.sctmf.model.pojo.FormalModel;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -19,12 +21,14 @@ public abstract class FormalModelGUI extends javax.swing.JPanel{
     protected static final int PREVIOUS = 0;
     protected static final int NEXT = 1;
     
+    protected List<String> cardNames = new ArrayList<String>();    
+    protected int activeCard;
         
     /** Creates a new instance of FomalModelGUI */
     public FormalModelGUI() {
     }
     
     public abstract void setFormalModel(FormalModel fm);
-    public abstract FormalModel getFormalModel(); 
-   
+    public abstract FormalModel getFormalModel();
+    
 }

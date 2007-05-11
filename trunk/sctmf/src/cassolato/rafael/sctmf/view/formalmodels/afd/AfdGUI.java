@@ -22,10 +22,7 @@ public class AfdGUI extends FormalModelGUI {
     private final CadEst pCadEst = new CadEst();
     private final CadFunTrans pCadFunTrans = new CadFunTrans();
     private final ValSeq vs = new ValSeq();
-        
-    private String[] cardNames;
-    private int activeCard;
-    
+                
     /** Creates new form AfdGUI */
     public AfdGUI() {
         initComponents();
@@ -84,7 +81,7 @@ public class AfdGUI extends FormalModelGUI {
         
         this.changeCards(NEXT);
         
-        if(cardNames[activeCard].startsWith("last"))
+        if(cardNames.get(activeCard).startsWith("last"))
             bNext.setEnabled(false);
         
     }//GEN-LAST:event_bNextActionPerformed
@@ -94,7 +91,7 @@ public class AfdGUI extends FormalModelGUI {
         
         this.changeCards(PREVIOUS);
         
-        if(cardNames[activeCard].startsWith("first"))
+        if(cardNames.get(activeCard).startsWith("first"))
             bBack.setEnabled(false);
          
     }//GEN-LAST:event_bBackActionPerformed
@@ -122,16 +119,15 @@ public class AfdGUI extends FormalModelGUI {
      * standard card.
      */
     private void addCards() {        
-        cardNames = new String[4];        
-        cardNames[0] = "first-cadAlf";
-        cardNames[1] = "cadEst";
-        cardNames[2] = "cadFunTrans";
-        cardNames[3] = "last-valSeq";
+        cardNames.add("first-cadAlf");
+        cardNames.add("cadEst");
+        cardNames.add("cadFunTrans");
+        cardNames.add("last-valSeq");
         
-        pCard.add(pCadAlf, cardNames[0]);
-        pCard.add(pCadEst,cardNames[1] );
-        pCard.add(pCadFunTrans,cardNames[2]);
-        pCard.add(vs,cardNames[3]);
+        pCard.add(pCadAlf,cardNames.get(0));
+        pCard.add(pCadEst,cardNames.get(1) );
+        pCard.add(pCadFunTrans,cardNames.get(2));
+        pCard.add(vs,cardNames.get(3));
         
         bBack.setEnabled(false);                
     }
@@ -154,7 +150,7 @@ public class AfdGUI extends FormalModelGUI {
         }
         
         ((java.awt.CardLayout)pCard.getLayout()).
-                show(pCard,cardNames[activeCard]);
+                show(pCard,cardNames.get(activeCard));
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
