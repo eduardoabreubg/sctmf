@@ -117,7 +117,6 @@ class CadAlf extends javax.swing.JPanel {
     
     void addSimbolos(Collection<Simbolo> simbolos ) {
         this.genericJList.removeAllItens();
-        
         Iterator<Simbolo> i = simbolos.iterator();
         while(i.hasNext())
             this.genericJList.addItem(

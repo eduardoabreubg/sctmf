@@ -98,7 +98,10 @@ public class AfdGUI extends FormalModelGUI {
 
     public void setFormalModel(FormalModel fm) {
         AFD afd = (AFD)fm;
-        this.pCadAlf.addSimbolos(afd.getSimbolos());        
+        this.pCadAlf.addSimbolos(afd.getSimbolos());  
+        this.pCadEst.setEstados(afd.getEstados());
+        this.pCadEst.setEstadoInicial(afd.getEstadoInicial());
+        this.pCadFunTrans.setFuncTrans(afd.getTransicoes());
     }
 
     public FormalModel getFormalModel() {

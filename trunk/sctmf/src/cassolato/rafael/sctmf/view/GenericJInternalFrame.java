@@ -102,8 +102,8 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
         if(file!=null) {
             FormalModel fm = this.ctrl.openFormalModel(file);
             // Envia pra a gui setar o Modelo Formal caso ele não esteja null
-            if(fm!=null);
-                this.gui.setFormalModel(fm);
+            if(fm!=null)
+             this.gui.setFormalModel(fm);
         }      
     }//GEN-LAST:event_bOpenActionPerformed
 

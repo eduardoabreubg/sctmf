@@ -11,8 +11,10 @@ package cassolato.rafael.sctmf.model.services;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
+import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.FormalModel;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
+import cassolato.rafael.sctmf.model.pojo.Transicao;
 import java.io.File;
 import java.io.FileWriter;
 
@@ -48,40 +50,35 @@ public class SaveFormalModel implements Save {
     private void saveAFD(AFD afd) throws SaveException {
         StringBuffer sb = new StringBuffer();
         
-        sb.append("\u03a3 = {");  // Add Simbolos
+        sb.append("E:");  // Add Simbolos
         for(Simbolo s : afd.getSimbolos())
-            sb.append(s.getNome()+", ");                
-//        sb = formataSb(sb);
-//                
-//        sb.append("S = {");
-//        for(Estado e : afd.getEstados())
-//            sb.append("<"+e.getNome()+">, ");          
-//        sb = formataSb(sb);
-//               
-//        Estado aux = afd.getEstadoInicial();
-//        sb.append("S\u2080 = <");
-//        if(aux!=null)
-//             sb.append(aux.getNome());        
-//        sb.append(">\n");
-//        aInfor.append(sb.toString());
-//        sb = new StringBuffer();
-//        
-//        sb.append("F = {");
-//        for(Estado e : afd.getEstadosFinais())
-//            sb.append("<"+e.getNome()+">, "); 
-//        sb = formataSb(sb);        
-//        aInfor.append("\n");
-//        
-//        for(Transicao t : afd.getTransicoes())
-//        sb.append("\u03B4(<"+
-//                t.getEstOri().getNome()+">, "+
-//                t.getSimbolo().getNome()+") = <"+
-//                t.getEstDest().getNome()+">\n" ); 
-//    
+            sb.append(s.getNome()+"-");     
+                       
+        sb.append("\nS:");
+        for(Estado e : afd.getEstados())
+            sb.append(e.getNome()+"-");          
+                       
+        Estado aux = afd.getEstadoInicial();
+        sb.append("\nI:");
+        if(aux!=null)
+             sb.append(aux.getNome());        
+                        
+        sb.append("\nF:");
+        for(Estado e : afd.getEstadosFinais())
+            sb.append(e.getNome()+"-"); 
+                
+        for(Transicao t : afd.getTransicoes())
+        sb.append("\nT:"+
+                t.getEstOri().getNome()+"-"+
+                t.getSimbolo().getNome()+"-"+
+                t.getEstDest().getNome()); 
+    
         try {         
             this.writeInFile(
                     new File(
                         this.file.getPath()+".afd"),sb.toString());
+            
+            this.showOkMessage("AFD");
         }catch(Exception ioex) {
             throw new SaveException("Erro ao Salvar AFD");
         }
@@ -98,7 +95,14 @@ public class SaveFormalModel implements Save {
         fw.write(content);
         fw.flush();
         fw.close();
-            
+        
+    }
+    
+    private void showOkMessage(String nameFormalModel) {
+        javax.swing.JOptionPane.showMessageDialog(null,
+                nameFormalModel+" Salvo com Sucesso", "Operação Concluída",
+                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        
     }
     
     public static SaveFormalModel getInstance() {
@@ -107,4 +111,5 @@ public class SaveFormalModel implements Save {
         
         return singleton;
     }
+    
 }

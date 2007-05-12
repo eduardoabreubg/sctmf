@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -47,9 +48,13 @@ public class TrayIconManager {
             MenuItem miSobre = new MenuItem("Sobre");
             
             miSair.addActionListener( new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    gui.dispose();
-                    System.exit(0);
+                public void actionPerformed(ActionEvent e) {                    
+                    int i = JOptionPane.showOptionDialog(null, "Deseja Sair do Sistema", "",   
+                        JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,   
+                        null, new String[]{"Sim","Não"}, null);
+        
+                    if(i==0)
+                        System.exit(0);
                 }
             });
             

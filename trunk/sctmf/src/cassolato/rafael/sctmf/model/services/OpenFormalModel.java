@@ -11,8 +11,10 @@ package cassolato.rafael.sctmf.model.services;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
+import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.FormalModel;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
+import cassolato.rafael.sctmf.model.pojo.Transicao;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -50,12 +52,42 @@ public class OpenFormalModel implements Open {
          BufferedReader br = new BufferedReader(new FileReader(file));
          while(br.ready()) {
              String line = br.readLine();
-             if(line.startsWith("Simbolos -> ")) {
-                 String[] simbolos = line.split("-");
-                 afd.addSimbolo(new Simbolo(simbolos[1].charAt(0)));
-                 afd.addSimbolo(new Simbolo(simbolos[2].charAt(0)));
-             }
-         }
+             if(line.length()>2) {
+                 if(line.startsWith("I")) {
+                        afd.setEstadoInicial(
+                            new Estado(line.substring(2)));
+                        
+                 }else if(line.startsWith("T")) {
+                     line = line.substring(2,line.length()-1);
+                     String str[] = line.split("-");
+                     
+                     Transicao t = new Transicao();
+                     t.setEstOri(new Estado(str[0]));
+                     t.setSimbolo(new Simbolo(str[1].charAt(0)));
+                     t.setEstDest(new Estado(str[2]));
+                     
+                     afd.addTransicao(t);
+                     
+                 }else {
+                     line = line.substring(2,line.length()-2);
+                     
+                     if(line.startsWith("E")) {
+                        for(String s : line.split("-"))
+                            afd.addSimbolo(new Simbolo(s.charAt(0)));
+
+                     }else if(line.startsWith("S")) {                        
+                         for(String e: line.split("-"))
+                             afd.addEstado(new Estado(e));
+
+                     }else if(line.startsWith("F")) {
+                         for(String f : line.split("-"))
+                             afd.addEstadoFinal(new Estado(f));
+
+                     }                     
+                 } // end else
+             }                 
+             
+         }//end while
          
          br.close();
         }catch(Exception ex) {
