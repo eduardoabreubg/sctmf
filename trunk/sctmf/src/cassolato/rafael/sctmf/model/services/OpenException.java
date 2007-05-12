@@ -1,3 +1,4 @@
+
 /*
  * OpenException.java
  *
@@ -18,6 +19,8 @@ public class OpenException extends Exception {
     /** Creates a new instance of OpenException */
     public OpenException(String msg) {
         super(msg);
+        javax.swing.JOptionPane.showMessageDialog(null, 
+                msg,"Atenção",javax.swing.JOptionPane.WARNING_MESSAGE);
     }
     
 }

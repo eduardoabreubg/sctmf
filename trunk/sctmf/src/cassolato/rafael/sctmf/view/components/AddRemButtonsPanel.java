@@ -11,10 +11,7 @@ package view;
  * @author  rafael2009_00
  */
 public class AddRemButtonsPanel extends javax.swing.JPanel {
-    
-    public static final int ADD = 1;
-    public static final int REMOVE = 2;
-    
+       
     /** Creates new form AddRemButtonsPanel */
     public AddRemButtonsPanel() {
         initComponents();
@@ -39,9 +36,13 @@ public class AddRemButtonsPanel extends javax.swing.JPanel {
         add(bRemove);
 
     }// </editor-fold>//GEN-END:initComponents
+        
+    public javax.swing.JButton getBAdd() {
+        return this.bAdd;
+    }
     
-    public javax.swing.JButton getButton(int codButton){        
-        return (codButton==ADD?this.bAdd:this.bRemove);
+    public javax.swing.JButton getBRemove() {
+        return this.bRemove;
     }
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables

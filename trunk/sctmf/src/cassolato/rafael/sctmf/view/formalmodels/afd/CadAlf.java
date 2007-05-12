@@ -7,6 +7,8 @@
 package cassolato.rafael.sctmf.view.formalmodels.afd;
 
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -21,7 +23,8 @@ class CadAlf extends javax.swing.JPanel {
     
     /** Creates new form CadAlf */
     public CadAlf() {
-        initComponents();     
+        initComponents();   
+        this.posInitComponents();
     }
     
     /** This method is called from within the constructor to
@@ -33,8 +36,6 @@ class CadAlf extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        bAdd = new javax.swing.JButton();
-        bRemove = new javax.swing.JButton();
         pCadAlf = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -45,24 +46,6 @@ class CadAlf extends javax.swing.JPanel {
         genericJList = new cassolato.rafael.sctmf.view.components.GenericJList();
         addRemoveButtons = new view.AddRemButtonsPanel();
         letterNumberCA = new view.LetterNumber();
-
-        bAdd.setText("jButton1");
-        bAdd = this.addRemoveButtons.getButton(
-            this.addRemoveButtons.ADD);
-        bAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bAddActionPerformed(evt);
-            }
-        });
-
-        bRemove.setText("jButton1");
-        bRemove = this.addRemoveButtons.getButton(
-            this.addRemoveButtons.REMOVE);
-        bRemove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bRemoveActionPerformed(evt);
-            }
-        });
 
         setLayout(new java.awt.GridLayout(1, 0));
 
@@ -120,15 +103,6 @@ class CadAlf extends javax.swing.JPanel {
         add(pCadAlf);
 
     }// </editor-fold>//GEN-END:initComponents
-
-    private void bRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRemoveActionPerformed
-        this.genericJList.removeItens();         
-    }//GEN-LAST:event_bRemoveActionPerformed
-
-    private void bAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddActionPerformed
-          this.genericJList.addItem(
-                this.letterNumberCA.getLetter());
-    }//GEN-LAST:event_bAddActionPerformed
           
     Collection<Simbolo> getSimbolos() {
         Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
@@ -151,10 +125,30 @@ class CadAlf extends javax.swing.JPanel {
             
     }
     
+    private void posInitComponents() {
+        this.addRemoveButtons.getBAdd().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                addAction();
+            }
+        });
+        
+        this.addRemoveButtons.getBRemove().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                removeAction();
+            }
+        });
+    }
+    
+    private void removeAction() {
+        this.genericJList.removeItens();  
+    }
+    
+    private void addAction() {
+         this.genericJList.addItem(
+                this.letterNumberCA.getLetter());
+    }
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
     private view.AddRemButtonsPanel addRemoveButtons;
-    private javax.swing.JButton bAdd;
-    private javax.swing.JButton bRemove;
     private cassolato.rafael.sctmf.view.components.GenericJList genericJList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

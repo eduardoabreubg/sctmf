@@ -12,7 +12,10 @@ package cassolato.rafael.sctmf.model.services;
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.FormalModel;
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 
 /**
  *
@@ -43,6 +46,22 @@ public class OpenFormalModel implements Open {
     
     private AFD getAFD(File file) throws OpenException {
         AFD afd = new AFD();
+        try {
+         BufferedReader br = new BufferedReader(new FileReader(file));
+         while(br.ready()) {
+             String line = br.readLine();
+             if(line.startsWith("Simbolos -> ")) {
+                 String[] simbolos = line.split("-");
+                 afd.addSimbolo(new Simbolo(simbolos[1].charAt(0)));
+                 afd.addSimbolo(new Simbolo(simbolos[2].charAt(0)));
+             }
+         }
+         
+         br.close();
+        }catch(Exception ex) {
+            ex.printStackTrace();
+            throw new OpenException("Erro Ao abrir modelo Formal");            
+        }
         
         return afd;        
     }

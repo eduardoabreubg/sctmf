@@ -18,6 +18,8 @@ public class SaveException extends Exception {
     /** Creates a new instance of SaveException */
     public SaveException(String msg) {
         super(msg);
+        javax.swing.JOptionPane.showMessageDialog(null, 
+                msg,"Atenção",javax.swing.JOptionPane.WARNING_MESSAGE);
     }
     
 }

@@ -98,7 +98,7 @@ public class AfdGUI extends FormalModelGUI {
 
     public void setFormalModel(FormalModel fm) {
         AFD afd = (AFD)fm;
-        
+        this.pCadAlf.addSimbolos(afd.getSimbolos());        
     }
 
     public FormalModel getFormalModel() {
