@@ -27,7 +27,6 @@ public class ValidaSequencia implements Validacao {
     private ValidaSequencia() {
     }
     
-    
     public void valida(FormalModel fm, String sequencia) {        
        try {
            this.sendMessage(this.validaAFD((AFD) fm, sequencia));
