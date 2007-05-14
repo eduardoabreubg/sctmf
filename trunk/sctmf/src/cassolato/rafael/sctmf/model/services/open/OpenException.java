@@ -8,7 +8,7 @@
  * and open the template in the editor.
  */
 
-package cassolato.rafael.sctmf.model.services;
+package cassolato.rafael.sctmf.model.services.open;
 
 /**
  *

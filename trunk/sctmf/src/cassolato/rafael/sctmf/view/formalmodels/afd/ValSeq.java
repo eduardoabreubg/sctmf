@@ -11,6 +11,7 @@ import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.services.ValidaSequencia;
+import cassolato.rafael.sctmf.model.services.Validacao;
 
 /**
  *
@@ -18,6 +19,7 @@ import cassolato.rafael.sctmf.model.services.ValidaSequencia;
  */
 class ValSeq extends javax.swing.JPanel {   
     private AFD afd = null;
+    private Validacao valida = ValidaSequencia.getInstance();
     
     /** Creates new form ValSeq */
     public ValSeq() {
@@ -125,13 +127,7 @@ class ValSeq extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bValidarActionPerformed
-        if(ValidaSequencia.getInstance().validaAFD(
-                this.afd, this.fSequencia.getText()))
-            javax.swing.JOptionPane.showMessageDialog(
-                    this, "Seqüencia ACEITA");
-        else
-            javax.swing.JOptionPane.showMessageDialog(
-                    this, "Seqüencia REJEITADA");
+        valida.valida(afd, this.fSequencia.getText());
     }//GEN-LAST:event_bValidarActionPerformed
     
     void managerAFD(AFD afd) {
@@ -139,29 +135,7 @@ class ValSeq extends javax.swing.JPanel {
         this.setInformacoes(afd);
         this.fSequencia.requestFocus(true);
     }
-    
-    void teste(AFD afd) {
-        System.out.println("Simbolos");
-        for(Simbolo s : afd.getSimbolos())
-            System.out.println(s.getNome());
-        
-        System.out.println("\nEstados");
-        for(Estado e : afd.getEstados())
-            System.out.println(e.getNome());
-        
-        System.out.println("Estado Inicial "+afd.getEstadoInicial().getNome());
-        System.out.println("\nEstados Finais");
-        for(Estado e : afd.getEstadosFinais())
-            System.out.println(e.getNome());
-        
-        System.out.println("\nTransicoes");
-        for(Transicao t : afd.getTransicoes())
-            System.out.println(
-                "E: ("+t.getEstOri().getNome()+" ,"
-                +t.getSimbolo().getNome()+") = "+t.getEstDest().getNome()
-                );
-    }
-    
+            
     void setInformacoes(AFD afd) {
         aInfor.setText("V = <\u03a3, S, S\u2080, \u03B4, F>\n");
         StringBuffer sb = new StringBuffer();

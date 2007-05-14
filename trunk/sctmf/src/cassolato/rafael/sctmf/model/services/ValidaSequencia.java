@@ -11,16 +11,15 @@ package cassolato.rafael.sctmf.model.services;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.Estado;
+import cassolato.rafael.sctmf.model.pojo.FormalModel;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
-import java.util.Set;
-
 
 /**
  *
  * @author rafael2009_00
  */
-public class ValidaSequencia {
+public class ValidaSequencia implements Validacao {
     
     private static ValidaSequencia singleton;
     
@@ -28,6 +27,20 @@ public class ValidaSequencia {
     private ValidaSequencia() {
     }
     
+    
+    public void valida(FormalModel fm, String sequencia) {        
+       try {
+           this.sendMessage(this.validaAFD((AFD) fm, sequencia));
+       }catch(ClassCastException exAFD)  {
+           try {
+               
+           }catch(ClassCastException exAFND) {
+               
+           }
+       }
+        
+    }
+            
     /**
      * Metodo que faz a validação de uma sequencia.
      * 
@@ -35,13 +48,13 @@ public class ValidaSequencia {
      * @param sequencia - Sequencia digitada pelo usuário
      *
      * @return boolean;
-     */
-    public boolean validaAFD(AFD afd, String sequencia) {
-        // Estado Inicial
+     */    
+    private boolean validaAFD(AFD afd, String sequencia) {
+        // Estado InicialE
         Estado estadoAtual = afd.getEstadoInicial();
                                 
-        for(char c : sequencia.toCharArray())
-            if(this.charPertenceAlfabeto(afd.getSimbolos(),c)) 
+        for(char c : sequencia.toCharArray())  {  
+            label : {
                 for(Transicao t : afd.getTransicoes()) {
                     Estado e = t.getEstOri();
                     Simbolo s = t.getSimbolo();
@@ -49,13 +62,15 @@ public class ValidaSequencia {
                         &&c==(s.getNome())) {
 
                         estadoAtual = t.getEstDest();
-                        break;
+                        break label;
                     }
-
-                }
-                
-            else
-                return false;
+                }         
+              
+            // caso nao exista nenhuma transicao que o leve ao proximo estado
+            return false; 
+            }
+            
+        }
         
         // Verifica se o Estado atual Ã© algum
         // Dos estados finais
@@ -65,16 +80,19 @@ public class ValidaSequencia {
         
         return false;
         
-    }
+    }    
     
-    private boolean charPertenceAlfabeto(Set<Simbolo> sim, char c) {                                 
-        for(Simbolo s : sim)                                                
-             if(c==s.getNome())
-                 return true ;              
-                    
-         return false;
+    private void sendMessage(boolean isOK) {
+        if(isOK) 
+            javax.swing.JOptionPane.showMessageDialog(null, 
+                    "Seqüência ACEITA", "!! OK !!",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        else
+            javax.swing.JOptionPane.showMessageDialog(null, 
+                    "Seqüência REJEITADA", "!! Atenção !!",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            
     }
-    
     
     public static ValidaSequencia getInstance() {
         return singleton;

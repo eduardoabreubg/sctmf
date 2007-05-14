@@ -10,12 +10,12 @@
 package cassolato.rafael.sctmf.control;
 
 import cassolato.rafael.sctmf.model.pojo.FormalModel;
-import cassolato.rafael.sctmf.model.services.Open;
-import cassolato.rafael.sctmf.model.services.OpenException;
-import cassolato.rafael.sctmf.model.services.OpenFormalModel;
+import cassolato.rafael.sctmf.model.services.open.Open;
+import cassolato.rafael.sctmf.model.services.open.OpenException;
+import cassolato.rafael.sctmf.model.services.open.OpenFormalModel;
 import cassolato.rafael.sctmf.model.services.Save;
-import cassolato.rafael.sctmf.model.services.SaveException;
-import cassolato.rafael.sctmf.model.services.SaveFormalModel;
+import cassolato.rafael.sctmf.model.services.save.SaveException;
+import cassolato.rafael.sctmf.model.services.save.SaveFormalModel;
 import cassolato.rafael.sctmf.view.MainWindow;
 import cassolato.rafael.sctmf.view.components.Splash;
 import cassolato.rafael.sctmf.view.components.TrayIconManager;

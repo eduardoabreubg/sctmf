@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package cassolato.rafael.sctmf.model.services;
+package cassolato.rafael.sctmf.model.services.save;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
@@ -15,8 +15,10 @@ import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.FormalModel;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
+import cassolato.rafael.sctmf.model.services.Save;
 import java.io.File;
 import java.io.FileWriter;
+
 
 /**
  *
