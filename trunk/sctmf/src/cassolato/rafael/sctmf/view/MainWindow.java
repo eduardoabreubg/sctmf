@@ -412,7 +412,7 @@ public class MainWindow extends javax.swing.JFrame {
      * Manipula a ação de Saída do Sistema
      */
     private void actionSair() {           
-        int i = jop.showOptionDialog(null, "Deseja Sair do Sistema", "",   
+        int i = jop.showOptionDialog(null, "Deseja Sair do Sistema ?", "",   
                  jop.YES_NO_OPTION,jop.QUESTION_MESSAGE,   
                  null, new String[]{"Sim","Não"}, null);
         

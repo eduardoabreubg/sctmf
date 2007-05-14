@@ -50,7 +50,7 @@ public class TrayIconManager {
             miSair.addActionListener( new ActionListener() {
                 public void actionPerformed(ActionEvent e) {                    
                     int i = javax.swing.JOptionPane.showOptionDialog(
-                            null, "Deseja Sair do Sistema", "",   
+                            null, "Deseja Sair do Sistema ?", "",   
                         javax.swing.JOptionPane.YES_NO_OPTION,
                         javax.swing.JOptionPane.QUESTION_MESSAGE,   
                         null, new String[]{"Sim","Não"}, null);
