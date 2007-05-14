@@ -23,7 +23,7 @@ public class MainWindow extends javax.swing.JFrame {
         
         this.initComponents();
         this.posInitComponents();
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);        
     }
     
     /** This method is called from within the constructor to
