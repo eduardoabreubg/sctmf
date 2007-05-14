@@ -11,6 +11,7 @@ package cassolato.rafael.sctmf.view;
 
 import cassolato.rafael.sctmf.view.formalmodels.afd.AfdGUI;
 
+
 /**
  *
  * @author rafael2009_00
@@ -21,12 +22,12 @@ public class GUIFactory {
     public GUIFactory() {
     }
     
-    public static FormalModelGUI getInstanceFM(int fm) {
+    public static FormalModelGUI getInstanceFM(IdFormalModel fm) {
         switch(fm) {
-            case IdFormalModels.AFD : 
+            case AFD : 
                 return new AfdGUI();
              
-            case IdFormalModels.AFND : 
+            case AFND : 
                 return new AfdGUI();
                 
             default : 

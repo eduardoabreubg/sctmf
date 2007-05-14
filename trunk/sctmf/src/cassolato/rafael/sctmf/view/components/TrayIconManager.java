@@ -19,7 +19,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,7 +37,8 @@ public class TrayIconManager {
             
             SystemTray tray = SystemTray.getSystemTray();
             Image image = Toolkit.getDefaultToolkit().getImage(getClass().
-                    getResource("/cassolato/rafael/sctmf/view/icons/java.gif"));
+                    getResource(
+                        "/cassolato/rafael/sctmf/view/icons/java_tray.png"));
             
             
             PopupMenu popup = new PopupMenu();
@@ -49,8 +49,10 @@ public class TrayIconManager {
             
             miSair.addActionListener( new ActionListener() {
                 public void actionPerformed(ActionEvent e) {                    
-                    int i = JOptionPane.showOptionDialog(null, "Deseja Sair do Sistema", "",   
-                        JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,   
+                    int i = javax.swing.JOptionPane.showOptionDialog(
+                            null, "Deseja Sair do Sistema", "",   
+                        javax.swing.JOptionPane.YES_NO_OPTION,
+                        javax.swing.JOptionPane.QUESTION_MESSAGE,   
                         null, new String[]{"Sim","Não"}, null);
         
                     if(i==0)

@@ -7,11 +7,11 @@
 package cassolato.rafael.sctmf.view.formalmodels.afd;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
-import cassolato.rafael.sctmf.model.pojo.Automato;
+import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.FormalModel;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.view.FormalModelGUI;
-import java.util.Iterator;
+import java.util.Collection;
 
 /**
  *
@@ -99,19 +99,27 @@ public class AfdGUI extends FormalModelGUI {
     public void setFormalModel(FormalModel fm) {
         AFD afd = (AFD)fm;
         this.pCadAlf.addSimbolos(afd.getSimbolos());  
+        
         this.pCadEst.setEstados(afd.getEstados());
         this.pCadEst.setEstadoInicial(afd.getEstadoInicial());
+        this.pCadEst.setEstadosFinais(afd.getEstadosFinais());
+        
         this.pCadFunTrans.setFuncTrans(afd.getTransicoes());
+        
+        this.changeCards(-1); // volta o card para o primeiro card
     }
 
     public FormalModel getFormalModel() {
         AFD afd = new AFD();
-        afd.addAllSimbolos(pCadAlf.getSimbolos());
+        Collection<Simbolo> simbolos = pCadAlf.getSimbolos();
+        afd.addAllSimbolos(simbolos);
         
-        afd.addAllEstados(pCadEst.getEstados());
+        Collection<Estado> estados = pCadEst.getEstados();
+        afd.addAllEstados(estados);
         afd.setEstadoInicial(pCadEst.getEstadoInicial());
         afd.addAllEstFinais(pCadEst.getEstadosFinais());
-        
+                
+        pCadFunTrans.observer(estados,simbolos);        
         afd.addAllTransicoes(pCadFunTrans.getFuncTrans());
                 
         return afd;
@@ -141,15 +149,23 @@ public class AfdGUI extends FormalModelGUI {
                 activeCard++;
                 
                 if(activeCard==2)
-                    pCadFunTrans.addEstadosSimbolosComboBox(
+                    pCadFunTrans.observer(
                             pCadEst.getEstados(),pCadAlf.getSimbolos());
                 else if(activeCard==3)                    
                     vs.managerAFD((AFD)getFormalModel());
                 
                 break;
+                
             case PREVIOUS : 
                 activeCard--;
                 break;
+                
+            default : {
+                activeCard = 0;
+                this.bNext.setEnabled(true);
+                this.bBack.setEnabled(false);
+            }
+                
         }
         
         ((java.awt.CardLayout)pCard.getLayout()).

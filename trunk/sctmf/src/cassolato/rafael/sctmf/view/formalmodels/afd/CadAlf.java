@@ -117,11 +117,11 @@ class CadAlf extends javax.swing.JPanel {
     
     void addSimbolos(Collection<Simbolo> simbolos ) {
         this.genericJList.removeAllItens();
-        Iterator<Simbolo> i = simbolos.iterator();
+        
+        Iterator<Simbolo> i = simbolos.iterator();        
         while(i.hasNext())
-            this.genericJList.addItem(
-                    i.next().getNome());
-            
+            this.genericJList.addItem(i.next().getNome());
+        
     }
     
     private void posInitComponents() {

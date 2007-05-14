@@ -6,6 +6,8 @@
 
 package cassolato.rafael.sctmf.view;
 
+import cassolato.rafael.sctmf.model.pojo.AFD;
+import cassolato.rafael.sctmf.model.pojo.AFND;
 import java.awt.Component;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -19,13 +21,14 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
     public static final int OPEN = 1;
     
     private Component c;
-    private int idFM;
+    private IdFormalModel idFormalModel;
     private int codOperation;
     
     /** Creates new form BeanForm */
-    public JfcOpenSave(final int codOperation, final Component c, int idFM) {        
+    public JfcOpenSave(
+            final int codOperation, final Component c, IdFormalModel idFM) {        
         this.c = c;
-        this.idFM = idFM;
+        this.idFormalModel = idFM;
         this.codOperation = codOperation;
         
         initComponents();
@@ -59,7 +62,7 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
                 
         }
         
-        this.setFileFilter(this.getFilter(this.idFM));
+        this.setFileFilter(this.getFilter());
         
     }
     
@@ -86,13 +89,13 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
         
     }
     
-    private FileNameExtensionFilter getFilter(int codFM) {
-        switch(codFM) {
-            case IdFormalModels.AFD :
+    private FileNameExtensionFilter getFilter() {
+        switch(this.idFormalModel) {
+            case AFD :
                 return new FileNameExtensionFilter(
                         "Autômato Finito Determinístico", "afd", "AFD");
                 
-            case IdFormalModels.AFND:
+            case AFND:
                  return new FileNameExtensionFilter("AFND", "afnd");
                  
             default: return null;

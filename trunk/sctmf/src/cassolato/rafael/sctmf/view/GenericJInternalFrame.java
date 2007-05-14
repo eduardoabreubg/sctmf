@@ -8,6 +8,7 @@ package cassolato.rafael.sctmf.view;
 
 import cassolato.rafael.sctmf.control.Controller;
 import cassolato.rafael.sctmf.model.pojo.FormalModel;
+import cassolato.rafael.sctmf.view.FormalModelGUI;
 
 /**
  *
@@ -17,12 +18,12 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
     
     private Controller ctrl;
     private FormalModelGUI gui;
-    private int idFormalModel;
+    private IdFormalModel idFM;
     
     /** Creates new form GenericJInternalFrame */
-    public GenericJInternalFrame(Controller ctrl, int cod) {
+    public GenericJInternalFrame(Controller ctrl, IdFormalModel idFM) {
         this.ctrl = ctrl;
-        this.idFormalModel = cod;
+        this.idFM = idFM;
         
         initComponents();
         this.posInitComponents();
@@ -94,7 +95,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
 
     private void bOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOpenActionPerformed
         JfcOpenSave fc = new JfcOpenSave(
-                JfcOpenSave.OPEN, this, this.idFormalModel);
+                JfcOpenSave.OPEN, this, this.idFM);
        
         // Envia para o Controller o Arquivo selecionado 
         // e recebe o objeto correspondente
@@ -109,7 +110,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
 
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         JfcOpenSave fc = new JfcOpenSave(
-                JfcOpenSave.SAVE, this, this.idFormalModel);
+                JfcOpenSave.SAVE, this, this.idFM);
         
         java.io.File file = fc.getFile();
         if(file!=null)
@@ -118,18 +119,18 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bSaveActionPerformed
         
     private void posInitComponents() {
-        switch(this.idFormalModel) {
-            case IdFormalModels.AFD :
+        switch(this.idFM) {
+            case AFD :
                 this.setTitle("AFD - Autômatos Finitos Determinísticos");
                 break;
             
-            case IdFormalModels.AFND :
+            case AFND :
             this.setTitle("AFND - Autômatos Finitos Não Determinísticos");
             break;
                 
         }
        
-        this.gui = GUIFactory.getInstanceFM(this.idFormalModel);        
+        this.gui = GUIFactory.getInstanceFM(this.idFM);        
         getContentPane().add(this.gui,java.awt.BorderLayout.CENTER);
         
     }

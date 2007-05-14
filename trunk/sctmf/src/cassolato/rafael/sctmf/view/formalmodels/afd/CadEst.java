@@ -240,10 +240,16 @@ class CadEst extends javax.swing.JPanel {
     
     void setEstados(Collection<Estado> estados) {
         this.listEstados.removeAllItens();
+        this.cbEstFin.removeAllItems();
+        this.cbEstIni.removeAllItems();
         
         Iterator<Estado> i = estados.iterator();
-        while(i.hasNext())
-            this.listEstados.addItem(i.next().getNome());
+        while(i.hasNext()) {
+            String nomeEstado = i.next().getNome();
+            this.listEstados.addItem(nomeEstado);
+            this.observerAdd(nomeEstado);
+        }
+            
     }
     
     Collection<Estado> getEstados() {
@@ -256,7 +262,10 @@ class CadEst extends javax.swing.JPanel {
     }
     
     void setEstadoInicial(Estado ei) {
-        
+        this.listEstIni.removeAllItens();
+        if(ei!=null)             
+            this.listEstIni.addItem(ei.getNome());
+                    
     }
     
     Estado getEstadoInicial() {
@@ -267,7 +276,10 @@ class CadEst extends javax.swing.JPanel {
     }
     
     void setEstadosFinais(Collection<Estado> ef) {
-        
+        listEstFin.removeAllItens();
+        for(Estado e : ef)
+            listEstFin.addItem(e.getNome());
+                    
     }
     
     Collection<Estado> getEstadosFinais() {
@@ -282,7 +294,7 @@ class CadEst extends javax.swing.JPanel {
      private void posInitComponents() {
         this.addRemEst.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
-                addActionEstado();
+                addActionEstado(null);
             }
         });
         
@@ -322,12 +334,14 @@ class CadEst extends javax.swing.JPanel {
             this.observerRemove(o);
     }
     
-    private void addActionEstado() {
-        String estado = letterNumber.getLetter()+
-                      ""+letterNumber.getNumber();
+    private void addActionEstado(Estado est) {
+        if(est==null)
+            est = new Estado(letterNumber.getLetter()+
+                            ""+letterNumber.getNumber());
         
-        if(this.listEstados.addItem(estado))  
-            this.observerAdd(estado);
+        String nomeEst = est.getNome();
+        if(this.listEstados.addItem(nomeEst))  
+            this.observerAdd(nomeEst);
     }
     
     private void removeActionEstadoInicial() {

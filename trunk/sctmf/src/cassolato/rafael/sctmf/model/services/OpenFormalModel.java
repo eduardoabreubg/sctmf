@@ -52,13 +52,13 @@ public class OpenFormalModel implements Open {
          BufferedReader br = new BufferedReader(new FileReader(file));
          while(br.ready()) {
              String line = br.readLine();
-             if(line.length()>2) {
+             if(line.length()>2) {                 
                  if(line.startsWith("I")) {
                         afd.setEstadoInicial(
                             new Estado(line.substring(2)));
                         
                  }else if(line.startsWith("T")) {
-                     line = line.substring(2,line.length()-1);
+                     line = line.substring(2);
                      String str[] = line.split("-");
                      
                      Transicao t = new Transicao();
@@ -68,23 +68,19 @@ public class OpenFormalModel implements Open {
                      
                      afd.addTransicao(t);
                      
-                 }else {
-                     line = line.substring(2,line.length()-2);
-                     
-                     if(line.startsWith("E")) {
-                        for(String s : line.split("-"))
-                            afd.addSimbolo(new Simbolo(s.charAt(0)));
+                 }else if(line.startsWith("E")) {                                          
+                    for(String s : line.substring(2,line.length()-1).split("-"))
+                        afd.addSimbolo(new Simbolo(s.charAt(0)));
 
-                     }else if(line.startsWith("S")) {                        
-                         for(String e: line.split("-"))
-                             afd.addEstado(new Estado(e));
+                 }else if(line.startsWith("S")) {                        
+                     for(String e: line.substring(2,line.length()-1).split("-"))
+                         afd.addEstado(new Estado(e));
 
-                     }else if(line.startsWith("F")) {
-                         for(String f : line.split("-"))
-                             afd.addEstadoFinal(new Estado(f));
-
-                     }                     
-                 } // end else
+                 }else if(line.startsWith("F")) {
+                     for(String f : line.substring(2,line.length()-1).split("-"))
+                         afd.addEstadoFinal(new Estado(f));
+                                      
+                 }
              }                 
              
          }//end while
@@ -94,7 +90,7 @@ public class OpenFormalModel implements Open {
             ex.printStackTrace();
             throw new OpenException("Erro Ao abrir modelo Formal");            
         }
-        
+                
         return afd;        
     }
     

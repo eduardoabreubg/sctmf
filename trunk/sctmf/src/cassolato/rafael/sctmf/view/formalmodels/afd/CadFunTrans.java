@@ -315,13 +315,22 @@ class CadFunTrans extends javax.swing.JPanel {
         this.genericJList.removeItens();  
     }                                       
 
-    private void addAction() {                                     
+    private void addAction(Estado estOri, Simbolo s, Estado estFin) {                                     
         StringBuffer sb = new StringBuffer("\u03B4 (");
-        sb.append(cbEstOri.getSelectedItem().toString()); // EstOri
+       
+        // Indica que foi executada uma acao pelo usuário
+        // de adicao de Transicao
+        if(estOri==null) {
+            estOri = new Estado(cbEstOri.getSelectedItem().toString());
+            s = new Simbolo(cbSimb.getSelectedItem().toString().charAt(0));
+            estFin = new Estado(cbEstDes.getSelectedItem().toString());
+        }
+        
+        sb.append(estOri.getNome()); // EstOri
         sb.append(", ");
-        sb.append(cbSimb.getSelectedItem().toString());   // Simb
+        sb.append(s.getNome());   // Simb
         sb.append(") = ");
-        sb.append(cbEstDes.getSelectedItem().toString()); // EstOri
+        sb.append(estFin.getNome()); // EstOri
         
         genericJList.addItem(sb.toString());
     }
@@ -354,13 +363,19 @@ class CadFunTrans extends javax.swing.JPanel {
     }
     
     void setFuncTrans(Collection<Transicao> c) {
+        genericJList.removeAllItens();
+        for(Transicao t : c) 
+            this.addAction(t.getEstOri(),
+                           t.getSimbolo(),
+                           t.getEstDest());
+        
     }
         
     /**
      * Limpa os JComboBoxs e Add os valores nele.
      *
      */
-    void addEstadosSimbolosComboBox(
+    void observer(
             Collection<Estado> estados, Collection<Simbolo> simbolos) {
         String sim = "";
         String est = "";
@@ -432,7 +447,7 @@ class CadFunTrans extends javax.swing.JPanel {
      private void posInitComponents() {
         this.addRemButtonsPanel.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
-                addAction();
+                addAction(null,null,null);
             }
         });
         
