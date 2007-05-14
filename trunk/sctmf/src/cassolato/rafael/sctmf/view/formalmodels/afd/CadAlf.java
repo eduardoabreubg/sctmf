@@ -125,6 +125,8 @@ class CadAlf extends javax.swing.JPanel {
     }
     
     private void posInitComponents() {
+        this.letterNumberCA.enableCbNumber(false);
+        
         this.addRemoveButtons.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
                 addAction();

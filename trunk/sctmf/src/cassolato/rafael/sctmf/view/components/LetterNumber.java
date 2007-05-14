@@ -48,7 +48,7 @@ public class LetterNumber extends javax.swing.JPanel {
         cbNumber.setPreferredSize(new java.awt.Dimension(50, 25));
         jPanel1.add(cbNumber);
 
-        jcb.setToolTipText("Lower Case");
+        jcb.setToolTipText("Letra Min\u00fascula");
         jcb.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jcb.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jPanel1.add(jcb);
@@ -65,26 +65,13 @@ public class LetterNumber extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
         
-    /*
-    public String getDataJComboBoxs(int codCombo) {
-        return this.getJComboBox(codCombo).getSelectedItem().toString();
+    public void enableCbNumber(boolean arg) {
+        this.cbNumber.setEnabled(arg);
     }
     
-    public boolean getStatusJCB() {
-        return this.jcb.isSelected();
+    public void enableCbLetter(boolean arg) {
+        this.cbLetter.setEnabled(arg);
     }
-    
-    public void setEnabledJComboBoxs(int codCombo, boolean status) {
-        this.getJComboBox(codCombo).setEnabled(status);        
-    }
-    
-    public void setEnabledJCheckBok(boolean status) {
-        this.jcb.setEnabled(status);
-    }
-    
-    private javax.swing.JComboBox getJComboBox(int codCombo) {
-        return (codCombo==JCB_LETTER?this.cbLetter:this.cbNumber);        
-    } */
     
     public char getLetter() {
         char c = this.cbLetter.getSelectedItem().toString().charAt(0);

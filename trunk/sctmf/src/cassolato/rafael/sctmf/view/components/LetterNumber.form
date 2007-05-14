@@ -116,7 +116,7 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jcb">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Lower Case"/>
+            <Property name="toolTipText" type="java.lang.String" value="Letra Min&#xfa;scula"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                 <EmptyBorder bottom="0" left="0" right="0" top="0"/>
