@@ -10,8 +10,10 @@
 package cassolato.rafael.sctmf.control;
 
 import cassolato.rafael.sctmf.model.pojo.FormalModel;
+import cassolato.rafael.sctmf.model.services.Open;
 import cassolato.rafael.sctmf.model.services.OpenException;
 import cassolato.rafael.sctmf.model.services.OpenFormalModel;
+import cassolato.rafael.sctmf.model.services.Save;
 import cassolato.rafael.sctmf.model.services.SaveException;
 import cassolato.rafael.sctmf.model.services.SaveFormalModel;
 import cassolato.rafael.sctmf.view.MainWindow;
@@ -24,6 +26,8 @@ import cassolato.rafael.sctmf.view.components.TrayIconManager;
  */
 public class Controller {
     
+    private Open open = new OpenFormalModel();
+    private Save save = new SaveFormalModel();
     private MainWindow gui = null;
     private final String GUI_TITLE = 
             "* SCTMF - Sistema de Criação e Testes de Modelos Formais * v0.1";
@@ -47,8 +51,8 @@ public class Controller {
      *
      */    
     public void saveFormalModel(java.io.File file, FormalModel fm) {         
-        try {
-            SaveFormalModel.getInstance().save(file, fm);
+        try {            
+            save.save(file, fm);
         } catch (SaveException ex) {
             ex.printStackTrace();
         }
@@ -56,7 +60,7 @@ public class Controller {
     
     public FormalModel openFormalModel(java.io.File file) {        
         try {
-            return OpenFormalModel.getInstance().open(file);        
+            return open.open(file);        
         } catch (OpenException ex) {
             ex.printStackTrace();
             return null;

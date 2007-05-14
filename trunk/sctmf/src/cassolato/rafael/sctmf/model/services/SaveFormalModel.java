@@ -23,12 +23,12 @@ import java.io.FileWriter;
  * @author rafael2009_00
  */
 public class SaveFormalModel implements Save {
-    private static SaveFormalModel singleton = null;
     private FileWriter fw;
     private File file;
     
     /** Creates a new instance of Save */
-    private SaveFormalModel() {}
+    public SaveFormalModel() {
+    }
     
     public void save(File file, FormalModel fm) throws SaveException {
         this.file = file;
@@ -103,13 +103,6 @@ public class SaveFormalModel implements Save {
                 nameFormalModel+" Salvo com Sucesso", "Operação Concluída",
                 javax.swing.JOptionPane.INFORMATION_MESSAGE);
         
-    }
-    
-    public static SaveFormalModel getInstance() {
-        if(singleton==null)
-            singleton = new SaveFormalModel();
-        
-        return singleton;
     }
     
 }

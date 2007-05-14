@@ -25,10 +25,9 @@ import java.io.FileReader;
  */
 public class OpenFormalModel implements Open {
     
-    private static final OpenFormalModel singleton = new OpenFormalModel();
-    
     /** Creates a new instance of OpenFormalModel */
-    private OpenFormalModel() {}
+    public OpenFormalModel() {
+    }
     
     public FormalModel open(File file) throws OpenException {
         // pega a extenção do arquivo
@@ -98,8 +97,5 @@ public class OpenFormalModel implements Open {
         return new AFND();
     }
     
-    public static OpenFormalModel getInstance() {
-        return singleton;
-    }
     
 }
