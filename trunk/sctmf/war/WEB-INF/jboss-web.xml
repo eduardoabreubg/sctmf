@@ -1,0 +1,6 @@
+<jboss-web>
+  <context-root>/</context-root>
+  <virtual-host>sctmf.marcossousa.com</virtual-host>
+  <virtual-host>www.sctmf.marcossousa.com</virtual-host>
+<security-domain>java:/jaas/marcossousa</security-domain>
+</jboss-web>
