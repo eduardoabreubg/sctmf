@@ -38,7 +38,7 @@ public class TrayIconManager {
             SystemTray tray = SystemTray.getSystemTray();
             Image image = Toolkit.getDefaultToolkit().getImage(getClass().
                     getResource(
-                        "/cassolato/rafael/sctmf/view/icons/java_tray.png"));
+                        "/cassolato/rafael/sctmf/view/icons/java_tray.gif"));
             
             
             PopupMenu popup = new PopupMenu();
