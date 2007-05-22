@@ -17,8 +17,6 @@ import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  *
@@ -36,11 +34,10 @@ public class TrayIconManager {
         if (SystemTray.isSupported()) {
             
             SystemTray tray = SystemTray.getSystemTray();
-            Image image = Toolkit.getDefaultToolkit().getImage(getClass().
-                    getResource(
-                        "/cassolato/rafael/sctmf/view/icons/java_tray.gif"));
             
-            
+            Image image = Toolkit.getDefaultToolkit().getImage(
+                    getClass().getResource("java_tray.gif"));
+                        
             PopupMenu popup = new PopupMenu();
             MenuItem miSair = new MenuItem("Sair");
             MenuItem miHide = new MenuItem("Hide");
@@ -55,8 +52,11 @@ public class TrayIconManager {
                         javax.swing.JOptionPane.QUESTION_MESSAGE,   
                         null, new String[]{"Sim","Não"}, null);
         
-                    if(i==0)
+                    if(i==0) {
+                        gui.setVisible(false);
                         System.exit(0);
+                    }
+                        
                 }
             });
             
@@ -76,10 +76,10 @@ public class TrayIconManager {
             
             miSobre.addActionListener( new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    javax.swing.JOptionPane.showMessageDialog(null, "SOBRE");
+                    new SobreGUI(null,true);
                 }
-            });
-            
+            });            
+                       
             popup.add(miSair);
             popup.add(miHide);
             popup.add(miShow);
@@ -105,6 +105,5 @@ public class TrayIconManager {
         } else
             System.err.println("System tray is currently not supported.");
         
-    }
-    
+    }    
 }

@@ -7,6 +7,7 @@
 package cassolato.rafael.sctmf.view;
 
 import cassolato.rafael.sctmf.control.Controller;
+import cassolato.rafael.sctmf.view.components.SobreGUI;
 import java.beans.PropertyVetoException;
 
 /**
@@ -416,8 +417,11 @@ public class MainWindow extends javax.swing.JFrame {
                  jop.YES_NO_OPTION,jop.QUESTION_MESSAGE,   
                  null, new String[]{"Sim","Não"}, null);
         
-        if(i==0)
+        if(i==0) {
+            this.setVisible(false);            
             System.exit(0);
+        }
+            
     }
     
     /**

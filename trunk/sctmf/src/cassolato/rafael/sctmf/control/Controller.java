@@ -39,7 +39,7 @@ public class Controller {
         gui = new MainWindow(this);        // Create a instance of GUI        
         gui.setTitle(GUI_TITLE);
         
-        //new TrayIconManager(gui);          // Call TrayIcon
+        new TrayIconManager(gui);          // Call TrayIcon
         
         gui.setVisible(true);
         

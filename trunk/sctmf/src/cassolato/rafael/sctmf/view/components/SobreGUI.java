@@ -4,7 +4,7 @@
  * Created on 15 de Fevereiro de 2007, 20:52
  */
 
-package cassolato.rafael.sctmf.view;
+package cassolato.rafael.sctmf.view.components;
 
 /**
  *
