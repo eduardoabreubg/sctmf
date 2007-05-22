@@ -126,6 +126,7 @@ class CadAlf extends javax.swing.JPanel {
     
     private void posInitComponents() {
         this.letterNumberCA.enableCbNumber(false);
+        this.letterNumberCA.forceAllLowerCase(true);
         
         this.addRemoveButtons.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
@@ -142,14 +143,14 @@ class CadAlf extends javax.swing.JPanel {
     
     private void removeAction() {
         for(Object o : this.genericJList.removeItens())
-            this.letterNumberCA.addItem(o.toString());  
+            this.letterNumberCA.addItem(o.toString().toUpperCase());  
         
     }
     
     private void addAction() {
-        this.letterNumberCA.removeItem(
-                this.genericJList.addItem(
-                    this.letterNumberCA.getLetter()));
+        Character item = this.genericJList.addItem(
+                    this.letterNumberCA.getLetter());
+        this.letterNumberCA.removeItem(item.toString().toUpperCase());
     }
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
     private view.AddRemButtonsPanel addRemoveButtons;
