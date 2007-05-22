@@ -6,6 +6,10 @@
 
 package view;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
  *
  * @author  rafael2009_00
@@ -86,6 +90,23 @@ public class LetterNumber extends javax.swing.JPanel {
                 this.cbNumber.getSelectedItem().toString());
     }
     
+    public void addItem(String s) {
+        List<String> l = new ArrayList<String>();
+        l.add(s); // add o simbolo
+        int size = cbLetter.getModel().getSize();
+        for(int i =0;i<size;i++) 
+            l.add(cbLetter.getItemAt(i).toString());
+        
+        this.cbLetter.removeAllItems(); // remove todos os itens do JComoBox
+        Collections.sort(l); // Ordena            
+        for(String str : l)
+            this.cbLetter.addItem(str);
+        
+    }
+    
+    public void removeItem(Object o) {
+        this.cbLetter.removeItem(o.toString());        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbLetter;
     private javax.swing.JComboBox cbNumber;

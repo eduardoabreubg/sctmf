@@ -340,7 +340,7 @@ class CadEst extends javax.swing.JPanel {
                             ""+letterNumber.getNumber());
         
         String nomeEst = est.getNome();
-        if(this.listEstados.addItem(nomeEst))  
+        if(this.listEstados.addItem(nomeEst)!=null)  
             this.observerAdd(nomeEst);
     }
     

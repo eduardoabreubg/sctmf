@@ -141,12 +141,15 @@ class CadAlf extends javax.swing.JPanel {
     }
     
     private void removeAction() {
-        this.genericJList.removeItens();  
+        for(Object o : this.genericJList.removeItens())
+            this.letterNumberCA.addItem(o.toString());  
+        
     }
     
     private void addAction() {
-         this.genericJList.addItem(
-                this.letterNumberCA.getLetter());
+        this.letterNumberCA.removeItem(
+                this.genericJList.addItem(
+                    this.letterNumberCA.getLetter()));
     }
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
     private view.AddRemButtonsPanel addRemoveButtons;

@@ -41,34 +41,34 @@ public class GenericJList extends javax.swing.JScrollPane {
     
     /**
      * Add o Item na JList, se o item foi add com sucesso
-     * retorna true, caso não retorna false;
+     * retorna o Character, caso não retorna null;
      *
      * @param item
-     * @return boolean
+     * @return Character
      */
-    public boolean addItem(Character item) {
+    public Character addItem(Character item) {
         if(!this.dlm.contains(item)) {
             this.dlm.addElement(item); 
-            return true;
+            return item;
             
         }else
-            return false;
+            return null;
     }
     
     /**
      * Add o Item na JList, se o item foi add com sucesso
-     * retorna true, caso não retorna false;
+     * retorna a String, caso não retorna null;
      *
      * @param item
-     * @return boolean
+     * @return String
      */
-    public boolean addItem(String item) {
+    public String addItem(String item) {
         if(!this.dlm.contains(item)) {
             this.dlm.addElement(item);
-            return true;
+            return item;
             
         }else
-            return false;
+            return item;
             
     }
     
