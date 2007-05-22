@@ -331,8 +331,33 @@ class CadFunTrans extends javax.swing.JPanel {
         sb.append(s.getNome());   // Simb
         sb.append(") = ");
         sb.append(estFin.getNome()); // EstOri
+                       
+        String transicao = sb.toString();
+        if(wayAdd(transicao))
+            genericJList.addItem(transicao);
         
-        genericJList.addItem(sb.toString());
+        else
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Não é permitido cadastrar um mesmo estado inicial,\n" +
+                    "e um símbolo, para mais de UM estado destino.",
+                    "Tentativa de Violação de Integridade do AFD",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+    }
+    
+    /**
+     * Método que assegura a integridade da transicao do AFD,<br>
+     * ou seja, ele não permite que o mesmo estado inicial, e o mesmo simbolo,<br>
+     * possam ir para 2 estados diferentes ou seja.<br>
+     * <i>A1,a -> A2<br>
+     * A1,a -> A1 (ele nao permite issso)</i>
+     */
+    private boolean wayAdd(String transicao) {
+        transicao = transicao.substring(0,7);
+        for(Object o :genericJList.getAllItens())
+            if(o.toString().startsWith(transicao))
+                return false;
+        
+        return true;
     }
     
     /**
