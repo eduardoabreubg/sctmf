@@ -107,6 +107,21 @@ public class LetterNumber extends javax.swing.JPanel {
     public void removeItem(Object o) {
         this.cbLetter.removeItem(o.toString());        
     }
+    
+    /**
+     * Forca as letras serem todas minúsculas
+     */
+    public void forceAllLowerCase(boolean status) {
+        if(status) {
+            this.jcb.setSelected(true);
+            this.jcb.setEnabled(false);
+            
+        }else {        
+            this.jcb.setSelected(false);
+            this.jcb.setEnabled(true);
+        }
+        
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox cbLetter;
     private javax.swing.JComboBox cbNumber;
