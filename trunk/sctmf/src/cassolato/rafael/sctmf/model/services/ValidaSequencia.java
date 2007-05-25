@@ -27,17 +27,15 @@ public class ValidaSequencia implements Validacao {
     private ValidaSequencia() {
     }
     
-    public void valida(FormalModel fm, String sequencia) {        
-       try {
-           this.sendMessage(this.validaAFD((AFD) fm, sequencia));
-       }catch(ClassCastException exAFD)  {
-           try {
-               
-           }catch(ClassCastException exAFND) {
-               
-           }
-       }
+    public void valida(FormalModel fm, String sequencia) {    
+        boolean status = false;
         
+       if(fm instanceof AFD )
+         status = this.valida((AFD)fm, sequencia);  
+       //else if(fm instanceof AFND )
+         //  this.sendMessage(this.valida((AFND)fm, sequencia));
+            
+        this.sendMessage(status);
     }
             
     /**
@@ -48,7 +46,7 @@ public class ValidaSequencia implements Validacao {
      *
      * @return boolean;
      */    
-    private boolean validaAFD(AFD afd, String sequencia) {
+    private boolean valida(AFD afd, String sequencia) {
         // Estado InicialE
         Estado estadoAtual = afd.getEstadoInicial();
                                 
