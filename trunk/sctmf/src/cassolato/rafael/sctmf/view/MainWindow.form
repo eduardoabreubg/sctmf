@@ -52,6 +52,7 @@
                 <MenuItem class="javax.swing.JMenuItem" name="miAFND">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="AFND "/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAFNDActionPerformed"/>
@@ -246,6 +247,7 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="AFND"/>
                 <Property name="toolTipText" type="java.lang.String" value="Aut&#xf4;matos Finitos N&#xe3;o Determin&#xed;sticos"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[70, 25]"/>
                 </Property>
