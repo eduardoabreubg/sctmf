@@ -119,8 +119,10 @@ public class CadAlf extends javax.swing.JPanel {
         this.genericJList.removeAllItens();
         
         Iterator<Simbolo> i = simbolos.iterator();        
+        //while(i.hasNext())
+           // this.genericJList.addItem(i.next().getNome());
         while(i.hasNext())
-            this.genericJList.addItem(i.next().getNome());
+            this.addAction(i.next().getNome());
         
     }
     
@@ -151,6 +153,12 @@ public class CadAlf extends javax.swing.JPanel {
         Character item = this.genericJList.addItem(
                     this.letterNumberCA.getLetter());
         this.letterNumberCA.removeItem(item.toString().toUpperCase());
+    }
+    
+    
+    private void addAction(Character c) {
+        c = this.genericJList.addItem(c);
+        this.letterNumberCA.removeItem(c.toString().toUpperCase());
     }
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
     private view.AddRemButtonsPanel addRemoveButtons;

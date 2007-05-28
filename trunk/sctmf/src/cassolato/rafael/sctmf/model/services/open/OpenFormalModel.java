@@ -94,7 +94,51 @@ public class OpenFormalModel implements Open {
     }
     
      private AFND getAFND(File file) throws OpenException  {
-        return new AFND();
+        AFND afnd = new AFND();
+        try {
+         BufferedReader br = new BufferedReader(new FileReader(file));
+         while(br.ready()) {
+             String line = br.readLine();
+             if(line.length()>2) {                 
+                 if(line.startsWith("T")) { // Transicoes
+                     line = line.substring(2);
+                     String str[] = line.split("-");
+                     
+                     Transicao t = new Transicao();
+                     t.setEstOri(new Estado(str[0]));
+                     t.setSimbolo(new Simbolo(str[1].charAt(0)));
+                     t.setEstDest(new Estado(str[2]));
+                     
+                     afnd.addTransicao(t);
+                     
+                 }else if(line.startsWith("E")) { // Alfabeto                                        
+                    for(String s : line.substring(2,line.length()-1).split("-"))
+                        afnd.addSimbolo(new Simbolo(s.charAt(0)));
+
+                 }else if(line.startsWith("S")) { // Simbolos                       
+                     for(String e: line.substring(2,line.length()-1).split("-"))
+                         afnd.addEstado(new Estado(e));
+
+                 }else if(line.startsWith("F")) { // Estados Finais
+                     for(String f : line.substring(2,line.length()-1).split("-"))
+                         afnd.addEstadoFinal(new Estado(f));
+                                      
+                 }else if(line.startsWith("I")) { // Estados Iniciais
+                     for(String ei : line.substring(2,
+                             line.length()-1).split("-"))
+                         afnd.addEstadoInicial(new Estado(ei));
+                 }
+             }                 
+             
+         }//end while
+         
+         br.close();
+        }catch(Exception ex) {
+            ex.printStackTrace();
+            throw new OpenException("Erro Ao abrir modelo Formal");            
+        }
+                
+        return afnd;  
     }
     
     
