@@ -8,6 +8,7 @@ package cassolato.rafael.sctmf.view.formalmodels.afd;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.Estado;
+import cassolato.rafael.sctmf.model.pojo.FormalModel;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.services.ValidaSequencia;
@@ -17,9 +18,8 @@ import cassolato.rafael.sctmf.model.services.Validacao;
  *
  * @author  rafael2009_00
  */
-class ValSeq extends javax.swing.JPanel {   
+public class ValSeq extends javax.swing.JPanel {   
     private AFD afd = null;
-    private Validacao valida = ValidaSequencia.getInstance();
     
     /** Creates new form ValSeq */
     public ValSeq() {
@@ -127,16 +127,21 @@ class ValSeq extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bValidarActionPerformed
-        valida.valida(afd, this.fSequencia.getText());
+        this.actionValidar();
     }//GEN-LAST:event_bValidarActionPerformed
     
-    void managerAFD(AFD afd) {
-        this.afd = afd;
+    protected void actionValidar() {
+        ValidaSequencia.getInstance().valida(
+                afd, this.fSequencia.getText());
+    }
+    
+    protected void managerFM(FormalModel fm) {
+        this.afd = (AFD)fm;
         this.setInformacoes(afd);
         this.fSequencia.requestFocus(true);
     }
             
-    void setInformacoes(AFD afd) {
+    private void setInformacoes(AFD afd) {
         aInfor.setText("V = <\u03a3, S, S\u2080, \u03B4, F>\n");
         StringBuffer sb = new StringBuffer();
         
@@ -173,9 +178,9 @@ class ValSeq extends javax.swing.JPanel {
         aInfor.append(sb.toString());
     }
     
-    private StringBuffer formataSb(StringBuffer sb) {
+    protected StringBuffer formataSb(StringBuffer sb) {
         int size = sb.length();        
-        if(size>5)
+        if(size>6)
             sb.delete(size-2,size);
             
         sb.append("}\n");  
@@ -186,6 +191,14 @@ class ValSeq extends javax.swing.JPanel {
                     
     }
     
+    protected javax.swing.JTextField getFSequencia() {
+        return this.fSequencia;
+    }
+    
+    protected javax.swing.JTextArea getAInf() {
+        return this.aInfor;
+    }
+        
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
     private javax.swing.JTextArea aInfor;
     private javax.swing.JButton bValidar;

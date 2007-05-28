@@ -7,6 +7,7 @@
 package cassolato.rafael.sctmf.view.formalmodels.afd;
 
 import cassolato.rafael.sctmf.model.pojo.Estado;
+import cassolato.rafael.sctmf.view.components.GenericJList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
@@ -18,7 +19,7 @@ import java.util.Set;
  *
  * @author  rafael2009_00
  */
-class CadEst extends javax.swing.JPanel {
+public class CadEst extends javax.swing.JPanel {
     
     /** Creates new form CadEst */
     public CadEst() {
@@ -238,7 +239,7 @@ class CadEst extends javax.swing.JPanel {
         this.listEstFin.removeItem(item);
     }
     
-    void setEstados(Collection<Estado> estados) {
+    public void setEstados(Collection<Estado> estados) {
         this.listEstados.removeAllItens();
         this.cbEstFin.removeAllItems();
         this.cbEstIni.removeAllItems();
@@ -246,13 +247,14 @@ class CadEst extends javax.swing.JPanel {
         Iterator<Estado> i = estados.iterator();
         while(i.hasNext()) {
             String nomeEstado = i.next().getNome();
-            this.listEstados.addItem(nomeEstado);
-            this.observerAdd(nomeEstado);
+            if(this.listEstados.addItem(nomeEstado)!=null)
+                this.observerAdd(nomeEstado);
+            
         }
             
     }
     
-    Collection<Estado> getEstados() {
+    public Collection<Estado> getEstados() {
         Set<Estado> estados = new LinkedHashSet<Estado>();
         Iterator<Object> i = this.listEstados.getAllItens().iterator();
         while(i.hasNext())
@@ -275,14 +277,14 @@ class CadEst extends javax.swing.JPanel {
         return null;
     }
     
-    void setEstadosFinais(Collection<Estado> ef) {
+    public void setEstadosFinais(Collection<Estado> ef) {
         listEstFin.removeAllItens();
         for(Estado e : ef)
             listEstFin.addItem(e.getNome());
                     
     }
     
-    Collection<Estado> getEstadosFinais() {
+    public Collection<Estado> getEstadosFinais() {
         Set<Estado> estFin = new LinkedHashSet<Estado>();
         Iterator<Object> i = this.listEstFin.getAllItens().iterator();
         while(i.hasNext())
@@ -291,7 +293,7 @@ class CadEst extends javax.swing.JPanel {
         return estFin;  
     }    
     
-     private void posInitComponents() {         
+    private void posInitComponents() {         
         this.addRemEst.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
                 addActionEstado(null);
@@ -348,7 +350,7 @@ class CadEst extends javax.swing.JPanel {
          this.listEstIni.removeItens(); 
     }
     
-    private void addActionEstadoInicial() {
+    protected void addActionEstadoInicial() {
         Object item = this.cbEstIni.getSelectedItem();
         if(item!=null) {
             this.listEstIni.removeAllItens();
@@ -364,6 +366,14 @@ class CadEst extends javax.swing.JPanel {
         Object item = this.cbEstFin.getSelectedItem();
         if(item!=null) 
             this.listEstFin.addItem(item.toString());
+    }
+    
+    protected javax.swing.JComboBox getCbEstInicial() {
+        return this.cbEstIni;
+    }
+    
+    protected GenericJList getListEstInicial() {
+        return this.listEstIni;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

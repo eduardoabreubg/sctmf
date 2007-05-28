@@ -68,7 +68,7 @@ public class GenericJList extends javax.swing.JScrollPane {
             return item;
             
         }else
-            return item;
+            return null;
             
     }
     

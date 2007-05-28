@@ -96,7 +96,8 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
                         "Autômato Finito Determinístico", "afd", "AFD");
                 
             case AFND:
-                 return new FileNameExtensionFilter("AFND", "afnd");
+                return new FileNameExtensionFilter(
+                        "Autômato Finito Não Determinístico", "afnd", "AFND");
                  
             default: return null;
             

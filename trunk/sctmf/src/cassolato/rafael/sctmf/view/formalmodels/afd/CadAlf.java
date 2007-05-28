@@ -19,7 +19,7 @@ import java.util.Set;
  *
  * @author  rafael2009_00
  */
-class CadAlf extends javax.swing.JPanel {
+public class CadAlf extends javax.swing.JPanel {
     
     /** Creates new form CadAlf */
     public CadAlf() {
@@ -104,7 +104,7 @@ class CadAlf extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
           
-    Collection<Simbolo> getSimbolos() {
+    public Collection<Simbolo> getSimbolos() {
         Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
         Iterator<Object> i = 
                 this.genericJList.getAllItens().iterator();
@@ -115,7 +115,7 @@ class CadAlf extends javax.swing.JPanel {
         return simbolos;            
     }
     
-    void addSimbolos(Collection<Simbolo> simbolos ) {
+    public void addSimbolos(Collection<Simbolo> simbolos ) {
         this.genericJList.removeAllItens();
         
         Iterator<Simbolo> i = simbolos.iterator();        

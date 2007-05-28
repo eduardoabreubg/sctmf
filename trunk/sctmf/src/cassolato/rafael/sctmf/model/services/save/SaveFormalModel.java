@@ -35,18 +35,12 @@ public class SaveFormalModel implements Save {
     public void save(File file, FormalModel fm) throws SaveException {
         this.file = file;
         
-        try {
+        if(fm instanceof AFD)
             this.saveAFD((AFD)fm);   
             
-        }catch(ClassCastException exAfd) {
-            try {                
-                this.saveAFND((AFND)fm);              
-                
-            }catch(ClassCastException exAfnd) {
-                exAfnd.printStackTrace();
-            }
-        }
-        
+        else if(fm instanceof AFND)
+            this.saveAFND((AFND)fm);              
+                        
     }
     
     private void saveAFD(AFD afd) throws SaveException {
@@ -87,7 +81,39 @@ public class SaveFormalModel implements Save {
     }
     
     private void saveAFND(AFND afnd) throws SaveException {
+        StringBuffer sb = new StringBuffer();
         
+        sb.append("E:");  // Add Simbolos
+        for(Simbolo s : afnd.getSimbolos())
+            sb.append(s.getNome()+"-");     
+                       
+        sb.append("\nS:");
+        for(Estado e : afnd.getEstados())
+            sb.append(e.getNome()+"-");          
+                       
+        sb.append("\nI:");
+        for(Estado ei : afnd.getEstadosIniciais())
+            sb.append(ei.getNome()+"-"); 
+                        
+        sb.append("\nF:");
+        for(Estado e : afnd.getEstadosFinais())
+            sb.append(e.getNome()+"-"); 
+                
+        for(Transicao t : afnd.getTransicoes())
+        sb.append("\nT:"+
+                t.getEstOri().getNome()+"-"+
+                t.getSimbolo().getNome()+"-"+
+                t.getEstDest().getNome()); 
+    
+        try {         
+            this.writeInFile(
+                    new File(
+                        this.file.getPath()+".afnd"),sb.toString());
+            
+            this.showOkMessage("AFND");
+        }catch(Exception ioex) {
+            throw new SaveException("Erro ao Salvar AFND");
+        }
     }
     
     private void writeInFile(File file, String content)

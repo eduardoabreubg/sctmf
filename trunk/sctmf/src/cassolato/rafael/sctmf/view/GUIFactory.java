@@ -10,6 +10,7 @@
 package cassolato.rafael.sctmf.view;
 
 import cassolato.rafael.sctmf.view.formalmodels.afd.AfdGUI;
+import cassolato.rafael.sctmf.view.formalmodels.afnd.AfndGUI;
 
 
 /**
@@ -19,7 +20,7 @@ import cassolato.rafael.sctmf.view.formalmodels.afd.AfdGUI;
 public class GUIFactory {
     
     /** Creates a new instance of GUIFactory */
-    public GUIFactory() {
+    private GUIFactory() {
     }
     
     public static FormalModelGUI getInstanceFM(IdFormalModel fm) {
@@ -28,7 +29,7 @@ public class GUIFactory {
                 return new AfdGUI();
              
             case AFND : 
-                return new AfdGUI();
+                return new AfndGUI();
                 
             default : 
                 return null;

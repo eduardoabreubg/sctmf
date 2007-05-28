@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
  *
  * @author  rafael2009_00
  */
-class CadFunTrans extends javax.swing.JPanel {
+public class CadFunTrans extends javax.swing.JPanel {
     
     /** Creates new form CadFunTrans */
     public CadFunTrans() {
@@ -320,6 +320,8 @@ class CadFunTrans extends javax.swing.JPanel {
        
         // Indica que foi executada uma acao pelo usuário
         // de adicao de Transicao
+        try {
+         
         if(estOri==null) {
             estOri = new Estado(cbEstOri.getSelectedItem().toString());
             s = new Simbolo(cbSimb.getSelectedItem().toString().charAt(0));
@@ -341,7 +343,11 @@ class CadFunTrans extends javax.swing.JPanel {
                     "Não é permitido cadastrar um mesmo estado inicial,\n" +
                     "e um símbolo, para mais de UM estado destino.",
                     "Tentativa de Violação de Integridade do AFD",
-                    javax.swing.JOptionPane.WARNING_MESSAGE);
+                    javax.swing.JOptionPane.WARNING_MESSAGE);   
+        
+        }catch(Exception ex) {
+            System.out.println("Algum JComboBox está null");
+        }
     }
     
     /**
@@ -351,8 +357,8 @@ class CadFunTrans extends javax.swing.JPanel {
      * <i>A1,a -> A2<br>
      * A1,a -> A1 (ele nao permite issso)</i>
      */
-    private boolean wayAdd(String transicao) {
-        transicao = transicao.substring(0,7);
+    protected boolean wayAdd(String transicao) {
+        transicao = transicao.substring(0,8);
         for(Object o :genericJList.getAllItens())
             if(o.toString().startsWith(transicao))
                 return false;
@@ -368,7 +374,7 @@ class CadFunTrans extends javax.swing.JPanel {
      * 
      * @return Set
      */
-    Set<Transicao> getFuncTrans() {
+    public Set<Transicao> getFuncTrans() {
         Set<Transicao> transicoes = new LinkedHashSet<Transicao>();
         
         for(Object obj : genericJList.getAllItens()) {            
@@ -387,7 +393,7 @@ class CadFunTrans extends javax.swing.JPanel {
         return transicoes;
     }
     
-    void setFuncTrans(Collection<Transicao> c) {
+    public void setFuncTrans(Collection<Transicao> c) {
         genericJList.removeAllItens();
         for(Transicao t : c) 
             this.addAction(t.getEstOri(),
@@ -400,7 +406,7 @@ class CadFunTrans extends javax.swing.JPanel {
      * Limpa os JComboBoxs e Add os valores nele.
      *
      */
-    void observer(
+    public void observer(
             Collection<Estado> estados, Collection<Simbolo> simbolos) {
         String sim = "";
         String est = "";

@@ -3,7 +3,6 @@
  *
  * Created on 4 de Abril de 2007, 09:41
  */
-
 package cassolato.rafael.sctmf.view.formalmodels.afd;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
@@ -18,6 +17,7 @@ import java.util.Collection;
  * @author  rafael2009_00
  */
 public class AfdGUI extends FormalModelGUI {    
+    
     private final CadAlf pCadAlf = new CadAlf();
     private final CadEst pCadEst = new CadEst();
     private final CadFunTrans pCadFunTrans = new CadFunTrans();
@@ -26,6 +26,7 @@ public class AfdGUI extends FormalModelGUI {
     /** Creates new form AfdGUI */
     public AfdGUI() {
         initComponents();
+         
         this.addCards();
     }
       
@@ -93,12 +94,12 @@ public class AfdGUI extends FormalModelGUI {
         
         if(cardNames.get(activeCard).startsWith("first"))
             bBack.setEnabled(false);
-         
+        
     }//GEN-LAST:event_bBackActionPerformed
 
     public void setFormalModel(FormalModel fm) {
         AFD afd = (AFD)fm;
-        this.pCadAlf.addSimbolos(afd.getSimbolos());  
+        this.getPCadAlf().addSimbolos(afd.getSimbolos());  
         
         this.pCadEst.setEstados(afd.getEstados());
         this.pCadEst.setEstadoInicial(afd.getEstadoInicial());
@@ -111,7 +112,7 @@ public class AfdGUI extends FormalModelGUI {
 
     public FormalModel getFormalModel() {
         AFD afd = new AFD();
-        Collection<Simbolo> simbolos = pCadAlf.getSimbolos();
+        Collection<Simbolo> simbolos = getPCadAlf().getSimbolos();
         afd.addAllSimbolos(simbolos);
         
         Collection<Estado> estados = pCadEst.getEstados();
@@ -126,52 +127,70 @@ public class AfdGUI extends FormalModelGUI {
     }
     
     /**
-     * Create a String[] and add cards into<br>
-     * standard card.
+     * Add cards into standard card.
      */
-    private void addCards() {        
+    protected void addCards() {                
         cardNames.add("first-cadAlf");
         cardNames.add("cadEst");
         cardNames.add("cadFunTrans");
         cardNames.add("last-valSeq");
+          
+        getPCard().add(getPCadAlf(), cardNames.get(0));
+        getPCard().add(pCadEst,cardNames.get(1) );
+        getPCard().add(pCadFunTrans,cardNames.get(2));
+        getPCard().add(vs,cardNames.get(3));        
         
-        pCard.add(pCadAlf,cardNames.get(0));
-        pCard.add(pCadEst,cardNames.get(1) );
-        pCard.add(pCadFunTrans,cardNames.get(2));
-        pCard.add(vs,cardNames.get(3));
+        bBack.setEnabled(false);  
         
-        bBack.setEnabled(false);                
     }
     
-    private void changeCards(final int direction) {
+    protected void changeCards(final int direction) {
         switch(direction) {
             case NEXT :
                 activeCard++;
                 
                 if(activeCard==2)
                     pCadFunTrans.observer(
-                            pCadEst.getEstados(),pCadAlf.getSimbolos());
+                            pCadEst.getEstados(),
+                            getPCadAlf().getSimbolos());
+                
                 else if(activeCard==3)                    
-                    vs.managerAFD((AFD)getFormalModel());
+                    vs.managerFM(getFormalModel());
                 
                 break;
                 
             case PREVIOUS : 
                 activeCard--;
+                
                 break;
                 
             default : {
                 activeCard = 0;
                 this.bNext.setEnabled(true);
                 this.bBack.setEnabled(false);
-            }
-                
+            }                
         }
         
-        ((java.awt.CardLayout)pCard.getLayout()).
-                show(pCard,cardNames.get(activeCard));
+        ((java.awt.CardLayout)getPCard().getLayout()).
+                show(getPCard(),cardNames.get(activeCard));
+    }
+
+    protected CadAlf getPCadAlf() {
+        return pCadAlf;
     }
     
+    protected javax.swing.JPanel getPCard() {
+        return this.pCard;
+    }
+    
+    protected javax.swing.JButton getBNext() {
+        return this.bNext;
+    }
+    
+    protected javax.swing.JButton getBBack() {
+        return this.bBack;
+    }
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bBack;
     private javax.swing.JButton bNext;

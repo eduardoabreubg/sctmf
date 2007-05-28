@@ -31,4 +31,13 @@ public class AFND extends Automato {
         estadosIniciais.remove(ei);        
     }
     
+    public Set<Estado> getEstadosIniciais() {
+        return this.estadosIniciais;
+    }
+    
+    public void addAllEstadosIniciais(Set<Estado> ei) {     
+        this.estadosIniciais.clear();
+        this.estadosIniciais.addAll(ei);   
+    }
+    
 }

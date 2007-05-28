@@ -10,6 +10,7 @@
 package cassolato.rafael.sctmf.model.services;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
+import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.FormalModel;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
@@ -31,9 +32,9 @@ public class ValidaSequencia implements Validacao {
         boolean status = false;
         
        if(fm instanceof AFD )
-         status = this.valida((AFD)fm, sequencia);  
-       //else if(fm instanceof AFND )
-         //  this.sendMessage(this.valida((AFND)fm, sequencia));
+           status = this.valida((AFD)fm, sequencia);  
+       else if(fm instanceof AFND )
+           status = this.valida((AFND)fm, sequencia);
             
         this.sendMessage(status);
     }
@@ -47,7 +48,7 @@ public class ValidaSequencia implements Validacao {
      * @return boolean;
      */    
     private boolean valida(AFD afd, String sequencia) {
-        // Estado InicialE
+        // Estado Inicial
         Estado estadoAtual = afd.getEstadoInicial();
                                 
         for(char c : sequencia.toCharArray())  {  
@@ -79,6 +80,40 @@ public class ValidaSequencia implements Validacao {
         
     }    
     
+    private boolean valida(AFND afnd, String sequencia) {        
+        // Estado Inicial
+        for(Estado estadoAtual : afnd.getEstadosIniciais()) {
+            for(char c : sequencia.toCharArray())  {  
+                label : {
+                    for(Transicao t : afnd.getTransicoes()) {
+                        Estado e = t.getEstOri();
+                        Simbolo s = t.getSimbolo();
+                        if(estadoAtual.getNome().equals(e.getNome())
+                            &&c==(s.getNome())) {
+
+                            estadoAtual = t.getEstDest();
+                            break label;
+                        }
+                    }         
+
+                    // caso nao exista nenhuma transicao 
+                    // que o leve ao proximo estado
+                    return false; 
+                }
+            
+            }
+        
+            // Verifica se o Estado atual Ã© algum
+            // Dos estados finais
+            for(Estado x : afnd.getEstadosFinais())
+                if(estadoAtual.getNome().equals(x.getNome()))
+                    return true;
+
+        }
+        
+        return false;
+    }    
+    
     private void sendMessage(boolean isOK) {
         if(isOK) 
             javax.swing.JOptionPane.showMessageDialog(null, 
@@ -87,7 +122,7 @@ public class ValidaSequencia implements Validacao {
         else
             javax.swing.JOptionPane.showMessageDialog(null, 
                     "Seqüência REJEITADA", "!! Atenção !!",
-                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
             
     }
     
