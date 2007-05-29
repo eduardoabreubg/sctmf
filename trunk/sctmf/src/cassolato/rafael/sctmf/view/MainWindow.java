@@ -101,7 +101,6 @@ public class MainWindow extends javax.swing.JFrame {
         bAFND.setBackground(new java.awt.Color(255, 255, 204));
         bAFND.setText("AFND");
         bAFND.setToolTipText("Aut\u00f4matos Finitos N\u00e3o Determin\u00edsticos");
-        bAFND.setEnabled(false);
         bAFND.setPreferredSize(new java.awt.Dimension(70, 25));
         bAFND.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,7 +226,6 @@ public class MainWindow extends javax.swing.JFrame {
         mLingRegul.add(miAFD);
 
         miAFND.setText("AFND ");
-        miAFND.setEnabled(false);
         miAFND.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miAFNDActionPerformed(evt);
