@@ -116,11 +116,10 @@ public class CadAlf extends javax.swing.JPanel {
     }
     
     public void addSimbolos(Collection<Simbolo> simbolos ) {
-        this.genericJList.removeAllItens();
+        // Remove os itens antigos da JList
+        this.removeAction(this.genericJList.getAllItens());
         
         Iterator<Simbolo> i = simbolos.iterator();        
-        //while(i.hasNext())
-           // this.genericJList.addItem(i.next().getNome());
         while(i.hasNext())
             this.addAction(i.next().getNome());
         
@@ -149,6 +148,14 @@ public class CadAlf extends javax.swing.JPanel {
         
     }
     
+    private void removeAction(Collection<Object> objectsRemoveds) {
+        for(Object o : objectsRemoveds)
+            this.letterNumberCA.addItem(o.toString().toUpperCase());
+        
+        this.genericJList.removeAllItens();
+        
+    }
+        
     private void addAction() {
         Character item = this.genericJList.addItem(
                     this.letterNumberCA.getLetter());

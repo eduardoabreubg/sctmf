@@ -85,7 +85,7 @@ public class GenericJList extends javax.swing.JScrollPane {
      * Remove todos os itens da JList
      */
     public void removeAllItens() {
-        this.dlm.removeAllElements();        
+        this.dlm.removeAllElements();  
     }
     
     /**

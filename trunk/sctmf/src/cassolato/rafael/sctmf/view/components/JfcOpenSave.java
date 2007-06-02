@@ -32,7 +32,7 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
         this.codOperation = codOperation;
         
         initComponents();
-        this.posInitCompoents();
+        this.posInitCompoents();        
     }
     
     /** This method is called from within the constructor to
@@ -46,10 +46,11 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
     }// </editor-fold>//GEN-END:initComponents
     
     private void posInitCompoents() {
+        this.setLocale(new java.util.Locale("pt","BR"));
         switch(this.codOperation) {
             case OPEN: 
                 this.setDialogTitle("Selecione o Modelo Formal a ser Aberto.");
-                this.setFileSelectionMode(FILES_ONLY);                                          
+                this.setFileSelectionMode(FILES_ONLY);   
                 
                 break;
                 
@@ -57,12 +58,11 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
                 this.setDialogTitle(                        
                         "Selecione o Diretório a ser salvo o Modelo Formal.");
                 this.setFileSelectionMode(DIRECTORIES_ONLY);
-                                                           
-                break;
                 
+                break;
         }
         
-        this.setFileFilter(this.getFilter());
+        this.setFileFilter(this.getFilter());       
         
     }
     
