@@ -7,8 +7,8 @@
 package cassolato.rafael.sctmf.view;
 
 import cassolato.rafael.sctmf.control.Controller;
-import cassolato.rafael.sctmf.model.pojo.FormalModel;
-import cassolato.rafael.sctmf.view.FormalModelGUI;
+import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
+import cassolato.rafael.sctmf.view.components.JfcOpenSave;
 
 /**
  *
@@ -18,10 +18,10 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
     
     private Controller ctrl;
     private FormalModelGUI gui;
-    private IdFormalModel idFM;
+    private IdModeloFormal idFM;
     
     /** Creates new form GenericJInternalFrame */
-    public GenericJInternalFrame(Controller ctrl, IdFormalModel idFM) {
+    public GenericJInternalFrame(Controller ctrl, IdModeloFormal idFM) {
         this.ctrl = ctrl;
         this.idFM = idFM;
         
@@ -92,38 +92,38 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void bOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOpenActionPerformed
         JfcOpenSave fc = new JfcOpenSave(
                 JfcOpenSave.OPEN, this, this.idFM);
-       
-        // Envia para o Controller o Arquivo selecionado 
+        
+        // Envia para o Controller o Arquivo selecionado
         // e recebe o objeto correspondente
-        java.io.File file = fc.getFile();
-        if(file!=null) {
-            FormalModel fm = this.ctrl.openFormalModel(file);
+        java.io.File arquivo = fc.getFile();
+        if(arquivo!=null) {
+            ModeloFormal mf = this.ctrl.abrirModeloFormal(arquivo);
             // Envia pra a gui setar o Modelo Formal caso ele não esteja null
-            if(fm!=null)
-             this.gui.setFormalModel(fm);
-        }      
+            if(mf!=null)
+                this.gui.setModeloFormal(mf);
+        }
     }//GEN-LAST:event_bOpenActionPerformed
-
+    
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         JfcOpenSave fc = new JfcOpenSave(
                 JfcOpenSave.SAVE, this, this.idFM);
         
-        java.io.File file = fc.getFile();
-        if(file!=null)
-            this.ctrl.saveFormalModel(file, this.gui.getFormalModel());
+        java.io.File arquivo = fc.getFile();
+        if(arquivo!=null)            
+            this.ctrl.salvarModeloFormal(arquivo, this.gui.getModeloFormal());
         
     }//GEN-LAST:event_bSaveActionPerformed
-        
+    
     private void posInitComponents() {
         switch(this.idFM) {
             case AFD :
                 this.setTitle("AFD - Autômatos Finitos Determinísticos");
                 break;
-            
+                
             case AFND :
                 this.setTitle("AFND - Autômatos Finitos Não Determinísticos");
                 break;
@@ -133,8 +133,8 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
                 break;
                 
         }
-       
-        this.gui = GUIFactory.getInstanceFM(this.idFM);        
+        
+        this.gui = GUIFactory.getInstanceFM(this.idFM);
         getContentPane().add(this.gui,java.awt.BorderLayout.CENTER);
         
     }

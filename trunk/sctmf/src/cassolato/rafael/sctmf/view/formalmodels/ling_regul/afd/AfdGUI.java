@@ -7,7 +7,7 @@ package cassolato.rafael.sctmf.view.formalmodels.ling_regul.afd;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.Estado;
-import cassolato.rafael.sctmf.model.pojo.FormalModel;
+import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.view.FormalModelGUI;
 import java.util.Collection;
@@ -97,7 +97,7 @@ public class AfdGUI extends FormalModelGUI {
         
     }//GEN-LAST:event_bBackActionPerformed
 
-    public void setFormalModel(FormalModel fm) {
+    public void setModeloFormal(ModeloFormal fm) {
         AFD afd = (AFD)fm;
         this.getPCadAlf().addSimbolos(afd.getSimbolos());  
         
@@ -110,7 +110,7 @@ public class AfdGUI extends FormalModelGUI {
         this.changeCards(-1); // volta o card para o primeiro card
     }
 
-    public FormalModel getFormalModel() {
+    public ModeloFormal getModeloFormal() {
         AFD afd = new AFD();
         Collection<Simbolo> simbolos = getPCadAlf().getSimbolos();
         afd.addAllSimbolos(simbolos);
@@ -155,7 +155,7 @@ public class AfdGUI extends FormalModelGUI {
                             getPCadAlf().getSimbolos());
                 
                 else if(activeCard==3)                    
-                    vs.managerFM(getFormalModel());
+                    vs.managerFM(getModeloFormal());
                 
                 break;
                 

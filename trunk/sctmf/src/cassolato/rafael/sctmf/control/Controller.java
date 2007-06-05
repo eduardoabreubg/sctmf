@@ -9,32 +9,33 @@
 
 package cassolato.rafael.sctmf.control;
 
-import cassolato.rafael.sctmf.model.pojo.FormalModel;
-import cassolato.rafael.sctmf.model.services.open.Open;
-import cassolato.rafael.sctmf.model.services.open.OpenException;
-import cassolato.rafael.sctmf.model.services.open.OpenFormalModel;
-import cassolato.rafael.sctmf.model.services.Save;
-import cassolato.rafael.sctmf.model.services.save.SaveException;
-import cassolato.rafael.sctmf.model.services.save.SaveFormalModel;
+import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
+import cassolato.rafael.sctmf.model.services.abrir.Abrir;
+import cassolato.rafael.sctmf.model.services.abrir.AbrirException;
+import cassolato.rafael.sctmf.model.services.abrir.AbrirModeloFormal;
+import cassolato.rafael.sctmf.model.services.salvar.Salvar;
+import cassolato.rafael.sctmf.model.services.salvar.SalvarException;
+import cassolato.rafael.sctmf.model.services.salvar.SalvarModeloFormal;
 import cassolato.rafael.sctmf.view.MainWindow;
 import cassolato.rafael.sctmf.view.components.Splash;
 import cassolato.rafael.sctmf.view.components.TrayIconManager;
+import java.io.File;
 
 /**
  *
  * @author Cassolato
  */
-public class Controller {
+public class Controller implements Salvar, Abrir{
     
-    private Open open = new OpenFormalModel();
-    private Save save = new SaveFormalModel();
+    private Abrir open = new AbrirModeloFormal();
+    private Salvar save = new SalvarModeloFormal();
     private MainWindow gui = null;
     private final String GUI_TITLE = 
             "* SCTMF - Sistema de Criação e Testes de Modelos Formais * v0.1";
     
     /** Creates a new instance of Controller */
     public Controller() {
-        Splash.getInstance().openSplash(); // Open Splash      
+        Splash.getInstance().openSplash(); // Abrir Splash      
         
         gui = new MainWindow(this);        // Create a instance of GUI        
         gui.setTitle(GUI_TITLE);
@@ -46,25 +47,25 @@ public class Controller {
         Splash.getInstance().finish(); // Close Splash
     }
     
-    /**
-     * Envia para o model, o modelo formal a ser salvo
-     *
-     */    
-    public void saveFormalModel(java.io.File file, FormalModel fm) {         
-        try {            
-            save.save(file, fm);
-        } catch (SaveException ex) {
-            ex.printStackTrace();
-        }
-    }
-    
-    public FormalModel openFormalModel(java.io.File file) {        
+    public ModeloFormal abrirModeloFormal(java.io.File arquivo) {        
         try {
-            return open.open(file);        
-        } catch (OpenException ex) {
+            return open.abrirModeloFormal(arquivo);        
+        } catch (AbrirException ex) {
             ex.printStackTrace();
             return null;
         }        
     }
-    
+
+    /**
+     * Envia para o model, o modelo formal a ser salvo
+     *
+     */ 
+    public void salvarModeloFormal(File arquivo, ModeloFormal mf) {
+         try {            
+            save.salvarModeloFormal(arquivo, mf);
+        } catch (SalvarException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }

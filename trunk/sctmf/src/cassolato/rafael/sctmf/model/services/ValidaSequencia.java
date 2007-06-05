@@ -12,7 +12,7 @@ package cassolato.rafael.sctmf.model.services;
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.Estado;
-import cassolato.rafael.sctmf.model.pojo.FormalModel;
+import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import java.util.HashMap;
@@ -30,7 +30,7 @@ public class ValidaSequencia implements Validacao {
     private ValidaSequencia() {
     }
     
-    public void valida(FormalModel fm, String sequencia) {
+    public void valida(ModeloFormal fm, String sequencia) {
         boolean status = false;
         
         if(fm instanceof AFD )

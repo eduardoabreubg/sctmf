@@ -1,5 +1,5 @@
 /*
- * FormalModel.java
+ * ModeloFormal.java
  *
  * Created on 11 de Abril de 2007, 09:05
  *
@@ -13,10 +13,12 @@ package cassolato.rafael.sctmf.model.pojo;
  *
  * @author rafael2009_00
  */
-public abstract class FormalModel {
+public abstract class ModeloFormal {
       
-    /** Creates a new instance of FormalModel */
-    public FormalModel() {
+    /**
+     * Creates a new instance of ModeloFormal
+     */
+    public ModeloFormal() {
     }
     
 }

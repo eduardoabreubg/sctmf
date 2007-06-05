@@ -11,7 +11,7 @@ package cassolato.rafael.sctmf.view.formalmodels.ling_regul.afnd;
 
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.Estado;
-import cassolato.rafael.sctmf.model.pojo.FormalModel;
+import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.services.ValidaSequencia;
@@ -28,7 +28,7 @@ public class ValSeqAfnd extends ValSeq {
     public ValSeqAfnd() {
     }
     
-    protected void managerFM(FormalModel fm) {
+    protected void managerFM(ModeloFormal fm) {
         this.afnd = (AFND)fm;
         this.setInformacoes(afnd);
     }

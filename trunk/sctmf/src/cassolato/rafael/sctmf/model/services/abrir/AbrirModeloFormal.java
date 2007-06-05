@@ -1,5 +1,5 @@
 /*
- * OpenFormalModel.java
+ * AbrirModeloFormal.java
  *
  * Created on 13 de Abril de 2007, 09:26
  *
@@ -7,12 +7,12 @@
  * and open the template in the editor.
  */
 
-package cassolato.rafael.sctmf.model.services.open;
+package cassolato.rafael.sctmf.model.services.abrir;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.Estado;
-import cassolato.rafael.sctmf.model.pojo.FormalModel;
+import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import java.io.BufferedReader;
@@ -23,29 +23,31 @@ import java.io.FileReader;
  *
  * @author rafael2009_00
  */
-public class OpenFormalModel implements Open {
+public class AbrirModeloFormal implements Abrir {
     
-    /** Creates a new instance of OpenFormalModel */
-    public OpenFormalModel() {
+    /**
+     * Creates a new instance of AbrirModeloFormal
+     */
+    public AbrirModeloFormal() {
     }
     
-    public FormalModel open(File file) throws OpenException {
+    public ModeloFormal abrirModeloFormal(File arquivo) throws AbrirException {
         // pega a extenção do arquivo
-        String aux[] = file.getName().split("\\.");    
+        String aux[] = arquivo.getName().split("\\.");    
         String extencionFile = aux[aux.length-1];
         
         // De acordo com a extencao, retorna o Modelo Formal equivalente
         if(extencionFile.equalsIgnoreCase("afd"))
-            return this.getAFD(file);
+            return this.abrirAFD(arquivo);
         
         else if(extencionFile.equalsIgnoreCase("afnd"))
-            return this.getAFND(file);
+            return this.abrirAFND(arquivo);
         
         else
             return null;
     }
     
-    private AFD getAFD(File file) throws OpenException {
+    private AFD abrirAFD(File file) throws AbrirException {
         AFD afd = new AFD();
         try {
          BufferedReader br = new BufferedReader(new FileReader(file));
@@ -87,13 +89,13 @@ public class OpenFormalModel implements Open {
          br.close();
         }catch(Exception ex) {
             ex.printStackTrace();
-            throw new OpenException("Erro Ao abrir modelo Formal");            
+            throw new AbrirException("Erro Ao abrir modelo Formal");            
         }
                 
         return afd;        
     }
     
-     private AFND getAFND(File file) throws OpenException  {
+     private AFND abrirAFND(File file) throws AbrirException  {
         AFND afnd = new AFND();
         try {
          BufferedReader br = new BufferedReader(new FileReader(file));
@@ -135,7 +137,7 @@ public class OpenFormalModel implements Open {
          br.close();
         }catch(Exception ex) {
             ex.printStackTrace();
-            throw new OpenException("Erro Ao abrir modelo Formal");            
+            throw new AbrirException("Erro Ao abrir modelo Formal");            
         }
                 
         return afnd;  

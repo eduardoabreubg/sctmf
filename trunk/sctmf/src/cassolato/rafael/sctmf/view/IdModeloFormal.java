@@ -1,5 +1,5 @@
 /*
- * IdFormalModel.java
+ * IdModeloFormal.java
  *
  * Created on 16 de Abril de 2007, 09:55
  *
@@ -13,7 +13,7 @@ package cassolato.rafael.sctmf.view;
  *
  * @author rafael2009_00
  */
-public enum IdFormalModel {
+public enum IdModeloFormal {
     AFD,
     AFND,
     AP;    

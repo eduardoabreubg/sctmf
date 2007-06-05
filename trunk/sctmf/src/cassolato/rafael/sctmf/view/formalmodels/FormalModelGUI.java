@@ -9,7 +9,7 @@
 
 package cassolato.rafael.sctmf.view;
 
-import cassolato.rafael.sctmf.model.pojo.FormalModel;
+import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +28,7 @@ public abstract class FormalModelGUI extends javax.swing.JPanel{
     public FormalModelGUI() {
     }
     
-    public abstract void setFormalModel(FormalModel fm);
-    public abstract FormalModel getFormalModel();
+    public abstract void setModeloFormal(ModeloFormal mf);
+    public abstract ModeloFormal getModeloFormal();
     
 }

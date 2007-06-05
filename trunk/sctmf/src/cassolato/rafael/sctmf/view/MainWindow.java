@@ -335,7 +335,7 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAutComPilhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAutComPilhaActionPerformed
-        this.showFormalModel(IdFormalModel.AP);
+        this.showFormalModel(IdModeloFormal.AP);
     }//GEN-LAST:event_bAutComPilhaActionPerformed
 
     private void bMaqTuringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMaqTuringActionPerformed
@@ -351,11 +351,11 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_bExpRegActionPerformed
 
     private void bAFNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAFNDActionPerformed
-        this.showFormalModel(IdFormalModel.AFND);
+        this.showFormalModel(IdModeloFormal.AFND);
     }//GEN-LAST:event_bAFNDActionPerformed
 
     private void bAFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAFDActionPerformed
-       this.showFormalModel(IdFormalModel.AFD);
+       this.showFormalModel(IdModeloFormal.AFD);
     }//GEN-LAST:event_bAFDActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -387,7 +387,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_miGramLivrContexActionPerformed
 
     private void miAutComPilhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAutComPilhaActionPerformed
-        this.showFormalModel(IdFormalModel.AP);
+        this.showFormalModel(IdModeloFormal.AP);
     }//GEN-LAST:event_miAutComPilhaActionPerformed
 
     private void miExpRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miExpRegActionPerformed
@@ -395,11 +395,11 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_miExpRegActionPerformed
 
     private void miAFNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAFNDActionPerformed
-        this.showFormalModel(IdFormalModel.AFND);
+        this.showFormalModel(IdModeloFormal.AFND);
     }//GEN-LAST:event_miAFNDActionPerformed
 
     private void miAFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAFDActionPerformed
-        this.showFormalModel(IdFormalModel.AFD);
+        this.showFormalModel(IdModeloFormal.AFD);
     }//GEN-LAST:event_miAFDActionPerformed
     
     private void miSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSairActionPerformed
@@ -460,7 +460,7 @@ public class MainWindow extends javax.swing.JFrame {
         this.miGramEstruFrase.setVisible(false);
     }
     
-    private void showFormalModel(IdFormalModel idFM) {        
+    private void showFormalModel(IdModeloFormal idFM) {        
         this.addJIF(
                 new GenericJInternalFrame(ctrl, idFM));
     }

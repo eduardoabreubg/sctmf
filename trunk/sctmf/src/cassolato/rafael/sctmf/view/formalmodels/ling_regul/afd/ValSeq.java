@@ -8,7 +8,7 @@ package cassolato.rafael.sctmf.view.formalmodels.ling_regul.afd;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.Estado;
-import cassolato.rafael.sctmf.model.pojo.FormalModel;
+import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.services.ValidaSequencia;
@@ -135,7 +135,7 @@ public class ValSeq extends javax.swing.JPanel {
                 afd, this.fSequencia.getText());
     }
     
-    protected void managerFM(FormalModel fm) {
+    protected void managerFM(ModeloFormal fm) {
         this.afd = (AFD)fm;
         this.setInformacoes(afd);
         this.fSequencia.requestFocus(true);

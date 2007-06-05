@@ -9,12 +9,12 @@
 
 package cassolato.rafael.sctmf.model.services;
 
-import cassolato.rafael.sctmf.model.pojo.FormalModel;
+import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 
 /**
  *
  * @author rafael2009_00
  */
 public interface Validacao {
-    void valida(FormalModel fm, String sequencia);
+    void valida(ModeloFormal fm, String sequencia);
 }

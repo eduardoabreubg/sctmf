@@ -17,7 +17,7 @@ import java.util.Set;
  *
  * @author rafael2009_00
  */
-public abstract class Automato extends FormalModel {
+public abstract class Automato extends ModeloFormal {
     
     private Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
     private Set<Estado> estados = new LinkedHashSet<Estado>();

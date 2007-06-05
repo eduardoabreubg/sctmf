@@ -1,6 +1,6 @@
 
 /*
- * OpenException.java
+ * AbrirException.java
  *
  * Created on 13 de Abril de 2007, 10:10
  *
@@ -8,16 +8,18 @@
  * and open the template in the editor.
  */
 
-package cassolato.rafael.sctmf.model.services.open;
+package cassolato.rafael.sctmf.model.services.abrir;
 
 /**
  *
  * @author rafael2009_00
  */
-public class OpenException extends Exception {
+public class AbrirException extends Exception {
     
-    /** Creates a new instance of OpenException */
-    public OpenException(String msg) {
+    /**
+     * Creates a new instance of AbrirException
+     */
+    public AbrirException(String msg) {
         super(msg);
         javax.swing.JOptionPane.showMessageDialog(null, 
                 msg,"Atenção",javax.swing.JOptionPane.WARNING_MESSAGE);

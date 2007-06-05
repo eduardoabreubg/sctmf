@@ -9,7 +9,7 @@ package cassolato.rafael.sctmf.view.formalmodels.ling_regul.afnd;
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.Estado;
-import cassolato.rafael.sctmf.model.pojo.FormalModel;
+import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.view.formalmodels.ling_regul.afd.AfdGUI;
 import java.util.Collection;
@@ -85,7 +85,7 @@ public class AfndGUI extends AfdGUI {
     }// </editor-fold>//GEN-END:initComponents
     
     
-    public void setFormalModel(FormalModel fm) {
+    public void setFormalModel(ModeloFormal fm) {
         AFND afnd = (AFND)fm;
         this.getPCadAlf().addSimbolos(afnd.getSimbolos());  
         
@@ -98,7 +98,7 @@ public class AfndGUI extends AfdGUI {
         this.changeCards(-1); // volta o card para o primeiro card
     }
 
-    public FormalModel getFormalModel() {
+    public ModeloFormal getFormalModel() {
         AFND afnd = new AFND();
         Collection<Simbolo> simbolos = getPCadAlf().getSimbolos();
         afnd.addAllSimbolos(simbolos);
