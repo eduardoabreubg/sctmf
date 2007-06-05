@@ -4,10 +4,10 @@
  * Created on 26 de Maio de 2007, 14:04
  */
 
-package cassolato.rafael.sctmf.view.formalmodels.afnd;
+package cassolato.rafael.sctmf.view.formalmodels.ling_regul.afnd;
 
 import cassolato.rafael.sctmf.model.pojo.Estado;
-import cassolato.rafael.sctmf.view.formalmodels.afd.CadEst;
+import cassolato.rafael.sctmf.view.formalmodels.ling_regul.afd.CadEst;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;

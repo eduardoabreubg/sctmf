@@ -3,7 +3,7 @@
  *
  * Created on 4 de Abril de 2007, 09:41
  */
-package cassolato.rafael.sctmf.view.formalmodels.afd;
+package cassolato.rafael.sctmf.view.formalmodels.ling_regul.afd;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.Estado;

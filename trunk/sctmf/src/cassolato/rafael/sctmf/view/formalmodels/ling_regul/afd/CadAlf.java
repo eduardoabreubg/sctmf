@@ -4,7 +4,7 @@
  * Created on 3 de Maio de 2007, 09:47
  */
 
-package cassolato.rafael.sctmf.view.formalmodels.afd;
+package cassolato.rafael.sctmf.view.formalmodels.ling_regul.afd;
 
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import java.awt.event.ActionEvent;
