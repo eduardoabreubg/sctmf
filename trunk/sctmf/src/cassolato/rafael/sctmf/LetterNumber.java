@@ -4,7 +4,7 @@
  * Created on 13 de Março de 2007, 08:38
  */
 
-package view;
+package cassolato.rafael.sctmf;
 
 import java.util.ArrayList;
 import java.util.Collections;
