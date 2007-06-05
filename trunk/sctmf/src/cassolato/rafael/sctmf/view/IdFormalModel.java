@@ -15,5 +15,6 @@ package cassolato.rafael.sctmf.view;
  */
 public enum IdFormalModel {
     AFD,
-    AFND;    
+    AFND,
+    AP;    
 }

@@ -125,8 +125,12 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
                 break;
             
             case AFND :
-            this.setTitle("AFND - Autômatos Finitos Não Determinísticos");
-            break;
+                this.setTitle("AFND - Autômatos Finitos Não Determinísticos");
+                break;
+                
+            case AP :
+                this.setTitle("AP - Autômatos Com Pilha");
+                break;
                 
         }
        
