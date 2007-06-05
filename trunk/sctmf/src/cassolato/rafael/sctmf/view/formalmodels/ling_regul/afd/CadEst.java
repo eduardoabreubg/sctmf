@@ -36,9 +36,9 @@ public class CadEst extends javax.swing.JPanel {
     private void initComponents() {
         pNorte = new javax.swing.JPanel();
         jPanel25 = new javax.swing.JPanel();
-        letterNumber = new view.LetterNumber();
+        letterNumber = new cassolato.rafael.sctmf.view.components.LetterNumber();
         jPanel26 = new javax.swing.JPanel();
-        addRemEst = new view.AddRemButtonsPanel();
+        addRemEst = new cassolato.rafael.sctmf.view.components.AddRemButtonsPanel();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
@@ -55,7 +55,7 @@ public class CadEst extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         cbEstIni = new javax.swing.JComboBox();
         jPanel7 = new javax.swing.JPanel();
-        addRemEstIni = new view.AddRemButtonsPanel();
+        addRemEstIni = new cassolato.rafael.sctmf.view.components.AddRemButtonsPanel();
         jLabel79 = new javax.swing.JLabel();
         jLabel80 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
@@ -67,7 +67,7 @@ public class CadEst extends javax.swing.JPanel {
         jPanel40 = new javax.swing.JPanel();
         cbEstFin = new javax.swing.JComboBox();
         jPanel41 = new javax.swing.JPanel();
-        addRemEstFin = new view.AddRemButtonsPanel();
+        addRemEstFin = new cassolato.rafael.sctmf.view.components.AddRemButtonsPanel();
         jLabel83 = new javax.swing.JLabel();
         jLabel84 = new javax.swing.JLabel();
         jPanel42 = new javax.swing.JPanel();
@@ -377,9 +377,9 @@ public class CadEst extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private view.AddRemButtonsPanel addRemEst;
-    private view.AddRemButtonsPanel addRemEstFin;
-    private view.AddRemButtonsPanel addRemEstIni;
+    private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemEst;
+    private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemEstFin;
+    private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemEstIni;
     private javax.swing.JComboBox cbEstFin;
     private javax.swing.JComboBox cbEstIni;
     private javax.swing.JLabel jLabel42;
@@ -406,7 +406,7 @@ public class CadEst extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private view.LetterNumber letterNumber;
+    private cassolato.rafael.sctmf.view.components.LetterNumber letterNumber;
     private cassolato.rafael.sctmf.view.components.GenericJList listEstFin;
     private cassolato.rafael.sctmf.view.components.GenericJList listEstIni;
     private cassolato.rafael.sctmf.view.components.GenericJList listEstados;

@@ -81,7 +81,7 @@ public class CadFunTrans extends javax.swing.JPanel {
         pCenter = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        addRemButtonsPanel = new view.AddRemButtonsPanel();
+        addRemButtonsPanel = new cassolato.rafael.sctmf.view.components.AddRemButtonsPanel();
         jLabel6 = new javax.swing.JLabel();
         pEast = new javax.swing.JPanel();
         genericJList = new cassolato.rafael.sctmf.view.components.GenericJList();
@@ -490,7 +490,7 @@ public class CadFunTrans extends javax.swing.JPanel {
      }
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
-    private view.AddRemButtonsPanel addRemButtonsPanel;
+    private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemButtonsPanel;
     private javax.swing.JComboBox cbEstDes;
     private javax.swing.JComboBox cbEstOri;
     private javax.swing.JComboBox cbSimb;

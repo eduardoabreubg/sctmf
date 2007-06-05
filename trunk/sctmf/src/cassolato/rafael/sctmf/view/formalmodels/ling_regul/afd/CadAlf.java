@@ -44,8 +44,8 @@ public class CadAlf extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         genericJList = new cassolato.rafael.sctmf.view.components.GenericJList();
-        addRemoveButtons = new view.AddRemButtonsPanel();
-        letterNumberCA = new view.LetterNumber();
+        addRemoveButtons = new cassolato.rafael.sctmf.view.components.AddRemButtonsPanel();
+        letterNumberCA = new cassolato.rafael.sctmf.view.components.LetterNumber();
 
         setLayout(new java.awt.GridLayout(1, 0));
 
@@ -168,7 +168,7 @@ public class CadAlf extends javax.swing.JPanel {
         this.letterNumberCA.removeItem(c.toString().toUpperCase());
     }
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
-    private view.AddRemButtonsPanel addRemoveButtons;
+    private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemoveButtons;
     private cassolato.rafael.sctmf.view.components.GenericJList genericJList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
@@ -176,7 +176,7 @@ public class CadAlf extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private view.LetterNumber letterNumberCA;
+    private cassolato.rafael.sctmf.view.components.LetterNumber letterNumberCA;
     private javax.swing.JPanel pCadAlf;
     // Fim da declaração de variáveis//GEN-END:variables
     
