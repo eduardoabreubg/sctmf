@@ -4,14 +4,14 @@
  * Created on 26 de Maio de 2007, 15:12
  */
 
-package cassolato.rafael.sctmf.view.formalmodels.ling_regul.afnd;
+package cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afnd;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
-import cassolato.rafael.sctmf.view.formalmodels.ling_regul.afd.AfdGUI;
+import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.AfdGUI;
 import java.util.Collection;
 
 /**

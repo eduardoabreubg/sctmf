@@ -9,6 +9,7 @@ package cassolato.rafael.sctmf.view;
 import cassolato.rafael.sctmf.control.Controller;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.view.components.JfcOpenSave;
+import cassolato.rafael.sctmf.view.modelos_formais.FormalModelGUI;
 
 /**
  *

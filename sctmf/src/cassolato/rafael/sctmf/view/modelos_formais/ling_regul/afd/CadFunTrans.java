@@ -4,7 +4,7 @@
  * Created on 3 de Maio de 2007, 10:22
  */
 
-package cassolato.rafael.sctmf.view.formalmodels.ling_regul.afd;
+package cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd;
 
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;

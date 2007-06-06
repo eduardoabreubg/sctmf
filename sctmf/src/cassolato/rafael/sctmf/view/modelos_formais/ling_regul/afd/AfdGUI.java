@@ -3,13 +3,13 @@
  *
  * Created on 4 de Abril de 2007, 09:41
  */
-package cassolato.rafael.sctmf.view.formalmodels.ling_regul.afd;
+package cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
-import cassolato.rafael.sctmf.view.FormalModelGUI;
+import cassolato.rafael.sctmf.view.modelos_formais.FormalModelGUI;
 import java.util.Collection;
 
 /**
