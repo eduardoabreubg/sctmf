@@ -18,18 +18,18 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class JfcOpenSave extends javax.swing.JFileChooser {
     
-    public static final int SAVE = 0;
-    public static final int OPEN = 1;
+    public static final int SALVAR = 0;
+    public static final int ABRIR = 1;
     
     private Component c;
-    private IdModeloFormal idFormalModel;
+    private IdModeloFormal idModeloFormal;
     private int codOperation;
     
     /** Creates new form BeanForm */
     public JfcOpenSave(
-            final int codOperation, final Component c, IdModeloFormal idFM) {        
+            final int codOperation, final Component c, IdModeloFormal idMF) {        
         this.c = c;
-        this.idFormalModel = idFM;
+        this.idModeloFormal = idMF;
         this.codOperation = codOperation;
         
         initComponents();
@@ -49,13 +49,13 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
     private void posInitCompoents() {
         this.setLocale(new java.util.Locale("pt","BR"));
         switch(this.codOperation) {
-            case OPEN: 
+            case ABRIR: 
                 this.setDialogTitle("Selecione o Modelo Formal a ser Aberto.");
                 this.setFileSelectionMode(FILES_ONLY);   
                 
                 break;
                 
-            case SAVE:
+            case SALVAR:
                 this.setDialogTitle(                        
                         "Selecione o Diretório a ser salvo o Modelo Formal.");
                 this.setFileSelectionMode(DIRECTORIES_ONLY);
@@ -69,14 +69,14 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
     
     public java.io.File getFile() {
         switch(this.codOperation) {
-            case OPEN:
+            case ABRIR:
                 if(this.showOpenDialog(this.c) == APPROVE_OPTION) 
                     return this.getSelectedFile();
                 
                 else                
                     return null;
                                 
-            case SAVE:
+            case SALVAR:
                 if(this.showSaveDialog(this.c) == APPROVE_OPTION) 
                     return this.getSelectedFile();
                 
@@ -91,7 +91,7 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
     }
     
     private FileNameExtensionFilter getFilter() {
-        switch(this.idFormalModel) {
+        switch(this.idModeloFormal) {
             case AFD :
                 return new FileNameExtensionFilter(
                         "Autômato Finito Determinístico", "afd", "AFD");

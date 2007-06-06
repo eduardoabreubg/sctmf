@@ -34,14 +34,14 @@ public class SalvarModeloFormal implements Salvar {
     public SalvarModeloFormal() {
     }
     
-    public void salvarModeloFormal(File file, ModeloFormal fm) throws SalvarException {
+    public void salvar(File arquivo, ModeloFormal mf) throws SalvarException {
         this.file = file;
         
-        if(fm instanceof AFD)
-            this.salvarAFD((AFD)fm);   
+        if(mf instanceof AFD)
+            this.salvarAFD((AFD)mf);   
             
-        else if(fm instanceof AFND)
-            this.salvarAFND((AFND)fm);              
+        else if(mf instanceof AFND)
+            this.salvarAFND((AFND)mf);              
                         
     }
     

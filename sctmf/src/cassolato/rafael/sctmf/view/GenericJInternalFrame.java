@@ -19,12 +19,12 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
     
     private Controller ctrl;
     private ModeloFormalGUI gui;
-    private IdModeloFormal idFM;
+    private IdModeloFormal idMF;
     
     /** Creates new form GenericJInternalFrame */
-    public GenericJInternalFrame(Controller ctrl, IdModeloFormal idFM) {
+    public GenericJInternalFrame(Controller ctrl, IdModeloFormal idMF) {
         this.ctrl = ctrl;
-        this.idFM = idFM;
+        this.idMF = idMF;
         
         initComponents();
         this.posInitComponents();
@@ -96,7 +96,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
     
     private void bOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOpenActionPerformed
         JfcOpenSave fc = new JfcOpenSave(
-                JfcOpenSave.OPEN, this, this.idFM);
+                JfcOpenSave.ABRIR, this, this.idMF);
         
         // Envia para o Controller o Arquivo selecionado
         // e recebe o objeto correspondente
@@ -111,7 +111,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
     
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         JfcOpenSave fc = new JfcOpenSave(
-                JfcOpenSave.SAVE, this, this.idFM);
+                JfcOpenSave.SALVAR, this, this.idMF);
         
         java.io.File arquivo = fc.getFile();
         if(arquivo!=null)            
@@ -120,7 +120,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bSaveActionPerformed
     
     private void posInitComponents() {
-        switch(this.idFM) {
+        switch(this.idMF) {
             case AFD :
                 this.setTitle("AFD - Autômatos Finitos Determinísticos");
                 break;
@@ -135,7 +135,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
                 
         }
         
-        this.gui = GUIFactory.getInstanceFM(this.idFM);
+        this.gui = GUIFactory.getInstanceMF(this.idMF);
         getContentPane().add(this.gui,java.awt.BorderLayout.CENTER);
         
     }

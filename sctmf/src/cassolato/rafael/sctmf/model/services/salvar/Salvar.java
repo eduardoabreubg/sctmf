@@ -19,5 +19,5 @@ import java.io.File;
  * @author rafael2009_00
  */
 public interface Salvar {
-    public void salvarModeloFormal(File arquivo, ModeloFormal fm) throws SalvarException;
+    public void salvar(File arquivo, ModeloFormal mf) throws SalvarException;
 }

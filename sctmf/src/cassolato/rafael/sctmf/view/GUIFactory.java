@@ -25,8 +25,8 @@ public class GUIFactory {
     private GUIFactory() {
     }
     
-    public static ModeloFormalGUI getInstanceFM(IdModeloFormal fm) {
-        switch(fm) {
+    public static ModeloFormalGUI getInstanceMF(IdModeloFormal mf) {
+        switch(mf) {
             case AFD : 
                 return new AfdGUI();
              
