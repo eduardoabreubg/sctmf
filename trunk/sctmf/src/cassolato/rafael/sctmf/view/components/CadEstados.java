@@ -7,17 +7,27 @@
 package cassolato.rafael.sctmf.view.components;
 
 import cassolato.rafael.sctmf.model.pojo.Estado;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
+ * Toda a classe que usar esse componente, é obrigada a implementar a interface
+ * InterfaceCadEstados.
  *
  * @author  Cassolato
  */
-public class CadEstados extends javax.swing.JPanel {
+public class CadEstados extends javax.swing.JPanel 
+                        implements InterfaceCadEstados{
+    
+    private InterfaceCadEstados component = null;
     
     /** Creates new form BeanForm */
-    public CadEstados() {
+    public CadEstados(InterfaceCadEstados component) {
+        this.component = component;
+                
         initComponents();
          this.posInitComponents();
     }
@@ -90,32 +100,34 @@ public class CadEstados extends javax.swing.JPanel {
     private void posInitComponents() {
         this.addRemEstado.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
-                addActionEstado(null);
+                addEstado(null);
             }
         });
         
         this.addRemEstado.getBRemove().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
-                removeActionEstado();
+                remEstados(null);
             }
         });
     }
-    
-    private void addActionEstado(Estado est) {
-        if(est==null)
-            est = new Estado(lN.getLetter()+
+
+    public void remEstados(Set<Estado> estados) {
+        estados = new LinkedHashSet<Estado>();
+        for(Object o : genericJList.removeItens())
+            estados.add(new Estado(o.toString()));
+        
+        this.component.remEstados(estados);
+    }
+
+    public void addEstado(Estado estado) {
+         if(estado==null)
+            estado = new Estado(lN.getLetter()+
                             ""+lN.getNumber());
         
-        String nomeEst = est.getNome();
-        //if(this.listEstados.addItem(nomeEst)!=null)  
-          ///  this.observerAdd(nomeEst);
-    }
-    
-   private void removeActionEstado() {
-         //for(Object o : listEstados.removeItens());
-            //this.observerRemove(o);
-    }
-    
+        String nomeEst = estado.getNome();
+        if(this.genericJList.addItem(nomeEst)!=null)  
+            this.component.addEstado(new Estado(nomeEst));
+    }    
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
     private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemEstado;
