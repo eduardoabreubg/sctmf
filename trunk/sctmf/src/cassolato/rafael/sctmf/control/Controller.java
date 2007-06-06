@@ -49,7 +49,7 @@ public class Controller {
     
     public ModeloFormal abrirModeloFormal(java.io.File arquivo) {        
         try {
-            return open.abrirModeloFormal(arquivo);        
+            return open.abrir(arquivo);        
         } catch (AbrirException ex) {
             ex.printStackTrace();
             return null;
@@ -62,7 +62,7 @@ public class Controller {
      */ 
     public void salvarModeloFormal(File arquivo, ModeloFormal mf) {
          try {            
-            save.salvarModeloFormal(arquivo, mf);
+            save.salvar(arquivo, mf);
         } catch (SalvarException ex) {
             ex.printStackTrace();
         }

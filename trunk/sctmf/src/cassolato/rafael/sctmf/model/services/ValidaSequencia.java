@@ -30,13 +30,13 @@ public class ValidaSequencia implements Validacao {
     private ValidaSequencia() {
     }
     
-    public void valida(ModeloFormal fm, String sequencia) {
+    public void valida(ModeloFormal mf, String sequencia) {
         boolean status = false;
         
-        if(fm instanceof AFD )
-            status = this.valida((AFD)fm, sequencia);
-        else if(fm instanceof AFND )
-            status = this.valida((AFND)fm, sequencia);
+        if(mf instanceof AFD )
+            status = this.valida((AFD)mf, sequencia);
+        else if(mf instanceof AFND )
+            status = this.valida((AFND)mf, sequencia);
         
         this.sendMessage(status);
     }
