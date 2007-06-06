@@ -9,14 +9,14 @@ import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
-import cassolato.rafael.sctmf.view.modelos_formais.FormalModelGUI;
+import cassolato.rafael.sctmf.view.modelos_formais.ModeloFormalGUI;
 import java.util.Collection;
 
 /**
  *
  * @author  rafael2009_00
  */
-public class AfdGUI extends FormalModelGUI {    
+public class AfdGUI extends ModeloFormalGUI {    
     
     private final CadAlf pCadAlf = new CadAlf();
     private final CadEst pCadEst = new CadEst();
