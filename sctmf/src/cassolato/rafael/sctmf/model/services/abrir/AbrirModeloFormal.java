@@ -31,7 +31,7 @@ public class AbrirModeloFormal implements Abrir {
     public AbrirModeloFormal() {
     }
     
-    public ModeloFormal abrirModeloFormal(File arquivo) throws AbrirException {
+    public ModeloFormal abrir(File arquivo) throws AbrirException {
         // pega a extenção do arquivo
         String aux[] = arquivo.getName().split("\\.");    
         String extencionFile = aux[aux.length-1];
@@ -47,10 +47,10 @@ public class AbrirModeloFormal implements Abrir {
             return null;
     }
     
-    private AFD abrirAFD(File file) throws AbrirException {
+    private AFD abrirAFD(File arquivo) throws AbrirException {
         AFD afd = new AFD();
         try {
-         BufferedReader br = new BufferedReader(new FileReader(file));
+         BufferedReader br = new BufferedReader(new FileReader(arquivo));
          while(br.ready()) {
              String line = br.readLine();
              if(line.length()>2) {                 
@@ -95,10 +95,10 @@ public class AbrirModeloFormal implements Abrir {
         return afd;        
     }
     
-     private AFND abrirAFND(File file) throws AbrirException  {
+     private AFND abrirAFND(File arquivo) throws AbrirException  {
         AFND afnd = new AFND();
         try {
-         BufferedReader br = new BufferedReader(new FileReader(file));
+         BufferedReader br = new BufferedReader(new FileReader(arquivo));
          while(br.ready()) {
              String line = br.readLine();
              if(line.length()>2) {                 

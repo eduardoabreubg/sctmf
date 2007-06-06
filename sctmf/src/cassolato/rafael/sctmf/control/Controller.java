@@ -25,7 +25,7 @@ import java.io.File;
  *
  * @author Cassolato
  */
-public class Controller implements Salvar, Abrir{
+public class Controller {
     
     private Abrir open = new AbrirModeloFormal();
     private Salvar save = new SalvarModeloFormal();

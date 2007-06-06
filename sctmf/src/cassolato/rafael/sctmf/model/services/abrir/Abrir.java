@@ -18,5 +18,5 @@ import java.io.File;
  * @author rafael2009_00
  */
 public interface Abrir {
-    public ModeloFormal abrirModeloFormal(File arquivo) throws AbrirException;
+    public ModeloFormal abrir(File arquivo) throws AbrirException;
 }
