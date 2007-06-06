@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
  *
  * @author  Cassolato
  */
-public class ApGUI extends cassolato.rafael.sctmf.view.modelos_formais.FormalModelGUI {
+public class ApGUI extends cassolato.rafael.sctmf.view.modelos_formais.ModeloFormalGUI {
     
     /** Creates new form BeanForm */
     public ApGUI() {

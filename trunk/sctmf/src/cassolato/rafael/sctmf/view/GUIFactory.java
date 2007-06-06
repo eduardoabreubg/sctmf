@@ -12,7 +12,7 @@ package cassolato.rafael.sctmf.view;
 import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.AfdGUI;
 import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afnd.AfndGUI;
 import cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.ap.ApGUI;
-import cassolato.rafael.sctmf.view.modelos_formais.FormalModelGUI;
+import cassolato.rafael.sctmf.view.modelos_formais.ModeloFormalGUI;
 
 
 /**
@@ -25,7 +25,7 @@ public class GUIFactory {
     private GUIFactory() {
     }
     
-    public static FormalModelGUI getInstanceFM(IdModeloFormal fm) {
+    public static ModeloFormalGUI getInstanceFM(IdModeloFormal fm) {
         switch(fm) {
             case AFD : 
                 return new AfdGUI();
