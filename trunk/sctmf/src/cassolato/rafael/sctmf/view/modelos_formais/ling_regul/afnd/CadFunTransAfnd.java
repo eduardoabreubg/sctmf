@@ -4,9 +4,9 @@
  * Created on 26 de Maio de 2007, 17:22
  */
 
-package cassolato.rafael.sctmf.view.formalmodels.ling_regul.afnd;
+package cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afnd;
 
-import cassolato.rafael.sctmf.view.formalmodels.ling_regul.afd.CadFunTrans;
+import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.CadFunTrans;
 
 /**
  *

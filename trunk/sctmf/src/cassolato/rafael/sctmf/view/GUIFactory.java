@@ -9,9 +9,10 @@
 
 package cassolato.rafael.sctmf.view;
 
-import cassolato.rafael.sctmf.view.formalmodels.ling_regul.afd.AfdGUI;
-import cassolato.rafael.sctmf.view.formalmodels.ling_regul.afnd.AfndGUI;
-import cassolato.rafael.sctmf.view.formalmodels.ling_liv_contex.ap.ApGUI;
+import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.AfdGUI;
+import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afnd.AfndGUI;
+import cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.ap.ApGUI;
+import cassolato.rafael.sctmf.view.modelos_formais.FormalModelGUI;
 
 
 /**

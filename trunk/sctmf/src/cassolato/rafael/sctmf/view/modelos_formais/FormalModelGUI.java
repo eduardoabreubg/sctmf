@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package cassolato.rafael.sctmf.view;
+package cassolato.rafael.sctmf.view.modelos_formais;
 
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import java.util.ArrayList;

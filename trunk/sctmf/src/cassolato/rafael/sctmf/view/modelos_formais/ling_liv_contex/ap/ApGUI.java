@@ -4,7 +4,7 @@
  * Created on 4 de Junho de 2007, 21:13
  */
 
-package cassolato.rafael.sctmf.view.formalmodels.ling_liv_contex.ap;
+package cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.ap;
 
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import java.awt.event.ActionEvent;
@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
  *
  * @author  Cassolato
  */
-public class ApGUI extends cassolato.rafael.sctmf.view.FormalModelGUI {
+public class ApGUI extends cassolato.rafael.sctmf.view.modelos_formais.FormalModelGUI {
     
     /** Creates new form BeanForm */
     public ApGUI() {
