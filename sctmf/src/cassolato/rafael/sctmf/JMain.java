@@ -1,6 +1,6 @@
 
 /*
- * Main.java
+ * JMain.java
  *
  * Created on 10 de Fevereiro de 2007, 12:52
  *
