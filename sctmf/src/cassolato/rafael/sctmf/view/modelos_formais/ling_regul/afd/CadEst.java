@@ -187,28 +187,18 @@ public class CadEst extends javax.swing.JPanel
     }
     
     public void setEstados(Collection<Estado> estados) {
-        /*this.listEstados.removeAllItens();
+        this.cEstado.removeAllItens();
         this.cbEstFin.removeAllItems();
         this.cbEstIni.removeAllItems();
         
         Iterator<Estado> i = estados.iterator();
-        while(i.hasNext()) {
-            String nomeEstado = i.next().getNome();
-            if(this.listEstados.addItem(nomeEstado)!=null)
-                this.observerAdd(nomeEstado);
-            
-        }*/
+        while(i.hasNext()) 
+            this.cEstado.addEstado(i.next());            
             
     }
     
     public Collection<Estado> getEstados() {
-        /*Set<Estado> estados = new LinkedHashSet<Estado>();
-        Iterator<Object> i = this.listEstados.getAllItens().iterator();
-        while(i.hasNext())
-            estados.add(new Estado(i.next().toString()));
-        
-        return estados; */
-        return null;
+        return this.cEstado.getAllItens();        
     }
     
     void setEstadoInicial(Estado ei) {

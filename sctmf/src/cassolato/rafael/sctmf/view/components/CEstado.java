@@ -16,8 +16,7 @@ import java.util.Set;
  *
  * @author  rafael2009_00
  */
-public class CEstado extends javax.swing.JPanel 
-                       implements InterfaceCEstado {
+public class CEstado extends javax.swing.JPanel {
     
     private InterfaceCEstado component = null;
     
@@ -129,6 +128,14 @@ public class CEstado extends javax.swing.JPanel
 
     public void removeAllItens() {
         this.genericJList.removeAllItens();
+    }
+    
+    public Set<Estado> getAllItens() {
+        Set<Estado> estados = new LinkedHashSet<Estado>();
+        for(Object o : this.genericJList.getAllItens())
+            estados.add(new Estado(o.toString()));
+        
+        return estados;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
