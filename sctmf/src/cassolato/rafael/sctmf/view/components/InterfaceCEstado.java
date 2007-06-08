@@ -1,5 +1,5 @@
 /*
- * InterfaceCadEstados.java
+ * InterfaceCEstado.java
  *
  * Created on 6 de Junho de 2007, 19:36
  *
@@ -18,7 +18,8 @@ import java.util.Set;
  *
  * @author Cassolato
  */
-public interface InterfaceCadEstados {
+public interface InterfaceCEstado {
     public abstract void addEstado(Estado estado);
     public abstract void remEstados(Set<Estado> estados);
+    public abstract void removeAllItens();
 }
