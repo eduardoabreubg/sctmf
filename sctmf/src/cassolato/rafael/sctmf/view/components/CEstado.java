@@ -7,6 +7,7 @@
 package cassolato.rafael.sctmf.view.components;
 
 import cassolato.rafael.sctmf.model.pojo.Estado;
+import cassolato.rafael.sctmf.view.components.InterfaceCEstado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedHashSet;

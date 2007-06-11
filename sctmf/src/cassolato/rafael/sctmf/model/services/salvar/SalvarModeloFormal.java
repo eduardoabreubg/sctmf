@@ -35,7 +35,7 @@ public class SalvarModeloFormal implements Salvar {
     }
     
     public void salvar(File arquivo, ModeloFormal mf) throws SalvarException {
-        this.file = file;
+        this.file = arquivo;
         
         if(mf instanceof AFD)
             this.salvarAFD((AFD)mf);   

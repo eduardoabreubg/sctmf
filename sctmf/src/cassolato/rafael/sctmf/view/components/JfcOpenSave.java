@@ -21,14 +21,13 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
     public static final int SALVAR = 0;
     public static final int ABRIR = 1;
     
-    private Component c;
     private IdModeloFormal idModeloFormal;
     private int codOperation;
     
     /** Creates new form BeanForm */
     public JfcOpenSave(
-            final int codOperation, final Component c, IdModeloFormal idMF) {        
-        this.c = c;
+            final int codOperation, IdModeloFormal idMF) {        
+        
         this.idModeloFormal = idMF;
         this.codOperation = codOperation;
         
@@ -58,8 +57,7 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
             case SALVAR:
                 this.setDialogTitle(                        
                         "Selecione o Diretório a ser salvo o Modelo Formal.");
-                this.setFileSelectionMode(DIRECTORIES_ONLY);
-                
+               
                 break;
         }
         
@@ -70,14 +68,14 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
     public java.io.File getFile() {
         switch(this.codOperation) {
             case ABRIR:
-                if(this.showOpenDialog(this.c) == APPROVE_OPTION) 
+                if(this.showOpenDialog(null) == APPROVE_OPTION) 
                     return this.getSelectedFile();
                 
                 else                
                     return null;
                                 
             case SALVAR:
-                if(this.showSaveDialog(this.c) == APPROVE_OPTION) 
+                if(this.showSaveDialog(null) == APPROVE_OPTION) 
                     return this.getSelectedFile();
                 
                 else

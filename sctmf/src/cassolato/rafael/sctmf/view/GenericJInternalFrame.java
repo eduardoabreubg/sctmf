@@ -96,7 +96,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
     
     private void bOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bOpenActionPerformed
         JfcOpenSave fc = new JfcOpenSave(
-                JfcOpenSave.ABRIR, this, this.idMF);
+                JfcOpenSave.ABRIR, this.idMF);
         
         // Envia para o Controller o Arquivo selecionado
         // e recebe o objeto correspondente
@@ -111,7 +111,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
     
     private void bSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSaveActionPerformed
         JfcOpenSave fc = new JfcOpenSave(
-                JfcOpenSave.SALVAR, this, this.idMF);
+                JfcOpenSave.SALVAR, this.idMF);
         
         java.io.File arquivo = fc.getFile();
         if(arquivo!=null)            
