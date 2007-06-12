@@ -17,7 +17,8 @@ import java.util.Set;
  *
  * @author  rafael2009_00
  */
-public class CEstado extends javax.swing.JPanel {
+public class CEstado extends javax.swing.JPanel 
+                    implements InterfaceCEstado {
     
     private InterfaceCEstado component = null;
     
@@ -29,6 +30,9 @@ public class CEstado extends javax.swing.JPanel {
                 
         initComponents();
          this.posInitComponents();
+    }
+     
+    public CEstado() {    
     }
     
     /** This method is called from within the constructor to
