@@ -45,7 +45,7 @@ public class ApGUI extends cassolato.rafael.sctmf.view.modelos_formais.ModeloFor
         addRemButtonsS = new cassolato.rafael.sctmf.view.components.AddRemButtonsPanel();
         addRemButtonsSP = new cassolato.rafael.sctmf.view.components.AddRemButtonsPanel();
         letterNumber = new cassolato.rafael.sctmf.view.components.LetterNumber();
-        jPanel2 = new javax.swing.JPanel();
+        pCadEstSimIni = new javax.swing.JPanel();
         pCadTrans = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
@@ -125,7 +125,9 @@ public class ApGUI extends cassolato.rafael.sctmf.view.modelos_formais.ModeloFor
 
         tpAp.addTab("Cad. Alfabetos", pCadAlf);
 
-        tpAp.addTab("tab2", jPanel2);
+        pCadEstSimIni.setLayout(new javax.swing.BoxLayout(pCadEstSimIni, javax.swing.BoxLayout.Y_AXIS));
+
+        tpAp.addTab("Cad. Est. e Sim. Ini(s)", pCadEstSimIni);
 
         tpAp.addTab("tab3", pCadTrans);
 
@@ -196,13 +198,13 @@ public class ApGUI extends cassolato.rafael.sctmf.view.modelos_formais.ModeloFor
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private cassolato.rafael.sctmf.view.components.LetterNumber letterNumber;
     private cassolato.rafael.sctmf.view.components.GenericJList listSim;
     private cassolato.rafael.sctmf.view.components.GenericJList listSimPilha;
     private javax.swing.JPanel pCadAlf;
+    private javax.swing.JPanel pCadEstSimIni;
     private javax.swing.JPanel pCadTrans;
     private javax.swing.JTabbedPane tpAp;
     // End of variables declaration//GEN-END:variables
