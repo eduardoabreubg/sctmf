@@ -15,16 +15,16 @@ import java.util.Set;
  * @author  Cassolato
  */
 public class CadEstado extends javax.swing.JPanel 
-    implements InterfaceCEstado {
+    implements CEstado {
     
-     private InterfaceCEstado component = null;
+     private CEstado component = null;
     
     /** Creates new form CadEstado */
     public CadEstado() {
         initComponents();
     }
     
-    public CadEstado(InterfaceCEstado component) {    
+    public CadEstado(CEstado component) {    
         this.component = component;
                 
         initComponents();
