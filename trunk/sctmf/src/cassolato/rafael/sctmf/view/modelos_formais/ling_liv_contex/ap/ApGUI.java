@@ -8,7 +8,7 @@ package cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.ap;
 
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
-import cassolato.rafael.sctmf.view.components.InterfaceCEstado;
+import cassolato.rafael.sctmf.view.components.CEstado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Set;
@@ -19,7 +19,7 @@ import java.util.Set;
  */
 public class ApGUI 
         extends cassolato.rafael.sctmf.view.modelos_formais.ModeloFormalGUI
-        implements InterfaceCEstado {
+        implements CEstado {
     
     /** Creates new form BeanForm */
     public ApGUI() {
@@ -288,6 +288,7 @@ public class ApGUI
                         this.letterNumber.getLetter()));
         if(o!=null)
             this.cbSimbIni.addItem(o);
+        
     }
        
    private void removeActionSimP() {
