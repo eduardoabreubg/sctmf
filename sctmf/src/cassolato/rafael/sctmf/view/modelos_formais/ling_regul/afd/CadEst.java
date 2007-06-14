@@ -36,7 +36,7 @@ public class CadEst extends javax.swing.JPanel
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        cEstado =  cEstado = new cassolato.rafael.sctmf.view.components.CEstado(this);
+        cEstado =  cEstado = new cassolato.rafael.sctmf.view.components.CadEstado(this);
         pSul = new javax.swing.JPanel();
         pEstIni = new javax.swing.JPanel();
         jLabel77 = new javax.swing.JLabel();
@@ -303,7 +303,6 @@ public class CadEst extends javax.swing.JPanel
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemEstFin;
     private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemEstIni;
-    private cassolato.rafael.sctmf.view.components.CEstado cEstado;
     private javax.swing.JComboBox cbEstFin;
     private javax.swing.JComboBox cbEstIni;
     private javax.swing.JLabel jLabel77;
