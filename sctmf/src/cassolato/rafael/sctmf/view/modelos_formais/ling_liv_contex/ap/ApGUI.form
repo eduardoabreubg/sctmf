@@ -444,8 +444,8 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Fun&#xe7;&#xf5;es de Transi&#xe7;&#xe3;o">
-                <Property name="tabTitle" type="java.lang.String" value="Fun&#xe7;&#xf5;es de Transi&#xe7;&#xe3;o"/>
+              <JTabbedPaneConstraints tabName="Fun. de Transi&#xe7;&#xe3;o">
+                <Property name="tabTitle" type="java.lang.String" value="Fun. de Transi&#xe7;&#xe3;o"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -508,6 +508,16 @@
                   <SubComponents>
                     <Container class="javax.swing.JPanel" name="jPanel17">
                       <Properties>
+                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                            <TitledBorder title="Legenda">
+                              <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
+                                <BevelBorder bevelType="1"/>
+                              </Border>
+                              <Color PropertyName="color" blue="99" green="0" red="99" type="rgb"/>
+                            </TitledBorder>
+                          </Border>
+                        </Property>
                         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[180, 100]"/>
                         </Property>
@@ -546,7 +556,7 @@
                     <Container class="javax.swing.JPanel" name="jPanel11">
                       <Properties>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[50, 10]"/>
+                          <Dimension value="[30, 10]"/>
                         </Property>
                       </Properties>
 
@@ -586,7 +596,7 @@
                         <Component class="javax.swing.JLabel" name="jLabel27">
                           <Properties>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                              <Dimension value="[10, 14]"/>
+                              <Dimension value="[5, 14]"/>
                             </Property>
                           </Properties>
                           <Constraints>
@@ -598,7 +608,7 @@
                         <Component class="javax.swing.JLabel" name="jLabel31">
                           <Properties>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                              <Dimension value="[10, 14]"/>
+                              <Dimension value="[5, 14]"/>
                             </Property>
                           </Properties>
                           <Constraints>
@@ -615,7 +625,7 @@
                           <Dimension value="[80, 146]"/>
                         </Property>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[80, 146]"/>
+                          <Dimension value="[140, 146]"/>
                         </Property>
                       </Properties>
 
@@ -652,6 +662,13 @@
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="jPanel18">
+                  <Properties>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
+                        <BevelBorder/>
+                      </Border>
+                    </Property>
+                  </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
                       <BorderConstraints direction="North"/>
@@ -1134,6 +1151,17 @@
               </Constraints>
             </Component>
           </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel13">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Val. Sequ&#xea;ncia">
+                <Property name="tabTitle" type="java.lang.String" value="Val. Sequ&#xea;ncia"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
         </Container>
       </SubComponents>
     </Container>
