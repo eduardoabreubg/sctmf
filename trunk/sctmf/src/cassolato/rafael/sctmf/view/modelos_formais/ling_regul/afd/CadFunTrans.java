@@ -322,28 +322,28 @@ public class CadFunTrans extends javax.swing.JPanel {
         // de adicao de Transicao
         try {
          
-        if(estOri==null) {
-            estOri = new Estado(cbEstOri.getSelectedItem().toString());
-            s = new Simbolo(cbSimb.getSelectedItem().toString().charAt(0));
-            estFin = new Estado(cbEstDes.getSelectedItem().toString());
-        }
-        
-        sb.append(estOri.getNome()); // EstOri
-        sb.append(", ");
-        sb.append(s.getNome());   // Simb
-        sb.append(") = ");
-        sb.append(estFin.getNome()); // EstOri
-                       
-        String transicao = sb.toString();
-        if(wayAdd(transicao))
-            genericJList.addItem(transicao);
-        
-        else
-            javax.swing.JOptionPane.showMessageDialog(this, 
-                    "Não é permitido cadastrar um mesmo estado inicial,\n" +
-                    "e um símbolo, para mais de UM estado destino.",
-                    "Tentativa de Violação de Integridade do AFD",
-                    javax.swing.JOptionPane.WARNING_MESSAGE);   
+            if(estOri==null) {
+                estOri = new Estado(cbEstOri.getSelectedItem().toString());
+                s = new Simbolo(cbSimb.getSelectedItem().toString().charAt(0));
+                estFin = new Estado(cbEstDes.getSelectedItem().toString());
+            }
+
+            sb.append(estOri.getNome()); // EstOri
+            sb.append(", ");
+            sb.append(s.getNome());   // Simb
+            sb.append(") = ");
+            sb.append(estFin.getNome()); // EstOri
+
+            String transicao = sb.toString();
+            if(wayAdd(transicao))
+                genericJList.addItem(transicao);
+
+            else
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                        "Não é permitido cadastrar um mesmo estado inicial,\n" +
+                        "e um símbolo, para mais de UM estado destino.",
+                        "Tentativa de Violação de Integridade do AFD",
+                        javax.swing.JOptionPane.WARNING_MESSAGE);   
         
         }catch(Exception ex) {
             System.out.println("Algum JComboBox está null");

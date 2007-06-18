@@ -8,9 +8,13 @@ package cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.ap;
 
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.view.components.CEstado;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -74,6 +78,58 @@ public class ApGUI
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         pCadTrans = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel34 = new javax.swing.JPanel();
+        jPanel17 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
+        jPanel21 = new javax.swing.JPanel();
+        jPanel22 = new javax.swing.JPanel();
+        jPanel23 = new javax.swing.JPanel();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel25 = new javax.swing.JLabel();
+        addRemTran = new cassolato.rafael.sctmf.view.components.AddRemButtonsPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        listTrans = new cassolato.rafael.sctmf.view.components.GenericJList();
+        jPanel18 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jPanel24 = new javax.swing.JPanel();
+        cbEstOri = new javax.swing.JComboBox();
+        jLabel24 = new javax.swing.JLabel();
+        jPanel25 = new javax.swing.JPanel();
+        jLabel28 = new javax.swing.JLabel();
+        jPanel26 = new javax.swing.JPanel();
+        jLabel34 = new javax.swing.JLabel();
+        cbSimAlf = new javax.swing.JComboBox();
+        jPanel27 = new javax.swing.JPanel();
+        jLabel29 = new javax.swing.JLabel();
+        jPanel28 = new javax.swing.JPanel();
+        cbBasePilha = new javax.swing.JComboBox();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel36.setText("\u0393");
+        jPanel29 = new javax.swing.JPanel();
+        jLabel32 = new javax.swing.JLabel();
+        jPanel30 = new javax.swing.JPanel();
+        cbEstDest = new javax.swing.JComboBox();
+        jLabel33 = new javax.swing.JLabel();
+        jPanel31 = new javax.swing.JPanel();
+        jLabel30 = new javax.swing.JLabel();
+        jPanel32 = new javax.swing.JPanel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel37.setText("\u0393*");
+        fSimDestPilha = new javax.swing.JTextField();
+        jPanel33 = new javax.swing.JPanel();
+        bAddLambida = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -150,7 +206,7 @@ public class ApGUI
         gridBagConstraints.insets = new java.awt.Insets(10, 1, 0, 0);
         pCadAlf.add(letterNumber, gridBagConstraints);
 
-        tpAp.addTab("Cad. Alfabetos", pCadAlf);
+        tpAp.addTab("Alfabetos", pCadAlf);
 
         pCadEstSimIni.setLayout(new java.awt.BorderLayout());
 
@@ -232,14 +288,272 @@ public class ApGUI
         jLabel10.setPreferredSize(new java.awt.Dimension(15, 0));
         pCadEstSimIni.add(jLabel10, java.awt.BorderLayout.WEST);
 
-        tpAp.addTab("Cad. Est. e Sim. Ini(s)", pCadEstSimIni);
+        tpAp.addTab("Est. e Sim. Ini(s)", pCadEstSimIni);
 
-        tpAp.addTab("tab3", pCadTrans);
+        pCadTrans.setLayout(new java.awt.BorderLayout());
+
+        pCadTrans.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                pCadTransComponentShown(evt);
+            }
+        });
+
+        jLabel17.setPreferredSize(new java.awt.Dimension(40, 10));
+        pCadTrans.add(jLabel17, java.awt.BorderLayout.NORTH);
+
+        jLabel18.setPreferredSize(new java.awt.Dimension(5, 14));
+        pCadTrans.add(jLabel18, java.awt.BorderLayout.EAST);
+
+        jLabel19.setPreferredSize(new java.awt.Dimension(40, 10));
+        pCadTrans.add(jLabel19, java.awt.BorderLayout.SOUTH);
+
+        jPanel9.setLayout(new java.awt.BorderLayout());
+
+        jPanel34.setLayout(new javax.swing.BoxLayout(jPanel34, javax.swing.BoxLayout.X_AXIS));
+
+        jPanel17.setLayout(new java.awt.GridLayout(5, 0));
+
+        jPanel17.setMinimumSize(new java.awt.Dimension(180, 100));
+        jPanel17.setPreferredSize(new java.awt.Dimension(180, 100));
+        jPanel17.add(jPanel19);
+
+        jPanel17.add(jPanel20);
+
+        jPanel17.add(jPanel21);
+
+        jPanel17.add(jPanel22);
+
+        jPanel17.add(jPanel23);
+
+        jPanel34.add(jPanel17);
+
+        jPanel11.setLayout(new java.awt.BorderLayout());
+
+        jPanel11.setPreferredSize(new java.awt.Dimension(50, 10));
+        jLabel25.setPreferredSize(new java.awt.Dimension(40, 20));
+        jPanel11.add(jLabel25, java.awt.BorderLayout.NORTH);
+
+        jPanel11.add(addRemTran, java.awt.BorderLayout.CENTER);
+
+        jLabel26.setPreferredSize(new java.awt.Dimension(40, 20));
+        jPanel11.add(jLabel26, java.awt.BorderLayout.SOUTH);
+
+        jLabel27.setPreferredSize(new java.awt.Dimension(10, 14));
+        jPanel11.add(jLabel27, java.awt.BorderLayout.WEST);
+
+        jLabel31.setPreferredSize(new java.awt.Dimension(10, 14));
+        jPanel11.add(jLabel31, java.awt.BorderLayout.EAST);
+
+        jPanel34.add(jPanel11);
+
+        jPanel12.setLayout(new java.awt.BorderLayout());
+
+        jPanel12.setMinimumSize(new java.awt.Dimension(80, 146));
+        jPanel12.setPreferredSize(new java.awt.Dimension(80, 146));
+        jLabel21.setFont(new java.awt.Font("Bitstream Vera Sans", 3, 12));
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("Transi\u00e7\u00f5es");
+        jPanel12.add(jLabel21, java.awt.BorderLayout.NORTH);
+
+        listTrans.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel12.add(listTrans, java.awt.BorderLayout.CENTER);
+
+        jPanel34.add(jPanel12);
+
+        jPanel9.add(jPanel34, java.awt.BorderLayout.CENTER);
+
+        jPanel18.setLayout(new java.awt.BorderLayout());
+
+        jPanel16.setLayout(new javax.swing.BoxLayout(jPanel16, javax.swing.BoxLayout.X_AXIS));
+
+        jPanel16.setPreferredSize(new java.awt.Dimension(100, 60));
+        jPanel10.setLayout(new java.awt.BorderLayout(0, 5));
+
+        jPanel10.setMaximumSize(new java.awt.Dimension(20, 60));
+        jPanel10.setPreferredSize(new java.awt.Dimension(20, 60));
+        jLabel22.setFont(new java.awt.Font("Verdana", 1, 14));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel22.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel22.setPreferredSize(new java.awt.Dimension(10, 30));
+        jLabel22.setText("\u03B4:");
+        jPanel10.add(jLabel22, java.awt.BorderLayout.NORTH);
+
+        jPanel16.add(jPanel10);
+
+        jPanel24.setLayout(new java.awt.BorderLayout(0, 5));
+
+        jPanel24.setOpaque(false);
+        jPanel24.setPreferredSize(new java.awt.Dimension(35, 30));
+        cbEstOri.setToolTipText("Estado de Origem");
+        jPanel24.add(cbEstOri, java.awt.BorderLayout.CENTER);
+
+        jLabel24.setFont(new java.awt.Font("Verdana", 1, 14));
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel24.setText("S");
+        jLabel24.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel24.setPreferredSize(new java.awt.Dimension(20, 30));
+        jPanel24.add(jLabel24, java.awt.BorderLayout.NORTH);
+
+        jPanel16.add(jPanel24);
+
+        jPanel25.setLayout(new java.awt.BorderLayout(0, 5));
+
+        jPanel25.setMaximumSize(new java.awt.Dimension(20, 60));
+        jPanel25.setOpaque(false);
+        jPanel25.setPreferredSize(new java.awt.Dimension(10, 60));
+        jLabel28.setFont(new java.awt.Font("Verdana", 1, 12));
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setText("x");
+        jLabel28.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel28.setPreferredSize(new java.awt.Dimension(20, 30));
+        jPanel25.add(jLabel28, java.awt.BorderLayout.NORTH);
+
+        jPanel16.add(jPanel25);
+
+        jPanel26.setLayout(new java.awt.BorderLayout(0, 5));
+
+        jPanel26.setOpaque(false);
+        jPanel26.setPreferredSize(new java.awt.Dimension(40, 30));
+        jLabel34.setFont(new java.awt.Font("Tahoma", 1, 14));
+        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel34.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel34.setPreferredSize(new java.awt.Dimension(20, 30));
+        jLabel34.setText("(\u03a3U{\u03BB})");
+        jPanel26.add(jLabel34, java.awt.BorderLayout.NORTH);
+
+        cbSimAlf.setToolTipText("S\u00edmbolo do Alfabeto");
+        cbSimAlf.addItem("\u03BB");
+        jPanel26.add(cbSimAlf, java.awt.BorderLayout.CENTER);
+
+        jPanel16.add(jPanel26);
+
+        jPanel27.setLayout(new java.awt.BorderLayout(0, 5));
+
+        jPanel27.setMaximumSize(new java.awt.Dimension(20, 60));
+        jPanel27.setPreferredSize(new java.awt.Dimension(10, 60));
+        jLabel29.setFont(new java.awt.Font("Verdana", 1, 12));
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel29.setText("x");
+        jLabel29.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel29.setPreferredSize(new java.awt.Dimension(20, 30));
+        jPanel27.add(jLabel29, java.awt.BorderLayout.NORTH);
+
+        jPanel16.add(jPanel27);
+
+        jPanel28.setLayout(new java.awt.BorderLayout(0, 5));
+
+        jPanel28.setOpaque(false);
+        jPanel28.setPreferredSize(new java.awt.Dimension(30, 30));
+        cbBasePilha.setToolTipText("Base da Pilha");
+        jPanel28.add(cbBasePilha, java.awt.BorderLayout.CENTER);
+
+        jLabel36.setFont(new java.awt.Font("Times New Roman", 1, 16));
+        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel36.setToolTipText("S\u00edmbolos do Alfabeto da Pilha");
+        jLabel36.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel36.setPreferredSize(new java.awt.Dimension(20, 30));
+        jPanel28.add(jLabel36, java.awt.BorderLayout.NORTH);
+
+        jPanel16.add(jPanel28);
+
+        jPanel29.setLayout(new java.awt.BorderLayout(0, 5));
+
+        jPanel29.setPreferredSize(new java.awt.Dimension(10, 30));
+        jLabel32.setFont(new java.awt.Font("Arial", 1, 15));
+        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel32.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel32.setPreferredSize(new java.awt.Dimension(20, 30));
+        jLabel32.setText("\u2192");
+        jPanel29.add(jLabel32, java.awt.BorderLayout.NORTH);
+
+        jPanel16.add(jPanel29);
+
+        jPanel30.setLayout(new java.awt.BorderLayout(0, 5));
+
+        jPanel30.setOpaque(false);
+        jPanel30.setPreferredSize(new java.awt.Dimension(35, 30));
+        cbEstDest.setToolTipText("Estado de Destino");
+        jPanel30.add(cbEstDest, java.awt.BorderLayout.CENTER);
+
+        jLabel33.setFont(new java.awt.Font("Verdana", 1, 14));
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel33.setText("S");
+        jLabel33.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel33.setPreferredSize(new java.awt.Dimension(20, 30));
+        jPanel30.add(jLabel33, java.awt.BorderLayout.NORTH);
+
+        jPanel16.add(jPanel30);
+
+        jPanel31.setLayout(new java.awt.BorderLayout(0, 5));
+
+        jPanel31.setMaximumSize(new java.awt.Dimension(20, 60));
+        jPanel31.setPreferredSize(new java.awt.Dimension(10, 60));
+        jLabel30.setFont(new java.awt.Font("Verdana", 1, 12));
+        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel30.setText("x");
+        jLabel30.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel30.setPreferredSize(new java.awt.Dimension(20, 30));
+        jPanel31.add(jLabel30, java.awt.BorderLayout.NORTH);
+
+        jPanel16.add(jPanel31);
+
+        jPanel32.setLayout(new java.awt.BorderLayout(0, 5));
+
+        jPanel32.setPreferredSize(new java.awt.Dimension(50, 30));
+        jLabel37.setFont(new java.awt.Font("Times New Roman", 1, 16));
+        jLabel37.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel37.setToolTipText("S\u00edmbolos do Alfabeto da Pilha");
+        jLabel37.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        jLabel37.setPreferredSize(new java.awt.Dimension(20, 30));
+        jPanel32.add(jLabel37, java.awt.BorderLayout.NORTH);
+
+        fSimDestPilha.setToolTipText("S\u00edmbolo da Pilha");
+        jPanel32.add(fSimDestPilha, java.awt.BorderLayout.CENTER);
+
+        jPanel16.add(jPanel32);
+
+        jPanel18.add(jPanel16, java.awt.BorderLayout.CENTER);
+
+        jPanel33.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 5, 2));
+
+        jPanel33.setPreferredSize(new java.awt.Dimension(10, 25));
+        bAddLambida.setFont(new java.awt.Font("Verdana", 0, 10));
+        bAddLambida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/toolbarButtonGraphics/navigation/Up16.gif")));
+        bAddLambida.setToolTipText("Adicionar L\u00e2mbida");
+        bAddLambida.setPreferredSize(new java.awt.Dimension(60, 20));
+        bAddLambida.setText("\u03BB");
+        bAddLambida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAddLambidaActionPerformed(evt);
+            }
+        });
+
+        jPanel33.add(bAddLambida);
+
+        jPanel18.add(jPanel33, java.awt.BorderLayout.SOUTH);
+
+        jPanel9.add(jPanel18, java.awt.BorderLayout.NORTH);
+
+        pCadTrans.add(jPanel9, java.awt.BorderLayout.CENTER);
+
+        jLabel20.setText("  ");
+        pCadTrans.add(jLabel20, java.awt.BorderLayout.WEST);
+
+        tpAp.addTab("Fun\u00e7\u00f5es de Transi\u00e7\u00e3o", pCadTrans);
 
         add(tpAp, java.awt.BorderLayout.CENTER);
         tpAp.getAccessibleContext().setAccessibleName("ca");
 
     }// </editor-fold>//GEN-END:initComponents
+
+    private void pCadTransComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pCadTransComponentShown
+        System.out.println("pCadTrans show");
+    }//GEN-LAST:event_pCadTransComponentShown
+
+    private void bAddLambidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddLambidaActionPerformed
+        String txt = fSimDestPilha.getText();
+        this.fSimDestPilha.setText(txt+"\u03BB");
+    }//GEN-LAST:event_bAddLambidaActionPerformed
     
    private void posInitComponents() {
         this.letterNumber.enableCbNumber(false);
@@ -274,11 +588,27 @@ public class ApGUI
             }
         });
         
+        // TRANSICOES
+        this.addRemTran.getBAdd().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                addActionTrans(null, null, null, null, null);
+            }
+        });
+        
+        this.addRemTran.getBRemove().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                removeActionTrans();
+            }
+        });
+        
     }
    
    private void removeActionSim() {
-       for(Object o : this.listSim.removeItens())
+       for(Object o : this.listSim.removeItens()) {
             this.cbSimbIni.removeItem(o);
+            this.cbSimAlf.removeItem(o);
+       }
+           
     }
         
     private void addActionSim() {
@@ -286,14 +616,18 @@ public class ApGUI
                 this.listSim.addItem(
                     Character.toLowerCase(
                         this.letterNumber.getLetter()));
-        if(o!=null)
+        if(o!=null) {
             this.cbSimbIni.addItem(o);
-        
+            this.cbSimAlf.addItem(o);
+        }
     }
        
    private void removeActionSimP() {
-       for(Object o : this.listSimPilha.removeItens())
+       for(Object o : this.listSimPilha.removeItens()) {
             this.cbSimbIniPilha.removeItem(o);
+            this.cbBasePilha.removeItem(o);
+       }
+           
              
     }
         
@@ -302,10 +636,78 @@ public class ApGUI
                 this.listSimPilha.addItem(
                     Character.toUpperCase(
                         this.letterNumber.getLetter()));
-        if(o!=null)
+        if(o!=null) {
             this.cbSimbIniPilha.addItem(o);        
+            this.cbBasePilha.addItem(o);
+        }
+            
+    }
+    
+    private void addActionTrans(Estado estOri, Simbolo simb, 
+                           Simbolo simBasePilha, 
+                           Estado estDest, List<Simbolo> simbDesPilha) {
+                         
+        String valueSimDestPilha = this.fSimDestPilha.getText();
+        
+        if(valueSimDestPilha.length()>0&&checkValuesList(valueSimDestPilha)) {
+            StringBuffer sb = new StringBuffer("\u03B4(");
+            // Indica que foi executada uma acao pelo usuário
+            // de adicao de Transicao
+            try {         
+                if(estOri==null) {
+                    estOri = new Estado(cbEstOri.getSelectedItem().toString());
+                    simb = new Simbolo(
+                            cbSimAlf.getSelectedItem().toString().charAt(0));
+                    simBasePilha = new Simbolo(
+                                cbBasePilha.getSelectedItem().toString().charAt(0)
+                            );
+
+                    estDest = new Estado(cbEstDest.getSelectedItem().toString());
+                    
+                    simbDesPilha = new ArrayList<Simbolo>();
+                    for(char c : fSimDestPilha.getText().toCharArray())
+                        simbDesPilha.add(new Simbolo(c));
+
+                }
+
+                sb.append(estOri.getNome()); // EstOri
+                sb.append(",");
+                sb.append(simb.getNome());   // Simb
+                sb.append(",");
+                sb.append(simBasePilha.getNome());
+                sb.append(") = {<");
+                sb.append(estDest.getNome()); // EstDest
+                sb.append(",");
+                
+                for(Simbolo s : simbDesPilha)
+                    sb.append(s.getNome());
+                
+                sb.append(">}");
+                
+                String transicao = sb.toString();
+                listTrans.addItem(transicao);
+
+            }catch(Exception ex) {
+               System.out.println("Algum JComboBox está null");
+            }
+            
+        }else {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Valores Inválidos");
+            fSimDestPilha.selectAll();
+            fSimDestPilha.requestFocus(true);
+        }
+                
+    }
+    
+    private void removeActionTrans() {
+        this.listTrans.removeItens();   
     }
 
+    private void observer() {
+        
+    }
+    
     public void setModeloFormal(ModeloFormal mf) {
     }
 
@@ -314,21 +716,55 @@ public class ApGUI
     }
 
     public void addEstado(Estado estado) {
-        
+        String nomeEstado = estado.getNome();
+        this.cbEstOri.addItem(nomeEstado);
+        this.cbEstDest.addItem(nomeEstado);
     }
 
     public void remEstados(Set<Estado> estados) {
+        for(Estado e : estados) {
+            String nomeEstado = e.getNome();
+            this.cbEstOri.removeItem(nomeEstado);
+            this.cbEstDest.removeItem(nomeEstado);
+        }
     }
 
     public void removeAllItens() {
     }
     
+    /**
+     * Verifica se os simbolos que foram digitados
+     * no TextField de simbolos da pilha
+     * pertecem ao alfabeto da pilha.
+     *
+     */
+    private boolean checkValuesList(String contextText) {
+        // Valores permitidos
+        StringBuffer sb = new StringBuffer("\u03BB");        
+        for(Object o : listSimPilha.getAllItens()) 
+            sb.append(o.toString());
+        
+        String valPermitidos = sb.toString();                    
+        for(char c : contextText.toCharArray())
+            if(!valPermitidos.contains(Character.toString(c)))
+                return false;
+        
+        return true;
+    }
+    
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
     private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemButtonsS;
     private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemButtonsSP;
+    private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemTran;
+    private javax.swing.JButton bAddLambida;
     private cassolato.rafael.sctmf.view.components.CadEstado cadEstado;
+    private javax.swing.JComboBox cbBasePilha;
+    private javax.swing.JComboBox cbEstDest;
+    private javax.swing.JComboBox cbEstOri;
+    private javax.swing.JComboBox cbSimAlf;
     private javax.swing.JComboBox cbSimbIni;
     private javax.swing.JComboBox cbSimbIniPilha;
+    private javax.swing.JTextField fSimDestPilha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -337,8 +773,27 @@ public class ApGUI
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -346,16 +801,40 @@ public class ApGUI
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
+    private javax.swing.JPanel jPanel24;
+    private javax.swing.JPanel jPanel25;
+    private javax.swing.JPanel jPanel26;
+    private javax.swing.JPanel jPanel27;
+    private javax.swing.JPanel jPanel28;
+    private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel30;
+    private javax.swing.JPanel jPanel31;
+    private javax.swing.JPanel jPanel32;
+    private javax.swing.JPanel jPanel33;
+    private javax.swing.JPanel jPanel34;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private cassolato.rafael.sctmf.view.components.LetterNumber letterNumber;
     private cassolato.rafael.sctmf.view.components.GenericJList listSim;
     private cassolato.rafael.sctmf.view.components.GenericJList listSimPilha;
+    private cassolato.rafael.sctmf.view.components.GenericJList listTrans;
     private javax.swing.JPanel pCadAlf;
     private javax.swing.JPanel pCadEstSimIni;
     private javax.swing.JPanel pCadTrans;
