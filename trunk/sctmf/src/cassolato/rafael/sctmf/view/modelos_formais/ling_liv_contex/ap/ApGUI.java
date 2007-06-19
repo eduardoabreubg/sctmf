@@ -893,16 +893,19 @@ public class ApGUI
     private Set<TransicaoAP> getTransicoes() {
         Set<TransicaoAP> trans = new LinkedHashSet<TransicaoAP>();
         for(Object o : this.listTrans.getAllItens()) {
-           //Matcher m = this.getMatcher(o.toString());
+           Matcher m = this.getMatcher(o.toString());
            TransicaoAP t = new TransicaoAP();
             
-            /*if(m.find()) {
-                t.setEstOri(new Estado(m.group(1)));
-                t.setSimbolo(new Simbolo(m.group(2).charAt(0)));
-                t.setEstDest(new Estado(m.group(3)));
-                
-                trans.add(t);
-            } */
+            if(m.find()) {
+                System.out.println(m.group(1));
+                System.out.println(m.group(2));
+                System.out.println(m.group(3));
+                System.out.println(m.group(4));
+                System.out.println(m.group(5));
+                                
+                //trans.add(t);
+            } else
+                System.out.println("PAU");
         }
         
         return trans;
@@ -912,16 +915,17 @@ public class ApGUI
      * Retorna o matcher para ser feito a pesquisa.<br>
      * Usando o metodo <b>group</b> obtemos:<br>
      * <i>Posicao 1</i> contem o estado de origem<br>
-     * <i>Posicao 2</i> esta o simbolo<br>
-     * <i>Posicao 3</i> esta o estado de destino.
+     * <i>Posicao 2</i> simbolo do alfabeto<br>
+     * <i>Posicao 3</i> topo da pilha<br>
+     * <i>Posicao 4</i> estado de destino<br>
+     * <i>Posicao 5</i> entrada da pilha<br>
      *
      * @param str
      * @return Matcher
      */
-    private Matcher getMatcher(String str) {
-        //String regex = ".*\\((.{2}),.*(.{1})\\).*=.*(.{2})$";
-        String regex = ".?\\((.{2}), (.{1})\\).?=.?(.{2})";        
-                
+    private Matcher getMatcher(String str) {       
+        String regex = ".?\\((.+),(.+),(.+)\\) = \\{<(.+),(.+)\\>}";   
+        
         return Pattern.compile(regex).matcher(str);
     }
     
