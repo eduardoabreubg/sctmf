@@ -265,7 +265,7 @@ public class ApGUI
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 204));
         jLabel12.setFont(new java.awt.Font("Bitstream Vera Sans", 0, 14));
-        jLabel12.setText("S\u00edmb. Ini. da Pilha");
+        jLabel12.setText("S\u00edm. Base da Pilha");
         jPanel8.add(jLabel12, java.awt.BorderLayout.NORTH);
 
         jLabel13.setPreferredSize(new java.awt.Dimension(20, 14));
