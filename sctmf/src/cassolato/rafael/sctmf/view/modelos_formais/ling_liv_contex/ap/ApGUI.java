@@ -455,7 +455,7 @@ public class ApGUI
 
         jPanel28.setOpaque(false);
         jPanel28.setPreferredSize(new java.awt.Dimension(30, 30));
-        cbBasePilha.setToolTipText("Base da Pilha");
+        cbBasePilha.setToolTipText("Topo da Pilha");
         jPanel28.add(cbBasePilha, java.awt.BorderLayout.CENTER);
 
         jLabel36.setFont(new java.awt.Font("Times New Roman", 1, 16));
@@ -518,7 +518,7 @@ public class ApGUI
         jLabel37.setPreferredSize(new java.awt.Dimension(20, 30));
         jPanel32.add(jLabel37, java.awt.BorderLayout.NORTH);
 
-        fSimDestPilha.setToolTipText("S\u00edmbolo da Pilha");
+        fSimDestPilha.setToolTipText("Entrada da Pilha");
         jPanel32.add(fSimDestPilha, java.awt.BorderLayout.CENTER);
 
         jPanel16.add(jPanel32);
@@ -552,7 +552,7 @@ public class ApGUI
 
         tpAp.addTab("Fun. de Transi\u00e7\u00e3o", pCadTrans);
 
-        pValSeq.setLayout(new java.awt.GridLayout());
+        pValSeq.setLayout(new java.awt.GridLayout(1, 0));
 
         pValSeq.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
