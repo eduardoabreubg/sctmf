@@ -22,7 +22,7 @@ import java.util.Set;
 public class AP extends AFD {
     
     private List<Simbolo> alfabetoPilha = new ArrayList<Simbolo>();
-    private Simbolo simbBasePilha; 
+    private Simbolo topoPilha; 
     private Set<TransicaoAP> transicoes = new LinkedHashSet<TransicaoAP>();
     
     /** Creates a new instance of AP */
@@ -38,8 +38,8 @@ public class AP extends AFD {
         this.alfabetoPilha.addAll(c);
     }
     
-    public void setSimbBasePilha(Simbolo s) {
-        this.simbBasePilha = s;
+    public void setTopoPilha(Simbolo s) {
+        this.topoPilha = s;
     }
     
     public void addTransicao(TransicaoAP t) {
@@ -58,8 +58,8 @@ public class AP extends AFD {
         return this.alfabetoPilha;
     }
     
-    public Simbolo getSimBasePilha() {
-        return this.simbBasePilha;
+    public Simbolo getTopoPilha() {
+        return this.topoPilha;
     }
     
 }
