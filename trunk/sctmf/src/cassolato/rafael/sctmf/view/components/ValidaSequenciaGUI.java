@@ -6,11 +6,16 @@
 
 package cassolato.rafael.sctmf.view.components;
 
+import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
+import cassolato.rafael.sctmf.model.services.ValidaSequencia;
+import cassolato.rafael.sctmf.model.services.Validacao;
+
 /**
  *
  * @author  Cassolato
  */
 public class ValidaSequenciaGUI extends javax.swing.JPanel {
+    private Validacao valida = ValidaSequencia.getInstance();
     
     /**
      * Creates new form ValidaSequenciaGUI
@@ -116,7 +121,8 @@ public class ValidaSequenciaGUI extends javax.swing.JPanel {
     }
     
     public void setTextAInf(String t) {
-        this.aInfor.setText(t);
+        String text = this.aInfor.getText();
+        this.aInfor.setText(text+t);
     }
     
     public String getSequencia() {
@@ -143,6 +149,14 @@ public class ValidaSequenciaGUI extends javax.swing.JPanel {
         
         return sb;
                     
+    }
+    
+    public void validarSequencia(ModeloFormal mf, String sequencia) {
+        this.valida.valida(mf, sequencia);
+    }
+    
+    public void clearArea() {
+        this.aInfor.setText("");
     }
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables

@@ -16,5 +16,5 @@ import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
  * @author rafael2009_00
  */
 public interface Validacao {
-    void valida(ModeloFormal fm, String sequencia);
+    void valida(ModeloFormal mf, String sequencia);
 }

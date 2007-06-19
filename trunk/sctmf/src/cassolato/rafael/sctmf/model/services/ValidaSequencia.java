@@ -11,6 +11,7 @@ package cassolato.rafael.sctmf.model.services;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
+import cassolato.rafael.sctmf.model.pojo.AP;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
@@ -35,8 +36,12 @@ public class ValidaSequencia implements Validacao {
         
         if(mf instanceof AFD )
             status = this.valida((AFD)mf, sequencia);
+        
         else if(mf instanceof AFND )
             status = this.valida((AFND)mf, sequencia);
+        
+        else if(mf instanceof AP)
+            status = this.valida((AP)mf, sequencia);
         
         this.sendMessage(status);
     }
@@ -82,6 +87,13 @@ public class ValidaSequencia implements Validacao {
         
     }
     
+    /**
+     * Valida o Autômato Finito Não Determinístico.
+     *
+     * @param afnd - Autômato Finito Não Determinístico.
+     * @param sequencia - Sequencia a ser Validada.
+     * @return boolean
+     */
     private boolean valida(AFND afnd, String sequencia) {
         // Estados que podem estar ativo no AFND
         Map<String, Estado> estadosAtivos = new HashMap<String, Estado>();
@@ -130,6 +142,17 @@ public class ValidaSequencia implements Validacao {
             if(estadosAtivos.containsKey(ef.getNome()))
                 return true;
         
+        return false;
+    }
+    
+    /**
+     * Valida o Autômato com Pilha
+     *
+     * @param ap - Autômato com Pilha
+     * @param sequencia - Sequencia a ser Validada.
+     * @return boolean
+     */
+    private boolean valida(AP ap, String sequencia) {
         return false;
     }
     

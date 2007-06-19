@@ -11,6 +11,7 @@ package cassolato.rafael.sctmf.model.services.salvar;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
+import cassolato.rafael.sctmf.model.pojo.AP;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
@@ -37,12 +38,15 @@ public class SalvarModeloFormal implements Salvar {
     public void salvar(File arquivo, ModeloFormal mf) throws SalvarException {
         this.file = arquivo;
         
-        if(mf instanceof AFD)
+        if(mf instanceof AP)
+            this.salvarAP((AP)mf);
+        
+        else if(mf instanceof AFD)
             this.salvarAFD((AFD)mf);   
             
         else if(mf instanceof AFND)
-            this.salvarAFND((AFND)mf);              
-                        
+            this.salvarAFND((AFND)mf);  
+                                
     }
     
     private void salvarAFD(AFD afd) throws SalvarException {
@@ -115,6 +119,48 @@ public class SalvarModeloFormal implements Salvar {
             this.showOkMessage("AFND");
         }catch(Exception ioex) {
             throw new SalvarException("Erro ao Salvar AFND");
+        }
+    }
+    
+    private void salvarAP(AP ap) throws SalvarException {
+        StringBuffer sb = new StringBuffer();
+        
+        sb.append("E:");  // Add Simbolos
+        for(Simbolo s : ap.getSimbolos())
+            sb.append(s.getNome()+"-");     
+          
+        sb.append("\nP:"); // Add Simbolos pilha
+        for(Simbolo s : ap.getSimbolosPilha())
+            sb.append(s.getNome()+"-");     
+        
+        sb.append("\nS:");
+        for(Estado e : ap.getEstados())
+            sb.append(e.getNome()+"-");          
+                       
+        Estado aux = ap.getEstadoInicial();
+        sb.append("\nI:");
+        if(aux!=null)
+             sb.append(aux.getNome());  
+          
+        Simbolo s = ap.getTopoPilha();
+        sb.append("\nB:");
+        if(s!=null)
+            sb.append(s.getNome());
+                
+        /*for(Transicao t : afnd.getTransicoes())
+        sb.append("\nT:"+
+                t.getEstOri().getNome()+"-"+
+                t.getSimbolo().getNome()+"-"+
+                t.getEstDest().getNome()); */
+    
+        try {         
+            this.writeInFile(
+                    new File(
+                        this.file.getPath()+".ap"),sb.toString());
+            
+            this.showOkMessage("AP");
+        }catch(Exception ioex) {
+            throw new SalvarException("Erro ao Salvar AP");
         }
     }
     
