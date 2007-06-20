@@ -16,7 +16,7 @@ import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
-import cassolato.rafael.sctmf.model.services.salvar.Salvar;
+import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
 import java.io.File;
 import java.io.FileWriter;
 
@@ -147,11 +147,20 @@ public class SalvarModeloFormal implements Salvar {
         if(s!=null)
             sb.append(s.getNome());
                 
-        /*for(Transicao t : afnd.getTransicoes())
-        sb.append("\nT:"+
-                t.getEstOri().getNome()+"-"+
-                t.getSimbolo().getNome()+"-"+
-                t.getEstDest().getNome()); */
+        for(TransicaoAP t : ap.getTransicoesAP()) {
+            sb.append("\nT:");
+            sb.append(t.getEstOri().getNome());
+            sb.append("-");
+            sb.append(t.getSimbolo().getNome());
+            sb.append("-");
+            sb.append(t.getSimBasePilha().getNome());
+            sb.append("-");
+            sb.append(t.getEstDest().getNome());
+            sb.append("-");
+            for(Simbolo x: t.getEntradaPilha())
+                sb.append(x.getNome());
+            
+        } 
     
         try {         
             this.writeInFile(
