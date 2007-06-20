@@ -9,8 +9,8 @@ package cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.ap;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  *
@@ -18,8 +18,11 @@ import java.util.TreeSet;
  */
 public class CadAlfAP extends javax.swing.JPanel {
     
+    private ApGUI apGUI = null;
+    
     /** Creates new form CadAlfAP */
-    public CadAlfAP() {
+    public CadAlfAP(ApGUI apGUI) {
+        this.apGUI = apGUI;
         initComponents();
         posInitComponents();
     }
@@ -117,18 +120,18 @@ public class CadAlfAP extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
     
-    public Set<Simbolo> getSimbsAfabeto() {
-        Set<Simbolo> simbolos = new TreeSet<Simbolo>();
+    Set<Simbolo> getSimbsAfabeto() {
+        Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
         for(Object o : this.listSim.getAllItens())
-            simbolos.add(new Simbolo(o.toString().charAt(0)));
+            simbolos.add(new Simbolo((Character)o));
             
         return simbolos;
     }
     
-    public Set<Simbolo> getSimbsAfabetoPilha() {
-        Set<Simbolo> simbolos = new TreeSet<Simbolo>();
+    Set<Simbolo> getSimbsAfabetoPilha() {
+        Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();                
         for(Object o : this.listSimPilha.getAllItens())
-            simbolos.add(new Simbolo(o.toString().charAt(0)));
+            simbolos.add(new Simbolo((Character)o));
         
         return simbolos;
     }
@@ -178,13 +181,16 @@ public class CadAlfAP extends javax.swing.JPanel {
     }
        
    private void removeActionSimP() {
-       this.listSimPilha.removeItens();                      
+       for(Object o : this.listSimPilha.removeItens())
+            this.apGUI.remSimPilha(new Simbolo((Character)o));                      
     }
         
     private void addActionSimP() {   
-        this.listSimPilha.addItem(
-            Character.toUpperCase(
-                this.letterNumber.getLetter()));             
+        this.apGUI.addSimPilha(
+            new Simbolo(
+                this.listSimPilha.addItem(
+                    Character.toUpperCase(
+                        this.letterNumber.getLetter()))));             
     }
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables

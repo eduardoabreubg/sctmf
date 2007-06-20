@@ -154,11 +154,11 @@ public class CadEstSimIniAP extends javax.swing.JPanel implements CEstado {
         this.cEstado.removeAllItens();
     }
     
-    public Set<Estado> getEstados() {
+    Set<Estado> getEstados() {
         return this.cadEstado.getAllItens();
     }
     
-    public Simbolo getSimbTopoPilha() {
+    Simbolo getSimbTopoPilha() {
         Object o = this.cbSimTopoPilha.getSelectedItem();
         if(o!=null)
             return new Simbolo((Character)o);
@@ -166,7 +166,7 @@ public class CadEstSimIniAP extends javax.swing.JPanel implements CEstado {
         return null;
     }
     
-    public Estado getEstadoInicial() {
+    Estado getEstadoInicial() {
         Object o = this.cbEstadoInicial.getSelectedItem();
         if(o!=null)
             return new Estado(o.toString());
@@ -174,12 +174,12 @@ public class CadEstSimIniAP extends javax.swing.JPanel implements CEstado {
         return null;
     }
         
-    public void setSimbolosCbTopoPilha(Set<Simbolo> simbolos) {
-        this.cbSimTopoPilha.removeAllItems();
-        
-        for(Simbolo s : simbolos)
-            this.cbSimTopoPilha.addItem(s.getNome());
-        
+    void addSimPilha(Simbolo s) {
+        this.cbSimTopoPilha.addItem(s.getNome());
+    }
+    
+    void remSimPilha(Simbolo s) {
+        this.cbSimTopoPilha.removeItem(s.getNome());
     }
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables

@@ -20,16 +20,16 @@ public class TransicaoAP {
     private Simbolo simbolo;
     private Simbolo simBasePilha;
     private Estado estDest;
-    private List<Simbolo> simbDesPilha;
+    private List<Simbolo> entradaPilha;
     
     /** Creates a new instance of TransicaoAP */
     public TransicaoAP(Estado estOri, Simbolo simbolo, Simbolo simBasePilha, 
-            Estado estDest, List<Simbolo> simbDesPilha ) {
+            Estado estDest, List<Simbolo> entradaPilha ) {
         this.setEstOri(estOri);
         this.setSimbolo(simbolo);
         this.setSimBasePilha(simBasePilha);
         this.setEstDest(estDest);
-        this.setSimbDesPilha(simbDesPilha);
+        this.setEntradaPilha(entradaPilha);
         
     }
     
@@ -67,12 +67,12 @@ public class TransicaoAP {
         this.estDest = estDest;
     }
 
-    public List<Simbolo> getSimbDesPilha() {
-        return simbDesPilha;
+    public List<Simbolo> getEntradaPilha() {
+        return entradaPilha;
     }
 
-    public void setSimbDesPilha(List<Simbolo> simbDesPilha) {
-        this.simbDesPilha = simbDesPilha;
+    public void setEntradaPilha(List<Simbolo> entradaPilha) {
+        this.entradaPilha = entradaPilha;
     }
     
 }

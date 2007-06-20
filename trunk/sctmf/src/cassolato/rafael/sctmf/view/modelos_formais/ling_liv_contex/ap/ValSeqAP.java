@@ -9,7 +9,7 @@ package cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.ap;
 import cassolato.rafael.sctmf.model.pojo.AP;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
-import cassolato.rafael.sctmf.view.modelos_formais.ModeloFormalGUI;
+import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -59,6 +59,9 @@ public class ValSeqAP extends javax.swing.JPanel {
                 this.validaSequenciaGUI.getSequencia());
     }
     
+    /**
+     * Atualiza os dados do automato com pilha, da Area de Informações.
+     */
     void observerValSeq(AP ap) {
         this.ap = ap;
         
@@ -96,11 +99,25 @@ public class ValSeqAP extends javax.swing.JPanel {
         if(s!=null)
              sb.append(s.getNome());        
         sb.append(">\n");
-        this.validaSequenciaGUI.setTextAInf(sb.toString()
-        );
-        //sb = new StringBuffer();
         
-        //this.validaSequenciaGUI.setTextAInf(sb.toString());
+        for(TransicaoAP t : ap.getTransicoesAP()) {
+             sb.append("\n");           // pula a linha
+             sb.append("\u03B4(");
+             sb.append(t.getEstOri().getNome());
+             sb.append(",");
+             sb.append(t.getSimbolo().getNome());
+             sb.append(",");
+             sb.append(t.getSimBasePilha().getNome());
+             sb.append(") = {<");
+             sb.append(t.getEstDest().getNome());
+             sb.append(",");
+             for(Simbolo x : t.getEntradaPilha())
+                 sb.append(x.getNome());
+             sb.append(">}");
+        }
+        
+        this.validaSequenciaGUI.setTextAInf(sb.toString());
+        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
