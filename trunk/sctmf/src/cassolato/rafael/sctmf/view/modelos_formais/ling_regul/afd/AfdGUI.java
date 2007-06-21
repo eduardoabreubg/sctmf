@@ -18,10 +18,10 @@ import java.util.Collection;
  */
 public class AfdGUI extends ModeloFormalGUI {    
     
-    private final CadAlf pCadAlf = new CadAlf();
-    private final CadEst pCadEst = new CadEst();
-    private final CadFunTrans pCadFunTrans = new CadFunTrans();
-    private final ValSeq vs = new ValSeq();
+    private final CadAlfAFD pCadAlf = new CadAlfAFD();
+    private final CadEstAFD pCadEst = new CadEstAFD();
+    private final CadFunTransAFD pCadFunTrans = new CadFunTransAFD();
+    private final ValSeqAFD vs = new ValSeqAFD();
                 
     /** Creates new form AfdGUI */
     public AfdGUI() {
@@ -175,7 +175,7 @@ public class AfdGUI extends ModeloFormalGUI {
                 show(getPCard(),cardNames.get(activeCard));
     }
 
-    protected CadAlf getPCadAlf() {
+    protected CadAlfAFD getPCadAlf() {
         return pCadAlf;
     }
     

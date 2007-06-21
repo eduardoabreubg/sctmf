@@ -1,5 +1,5 @@
 /*
- * CadAlf.java
+ * CadAlfAFD.java
  *
  * Created on 3 de Maio de 2007, 09:47
  */
@@ -19,10 +19,12 @@ import java.util.Set;
  *
  * @author  rafael2009_00
  */
-public class CadAlf extends javax.swing.JPanel {
+public class CadAlfAFD extends javax.swing.JPanel {
     
-    /** Creates new form CadAlf */
-    public CadAlf() {
+    /**
+     * Creates new form CadAlfAFD
+     */
+    public CadAlfAFD() {
         initComponents();   
         this.posInitComponents();
     }
