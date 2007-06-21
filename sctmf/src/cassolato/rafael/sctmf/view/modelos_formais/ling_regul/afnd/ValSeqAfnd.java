@@ -34,12 +34,14 @@ public class ValSeqAfnd extends ValSeq {
     }
     
     protected void actionValidar() {
+        /*
         ValidaSequencia.getInstance().valida(
                 afnd, getFSequencia().getText());
+         */
     }
     
     private void setInformacoes(AFND afnd) {
-        getAInf().setText("V = <\u03a3, S, S\u2080, \u03B4, F>\n");
+        /*getAInf().setText("V = <\u03a3, S, S\u2080, \u03B4, F>\n");
         StringBuffer sb = new StringBuffer();
         
         sb.append("\u03a3 = {");  // Add Simbolos
@@ -69,7 +71,7 @@ public class ValSeqAfnd extends ValSeq {
                 t.getSimbolo().getNome()+") = <"+
                 t.getEstDest().getNome()+">\n" );         
         
-        getAInf().append(sb.toString());
+        getAInf().append(sb.toString());*/
     }    
     
 }

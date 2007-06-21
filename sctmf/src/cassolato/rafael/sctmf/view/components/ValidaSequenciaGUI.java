@@ -158,7 +158,7 @@ public class ValidaSequenciaGUI extends javax.swing.JPanel {
     public void clearArea() {
         this.aInfor.setText("");
     }
-    
+        
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
     private javax.swing.JTextArea aInfor;
     private javax.swing.JButton bValidar;
