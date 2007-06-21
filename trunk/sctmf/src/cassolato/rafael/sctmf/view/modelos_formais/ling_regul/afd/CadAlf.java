@@ -148,8 +148,8 @@ public class CadAlf extends javax.swing.JPanel {
         
     }
     
-    private void removeAction(Collection<Object> objectsRemoveds) {
-        for(Object o : objectsRemoveds)
+    private void removeAction(Collection<Object> objetosRemovidos) {
+        for(Object o : objetosRemovidos)
             this.letterNumberCA.addItem(o.toString().toUpperCase());
         
         this.genericJList.removeAllItens();

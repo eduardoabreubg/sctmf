@@ -144,8 +144,8 @@ public class AfdGUI extends ModeloFormalGUI {
         
     }
     
-    protected void changeCards(final int direction) {
-        switch(direction) {
+    protected void changeCards(int direcao) {
+        switch(direcao) {
             case NEXT :
                 activeCard++;
                 
