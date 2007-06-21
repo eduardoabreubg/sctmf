@@ -1,5 +1,5 @@
 /*
- * CadEst.java
+ * CadEstAFD.java
  *
  * Created on 4 de Maio de 2007, 10:22
  */
@@ -20,11 +20,13 @@ import java.util.Set;
  *
  * @author  rafael2009_00
  */
-public class CadEst extends javax.swing.JPanel 
+public class CadEstAFD extends javax.swing.JPanel 
                     implements CEstado {
     
-    /** Creates new form CadEst */
-    public CadEst() {
+    /**
+     * Creates new form CadEstAFD
+     */
+    public CadEstAFD() {
         initComponents();
         this.posInitComponents();
     }

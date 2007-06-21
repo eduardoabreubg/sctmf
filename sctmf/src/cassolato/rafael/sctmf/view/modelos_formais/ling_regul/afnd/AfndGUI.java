@@ -19,15 +19,15 @@ import java.util.Collection;
  * @author  Cassolato
  */
 public class AfndGUI extends AfdGUI {
-    private CadEstAfnd cea = null;
-    private CadFunTransAfnd cfta = null;
-    private ValSeqAfnd vsa = null;
+    private CadEstAFND cea = null;
+    private CadFunTransAFND cfta = null;
+    private ValSeqAFND vsa = null;
     
     /** Creates new form BeanForm */
     public AfndGUI() {
-        cea = new CadEstAfnd();
-        cfta = new CadFunTransAfnd();
-        vsa = new ValSeqAfnd();
+        cea = new CadEstAFND();
+        cfta = new CadFunTransAFND();
+        vsa = new ValSeqAFND();
         this.posInit();
     } 
     
@@ -54,7 +54,7 @@ public class AfndGUI extends AfdGUI {
                             getPCadAlf().getSimbolos());
                 
                 else if(activeCard==3)                  
-                    vsa.managerFM(getFormalModel());
+                    vsa.observerValSeq((AFND)getFormalModel());
                 
                 break;
                 

@@ -1,5 +1,5 @@
 /*
- * CadFunTrans.java
+ * CadFunTransAFD.java
  *
  * Created on 3 de Maio de 2007, 10:22
  */
@@ -24,10 +24,12 @@ import java.util.regex.Pattern;
  *
  * @author  rafael2009_00
  */
-public class CadFunTrans extends javax.swing.JPanel {
+public class CadFunTransAFD extends javax.swing.JPanel {
     
-    /** Creates new form CadFunTrans */
-    public CadFunTrans() {
+    /**
+     * Creates new form CadFunTransAFD
+     */
+    public CadFunTransAFD() {
         initComponents();
         posInitComponents();
     }
