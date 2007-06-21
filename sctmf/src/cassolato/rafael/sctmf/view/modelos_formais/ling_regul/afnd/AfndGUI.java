@@ -54,7 +54,7 @@ public class AfndGUI extends AfdGUI {
                             getPCadAlf().getSimbolos());
                 
                 else if(activeCard==3)                  
-                    vsa.observerValSeq((AFND)getFormalModel());
+                    vsa.observerValSeq((AFND)getModeloFormal());
                 
                 break;
                 
@@ -85,7 +85,7 @@ public class AfndGUI extends AfdGUI {
     }// </editor-fold>//GEN-END:initComponents
     
     
-    public void setFormalModel(ModeloFormal fm) {
+    public void setModeloFormal(ModeloFormal fm) {
         AFND afnd = (AFND)fm;
         this.getPCadAlf().addSimbolos(afnd.getSimbolos());  
         
@@ -98,7 +98,7 @@ public class AfndGUI extends AfdGUI {
         this.changeCards(-1); // volta o card para o primeiro card
     }
 
-    public ModeloFormal getFormalModel() {
+    public ModeloFormal getModeloFormal() {
         AFND afnd = new AFND();
         Collection<Simbolo> simbolos = getPCadAlf().getSimbolos();
         afnd.addAllSimbolos(simbolos);
