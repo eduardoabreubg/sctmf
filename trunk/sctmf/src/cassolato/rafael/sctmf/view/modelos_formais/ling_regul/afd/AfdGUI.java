@@ -155,7 +155,7 @@ public class AfdGUI extends ModeloFormalGUI {
                             getPCadAlf().getSimbolos());
                 
                 else if(activeCard==3)                    
-                    vs.managerFM(getModeloFormal());
+                    vs.observerValSeq((AFD)getModeloFormal());
                 
                 break;
                 

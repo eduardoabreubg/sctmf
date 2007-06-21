@@ -50,7 +50,8 @@ public class ValSeqAP extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent ae) {
                 validarSequencia();
             }
-        });        
+        });   
+        
     }
      
     private void validarSequencia() {        
@@ -90,8 +91,8 @@ public class ValSeqAP extends javax.swing.JPanel {
         if(aux!=null)
              sb.append(aux.getNome());        
         sb.append(">\n");
-        this.validaSequenciaGUI.setTextAInf(sb.toString()
-        );
+        this.validaSequenciaGUI.setTextAInf(sb.toString());
+        
         sb = new StringBuffer();
         
         Simbolo s = ap.getTopoPilha();
