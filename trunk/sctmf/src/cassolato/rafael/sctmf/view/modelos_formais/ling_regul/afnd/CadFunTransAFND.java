@@ -6,13 +6,13 @@
 
 package cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afnd;
 
-import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.CadFunTrans;
+import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.CadFunTransAFD;
 
 /**
  *
  * @author  Cassolato
  */
-public class CadFunTransAFND extends CadFunTrans {
+public class CadFunTransAFND extends CadFunTransAFD {
     
     /** Creates new form BeanForm */
     public CadFunTransAFND() {

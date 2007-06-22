@@ -7,16 +7,18 @@
 package cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afnd;
 
 import cassolato.rafael.sctmf.model.pojo.Estado;
-import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.CadEst;
+import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.CadEstAFD;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+
 
 /**
  *
  * @author  Cassolato
  */
-public class CadEstAFND extends CadEst {
+public class CadEstAFND extends CadEstAFD {
     
     /**
      * Creates new form CadEstAFND
