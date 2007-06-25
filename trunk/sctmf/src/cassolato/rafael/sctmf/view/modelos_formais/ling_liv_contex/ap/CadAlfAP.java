@@ -9,6 +9,7 @@ package cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.ap;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -134,6 +135,16 @@ public class CadAlfAP extends javax.swing.JPanel {
             simbolos.add(new Simbolo((Character)o));
         
         return simbolos;
+    }
+    
+    void setSimbsAfabeto(Collection<Simbolo> simbAlf) {
+        for(Simbolo s :simbAlf )
+            this.listSim.addItem(s.getNome());
+    }
+    
+    void setSimbsAfabetoPilha(Collection<Simbolo> simbAlfPilha) {
+        for(Simbolo s : simbAlfPilha )
+            this.listSimPilha.addItem(s.getNome());
     }
 
     private void posInitComponents() {

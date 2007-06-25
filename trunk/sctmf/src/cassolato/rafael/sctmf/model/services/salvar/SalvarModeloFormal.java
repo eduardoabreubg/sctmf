@@ -156,7 +156,7 @@ public class SalvarModeloFormal implements Salvar {
             sb.append(t.getSimBasePilha().getNome());
             sb.append("-");
             sb.append(t.getEstDest().getNome());
-            sb.append("-");
+            sb.append("-");  
             for(Simbolo x: t.getEntradaPilha())
                 sb.append(x.getNome());
             

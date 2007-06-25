@@ -16,9 +16,12 @@ import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
+import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -159,15 +162,24 @@ public class AbrirModeloFormal implements Abrir {
                             new Estado(line.substring(2)));
                         
                  }else if(line.startsWith("T")) {
-                     /*line = line.substring(2);
+                     line = line.substring(2);
                      String str[] = line.split("-");
                      
-                     Transicao t = new Transicao();
+                     TransicaoAP t = new TransicaoAP();
                      t.setEstOri(new Estado(str[0]));
-                     t.setSimbolo(new Simbolo(str[1].charAt(0)));
-                     t.setEstDest(new Estado(str[2]));
+                     char s = str[1].charAt(0);                     
+                     t.setSimbolo(new Simbolo(s=='?'?'\u03BB':s));
+                     t.setSimBasePilha(new Simbolo(str[2].charAt(0)));
                      
-                     afd.addTransicao(t); */
+                     t.setEstDest(new Estado(str[3]));
+                     // Entrada da pilha
+                     List<Simbolo> simbolos = new LinkedList<Simbolo>();
+                     for(char c :str[4].toCharArray())                         
+                         simbolos.add(new Simbolo(c=='?'?'\u03BB':c));                     
+                         
+                     t.setEntradaPilha(simbolos);
+                     
+                     ap.addTransicao(t); 
                      
                  }else if(line.startsWith("E")) { // Alfabeto                                          
                     for(String s : line.substring(2,line.length()-1).split("-"))

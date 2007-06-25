@@ -173,6 +173,21 @@ public class CadEstSimIniAP extends javax.swing.JPanel implements CEstado {
         
         return null;
     }
+    
+    void setEstados(Set<Estado> estados) {
+        for(Estado e : estados)
+            this.cadEstado.addEstado(e);
+    }
+    
+    void setSimbTopoPilha(Simbolo sTP) {
+        if(sTP!=null)
+            this.cbSimTopoPilha.addItem(sTP.getNome());
+    }
+    
+    void setEstadoInicial(Estado ei) {
+        if(ei!=null)
+            this.cbEstadoInicial.addItem(ei.getNome());
+    }
         
     void addSimPilha(Simbolo s) {
         this.cbSimTopoPilha.addItem(s.getNome());

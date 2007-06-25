@@ -12,6 +12,7 @@ import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -501,6 +502,18 @@ public class CadFunTransAP extends javax.swing.JPanel {
         return trans;
     }
     
+    void addTransicoes(Collection<TransicaoAP> transicoes) {
+        for(TransicaoAP t : transicoes) 
+            this.addActionTrans(t.getEstOri(), 
+                                t.getSimbolo(), 
+                                t.getSimBasePilha(), 
+                
+                                t.getEstDest(), 
+                                t.getEntradaPilha());
+        
+        
+    }
+    
     /**
      * Retorna o matcher para ser feito a pesquisa.<br>
      * Usando o metodo <b>group</b> obtemos:<br>
@@ -547,6 +560,7 @@ public class CadFunTransAP extends javax.swing.JPanel {
     void observer(Set<Simbolo> sAlf, Set<Simbolo> sPilha, Set<Estado> estados) {
         this.simAlfPilha = sPilha;
         this.cbSimAlf.removeAllItems();
+        this.cbSimAlf.addItem("\u03BB"); // add o lambida
         for(Simbolo s : sAlf)
             this.cbSimAlf.addItem(s.getNome());
         
