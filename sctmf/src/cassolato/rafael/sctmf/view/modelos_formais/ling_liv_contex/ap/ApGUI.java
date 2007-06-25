@@ -102,7 +102,19 @@ public class ApGUI
                 this.cadESIP.getEstados());
     }//GEN-LAST:event_pCadTransComponentShown
         
-    public void setModeloFormal(ModeloFormal mf) {
+    public void setModeloFormal(ModeloFormal mf) {        
+        ap = (AP)mf;
+        this.cadAlf.setSimbsAfabeto(ap.getSimbolos());
+        this.cadAlf.setSimbsAfabetoPilha(ap.getSimbolosPilha());
+        
+        // VERIFICAR
+        this.cadESIP.setEstados(ap.getEstados());
+        this.cadESIP.setSimbTopoPilha(ap.getTopoPilha());
+        this.cadESIP.setEstadoInicial(ap.getEstadoInicial());
+        
+        this.cadFunTrans.addTransicoes(ap.getTransicoesAP());
+        
+        tpAp.setSelectedIndex(0);
     }
 
     public ModeloFormal getModeloFormal() {

@@ -17,11 +17,12 @@ import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+
+
 
 /**
  *
@@ -38,14 +39,14 @@ public class ValidaSequencia implements Validacao {
     public void valida(ModeloFormal mf, String sequencia) {
         boolean status = false;
         
-        if(mf instanceof AFD )
+        if(mf instanceof AP)
+            status = this.valida((AP)mf, sequencia);
+        
+        else if(mf instanceof AFD )
             status = this.valida((AFD)mf, sequencia);
         
         else if(mf instanceof AFND )
-            status = this.valida((AFND)mf, sequencia);
-        
-        else if(mf instanceof AP)
-            status = this.valida((AP)mf, sequencia);
+            status = this.valida((AFND)mf, sequencia);               
         
         this.sendMessage(status);
     }
@@ -157,24 +158,55 @@ public class ValidaSequencia implements Validacao {
      * @return boolean
      */
     private boolean valida(AP ap, String sequencia) {
+        // Pilha do Automato
+        final LinkedList<Simbolo> pilha = new LinkedList<Simbolo>();
+
         // Estado Inicial
-        /*Estado estadoAtual = automatoAws.getEstadoInicial();
-        
+        Estado estadoAtual = ap.getEstadoInicial();        
         // Transicoes Cadastradas
-        ArrayList<TransicaoAws> transicoes = automatoAws.getTransicoesAws();
+        Set<TransicaoAP> transicoes = ap.getTransicoesAP();
         
+        // Add o simbolo cadastrado no topo da pilha, na pilha do automato
+        pilha.addLast(ap.getTopoPilha());
+        
+        for(char sS : sequencia.toCharArray()) {
+            for(TransicaoAP tAP : transicoes) {
+                   // verifica o simbolo
+                if(sS==tAP.getSimbolo().getNome().charValue()&& 
+                   // estado de origem
+                   estadoAtual.getNome().equals(tAP.getEstOri().getNome())&&
+                   // Base da pilha
+                   pilha.getLast().getNome().equals(
+                        tAP.getSimBasePilha().getNome())) {
+                                        
+                    estadoAtual = tAP.getEstDest();
+                    // remove o simbolo do topo da pilha                     
+                    pilha.removeLast();
+                    // Add o que esta na entrada da transicao                    
+                    for(Simbolo s : tAP.getEntradaPilha())
+                        // se nao for igual a lambida
+                        if(!s.getNome().equals("\u03BB")) 
+                            pilha.addLast(s);
+                    
+                    break;
+                }
+            }
+        }
+        
+        return (pilha.size()==0)?true:false;
+        /*
         try {
             // Limpa a pilha e add novamente o simbolo inicial
-            ArrayList<Simbolo> clear = new ArrayList<Simbolo>();
+            List<Simbolo> clear = new ArrayList<Simbolo>();
             for(int i=0;i<automatoAws.getSizeStack();i++)
                 clear.add(new Simbolo("\u03BB"));
             
-            clear.add(automatoAws.getSBasePilha());
+            clear.add(ap.getTopoPilha());
             
             automatoAws.addSimbolStack(clear);
             
             // Faz a validação da Sequencia
-            for(char x : sequence.toCharArray())
+            for(char x : sequencia.toCharArray())
                 for(TransicaoAws t : transicoes) {
                     Estado e = t.getEstOrig();
                     Simbolo s = t.getSimbolo();
@@ -194,7 +226,7 @@ public class ValidaSequencia implements Validacao {
                 
                 // Quando a Sequencia é finalizada, verifica se existe alguma
                 // Transicao com o lambida
-                for(TransicaoAws t : transicoes) {
+                /*for(TransicaoAws t : transicoes) {
                     Estado e = t.getEstOrig();
                     
                     if(estadoAtual.getNome().equals(e.getNome())
@@ -210,14 +242,13 @@ public class ValidaSequencia implements Validacao {
                     
                 }
                 
-                return automatoAws.getSizeStack()==0?true:false;
+                return false;
                 
         }catch(Exception e) {
             e.printStackTrace();
             
             return false;
         }*/
-        return false;
         
     }
     

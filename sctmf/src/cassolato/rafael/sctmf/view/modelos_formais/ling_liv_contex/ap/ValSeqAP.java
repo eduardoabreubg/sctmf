@@ -54,7 +54,7 @@ public class ValSeqAP extends javax.swing.JPanel {
         
     }
      
-    private void validarSequencia() {        
+    private void validarSequencia() {   
         this.validaSequenciaGUI.validarSequencia(
                 this.ap,
                 this.validaSequenciaGUI.getSequencia());
