@@ -221,24 +221,29 @@ public class ValidaSequencia implements Validacao {
                pilha.peek().getNome().equals(
                     t.getSimBasePilha().getNome())) {
                 
-                estadoAtual = t.getEstDest();
-                // remove o simbolo do topo da pilha                     
-                pilha.pop();
-                // Add o que esta na entrada da transicao                    
-                for(Simbolo s : t.getEntradaPilha())
-                        // se nao for igual a lambida
-                        if(s.getNome().charValue()!='\u03BB') 
-                            pilha.addLast(s);
-                    
-                    break;
+                   estadoAtual = t.getEstDest();            
+                   // remove o simbolo do topo da pilha                     
+                   pilha.pop();
+                   
+                   int tamPilha = t.getEntradaPilha().size()-1;
+                    // Add o que esta na entrada da transicao   
+                   for(int i=tamPilha;i>=0;i--) {
+                       Simbolo s = t.getEntradaPilha().get(i);
+                       
+                       // se nao for igual a lambida
+                       if(s.getNome().charValue()=='\u03BB') {                         
+                           if(i!=tamPilha)
+                             pilha.pop();
+                           
+                       }else
+                           pilha.push(s);
+                   }
+                                           
+                   break;
             }
         }
         
-        for(Simbolo s : pilha)
-            System.out.println(s.getNome());
-        
-        return (pilha.size()==0)?true:false;
-     
+        return (pilha.size()==0)?true:false;     
         
     }
     
