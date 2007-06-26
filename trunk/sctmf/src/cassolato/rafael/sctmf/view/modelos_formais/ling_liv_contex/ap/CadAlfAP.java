@@ -138,11 +138,15 @@ public class CadAlfAP extends javax.swing.JPanel {
     }
     
     void setSimbsAfabeto(Collection<Simbolo> simbAlf) {
+        this.listSim.removeAllItens();
+        
         for(Simbolo s :simbAlf )
             this.listSim.addItem(s.getNome());
     }
     
     void setSimbsAfabetoPilha(Collection<Simbolo> simbAlfPilha) {
+        this.listSimPilha.removeAllItens();
+        
         for(Simbolo s : simbAlfPilha )
             this.listSimPilha.addItem(s.getNome());
     }

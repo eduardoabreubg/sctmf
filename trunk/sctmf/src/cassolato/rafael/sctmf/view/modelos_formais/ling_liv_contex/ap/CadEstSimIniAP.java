@@ -150,6 +150,7 @@ public class CadEstSimIniAP extends javax.swing.JPanel implements CEstado {
     }
 
     public void removeAllItens() {
+        this.cadEstado.removeAllItens();
         this.cbEstadoInicial.removeAllItems();
         this.cEstado.removeAllItens();
     }
@@ -162,8 +163,8 @@ public class CadEstSimIniAP extends javax.swing.JPanel implements CEstado {
         Object o = this.cbSimTopoPilha.getSelectedItem();
         if(o!=null)
             return new Simbolo((Character)o);
-        
-        return null;
+        else
+            return null;
     }
     
     Estado getEstadoInicial() {
@@ -174,24 +175,34 @@ public class CadEstSimIniAP extends javax.swing.JPanel implements CEstado {
         return null;
     }
     
-    void setEstados(Set<Estado> estados) {
-        for(Estado e : estados)
+    void setEstados(Set<Estado> estados) {   
+        this.removeAllItens();
+                
+        for(Estado e : estados) 
             this.cadEstado.addEstado(e);
+            
     }
     
     void setSimbTopoPilha(Simbolo sTP) {
         if(sTP!=null)
-            this.cbSimTopoPilha.addItem(sTP.getNome());
+            this.cbSimTopoPilha.setSelectedItem(sTP.getNome());
     }
     
     void setEstadoInicial(Estado ei) {
         if(ei!=null)
-            this.cbEstadoInicial.addItem(ei.getNome());
+            this.cbEstadoInicial.setSelectedItem(ei.getNome());
     }
         
     void addSimPilha(Simbolo s) {
         this.cbSimTopoPilha.addItem(s.getNome());
     }
+    
+    void addSimbolosPilha(Set<Simbolo> simbolos) {
+        this.cbSimTopoPilha.removeAllItems();
+        for(Simbolo s : simbolos)
+            this.addSimPilha(s);
+    }
+    
     
     void remSimPilha(Simbolo s) {
         this.cbSimTopoPilha.removeItem(s.getNome());

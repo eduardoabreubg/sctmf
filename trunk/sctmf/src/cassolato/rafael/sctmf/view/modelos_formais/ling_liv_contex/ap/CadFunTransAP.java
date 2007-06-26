@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.lang.model.type.NullType;
 
 /**
  *
@@ -415,11 +416,16 @@ public class CadFunTransAP extends javax.swing.JPanel {
     
     private void addActionTrans(Estado estOri, Simbolo simb,
             Simbolo simBasePilha,
-            Estado estDest, List<Simbolo> simbDesPilha) {
+            Estado estDest, List<Simbolo> simbEntPilha) {
         
-        String valueSimDestPilha = this.fSimDestPilha.getText();
+        String vsep = "";        
+        if(simbEntPilha!=null)
+            for(Simbolo s : simbEntPilha)
+                vsep+=s.getNome().toString();
+        else
+            vsep = this.fSimDestPilha.getText();
         
-        if(valueSimDestPilha.length()>0&&checkValuesList(valueSimDestPilha)) {
+        if(vsep.length()>0&&checkValuesList(vsep)) {
             StringBuffer sb = new StringBuffer("\u03B4(");
             // Indica que foi executada uma acao pelo usuário
             // de adicao de Transicao
@@ -434,9 +440,9 @@ public class CadFunTransAP extends javax.swing.JPanel {
                     
                     estDest = new Estado(cbEstDest.getSelectedItem().toString());
                     
-                    simbDesPilha = new ArrayList<Simbolo>();
+                    simbEntPilha = new ArrayList<Simbolo>();
                     for(char c : fSimDestPilha.getText().toCharArray())
-                        simbDesPilha.add(new Simbolo(c));
+                        simbEntPilha.add(new Simbolo(c));
                     
                 }
                 
@@ -449,7 +455,7 @@ public class CadFunTransAP extends javax.swing.JPanel {
                 sb.append(estDest.getNome()); // EstDest
                 sb.append(",");
                 
-                for(Simbolo s : simbDesPilha)
+                for(Simbolo s : simbEntPilha)
                     sb.append(s.getNome());
                 
                 sb.append(">}");
@@ -586,14 +592,16 @@ public class CadFunTransAP extends javax.swing.JPanel {
      *
      */
     private void checkIfRemoveEstOrSim(
-            Set<Simbolo> sAlf, Set<Simbolo> sPilha, Set<Estado> estados) {
+        Set<Simbolo> sAlf, Set<Simbolo> sPilha, Set<Estado> estados) {
         Set<String> alf = new HashSet<String>();
         Set<String> pilha = new HashSet<String>();
         Set<String> estado = new HashSet<String>();
         
+        alf.add("\u03bb"); //add lambida
         for(Simbolo s : sAlf)
             alf.add(Character.toString(s.getNome()));
         
+        alf.add("\u03bb"); //add lambida
         for(Simbolo s : sPilha)
             pilha.add(Character.toString(s.getNome()));
         
@@ -602,7 +610,7 @@ public class CadFunTransAP extends javax.swing.JPanel {
         
         for(Object obj : this.listTrans.getAllItens()) {
             Matcher m = this.getMatcher(obj.toString());            
-            if(m.find()) {
+            if(m.find()) {                
                 if(estado.contains(m.group(1))&&alf.contains(m.group(2))&&
                       pilha.contains(m.group(3))&&estado.contains(m.group(4))){                                
                     for(char c : m.group(5).toCharArray()) {
