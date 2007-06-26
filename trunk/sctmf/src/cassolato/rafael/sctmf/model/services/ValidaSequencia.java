@@ -179,19 +179,27 @@ public class ValidaSequencia implements Validacao {
                    pilha.peek().getNome().equals(
                         tAP.getSimBasePilha().getNome()) ) {
                     
-                    estadoAtual = tAP.getEstDest();
-                    // remove o simbolo do topo da pilha                     
-                    pilha.pop();
-                    // Add o que esta na entrada da transicao                    
-                    for(Simbolo s : tAP.getEntradaPilha())
-                        // se nao for igual a lambida
-                        if(s.getNome().charValue()!='\u03BB') 
-                            pilha.push(s);
-                    
-                     System.out.println("\n\nPILHA");
-                     for(Simbolo s : pilha)
-                           System.out.println(s.getNome());
-                    
+                   estadoAtual = tAP.getEstDest();            
+                   // remove o simbolo do topo da pilha                     
+                   pilha.pop();
+                   
+                   int tamPilha = tAP.getEntradaPilha().size()-1;
+                    // Add o que esta na entrada da transicao   
+                   for(int i=tamPilha;i>=0;i--) {
+                       Simbolo s = tAP.getEntradaPilha().get(i);
+                       
+                       // se nao for igual a lambida
+                       if(s.getNome().charValue()=='\u03BB') {
+                           // Remove novamente somente se o simbolo ja foi 
+                           // removido uma vez, ou seja.. caso para entrada da
+                           // pilha.. AlambidaB
+                           if(i!=tamPilha)
+                            pilha.pop();
+                           
+                       }else
+                           pilha.push(s);
+                   }
+                                           
                     break;
                 }
             }
@@ -204,87 +212,33 @@ public class ValidaSequencia implements Validacao {
         // ainda contem simbolos, é verificado se existem transicoes 
         // que contenham o lambinda como simbolo do alfabeto
         // e tenta-se aplicar a regra de producao.        
-        /*for(TransicaoAP t : ap.getTransicoesAP()) {
+        for(TransicaoAP t : ap.getTransicoesAP()) {
             // procura os simbolos lambida
             if(t.getSimbolo().getNome().charValue()=='\u03BB'&&
                // verifica se existe um estado de origem igual ao estado atual
                estadoAtual.getNome().equals(t.getEstOri())&& 
                // Base da pilha
-               pilha.getLast().getNome().equals(
-                t.getSimBasePilha().getNome())) {
+               pilha.peek().getNome().equals(
+                    t.getSimBasePilha().getNome())) {
                 
                 estadoAtual = t.getEstDest();
-                    // remove o simbolo do topo da pilha                     
-                    pilha.removeLast();
-                    // Add o que esta na entrada da transicao                    
-                    for(Simbolo s : t.getEntradaPilha())
+                // remove o simbolo do topo da pilha                     
+                pilha.pop();
+                // Add o que esta na entrada da transicao                    
+                for(Simbolo s : t.getEntradaPilha())
                         // se nao for igual a lambida
                         if(s.getNome().charValue()!='\u03BB') 
                             pilha.addLast(s);
                     
                     break;
             }
-        }*/
+        }
         
         for(Simbolo s : pilha)
             System.out.println(s.getNome());
         
         return (pilha.size()==0)?true:false;
-        /*
-        try {
-            // Limpa a pilha e add novamente o simbolo inicial
-            List<Simbolo> clear = new ArrayList<Simbolo>();
-            for(int i=0;i<automatoAws.getSizeStack();i++)
-                clear.add(new Simbolo("\u03BB"));
-            
-            clear.add(ap.getTopoPilha());
-            
-            automatoAws.addSimbolStack(clear);
-            
-            // Faz a validação da Sequencia
-            for(char x : sequencia.toCharArray())
-                for(TransicaoAws t : transicoes) {
-                    Estado e = t.getEstOrig();
-                    Simbolo s = t.getSimbolo();
-                    if(estadoAtual.getNome().equals(e.getNome())
-                    &&String.valueOf(x).equals(s.getValor())
-                    &&t.getSimbPilhaOrig().getValor().equals(
-                            automatoAws.getSTopoPilha().getValor())) {
-                        
-                        estadoAtual = t.getEstDest();
-                        automatoAws.addSimbolStack(t.getSimbPilhaDest());
-                        
-                        break;
-                        
-                    }
-                    
-                }
-                
-                // Quando a Sequencia é finalizada, verifica se existe alguma
-                // Transicao com o lambida
-                /*for(TransicaoAws t : transicoes) {
-                    Estado e = t.getEstOrig();
-                    
-                    if(estadoAtual.getNome().equals(e.getNome())
-                    &&t.getSimbolo().getValor().equals("\u03BB")
-                    &&t.getSimbPilhaOrig().getValor().equals(
-                            automatoAws.getSTopoPilha().getValor())) {
-                        
-                        estadoAtual = t.getEstDest();
-                        automatoAws.addSimbolStack(t.getSimbPilhaDest());
-                        
-                        break;
-                    }
-                    
-                }
-                
-                return false;
-                
-        }catch(Exception e) {
-            e.printStackTrace();
-            
-            return false;
-        }*/
+     
         
     }
     
