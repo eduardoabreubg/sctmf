@@ -180,38 +180,46 @@ public class ValidaSequencia implements Validacao {
                         tAP.getSimBasePilha().getNome()) ) {
                     
                     // Faz a alteração na pilha
-                    this.alterarPilha(pilha, estadoAtual, tAP);
-                    
+                    this.alterarPilha(pilha, estadoAtual, tAP);                    
                     break;
                 }
             }
         }
         
         // se a pilha ja esta vazia, e a sequencia terminou, é retornado true
-        if(pilha.empty()) return true;
+        if(pilha.empty()) 
+            return true;
         
-        // Quando os simbolos da sequencia sao finalizados e a pilha
-        // ainda contem simbolos, é verificado se existem transicoes
-        // que contenham o lambinda como simbolo do alfabeto
-        // e tenta-se aplicar a regra de producao.
-        boolean flag = true;
-       // label :
-            while(flag) {
-                for(TransicaoAP t : ap.getTransicoesAP()) {            
-                    if((t.getSimbolo().getNome().charValue()=='\u03BB')&&
-                        (estadoAtual.getNome().equals(t.getEstOri().getNome()))&&
-                        (t.getSimBasePilha().getNome().equals(pilha.peek().getNome()))){
+        else {        
+            // Quando os simbolos da sequencia sao finalizados e a pilha
+            // ainda contem simbolos, é verificado se existem transicoes
+            // que contenham o lambinda como simbolo do alfabeto
+            // e tenta-se aplicar a regra de producao.        
+            boolean status;
+            do {            
+                label : {
+                    for(TransicaoAP t : ap.getTransicoesAP()) {            
+                        if((t.getSimbolo().getNome().charValue()=='\u03BB')&&
+                            (estadoAtual.getNome().equals(t.getEstOri().getNome()))&&
+                            (t.getSimBasePilha().getNome().equals(
+                                pilha.peek().getNome()))){
 
-                        // Faz a alteração na pilha
-                        this.alterarPilha(pilha, estadoAtual, t);
-                        flag = true;
-                        break;
-                    }
-                }
-                flag = false;
-            }
+                            // Faz a alteração na pilha
+                            this.alterarPilha(pilha, estadoAtual, t);
+
+                            if(pilha.empty()) return true;
+                            status = true;
+                            break label;
+                        }
+                    } 
+                    
+                    status = false; // seta o status para sair do while
+                }// final break label;
+            }while(status);            
+            
+        }// fim do else
         
-        return pilha.empty();
+        return false;
         
     }
     
