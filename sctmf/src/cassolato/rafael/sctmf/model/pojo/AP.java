@@ -9,10 +9,8 @@
 
 package cassolato.rafael.sctmf.model.pojo;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,7 +19,7 @@ import java.util.Set;
  */
 public class AP extends AFD {
     
-    private List<Simbolo> alfabetoPilha = new ArrayList<Simbolo>();
+    private Set<Simbolo> alfabetoPilha = new LinkedHashSet<Simbolo>();
     private Simbolo topoPilha; 
     private Set<TransicaoAP> transicoes = new LinkedHashSet<TransicaoAP>();
     
@@ -54,7 +52,7 @@ public class AP extends AFD {
         return this.transicoes;
     }
     
-    public List<Simbolo> getSimbolosPilha() {
+    public Set<Simbolo> getSimbolosPilha() {
         return this.alfabetoPilha;
     }
     

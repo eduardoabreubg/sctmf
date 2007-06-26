@@ -104,14 +104,17 @@ public class ApGUI
         
     public void setModeloFormal(ModeloFormal mf) {        
         ap = (AP)mf;
+        
         this.cadAlf.setSimbsAfabeto(ap.getSimbolos());
         this.cadAlf.setSimbsAfabetoPilha(ap.getSimbolosPilha());
         
-        // VERIFICAR
         this.cadESIP.setEstados(ap.getEstados());
+        this.cadESIP.addSimbolosPilha(ap.getSimbolosPilha());
         this.cadESIP.setSimbTopoPilha(ap.getTopoPilha());
         this.cadESIP.setEstadoInicial(ap.getEstadoInicial());
         
+        this.cadFunTrans.observer(
+                ap.getSimbolos(),ap.getSimbolosPilha(),ap.getEstados());
         this.cadFunTrans.addTransicoes(ap.getTransicoesAP());
         
         tpAp.setSelectedIndex(0);
