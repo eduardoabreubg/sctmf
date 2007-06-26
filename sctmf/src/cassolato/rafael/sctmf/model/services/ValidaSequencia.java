@@ -18,9 +18,9 @@ import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+import java.util.Stack;
 
 
 
@@ -159,15 +159,15 @@ public class ValidaSequencia implements Validacao {
      */
     private boolean valida(AP ap, String sequencia) {
         // Pilha do Automato
-        final LinkedList<Simbolo> pilha = new LinkedList<Simbolo>();
-
+        final Stack<Simbolo> pilha = new Stack<Simbolo>();
+        
         // Estado Inicial
         Estado estadoAtual = ap.getEstadoInicial();        
         // Transicoes Cadastradas
         Set<TransicaoAP> transicoes = ap.getTransicoesAP();
         
         // Add o simbolo cadastrado no topo da pilha, na pilha do automato
-        pilha.addLast(ap.getTopoPilha());
+        pilha.push(ap.getTopoPilha());
         
         for(char sS : sequencia.toCharArray()) {
             for(TransicaoAP tAP : transicoes) {
@@ -176,22 +176,58 @@ public class ValidaSequencia implements Validacao {
                    // estado de origem
                    estadoAtual.getNome().equals(tAP.getEstOri().getNome())&&
                    // Base da pilha
-                   pilha.getLast().getNome().equals(
-                        tAP.getSimBasePilha().getNome())) {
-                                        
+                   pilha.peek().getNome().equals(
+                        tAP.getSimBasePilha().getNome()) ) {
+                    
                     estadoAtual = tAP.getEstDest();
                     // remove o simbolo do topo da pilha                     
-                    pilha.removeLast();
+                    pilha.pop();
                     // Add o que esta na entrada da transicao                    
                     for(Simbolo s : tAP.getEntradaPilha())
                         // se nao for igual a lambida
-                        if(!s.getNome().equals("\u03BB")) 
-                            pilha.addLast(s);
+                        if(s.getNome().charValue()!='\u03BB') 
+                            pilha.push(s);
+                    
+                     System.out.println("\n\nPILHA");
+                     for(Simbolo s : pilha)
+                           System.out.println(s.getNome());
                     
                     break;
                 }
             }
         }
+        
+        // se a pilha ja esta vazia, e a sequencia terminou, é retornado true        
+        if(pilha.size()==0) return true;
+        
+        // Quando os simbolos da sequencia sao finalizados e a pilha 
+        // ainda contem simbolos, é verificado se existem transicoes 
+        // que contenham o lambinda como simbolo do alfabeto
+        // e tenta-se aplicar a regra de producao.        
+        /*for(TransicaoAP t : ap.getTransicoesAP()) {
+            // procura os simbolos lambida
+            if(t.getSimbolo().getNome().charValue()=='\u03BB'&&
+               // verifica se existe um estado de origem igual ao estado atual
+               estadoAtual.getNome().equals(t.getEstOri())&& 
+               // Base da pilha
+               pilha.getLast().getNome().equals(
+                t.getSimBasePilha().getNome())) {
+                
+                estadoAtual = t.getEstDest();
+                    // remove o simbolo do topo da pilha                     
+                    pilha.removeLast();
+                    // Add o que esta na entrada da transicao                    
+                    for(Simbolo s : t.getEntradaPilha())
+                        // se nao for igual a lambida
+                        if(s.getNome().charValue()!='\u03BB') 
+                            pilha.addLast(s);
+                    
+                    break;
+            }
+        }*/
+        
+        for(Simbolo s : pilha)
+            System.out.println(s.getNome());
         
         return (pilha.size()==0)?true:false;
         /*
