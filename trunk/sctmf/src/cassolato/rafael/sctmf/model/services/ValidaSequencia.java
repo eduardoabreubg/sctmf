@@ -46,7 +46,7 @@ public class ValidaSequencia implements Validacao {
             status = this.valida((AFD)mf, sequencia);
         
         else if(mf instanceof AFND )
-            status = this.valida((AFND)mf, sequencia);               
+            status = this.valida((AFND)mf, sequencia);
         
         this.sendMessage(status);
     }
@@ -162,7 +162,7 @@ public class ValidaSequencia implements Validacao {
         final Stack<Simbolo> pilha = new Stack<Simbolo>();
         
         // Estado Inicial
-        Estado estadoAtual = ap.getEstadoInicial();        
+        Estado estadoAtual = ap.getEstadoInicial();
         // Transicoes Cadastradas
         Set<TransicaoAP> transicoes = ap.getTransicoesAP();
         
@@ -171,80 +171,75 @@ public class ValidaSequencia implements Validacao {
         
         for(char sS : sequencia.toCharArray()) {
             for(TransicaoAP tAP : transicoes) {
-                   // verifica o simbolo
-                if(sS==tAP.getSimbolo().getNome().charValue()&& 
-                   // estado de origem
-                   estadoAtual.getNome().equals(tAP.getEstOri().getNome())&&
-                   // Base da pilha
-                   pilha.peek().getNome().equals(
+                // verifica o simbolo
+                if(sS==tAP.getSimbolo().getNome().charValue()&&
+                        // estado de origem
+                        estadoAtual.getNome().equals(tAP.getEstOri().getNome())&&
+                        // Base da pilha
+                        pilha.peek().getNome().equals(
                         tAP.getSimBasePilha().getNome()) ) {
                     
-                   estadoAtual = tAP.getEstDest();            
-                   // remove o simbolo do topo da pilha                     
-                   pilha.pop();
-                   
-                   int tamPilha = tAP.getEntradaPilha().size()-1;
-                    // Add o que esta na entrada da transicao   
-                   for(int i=tamPilha;i>=0;i--) {
-                       Simbolo s = tAP.getEntradaPilha().get(i);
-                       
-                       // se nao for igual a lambida
-                       if(s.getNome().charValue()=='\u03BB') {
-                           // Remove novamente somente se o simbolo ja foi 
-                           // removido uma vez, ou seja.. caso para entrada da
-                           // pilha.. AlambidaB
-                           if(i!=tamPilha)
-                            pilha.pop();
-                           
-                       }else
-                           pilha.push(s);
-                   }
-                                           
+                    // Faz a alteração na pilha
+                    this.alterarPilha(pilha, estadoAtual, tAP);
+                    
                     break;
                 }
             }
         }
         
-        // se a pilha ja esta vazia, e a sequencia terminou, é retornado true        
-        if(pilha.size()==0) return true;
+        // se a pilha ja esta vazia, e a sequencia terminou, é retornado true
+        if(pilha.empty()) return true;
         
-        // Quando os simbolos da sequencia sao finalizados e a pilha 
-        // ainda contem simbolos, é verificado se existem transicoes 
+        // Quando os simbolos da sequencia sao finalizados e a pilha
+        // ainda contem simbolos, é verificado se existem transicoes
         // que contenham o lambinda como simbolo do alfabeto
-        // e tenta-se aplicar a regra de producao.        
-        for(TransicaoAP t : ap.getTransicoesAP()) {
-            // procura os simbolos lambida
-            if(t.getSimbolo().getNome().charValue()=='\u03BB'&&
-               // verifica se existe um estado de origem igual ao estado atual
-               estadoAtual.getNome().equals(t.getEstOri())&& 
-               // Base da pilha
-               pilha.peek().getNome().equals(
-                    t.getSimBasePilha().getNome())) {
-                
-                   estadoAtual = t.getEstDest();            
-                   // remove o simbolo do topo da pilha                     
-                   pilha.pop();
-                   
-                   int tamPilha = t.getEntradaPilha().size()-1;
-                    // Add o que esta na entrada da transicao   
-                   for(int i=tamPilha;i>=0;i--) {
-                       Simbolo s = t.getEntradaPilha().get(i);
-                       
-                       // se nao for igual a lambida
-                       if(s.getNome().charValue()=='\u03BB') {                         
-                           if(i!=tamPilha)
-                             pilha.pop();
-                           
-                       }else
-                           pilha.push(s);
-                   }
-                                           
-                   break;
+        // e tenta-se aplicar a regra de producao.
+        boolean flag = true;
+       // label :
+            while(flag) {
+                for(TransicaoAP t : ap.getTransicoesAP()) {            
+                    if((t.getSimbolo().getNome().charValue()=='\u03BB')&&
+                        (estadoAtual.getNome().equals(t.getEstOri().getNome()))&&
+                        (t.getSimBasePilha().getNome().equals(pilha.peek().getNome()))){
+
+                        // Faz a alteração na pilha
+                        this.alterarPilha(pilha, estadoAtual, t);
+                        flag = true;
+                        break;
+                    }
+                }
+                flag = false;
             }
+        
+        return pilha.empty();
+        
+    }
+    
+    /**
+     * Faz a alteração na pilha do automato com pilha.
+     */
+    private void alterarPilha(Stack pilha, Estado ea, TransicaoAP t) {
+        // Altera o estado Destino
+        ea = t.getEstDest();
+        // remove o simbolo do topo da pilha
+        pilha.pop();
+        
+        int tamPilha = t.getEntradaPilha().size()-1;
+        // Add o que esta na entrada da transicao
+        for(int i=tamPilha;i>=0;i--) {
+            Simbolo s = t.getEntradaPilha().get(i);
+            
+            // se nao for igual a lambida
+            if(s.getNome().charValue()=='\u03BB') {
+                // Remove novamente somente se o simbolo ja foi
+                // removido uma vez, ou seja.. caso para entrada da
+                // pilha.. AlambidaB
+                if(i!=tamPilha)
+                    pilha.pop();
+                
+            }else
+                pilha.push(s);
         }
-        
-        return (pilha.size()==0)?true:false;     
-        
     }
     
     private void sendMessage(boolean isOK) {
