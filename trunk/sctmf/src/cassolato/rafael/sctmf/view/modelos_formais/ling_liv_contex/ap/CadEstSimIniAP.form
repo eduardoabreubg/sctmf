@@ -233,7 +233,7 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Bitstream Vera Sans" size="14" style="0"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="S&#xed;m. Topo da Pilha"/>
+                        <Property name="text" type="java.lang.String" value="S&#xed;m. Base da Pilha"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
