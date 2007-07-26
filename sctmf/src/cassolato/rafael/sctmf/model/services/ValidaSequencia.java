@@ -198,15 +198,16 @@ public class ValidaSequencia implements Validacao {
                                 }
                             
                             return false; // caso nao encontre a transicao
-                        }                        
+                        } 
+                        break;
                         
                     // verifica a pilha
                     } else if(pilha.peek().getNome().equals(
-                            tAP.getSimBasePilha().getNome()))                                        
+                            tAP.getSimBasePilha().getNome())) {                                        
                         // Faz a alteração na pilha
-                        this.alterarPilha(pilha, estadoAtual, tAP);                    
-                    
-                    break;
+                        this.alterarPilha(pilha, estadoAtual, tAP);                                        
+                        break;
+                    }
                 }
             }
         }
@@ -271,7 +272,7 @@ public class ValidaSequencia implements Validacao {
                 // removido uma vez, ou seja.. caso para entrada da
                 // pilha.. AlambidaB
                 if(i!=tamPilha)
-                    if(!pilha.empty()) pilha.pop();
+                    pilha.pop();
                 
             }else
                 pilha.push(s);
