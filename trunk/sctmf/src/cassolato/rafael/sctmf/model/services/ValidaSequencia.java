@@ -157,7 +157,7 @@ public class ValidaSequencia implements Validacao {
      * @param sequencia - Sequencia a ser Validada.
      * @return boolean
      */
-    private boolean valida(AP ap, String sequencia) {
+    private boolean valida(AP ap, String sequencia) {                          
         // Pilha do Automato
         final Stack<Simbolo> pilha = new Stack<Simbolo>();
         
@@ -170,17 +170,42 @@ public class ValidaSequencia implements Validacao {
         pilha.push(ap.getTopoPilha());
         
         for(char sS : sequencia.toCharArray()) {
+             // verifica se o, é do alfabeto da linguagem
+            boolean status = false;            
+            for(Simbolo s : ap.getSimbolos()) 
+                if(s.getNome().charValue()==sS) {
+                    status = true; 
+                    break;
+                }    
+            
+            if(!status) return false; 
+            
             for(TransicaoAP tAP : transicoes) {
                 // verifica o simbolo
                 if(sS==tAP.getSimbolo().getNome().charValue()&&
                         // estado de origem
-                        estadoAtual.getNome().equals(tAP.getEstOri().getNome())&&
-                        // Base da pilha
-                        pilha.peek().getNome().equals(
-                        tAP.getSimBasePilha().getNome()) ) {
+                       estadoAtual.getNome().equals(tAP.getEstOri().getNome())){
                     
-                    // Faz a alteração na pilha
-                    this.alterarPilha(pilha, estadoAtual, tAP);                    
+                    // Se a pilha estiver vazia, procura uma transicao
+                    // para alterar o estado, caso nao encontre, return false
+                    if(pilha.empty()) {  
+                        label : {
+                            for(TransicaoAP t : transicoes)                            
+                                if(t.getSimBasePilha().getNome().charValue()=='\u03BB') {
+                                    // Faz a alteração na pilha
+                                    this.alterarPilha(pilha, estadoAtual, t);  
+                                    break label;
+                                }
+                            
+                            return false; // caso nao encontre a transicao
+                        }                        
+                        
+                    // verifica a pilha
+                    } else if(pilha.peek().getNome().equals(
+                            tAP.getSimBasePilha().getNome()))                                        
+                        // Faz a alteração na pilha
+                        this.alterarPilha(pilha, estadoAtual, tAP);                    
+                    
                     break;
                 }
             }
@@ -229,8 +254,11 @@ public class ValidaSequencia implements Validacao {
     private void alterarPilha(Stack pilha, Estado ea, TransicaoAP t) {
         // Altera o estado Destino
         ea = t.getEstDest();
+        
+        // VERIFICAR COM YANDRE -> SE A PILHA ESTIVER VAZIA E A TRASICAO 
+        // COM LAMBIDA N BASE DA PILHA... SE VAI TRAVAR OU NAO FAZER NADA
         // remove o simbolo do topo da pilha
-        pilha.pop();
+        if(!pilha.empty()) pilha.pop();
         
         int tamPilha = t.getEntradaPilha().size()-1;
         // Add o que esta na entrada da transicao
@@ -243,7 +271,7 @@ public class ValidaSequencia implements Validacao {
                 // removido uma vez, ou seja.. caso para entrada da
                 // pilha.. AlambidaB
                 if(i!=tamPilha)
-                    pilha.pop();
+                    if(!pilha.empty()) pilha.pop();
                 
             }else
                 pilha.push(s);
