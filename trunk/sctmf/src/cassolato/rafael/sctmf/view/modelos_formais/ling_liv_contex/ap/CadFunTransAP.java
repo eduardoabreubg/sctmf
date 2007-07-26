@@ -472,8 +472,7 @@ public class CadFunTransAP extends javax.swing.JPanel {
                     "Valores Inválidos");
             fSimDestPilha.selectAll();
             fSimDestPilha.requestFocus(true);
-        }
-        
+        }    
     }
     
     private void removeActionTrans() {
@@ -516,8 +515,7 @@ public class CadFunTransAP extends javax.swing.JPanel {
                 
                                 t.getEstDest(), 
                                 t.getEntradaPilha());
-        
-        
+                        
     }
     
     /**
@@ -571,6 +569,7 @@ public class CadFunTransAP extends javax.swing.JPanel {
             this.cbSimAlf.addItem(s.getNome());
         
         this.cbBasePilha.removeAllItems();
+        this.cbBasePilha.addItem("\u03BB"); // add o lambida
         for(Simbolo s : sPilha)
             this.cbBasePilha.addItem(s.getNome());
         
@@ -601,7 +600,7 @@ public class CadFunTransAP extends javax.swing.JPanel {
         for(Simbolo s : sAlf)
             alf.add(Character.toString(s.getNome()));
         
-        alf.add("\u03bb"); //add lambida
+        pilha.add("\u03bb"); //add lambida
         for(Simbolo s : sPilha)
             pilha.add(Character.toString(s.getNome()));
         
