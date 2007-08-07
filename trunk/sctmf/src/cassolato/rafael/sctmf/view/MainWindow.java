@@ -142,7 +142,6 @@ public class MainWindow extends javax.swing.JFrame {
         bGramLivrContex.setBackground(new java.awt.Color(204, 255, 204));
         bGramLivrContex.setText("GLC");
         bGramLivrContex.setToolTipText("Gram\u00e1tica Livre de Contexto ");
-        bGramLivrContex.setEnabled(false);
         bGramLivrContex.setPreferredSize(new java.awt.Dimension(70, 25));
         bGramLivrContex.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,11 +163,12 @@ public class MainWindow extends javax.swing.JFrame {
         pLingSensContex.add(bGramSensContex);
 
         bAutComDuasPilhas.setBackground(new java.awt.Color(255, 204, 204));
-        bAutComDuasPilhas.setText("ACDP");
+        bAutComDuasPilhas.setText("ADP");
         bAutComDuasPilhas.setToolTipText("Aut\u00f4mato com Duas Pilhas");
         bAutComDuasPilhas.setEnabled(false);
         bAutComDuasPilhas.setPreferredSize(new java.awt.Dimension(70, 25));
         pLingSensContex.add(bAutComDuasPilhas);
+        bAutComDuasPilhas.getAccessibleContext().setAccessibleName("ADP");
 
         jToolBar.add(pLingSensContex);
 
@@ -343,7 +343,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_bMaqTuringActionPerformed
 
     private void bGramLivrContexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGramLivrContexActionPerformed
-// TODO adicione seu código de manipulação aqui:
+        this.showFormalModel(IdModeloFormal.GLC);
     }//GEN-LAST:event_bGramLivrContexActionPerformed
 
     private void bExpRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExpRegActionPerformed
@@ -383,7 +383,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_miGramSensContexActionPerformed
 
     private void miGramLivrContexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGramLivrContexActionPerformed
-// TODO adicione seu código de manipulação aqui:
+        this.showFormalModel(IdModeloFormal.GLC);
     }//GEN-LAST:event_miGramLivrContexActionPerformed
 
     private void miAutComPilhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAutComPilhaActionPerformed

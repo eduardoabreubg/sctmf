@@ -14,7 +14,11 @@ package cassolato.rafael.sctmf.view;
  * @author rafael2009_00
  */
 public enum IdModeloFormal {
+    // Linguagens Regulares
     AFD,
     AFND,
-    AP;    
+    
+    // Linguagens Livres de Contexto
+    AP,
+    GLC;    
 }
