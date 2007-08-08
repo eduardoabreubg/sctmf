@@ -7,7 +7,6 @@
 package cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.glc;
 
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
-import cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.glc.CadFunTransGLC;
 
 /**
  *
@@ -16,8 +15,9 @@ import cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.glc.CadFunTra
 public class GlcGUI 
         extends cassolato.rafael.sctmf.view.modelos_formais.ModeloFormalGUI  {
     
-    private CadAlfGLC cadAlf = new CadAlfGLC();
+    private CadAlfGLC cadAlf = new CadAlfGLC(this);
     private CadFunTransGLC cadFTrans = new CadFunTransGLC();
+    private ValSeqGLC valSeq = new ValSeqGLC();
     
     /** Creates new form GlcGUI */
     public GlcGUI() {
@@ -34,7 +34,7 @@ public class GlcGUI
         jTabbedPane1 = new javax.swing.JTabbedPane();
         pCadAlfabetos = new javax.swing.JPanel();
         pCadFuncTrans = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        pValSeq = new javax.swing.JPanel();
 
         setLayout(new java.awt.GridLayout(1, 0));
 
@@ -46,22 +46,34 @@ public class GlcGUI
         pCadFuncTrans.setLayout(new java.awt.GridLayout(1, 0));
 
         pCadFuncTrans.add(this.cadFTrans);
+        pCadFuncTrans.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                pCadFuncTransComponentShown(evt);
+            }
+        });
+
         jTabbedPane1.addTab("Trasi\u00e7\u00f5es/Simb.Ini", pCadFuncTrans);
 
-        jPanel3.setLayout(new java.awt.GridLayout(1, 0));
+        pValSeq.setLayout(new java.awt.GridLayout(1, 0));
 
-        jTabbedPane1.addTab("Valida\u00e7\u00e3o", jPanel3);
+        pValSeq.add(this.valSeq);
+        jTabbedPane1.addTab("Valida\u00e7\u00e3o", pValSeq);
 
         add(jTabbedPane1);
 
     }// </editor-fold>//GEN-END:initComponents
+
+    private void pCadFuncTransComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pCadFuncTransComponentShown
+        this.cadFTrans.observer(cadAlf.getSimbTerminais(),
+                cadAlf.getSimNTermimais());        
+    }//GEN-LAST:event_pCadFuncTransComponentShown
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel pCadAlfabetos;
     private javax.swing.JPanel pCadFuncTrans;
+    private javax.swing.JPanel pValSeq;
     // End of variables declaration//GEN-END:variables
 
     public void setModeloFormal(ModeloFormal mf) {

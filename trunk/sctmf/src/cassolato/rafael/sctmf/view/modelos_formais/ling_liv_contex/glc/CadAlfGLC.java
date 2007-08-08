@@ -6,8 +6,12 @@
 
 package cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.glc;
 
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  *
@@ -15,10 +19,49 @@ import java.awt.event.ActionListener;
  */
 public class CadAlfGLC extends javax.swing.JPanel {
     
+    private GlcGUI glcGUI;
+    
     /** Creates new form CadAlfGLC */
-    public CadAlfGLC() {
+    public CadAlfGLC(GlcGUI glcGUI) {
+        this.glcGUI = glcGUI;
         initComponents();
         posInitComponents();
+    }
+    
+    /**
+     * Retorna os simbolos terminais cadastrados
+     */
+    Set<Simbolo> getSimbTerminais() {
+        Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
+        for(Object o : this.listTerm.getAllItens())
+            simbolos.add(new Simbolo((Character)o));
+            
+        return simbolos;
+    }
+    
+    /**
+     * Retorna os simbolos nao-terminais cadastrados
+     */
+    Set<Simbolo> getSimNTermimais() {
+        Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
+        for(Object o : this.listNTerm.getAllItens())
+            simbolos.add(new Simbolo((Character)o));
+            
+        return simbolos;
+    }
+    
+    void setSimTerminais(Collection<Simbolo> simbolos) {
+        this.listTerm.removeAllItens();
+        
+        for(Simbolo s :simbolos )
+            this.listTerm.addItem(s.getNome());
+    }
+    
+    void setSimNTerminais(Collection<Simbolo> simbolos) {
+        this.listNTerm.removeAllItens();
+        
+        for(Simbolo s :simbolos)
+            this.listNTerm.addItem(s.getNome());
     }
     
     /** This method is called from within the constructor to

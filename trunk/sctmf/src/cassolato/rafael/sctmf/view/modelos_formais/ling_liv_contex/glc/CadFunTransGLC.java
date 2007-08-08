@@ -6,17 +6,48 @@
 
 package cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.glc;
 
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Set;
+
 /**
  *
  * @author  rafael2009_00
  */
 public class CadFunTransGLC extends javax.swing.JPanel {
+    private Set<Simbolo> simbTerm;
+    private Set<Simbolo> simbNTerm;
     
     /**
      * Creates new form CadFunTransGLC
      */
     public CadFunTransGLC() {
         initComponents();
+        posInitComponents();
+    }
+    
+    void observer(Set<Simbolo> simbTerm, Set<Simbolo> simbNTerm) {
+       this.simbTerm = simbTerm;
+       this.simbNTerm = simbNTerm;
+       
+       // guarda o antigo simbolo inicial
+       Object o = cbSimbIni.getSelectedItem(); 
+              
+       cbEsq.removeAllItems();
+       cbSimbIni.removeAllItems();
+       for(Simbolo s : simbNTerm) {
+           cbEsq.addItem(s.getNome());
+           cbSimbIni.addItem(s.getNome());
+       }
+       
+       // Seleciona novamente o simbolo inicial
+       if(o!=null) {
+           char item = (Character)o;
+           for(Simbolo s : simbNTerm)
+               if(s.getNome().equals(item))
+                   cbSimbIni.setSelectedItem(item);
+       }
     }
     
     /** This method is called from within the constructor to
@@ -31,7 +62,7 @@ public class CadFunTransGLC extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        addRemButtonsPanel1 = new cassolato.rafael.sctmf.view.components.AddRemButtonsPanel();
+        addRemButtonsPanel = new cassolato.rafael.sctmf.view.components.AddRemButtonsPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -47,16 +78,16 @@ public class CadFunTransGLC extends javax.swing.JPanel {
         fExpres = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        fLadoDireito = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        cbSimbIni = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        genericJList1 = new cassolato.rafael.sctmf.view.components.GenericJList();
+        listRProd = new cassolato.rafael.sctmf.view.components.GenericJList();
         jLabel2 = new javax.swing.JLabel();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.X_AXIS));
@@ -75,7 +106,7 @@ public class CadFunTransGLC extends javax.swing.JPanel {
 
         jPanel7.setLayout(new java.awt.BorderLayout());
 
-        jPanel7.add(addRemButtonsPanel1, java.awt.BorderLayout.CENTER);
+        jPanel7.add(addRemButtonsPanel, java.awt.BorderLayout.CENTER);
 
         jLabel6.setPreferredSize(new java.awt.Dimension(0, 10));
         jPanel7.add(jLabel6, java.awt.BorderLayout.NORTH);
@@ -104,7 +135,6 @@ public class CadFunTransGLC extends javax.swing.JPanel {
         jPanel9.add(jLabel10, java.awt.BorderLayout.NORTH);
 
         cbEsq.setFont(new java.awt.Font("Tahoma", 0, 18));
-        cbEsq.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C" }));
         jPanel9.add(cbEsq, java.awt.BorderLayout.CENTER);
 
         jLabel13.setPreferredSize(new java.awt.Dimension(40, 35));
@@ -131,16 +161,16 @@ public class CadFunTransGLC extends javax.swing.JPanel {
         fExpres.setPreferredSize(new java.awt.Dimension(92, 100));
         jLabel11.setFont(new java.awt.Font("Verdana", 0, 24));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("B");
         jLabel11.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel11.setPreferredSize(new java.awt.Dimension(12, 50));
+        jLabel11.setText("\u03B2");
         fExpres.add(jLabel11, java.awt.BorderLayout.NORTH);
 
         jLabel14.setPreferredSize(new java.awt.Dimension(40, 35));
         fExpres.add(jLabel14, java.awt.BorderLayout.SOUTH);
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18));
-        fExpres.add(jTextField1, java.awt.BorderLayout.CENTER);
+        fLadoDireito.setFont(new java.awt.Font("Tahoma", 0, 18));
+        fExpres.add(fLadoDireito, java.awt.BorderLayout.CENTER);
 
         jPanel8.add(fExpres);
 
@@ -153,7 +183,7 @@ public class CadFunTransGLC extends javax.swing.JPanel {
 
         jPanel4.setLayout(new javax.swing.BoxLayout(jPanel4, javax.swing.BoxLayout.X_AXIS));
 
-        jPanel5.setLayout(new java.awt.GridLayout());
+        jPanel5.setLayout(new java.awt.GridLayout(1, 0));
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Legenda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(204, 0, 153)));
         jPanel5.setPreferredSize(new java.awt.Dimension(300, 100));
@@ -167,11 +197,10 @@ public class CadFunTransGLC extends javax.swing.JPanel {
         jLabel3.setPreferredSize(new java.awt.Dimension(60, 44));
         jPanel6.add(jLabel3);
 
-        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 36));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "S", "A", "B" }));
-        jComboBox1.setToolTipText("S\u00edmbolo Inicial");
-        jComboBox1.setPreferredSize(new java.awt.Dimension(60, 40));
-        jPanel6.add(jComboBox1);
+        cbSimbIni.setFont(new java.awt.Font("Tahoma", 0, 36));
+        cbSimbIni.setToolTipText("S\u00edmbolo Inicial");
+        cbSimbIni.setPreferredSize(new java.awt.Dimension(60, 40));
+        jPanel6.add(cbSimbIni);
 
         jPanel4.add(jPanel6);
 
@@ -186,7 +215,7 @@ public class CadFunTransGLC extends javax.swing.JPanel {
         jLabel1.setPreferredSize(new java.awt.Dimension(34, 50));
         jPanel2.add(jLabel1, java.awt.BorderLayout.NORTH);
 
-        jPanel2.add(genericJList1, java.awt.BorderLayout.CENTER);
+        jPanel2.add(listRProd, java.awt.BorderLayout.CENTER);
 
         jLabel2.setPreferredSize(new java.awt.Dimension(5, 14));
         jPanel2.add(jLabel2, java.awt.BorderLayout.EAST);
@@ -195,13 +224,87 @@ public class CadFunTransGLC extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
     
+    private void posInitComponents() {
+         this.addRemButtonsPanel.getBAdd().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                addAction();
+            }
+        });
+        
+        this.addRemButtonsPanel.getBRemove().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                removeAction();
+            }
+        });
+    }
+    
+    private void addAction() {
+        Object sNTerm = this.cbEsq.getSelectedItem();
+        String ladoDireito = fLadoDireito.getText();
+        int tam = ladoDireito.length();
+        if(sNTerm!=null&&tam>0) {            
+            if(this.isFNC(ladoDireito)) {
+                // verifica se os simbolos digitados foram cadastrados no 
+                // alfabeto
+                boolean status = false;
+                if(tam==1) {
+                    char c = ladoDireito.charAt(0);
+                    for(Simbolo s : simbTerm)
+                        if(s.getNome()==c) {
+                            status = true;
+                            break;
+                        }
+                }else { // tam==2
+                    
+                }
+                    
+                if(!status)
+                    javax.swing.JOptionPane.showMessageDialog(null, 
+                        "Símbolos não Cadastrados" , "Atenção", 
+                        javax.swing.JOptionPane.WARNING_MESSAGE);
+                
+                this.listRProd.addItem(
+                    sNTerm.toString()+" -> "+fLadoDireito.getText());    
+            }            
+            else
+                javax.swing.JOptionPane.showMessageDialog(null, 
+                        "Lado direito da expressão não está \n" +
+                        "na Forma Normal de Chomsky", "Atenção - FNC", 
+                        javax.swing.JOptionPane.WARNING_MESSAGE);
+        }
+        
+        
+    }
+    
+    private void removeAction() {
+        this.listRProd.removeItens();
+    }
+    
+    /**
+     * Verifica se o lado direito da regra de produção está<br>
+     * na forma normal de chomsky
+     */
+    private boolean isFNC(String value) {
+        int tam = value.length();
+        if(tam>2) return false;
+        if(tam==1) {
+            if(Character.isLowerCase(value.charAt(0))) // A -> a
+                return true;
+            else return false;
+        
+        } else if(Character.isUpperCase(value.charAt(0))&&
+                Character.isUpperCase(value.charAt(1))) // A -> BC
+            return true;
+        
+        else return false;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemButtonsPanel1;
+    private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemButtonsPanel;
     private javax.swing.JComboBox cbEsq;
+    private javax.swing.JComboBox cbSimbIni;
     private javax.swing.JPanel fExpres;
-    private cassolato.rafael.sctmf.view.components.GenericJList genericJList1;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JTextField fLadoDireito;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -228,7 +331,7 @@ public class CadFunTransGLC extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JTextField jTextField1;
+    private cassolato.rafael.sctmf.view.components.GenericJList listRProd;
     // End of variables declaration//GEN-END:variables
     
 }
