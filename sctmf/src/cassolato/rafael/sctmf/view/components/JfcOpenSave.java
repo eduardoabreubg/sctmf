@@ -101,6 +101,10 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
             case AP:
                 return new FileNameExtensionFilter(
                         "Autômato com Pilha", "ap", "AP");
+                
+             case GLC:
+                return new FileNameExtensionFilter(
+                        "Gramática Livre de Contexto", "glc", "GLC");
                  
             default: return null;
             

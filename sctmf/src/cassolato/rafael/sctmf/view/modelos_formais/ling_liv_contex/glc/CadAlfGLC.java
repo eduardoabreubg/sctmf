@@ -164,7 +164,7 @@ public class CadAlfGLC extends javax.swing.JPanel {
          // Para o alfabeto dos Termbolos nao-terminais
         this.addRemButtonsNTerm.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
-                addActionNTerm();
+                addActionNTerm(null);
             }
         });
         
@@ -177,7 +177,7 @@ public class CadAlfGLC extends javax.swing.JPanel {
         // Para o alfabeto dos Termbolos da pilha
         this.addRemButtonsTerm.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
-                addActionTerm();
+                addActionTerm(null);
             }
         });
         
@@ -189,25 +189,34 @@ public class CadAlfGLC extends javax.swing.JPanel {
     }
     
     private void removeActionNTerm() {
-      this.listNTerm.removeItens();           
+      for(Object o : this.listNTerm.removeItens())
+          this.glcGUI.addRemoveSimbolo(
+                new Simbolo((Character)o), 1, false);            
     }
         
-    private void addActionNTerm() {    
-        this.listNTerm.addItem(
-            Character.toUpperCase(
-                this.letterNumber.getLetter()));
-
+    private void addActionNTerm(Simbolo simbNTerm) {
+        if(simbNTerm==null)
+            simbNTerm = new Simbolo(
+                    Character.toUpperCase(this.letterNumber.getLetter()));
+        
+        this.glcGUI.addRemoveSimbolo(
+                new Simbolo(this.listNTerm.addItem(simbNTerm.getNome())),
+                0, false);    
     }
        
    private void removeActionTerm() {
-      for(Object o : this.listTerm.removeItens());
-            //this.apGUI.remSimPilha(new Simbolo((Character)o));                      
+      for(Object o : this.listTerm.removeItens())
+          this.glcGUI.addRemoveSimbolo(
+                new Simbolo((Character)o), 1, true);                      
     }
         
-    private void addActionTerm() { 
-        //this.apGUI.addTerm(
-            //new Simbolo(
-                this.listTerm.addItem(this.letterNumber.getLetter());
+    private void addActionTerm(Simbolo simbTerm) { 
+        if(simbTerm==null)
+            simbTerm = new Simbolo(
+                    Character.toUpperCase(this.letterNumber.getLetter()));
+        
+        this.glcGUI.addRemoveSimbolo(
+            new Simbolo(this.listTerm.addItem(simbTerm.getNome())), 0, true);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

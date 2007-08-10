@@ -21,6 +21,7 @@ public class GLC extends Gramatica {
     private Simbolo simbInicial;
     private Set<Simbolo> simbTerm = new LinkedHashSet<Simbolo>();
     private Set<Simbolo> simbNTerm = new LinkedHashSet<Simbolo>() ;
+    private Set<RegraProducao> regrasProducao = new LinkedHashSet<RegraProducao>();
         
     /** Creates a new instance of GLC */
     public GLC() {
@@ -50,12 +51,24 @@ public class GLC extends Gramatica {
         this.simbNTerm = simbNTerm;
     }
            
-    private void addSimbNTerm(Simbolo s) {
+    public void addSimbNTerm(Simbolo s) {
         this.simbNTerm.add(s);
     }
     
-    private void addSimbTerm(Simbolo s) {
+    public void addSimbTerm(Simbolo s) {
         this.simbTerm.add(s);
+    }
+    
+    public void addRegraProducao(RegraProducao rp) {
+        this.getRegrasProducao().add(rp);
+    }
+
+    public Set<RegraProducao> getRegrasProducao() {
+        return regrasProducao;
+    }
+
+    public void setRegrasProducao(Set<RegraProducao> regrasProducao) {
+        this.regrasProducao = regrasProducao;
     }
     
 }
