@@ -6,10 +6,16 @@
 
 package cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.glc;
 
+import cassolato.rafael.sctmf.model.pojo.RegraProducao;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -49,6 +55,40 @@ public class CadFunTransGLC extends javax.swing.JPanel {
                    cbSimbIni.setSelectedItem(item);
        }
     }
+    
+    Set<RegraProducao> getProducoes() {
+        Set<RegraProducao> producoes = new LinkedHashSet<RegraProducao>();
+        for(Object o : this.listRProd.getAllItens()) {
+            Matcher m = this.getMatcher(o.toString());
+            RegraProducao rp = new RegraProducao();
+            if(m.find()) {                
+                rp.setSimbLEsq(new Simbolo(m.group(1).charAt(0)));
+                
+                List<Simbolo> sLDireito = new ArrayList<Simbolo>();
+                for(char c : m.group(2).toCharArray())
+                    sLDireito.add(new Simbolo(c));
+                
+                rp.setSimbLDireito(sLDireito);
+                
+                producoes.add(rp);
+            }
+            
+        }
+        
+        return producoes;
+    }
+    
+    void setProducoes(Set<RegraProducao> regrasProducao) {
+        listRProd.removeAllItens();
+        for(RegraProducao rp : regrasProducao)
+            this.addAction(rp.getSimbLEsq(), rp.getSimbLDireito());
+        
+    }
+    
+    Simbolo getSimboloInicial() {
+        return new Simbolo(cbSimbIni.getSelectedItem().toString().charAt(0));
+    }
+    
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -227,7 +267,7 @@ public class CadFunTransGLC extends javax.swing.JPanel {
     private void posInitComponents() {
          this.addRemButtonsPanel.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
-                addAction();
+                addAction(null, null);
             }
         });
         
@@ -236,11 +276,22 @@ public class CadFunTransGLC extends javax.swing.JPanel {
                 removeAction();
             }
         });
+                
     }
     
-    private void addAction() {
-        Object sNTerm = this.cbEsq.getSelectedItem();
-        String ladoDireito = fLadoDireito.getText();
+    private void addAction(Simbolo sLadEsq, List<Simbolo> sLadDir) {
+        String ladoDireito = "";
+        Object sNTerm = null; 
+        if(sLadEsq==null) { // transicao inserida pelo usuário
+            sNTerm = this.cbEsq.getSelectedItem();
+            ladoDireito = fLadoDireito.getText();    
+            
+        }else { // Caso os valores vem de um arquivo
+            sNTerm = sLadEsq.getNome();
+            for(Simbolo s : sLadDir)
+                ladoDireito += s.getNome();
+        }
+        
         int tam = ladoDireito.length();
         if(sNTerm!=null&&tam>0) {            
             if(this.isFNC(ladoDireito)) {
@@ -258,15 +309,13 @@ public class CadFunTransGLC extends javax.swing.JPanel {
                     for(int i=0;i<2;i++) {
                         status = false;
                         char c = ladoDireito.charAt(i);
-                        for(Simbolo s : simbNTerm) {
+                        for(Simbolo s : simbNTerm) 
                             if(s.getNome()==c) { 
                                 status = true;
                                 break;
-                            }
-                        }
+                            }                        
                             
-                        if(!status)
-                            break;
+                        if(!status) break;
                         
                     }                
                         
@@ -283,8 +332,7 @@ public class CadFunTransGLC extends javax.swing.JPanel {
                         "Lado direito da expressão não está \n" +
                         "na Forma Normal de Chomsky", "Atenção - FNC", 
                         javax.swing.JOptionPane.WARNING_MESSAGE);
-        }
-        
+        }        
         
     }
     
@@ -309,6 +357,20 @@ public class CadFunTransGLC extends javax.swing.JPanel {
             return true;
         
         else return false;
+    }
+    
+    /**
+     * Observa o add e remove dos simbolos
+     *
+     */
+    void addRemoveSimbolo(Simbolo s, int oper, boolean status) {
+        
+    }
+    
+     private Matcher getMatcher(String str) {
+        String regex = "(.+) -> (.+)";
+        
+        return Pattern.compile(regex).matcher(str);
     }
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables

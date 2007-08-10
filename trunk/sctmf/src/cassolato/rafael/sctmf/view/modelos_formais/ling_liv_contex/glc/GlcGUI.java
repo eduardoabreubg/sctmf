@@ -6,7 +6,9 @@
 
 package cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.glc;
 
+import cassolato.rafael.sctmf.model.pojo.GLC;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
 
 /**
  *
@@ -67,8 +69,7 @@ public class GlcGUI
         this.cadFTrans.observer(cadAlf.getSimbTerminais(),
                 cadAlf.getSimNTermimais());        
     }//GEN-LAST:event_pCadFuncTransComponentShown
-    
-    
+        
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel pCadAlfabetos;
@@ -80,7 +81,27 @@ public class GlcGUI
     }
 
     public ModeloFormal getModeloFormal() {
-        return null;
+        final GLC glc = new GLC();
+        glc.setSimbTerm(cadAlf.getSimbTerminais());
+        glc.setSimbNTerm(cadAlf.getSimNTermimais());
+        
+        this.cadFTrans.observer(
+                glc.getSimbTerm(),
+                glc.getSimbNTerm()); 
+        
+        glc.setSimbInicial(cadFTrans.getSimboloInicial());
+        glc.setRegrasProducao(cadFTrans.getProducoes());
+        
+        return glc;
     }
     
+    /**
+     * Observa o add e remove dos simbolos terminais e nao terminais
+     * o parametro status, se for true, indica que é um simbolo terminal
+     * se for false, um simbolo nao terminal
+     * o parametro oper pode ser 0 que indica um add e um 1 que indica um remove
+     */
+    void addRemoveSimbolo(Simbolo s, int oper, boolean status) {
+        
+    }
 }

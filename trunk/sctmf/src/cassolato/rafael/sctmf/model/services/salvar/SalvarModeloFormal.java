@@ -13,7 +13,9 @@ import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.AP;
 import cassolato.rafael.sctmf.model.pojo.Estado;
+import cassolato.rafael.sctmf.model.pojo.GLC;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
+import cassolato.rafael.sctmf.model.pojo.RegraProducao;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
@@ -46,6 +48,9 @@ public class SalvarModeloFormal implements Salvar {
             
         else if(mf instanceof AFND)
             this.salvarAFND((AFND)mf);  
+        
+        else if(mf instanceof GLC)
+            this.salvarGLC((GLC)mf);
                                 
     }
     
@@ -171,6 +176,40 @@ public class SalvarModeloFormal implements Salvar {
         }catch(Exception ioex) {
             throw new SalvarException("Erro ao Salvar AP");
         }
+    }
+    
+    private void salvarGLC(GLC glc) throws SalvarException {
+        StringBuffer sb = new StringBuffer();
+        
+        sb.append("V:");  // Add Simbolos Nao-Termais
+        for(Simbolo s : glc.getSimbNTerm())
+            sb.append(s.getNome()+"-");     
+        
+        sb.append("\nT:");  // Add Simbolos Termais
+        for(Simbolo s : glc.getSimbTerm())
+            sb.append(s.getNome()+"-");     
+                       
+        Simbolo aux = glc.getSimbInicial(); // Simbolo Inicial
+        sb.append("\nS:");
+        if(aux!=null)
+             sb.append(aux.getNome());   
+        
+        for(RegraProducao rp : glc.getRegrasProducao()) {
+            sb.append("\nP:"+rp.getSimbLEsq().getNome())            
+            .append("-");  
+            for(Simbolo x: rp.getSimbLDireito())
+                sb.append(x.getNome());
+        }
+        
+        try {         
+            this.writeInFile(
+                    new File(
+                        this.file.getPath()+".glc"),sb.toString());
+            
+            this.showOkMessage("GLC");
+        }catch(Exception ioex) {
+            throw new SalvarException("Erro ao Salvar GLC");
+        } 
     }
     
     private void writeInFile(File file, String content)
