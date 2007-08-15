@@ -213,7 +213,7 @@ public class CadAlfGLC extends javax.swing.JPanel {
     private void addActionTerm(Simbolo simbTerm) { 
         if(simbTerm==null)
             simbTerm = new Simbolo(
-                    Character.toUpperCase(this.letterNumber.getLetter()));
+                    Character.toLowerCase(this.letterNumber.getLetter()));
         
         this.glcGUI.addRemoveSimbolo(
             new Simbolo(this.listTerm.addItem(simbTerm.getNome())), 0, true);

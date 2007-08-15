@@ -13,7 +13,9 @@ import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.AP;
 import cassolato.rafael.sctmf.model.pojo.Estado;
+import cassolato.rafael.sctmf.model.pojo.GLC;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
+import cassolato.rafael.sctmf.model.pojo.RegraProducao;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
@@ -49,6 +51,9 @@ public class AbrirModeloFormal implements Abrir {
         
         else if(extencionFile.equalsIgnoreCase("ap"))
             return this.abrirAP(arquivo);
+        
+        else if(extencionFile.equalsIgnoreCase("glc"))
+            return this.abrirGLC(arquivo);
         
         else
             return null;
@@ -210,6 +215,56 @@ public class AbrirModeloFormal implements Abrir {
         }
                 
         return ap;        
+    }
+     
+    private GLC abrirGLC(File arquivo) throws AbrirException {
+        GLC glc = new GLC();
+       
+        try {
+         BufferedReader br = new BufferedReader(new FileReader(arquivo));
+         while(br.ready()) {
+             String line = br.readLine();
+             if(line.length()>2) {                 
+                 if(line.startsWith("S")) {
+                        glc.setSimbInicial(
+                            new Simbolo(line.substring(2).charAt(0)));
+                        
+                 }else if(line.startsWith("P")) {
+                     line = line.substring(2);
+                     String str[] = line.split("-");
+                     
+                     RegraProducao rp = new RegraProducao();
+                     rp.setSimbLEsq(new Simbolo(str[0].charAt(0)));
+                     
+                     // Lado Direito da regra
+                     List<Simbolo> simbolos = new LinkedList<Simbolo>();
+                     for(char c :str[1].toCharArray())                         
+                         simbolos.add(new Simbolo(c));                     
+                         
+                     rp.setSimbLDireito(simbolos);
+                     
+                     glc.addRegraProducao(rp);
+                     
+                 }else if(line.startsWith("V")) { // Alfabeto Nao-Terminais                                         
+                    for(String s : line.substring(2,line.length()-1).split("-"))
+                        glc.addSimbNTerm(new Simbolo(s.charAt(0)));
+                    
+                 }else if(line.startsWith("T")) { // Alfabeto Terminais                                        
+                    for(String s : line.substring(2,line.length()-1).split("-"))
+                        glc.addSimbTerm(new Simbolo(s.charAt(0)));
+
+                 }
+             }                 
+             
+         }//end while
+         
+         br.close();
+        }catch(Exception ex) {
+            ex.printStackTrace();
+            throw new AbrirException("Erro Ao abrir modelo Formal - GLC");            
+        }
+                
+        return glc;        
     }
     
 }

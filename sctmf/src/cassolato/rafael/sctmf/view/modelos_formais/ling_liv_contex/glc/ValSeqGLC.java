@@ -6,6 +6,9 @@
 
 package cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.glc;
 
+import cassolato.rafael.sctmf.model.pojo.GLC;
+import cassolato.rafael.sctmf.model.pojo.RegraProducao;
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,10 +18,55 @@ import java.awt.event.ActionListener;
  */
 public class ValSeqGLC extends javax.swing.JPanel {
     
+    private GLC glc;
+    
     /** Creates new form ValSeqGLC */
     public ValSeqGLC() {
         initComponents();
          posInitComponents();
+    }
+    
+    public void observer(GLC glc) {
+        this.glc = glc;
+        this.validaSequenciaGUI.clearArea();   
+         
+        this.validaSequenciaGUI.setTextAInf(
+                "G = <V, T, P, S>\n");
+                
+        StringBuffer sb = new StringBuffer();        
+        sb.append("V = {");  // Add Simbolos Nao-Terminais
+        for(Simbolo s : glc.getSimbNTerm())
+            sb.append(s.getNome()+", ");                
+        sb = this.validaSequenciaGUI.formataSb(sb);
+                
+        sb.append("T = {");  // Add Simbolos Terminais
+        for(Simbolo s : glc.getSimbTerm())
+            sb.append(s.getNome()+", ");                
+        sb = this.validaSequenciaGUI.formataSb(sb);
+                              
+        Simbolo aux = glc.getSimbInicial();
+        sb.append("S = <");
+        if(aux!=null)
+             sb.append(aux.getNome());        
+        sb.append(">\n");
+        this.validaSequenciaGUI.setTextAInf(sb.toString());
+        
+        sb = new StringBuffer("P = {");              
+        int i = 1;
+        for(RegraProducao rp : glc.getRegrasProducao()) {
+             sb.append("\n")           // pula a linha
+             .append(i+") ")
+             .append(rp.getSimbLEsq().getNome())
+             .append(" -> ");             
+             for(Simbolo x : rp.getSimbLDireito())
+                 sb.append(x.getNome());
+             
+             i++;
+        }
+        sb.append(glc.getRegrasProducao().size()>0?"\n      }":"}");
+        
+        this.validaSequenciaGUI.setTextAInf(sb.toString());
+        
     }
     
     /** This method is called from within the constructor to
@@ -50,12 +98,11 @@ public class ValSeqGLC extends javax.swing.JPanel {
             }
         });   
         
-    }
+    }         
      
-     // ARRUMAR!
      private void validarSequencia() {   
         this.validaSequenciaGUI.validarSequencia(
-                null, // AQUI
+                this.glc, 
                 this.validaSequenciaGUI.getSequencia());
     }
     
