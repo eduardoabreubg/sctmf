@@ -22,8 +22,8 @@ import java.util.regex.Pattern;
  * @author  rafael2009_00
  */
 public class CadFunTransGLC extends javax.swing.JPanel {
-    private Set<Simbolo> simbTerm;
-    private Set<Simbolo> simbNTerm;
+    private Set<Simbolo> simbTerm = new LinkedHashSet<Simbolo>();
+    private Set<Simbolo> simbNTerm = new LinkedHashSet<Simbolo>();
     
     /**
      * Creates new form CadFunTransGLC
@@ -86,7 +86,12 @@ public class CadFunTransGLC extends javax.swing.JPanel {
     }
     
     Simbolo getSimboloInicial() {
-        return new Simbolo(cbSimbIni.getSelectedItem().toString().charAt(0));
+        Object o = cbSimbIni.getSelectedItem();        
+        return (o!=null)?new Simbolo(o.toString().charAt(0)):null;
+    }
+    
+     void setSimbInicial(Simbolo simbolo) {
+        this.cbSimbIni.setSelectedItem(simbolo.getNome());
     }
     
     
@@ -325,7 +330,7 @@ public class CadFunTransGLC extends javax.swing.JPanel {
                         javax.swing.JOptionPane.WARNING_MESSAGE);
                 else                
                     this.listRProd.addItem(
-                        sNTerm.toString()+" -> "+fLadoDireito.getText());    
+                        sNTerm.toString()+" -> "+ladoDireito);    
             }            
             else
                 javax.swing.JOptionPane.showMessageDialog(null, 
@@ -359,11 +364,57 @@ public class CadFunTransGLC extends javax.swing.JPanel {
         else return false;
     }
     
-    /**
-     * Observa o add e remove dos simbolos
-     *
+     /**
+     * Observa o add e remove dos simbolos terminais e nao terminais
+     * o parametro status, se for true, indica que é um simbolo terminal
+     * se for false, um simbolo nao terminal
+     * o parametro oper pode ser 0 que indica um add e um 1 que indica um remove
      */
-    void addRemoveSimbolo(Simbolo s, int oper, boolean status) {
+    void addRemoveSimbolo(Simbolo s, int oper, boolean status) {        
+        for(RegraProducao rp : this.getProducoes()) {
+            if(oper==1) {
+                if(!status&& // terminal
+                    rp.getSimbLEsq().getNome().equals(s.getNome()))
+                    this.listRProd.removeItem(this.montaRpEmString(rp));
+                
+                else { // n-terminal
+                    int tam = rp.getSimbLDireito().size();                    
+                    if(tam==1) {
+                        char c = rp.getSimbLDireito().get(0).getNome();
+                        for(Simbolo a : simbTerm)
+                            if(a.getNome()==c) {
+                                status = true;
+                                break;
+                            }
+                    }else  // tam==2                    
+                        for(int i=0;i<2;i++) {
+                            status = false;
+                            char c = rp.getSimbLDireito().get(i).getNome();
+                            for(Simbolo x : simbNTerm) 
+                                if(x.getNome()==c) { 
+                                    status = true;
+                                    break;
+                                }                        
+
+                            if(!status)
+                                this.listRProd.removeItem(
+                                        this.montaRpEmString(rp));
+
+                        }  
+                }
+                                       
+            }
+        }        
+    }
+    
+    private String montaRpEmString(RegraProducao rp) {
+        final StringBuilder sb = new StringBuilder(rp.getSimbLEsq().getNome())
+                                        .append(" -> ");
+        
+        for(Simbolo s : rp.getSimbLDireito())
+            sb.append(s.getNome());
+        
+        return sb.toString();
         
     }
     
