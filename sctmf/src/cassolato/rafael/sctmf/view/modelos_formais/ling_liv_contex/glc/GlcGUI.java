@@ -116,12 +116,9 @@ public class GlcGUI
     }
     
     /**
-     * Observa o add e remove dos simbolos terminais e nao terminais
-     * o parametro status, se for true, indica que é um simbolo terminal
-     * se for false, um simbolo nao terminal
-     * o parametro oper pode ser 0 que indica um add e um 1 que indica um remove
+     * Observa o add e remove dos simbolos terminais e nao terminais.
      */
-    void addRemoveSimbolo(Simbolo s, int oper, boolean status) {
-        this.cadFTrans.addRemoveSimbolo(s,oper,status);
+    void removeSimbolo(Simbolo s) {
+        this.cadFTrans.removeSimbolo(s);
     }
 }

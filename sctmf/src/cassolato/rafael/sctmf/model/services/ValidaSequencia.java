@@ -13,6 +13,7 @@ import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.AP;
 import cassolato.rafael.sctmf.model.pojo.Estado;
+import cassolato.rafael.sctmf.model.pojo.GLC;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
@@ -47,6 +48,9 @@ public class ValidaSequencia implements Validacao {
         
         else if(mf instanceof AFND )
             status = this.valida((AFND)mf, sequencia);
+        
+        else if(mf instanceof GLC )
+            status = this.valida((GLC)mf, sequencia);
         
         this.sendMessage(status);
     }
@@ -157,7 +161,7 @@ public class ValidaSequencia implements Validacao {
      * @param sequencia - Sequencia a ser Validada.
      * @return boolean
      */
-    private boolean valida(AP ap, String sequencia) {                          
+    private boolean valida(AP ap, String sequencia) {
         // Pilha do Automato
         final Stack<Simbolo> pilha = new Stack<Simbolo>();
         
@@ -170,42 +174,42 @@ public class ValidaSequencia implements Validacao {
         pilha.push(ap.getTopoPilha());
         
         for(char sS : sequencia.toCharArray()) {
-             // verifica se o, é do alfabeto da linguagem
-            boolean status = false;            
-            for(Simbolo s : ap.getSimbolos()) 
+            // verifica se o, é do alfabeto da linguagem
+            boolean status = false;
+            for(Simbolo s : ap.getSimbolos())
                 if(s.getNome().charValue()==sS) {
-                    status = true; 
-                    break;
-                }    
+                status = true;
+                break;
+                }
             
-            if(!status) return false; 
+            if(!status) return false;
             
             for(TransicaoAP tAP : transicoes) {
                 // verifica o simbolo
                 if(sS==tAP.getSimbolo().getNome().charValue()&&
                         // estado de origem
-                       estadoAtual.getNome().equals(tAP.getEstOri().getNome())){
+                        estadoAtual.getNome().equals(tAP.getEstOri().getNome())){
                     
                     // Se a pilha estiver vazia, procura uma transicao
                     // para alterar o estado, caso nao encontre, return false
-                    if(pilha.empty()) {  
+                    if(pilha.empty()) {
                         label : {
-                            for(TransicaoAP t : transicoes)                            
+                            for(TransicaoAP t : transicoes)
                                 if(t.getSimBasePilha().getNome().charValue()=='\u03BB') {
-                                    // Faz a alteração na pilha
-                                    this.alterarPilha(pilha, estadoAtual, t);  
-                                    break label;
+                                // Faz a alteração na pilha
+                                this.alterarPilha(pilha, estadoAtual, t);
+                                break label;
                                 }
                             
                             return false; // caso nao encontre a transicao
-                        } 
+                        }
                         break;
                         
-                    // verifica a pilha
+                        // verifica a pilha
                     } else if(pilha.peek().getNome().equals(
-                            tAP.getSimBasePilha().getNome())) {                                        
+                            tAP.getSimBasePilha().getNome())) {
                         // Faz a alteração na pilha
-                        this.alterarPilha(pilha, estadoAtual, tAP);                                        
+                        this.alterarPilha(pilha, estadoAtual, tAP);
                         break;
                     }
                 }
@@ -213,38 +217,52 @@ public class ValidaSequencia implements Validacao {
         }
         
         // se a pilha ja esta vazia, e a sequencia terminou, é retornado true
-        if(pilha.empty()) 
+        if(pilha.empty())
             return true;
         
-        else {        
+        else {
             // Quando os simbolos da sequencia sao finalizados e a pilha
             // ainda contem simbolos, é verificado se existem transicoes
             // que contenham o lambinda como simbolo do alfabeto
-            // e tenta-se aplicar a regra de producao.        
+            // e tenta-se aplicar a regra de producao.
             boolean status;
-            do {            
+            do {
                 label : {
-                    for(TransicaoAP t : ap.getTransicoesAP()) {            
+                    for(TransicaoAP t : ap.getTransicoesAP()) {
                         if((t.getSimbolo().getNome().charValue()=='\u03BB')&&
-                            (estadoAtual.getNome().equals(t.getEstOri().getNome()))&&
-                            (t.getSimBasePilha().getNome().equals(
+                                (estadoAtual.getNome().equals(t.getEstOri().getNome()))&&
+                                (t.getSimBasePilha().getNome().equals(
                                 pilha.peek().getNome()))){
-
+                            
                             // Faz a alteração na pilha
                             this.alterarPilha(pilha, estadoAtual, t);
-
+                            
                             if(pilha.empty()) return true;
                             status = true;
                             break label;
                         }
-                    } 
+                    }
                     
                     status = false; // seta o status para sair do while
                 }// final break label;
-            }while(status);            
+            }while(status);
             
         }// fim do else
         
+        return false;
+        
+    }
+    
+    /**
+     * Valida a Gramática Livre de Contexto<br>
+     * Algoritmo de CYK.
+     *
+     * @param glc - Gramática Livre de Contexto
+     * @param sequencia - Sequencia a ser Validada.
+     * @return boolean
+     */
+    private boolean valida(GLC glc, String sequencia) {
+            
         return false;
         
     }
@@ -256,8 +274,6 @@ public class ValidaSequencia implements Validacao {
         // Altera o estado Destino
         ea = t.getEstDest();
         
-        // VERIFICAR COM YANDRE -> SE A PILHA ESTIVER VAZIA E A TRASICAO 
-        // COM LAMBIDA N BASE DA PILHA... SE VAI TRAVAR OU NAO FAZER NADA
         // remove o simbolo do topo da pilha
         if(!pilha.empty()) pilha.pop();
         

@@ -569,7 +569,7 @@ public class CadFunTransAP extends javax.swing.JPanel {
             this.cbSimAlf.addItem(s.getNome());
         
         this.cbBasePilha.removeAllItems();
-        this.cbBasePilha.addItem("\u03BB"); // add o lambida
+        //this.cbBasePilha.addItem("\u03BB"); // add o lambida
         for(Simbolo s : sPilha)
             this.cbBasePilha.addItem(s.getNome());
         
