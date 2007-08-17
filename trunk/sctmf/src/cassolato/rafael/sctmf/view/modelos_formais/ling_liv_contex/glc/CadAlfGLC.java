@@ -50,6 +50,9 @@ public class CadAlfGLC extends javax.swing.JPanel {
         return simbolos;
     }
     
+    /**
+     * Limpa a lista dos simbolos terminais e add os recebidos no parametro.
+     */
     void setSimTerminais(Collection<Simbolo> simbolos) {
         this.listTerm.removeAllItens();
         
@@ -57,6 +60,9 @@ public class CadAlfGLC extends javax.swing.JPanel {
             this.listTerm.addItem(s.getNome());
     }
     
+    /**
+     * Limpa a lista dos simbolos nao-terminais e add os recebidos no parametro.
+     */
     void setSimNTerminais(Collection<Simbolo> simbolos) {
         this.listNTerm.removeAllItens();
         

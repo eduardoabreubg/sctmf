@@ -33,6 +33,9 @@ public class CadFunTransGLC extends javax.swing.JPanel {
         posInitComponents();
     }
     
+    /**
+     * Metodo observer para inclusao e exclusao de simbolos
+     */
     void observer(Set<Simbolo> simbTerm, Set<Simbolo> simbNTerm) {
        this.simbTerm = simbTerm;
        this.simbNTerm = simbNTerm;
