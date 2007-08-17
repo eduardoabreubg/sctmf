@@ -190,8 +190,8 @@ public class CadAlfGLC extends javax.swing.JPanel {
     
     private void removeActionNTerm() {
       for(Object o : this.listNTerm.removeItens())
-          this.glcGUI.addRemoveSimbolo(
-                new Simbolo((Character)o), 1, false);            
+          this.glcGUI.removeSimbolo(
+                new Simbolo((Character)o));            
     }
         
     private void addActionNTerm(Simbolo simbNTerm) {
@@ -199,15 +199,13 @@ public class CadAlfGLC extends javax.swing.JPanel {
             simbNTerm = new Simbolo(
                     Character.toUpperCase(this.letterNumber.getLetter()));
         
-        this.glcGUI.addRemoveSimbolo(
-                new Simbolo(this.listNTerm.addItem(simbNTerm.getNome())),
-                0, false);    
+         this.listNTerm.addItem(simbNTerm.getNome());
     }
        
    private void removeActionTerm() {
       for(Object o : this.listTerm.removeItens())
-          this.glcGUI.addRemoveSimbolo(
-                new Simbolo((Character)o), 1, true);                      
+          this.glcGUI.removeSimbolo(
+                new Simbolo((Character)o));                      
     }
         
     private void addActionTerm(Simbolo simbTerm) { 
@@ -215,8 +213,7 @@ public class CadAlfGLC extends javax.swing.JPanel {
             simbTerm = new Simbolo(
                     Character.toLowerCase(this.letterNumber.getLetter()));
         
-        this.glcGUI.addRemoveSimbolo(
-            new Simbolo(this.listTerm.addItem(simbTerm.getNome())), 0, true);
+        this.listTerm.addItem(simbTerm.getNome());
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
