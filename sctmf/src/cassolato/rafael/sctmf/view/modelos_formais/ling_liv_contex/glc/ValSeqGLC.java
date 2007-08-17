@@ -26,7 +26,7 @@ public class ValSeqGLC extends javax.swing.JPanel {
          posInitComponents();
     }
     
-    public void observer(GLC glc) {
+    void observer(GLC glc) {
         this.glc = glc;
         this.validaSequenciaGUI.clearArea();   
          
