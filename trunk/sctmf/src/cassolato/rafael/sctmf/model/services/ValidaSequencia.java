@@ -19,8 +19,8 @@ import cassolato.rafael.sctmf.model.pojo.RegraProducao;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -268,7 +268,7 @@ public class ValidaSequencia implements Validacao {
         final int tamSeq = sequencia.length();
         
         // cria a tabela 
-        List[][] tabela = new List[tamSeq][tamSeq];  // VERIFICAR GENERICS!
+        Set[][] tabela = new Set[tamSeq+1][tamSeq+1];
         
         // regride os nao terminais nos seus terminais
         for(int i=0;i<sequencia.length();i++) {
@@ -277,7 +277,7 @@ public class ValidaSequencia implements Validacao {
                 List<Simbolo> simbs = rp.getSimbLDireito();
                 // busca as regras de producao com terminais no lado direito
                 if(simbs.size()==1&&simbs.get(0).getNome()==c) {
-                    List<Simbolo> lista = new ArrayList<Simbolo>();
+                    Set<Simbolo> lista = new HashSet<Simbolo>();
                     lista.add(rp.getSimbLEsq());
                     tabela[0][i] = lista;
                     break;
@@ -287,6 +287,52 @@ public class ValidaSequencia implements Validacao {
             if(tabela[0][i]==null) return false;            
         }
         
+        for(int j=2;j<=tamSeq;j++) // Cantos da piramede....
+         for(int i=0;i<=tamSeq-j;i++) {// Vertical da pirâmede
+	    System.out.println("\nPosicao ["+j+","+i+"]");        
+            // Posicao[j,i] -> (a,b);(c,d)	    
+            int a = j-1, b = i, c = 0, d = j-1+i;
+
+	    for(int k=a;k>0;k--) {// percorre as linhas          
+                System.out.println("("+k+","+b+");("+(++c)+","+(d-c+1)+")"); 
+               
+                // posicao mais a esquerda
+                Set<Simbolo> simb1 = tabela[k][b]; 
+                // posicao mais a direita
+                Set<Simbolo> simb2 = tabela[++c][d-(c+1)]; 
+                
+                if(simb1!=null&&simb2!=null)
+                    for(Simbolo x : simb1)
+                            for(Simbolo y : simb2) {
+                                // valores encontrados
+                                String valFounds = ""+x.getNome()+y.getNome();
+                                // Verifica se existe alguma producao 
+                                // com esses simbolos encontrados
+                                for(RegraProducao rp : glc.getRegrasProducao()) {
+                                    String valRP = "";
+                                    for(Simbolo s : rp.getSimbLDireito())
+                                        valRP += s.getNome();
+                                        
+                                    if(valFounds.equals(valRP)) {
+                                        // se a List da posicao estiver nula
+                                        // cria e add
+                                        Set pos = tabela[j][i];
+                                        if(pos==null)
+                                            pos = new HashSet<Simbolo>();
+                                        
+                                        pos.add(rp.getSimbLEsq());
+                                    }    
+                                        
+                                }
+                                
+                            }                                                   
+
+               
+            } // for das linhas
+            
+            System.out.println();
+                
+         }
         
         return false;        
     }
