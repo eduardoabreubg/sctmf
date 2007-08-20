@@ -15,10 +15,13 @@ import cassolato.rafael.sctmf.model.pojo.AP;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.GLC;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
+import cassolato.rafael.sctmf.model.pojo.RegraProducao;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
@@ -262,9 +265,30 @@ public class ValidaSequencia implements Validacao {
      * @return boolean
      */
     private boolean valida(GLC glc, String sequencia) {
-            
-        return false;
+        final int tamSeq = sequencia.length();
         
+        // cria a tabela 
+        List[][] tabela = new List[tamSeq][tamSeq];  // VERIFICAR GENERICS!
+        
+        // regride os nao terminais nos seus terminais
+        for(int i=0;i<sequencia.length();i++) {
+            char c = sequencia.charAt(i);
+            for(RegraProducao rp : glc.getRegrasProducao()) {
+                List<Simbolo> simbs = rp.getSimbLDireito();
+                // busca as regras de producao com terminais no lado direito
+                if(simbs.size()==1&&simbs.get(0).getNome()==c) {
+                    List<Simbolo> lista = new ArrayList<Simbolo>();
+                    lista.add(rp.getSimbLEsq());
+                    tabela[0][i] = lista;
+                    break;
+                }
+            }
+            // caso nao exista uma producao para o simbolo da sequencia
+            if(tabela[0][i]==null) return false;            
+        }
+        
+        
+        return false;        
     }
     
     /**
