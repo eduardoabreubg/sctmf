@@ -265,76 +265,92 @@ public class ValidaSequencia implements Validacao {
      * @return boolean
      */
     private boolean valida(GLC glc, String sequencia) {
+        // caso nao exista simbolo inicial cadastrado
+        if(glc.getSimbInicial()==null) return false;
+        
         final int tamSeq = sequencia.length();
         
-        // cria a tabela 
-        Set[][] tabela = new Set[tamSeq+1][tamSeq+1];
+        // cria a tabela
+        Set[][] tabela = new Set[tamSeq+1][tamSeq];
+        
+        // add a sequencia na posicao 0 da tabela
+        for(int i=0;i<sequencia.length();i++) {
+            Set s = tabela[0][i];
+            if(s==null) s = new HashSet<Simbolo>();
+            
+            s.add(new Simbolo(sequencia.charAt(i)));
+            tabela[0][i] = s;
+        }
         
         // regride os nao terminais nos seus terminais
         for(int i=0;i<sequencia.length();i++) {
-            char c = sequencia.charAt(i);
+            Simbolo s = (Simbolo)tabela[0][i].iterator().next();
+            char c = s.getNome();
             for(RegraProducao rp : glc.getRegrasProducao()) {
                 List<Simbolo> simbs = rp.getSimbLDireito();
                 // busca as regras de producao com terminais no lado direito
                 if(simbs.size()==1&&simbs.get(0).getNome()==c) {
                     Set<Simbolo> lista = new HashSet<Simbolo>();
                     lista.add(rp.getSimbLEsq());
-                    tabela[0][i] = lista;
+                    tabela[1][i] = lista;
                     break;
                 }
             }
             // caso nao exista uma producao para o simbolo da sequencia
-            if(tabela[0][i]==null) return false;            
+            if(tabela[1][i]==null) return false;
         }
         
         for(int j=2;j<=tamSeq;j++) // Cantos da piramede....
-         for(int i=0;i<=tamSeq-j;i++) {// Vertical da pirâmede
-	    System.out.println("\nPosicao ["+j+","+i+"]");        
-            // Posicao[j,i] -> (a,b);(c,d)	    
-            int a = j-1, b = i, c = 0, d = j-1+i;
+            for(int i=0;i<=tamSeq-j;i++) {// Vertical da pirâmede
+                // Posicao[j,i] -> (a,b);(c,d)
+                int a = j-1, b = i, c = 0, d = j-1+i;
 
-	    for(int k=a;k>0;k--) {// percorre as linhas          
-                System.out.println("("+k+","+b+");("+(++c)+","+(d-c+1)+")"); 
-               
-                // posicao mais a esquerda
-                Set<Simbolo> simb1 = tabela[k][b]; 
-                // posicao mais a direita
-                Set<Simbolo> simb2 = tabela[++c][d-(c+1)]; 
-                
-                if(simb1!=null&&simb2!=null)
-                    for(Simbolo x : simb1)
+                for(int k=a;k>0;k--) {// percorre as linhas
+                    c++;
+                    // posicao mais a esquerda
+                    Set<Simbolo> simb1 = tabela[k][b];
+                    // posicao mais a direita
+                    Set<Simbolo> simb2 = tabela[c][(d-c+1)];
+
+                    if(simb1!=null&&simb2!=null)
+                        for(Simbolo x : simb1)
                             for(Simbolo y : simb2) {
                                 // valores encontrados
                                 String valFounds = ""+x.getNome()+y.getNome();
-                                // Verifica se existe alguma producao 
+                                // Verifica se existe alguma producao
                                 // com esses simbolos encontrados
-                                for(RegraProducao rp : glc.getRegrasProducao()) {
-                                    String valRP = "";
-                                    for(Simbolo s : rp.getSimbLDireito())
-                                        valRP += s.getNome();
-                                        
-                                    if(valFounds.equals(valRP)) {
-                                        // se a List da posicao estiver nula
-                                        // cria e add
-                                        Set pos = tabela[j][i];
-                                        if(pos==null)
-                                            pos = new HashSet<Simbolo>();
-                                        
-                                        pos.add(rp.getSimbLEsq());
-                                    }    
-                                        
-                                }
-                                
-                            }                                                   
+                                for(RegraProducao rp : glc.getRegrasProducao())
+                                    // so compara as produções com simbolos n-terminais
+                                    if(rp.getSimbLDireito().size()==2) {
+                                        String valRP = "";
+                                        for(Simbolo s : rp.getSimbLDireito())
+                                            valRP += s.getNome();
 
-               
-            } // for das linhas
-            
-            System.out.println();
-                
-         }
+                                        if(valFounds.equals(valRP)) {
+                                            // se a List da posicao estiver nula
+                                            // cria e add
+                                            Set pos = tabela[j][i];
+                                            if(pos==null) {
+                                                pos = new HashSet<Simbolo>();
+                                                tabela[j][i] = pos;
+                                            }
+
+                                            pos.add(rp.getSimbLEsq());
+
+                                        }
+                                    }
+
+                            }
+
+                } // for das linhas                        
+            }
         
-        return false;        
+        // Verifica se o simbolo no topo da piramete é o simbolo inicial
+        for(Simbolo s : (Set<Simbolo>)tabela[tabela.length-1][0])
+            if(s.getNome()==glc.getSimbInicial().getNome())
+                return true;
+        
+        return false;
     }
     
     /**
