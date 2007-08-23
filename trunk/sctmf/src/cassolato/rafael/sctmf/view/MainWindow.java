@@ -168,7 +168,6 @@ public class MainWindow extends javax.swing.JFrame {
         bAutComDuasPilhas.setEnabled(false);
         bAutComDuasPilhas.setPreferredSize(new java.awt.Dimension(70, 25));
         pLingSensContex.add(bAutComDuasPilhas);
-        bAutComDuasPilhas.getAccessibleContext().setAccessibleName("ADP");
 
         jToolBar.add(pLingSensContex);
 
@@ -177,7 +176,6 @@ public class MainWindow extends javax.swing.JFrame {
         bMaqTuring.setBackground(new java.awt.Color(204, 204, 255));
         bMaqTuring.setText("MT");
         bMaqTuring.setToolTipText("M\u00e1quina de Turing ");
-        bMaqTuring.setEnabled(false);
         bMaqTuring.setPreferredSize(new java.awt.Dimension(70, 25));
         bMaqTuring.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -339,7 +337,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_bAutComPilhaActionPerformed
 
     private void bMaqTuringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMaqTuringActionPerformed
-// TODO adicione seu código de manipulação aqui:
+        this.showFormalModel(IdModeloFormal.MT);
     }//GEN-LAST:event_bMaqTuringActionPerformed
 
     private void bGramLivrContexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGramLivrContexActionPerformed
@@ -371,7 +369,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_miGramEstruFraseActionPerformed
 
     private void miMaqTuringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMaqTuringActionPerformed
-// TODO adicione seu código de manipulação aqui:
+        this.showFormalModel(IdModeloFormal.MT);
     }//GEN-LAST:event_miMaqTuringActionPerformed
 
     private void miAutComDuasPilhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAutComDuasPilhaActionPerformed

@@ -9,6 +9,7 @@
 
 package cassolato.rafael.sctmf.view;
 
+import cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt.MtGUI;
 import cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.glc.GlcGUI;
 import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.AfdGUI;
 import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afnd.AfndGUI;
@@ -39,6 +40,9 @@ public class GUIFactory {
                 
            case GLC : 
                 return new GlcGUI();
+                
+           case MT : 
+                return new MtGUI();     
                 
             default : 
                 return null;

@@ -20,5 +20,8 @@ public enum IdModeloFormal {
     
     // Linguagens Livres de Contexto
     AP,
-    GLC;    
+    GLC,  
+    
+    // Linguagens Enumeraveis Recursivamente
+    MT;
 }
