@@ -137,6 +137,10 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
                 this.setTitle("GLC - Gramática Livre de Contexto");
                 break;
                 
+            case MT :
+                this.setTitle("MT - Maquina de Turing");
+                break;
+                
         }
         
         this.gui = GUIFactory.getInstanceMF(this.idMF);
