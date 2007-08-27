@@ -6,6 +6,9 @@
 
 package cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author  rafael2009_00
@@ -28,12 +31,12 @@ public class CadAlfMT extends javax.swing.JPanel {
 
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        listNTerm = new cassolato.rafael.sctmf.view.components.GenericJList();
+        listAlf = new cassolato.rafael.sctmf.view.components.GenericJList();
         jPanel5 = new javax.swing.JPanel();
-        listTerm = new cassolato.rafael.sctmf.view.components.GenericJList();
+        listAlfAux = new cassolato.rafael.sctmf.view.components.GenericJList();
         jLabel5 = new javax.swing.JLabel();
-        addRemButtonsNTerm = new cassolato.rafael.sctmf.view.components.AddRemButtonsPanel();
-        addRemButtonsTerm = new cassolato.rafael.sctmf.view.components.AddRemButtonsPanel();
+        addRemButtonsAlf = new cassolato.rafael.sctmf.view.components.AddRemButtonsPanel();
+        addRemButtonsAlfAux = new cassolato.rafael.sctmf.view.components.AddRemButtonsPanel();
         letterNumber = new cassolato.rafael.sctmf.view.components.LetterNumber();
 
         setLayout(new java.awt.GridBagLayout());
@@ -47,8 +50,8 @@ public class CadAlfMT extends javax.swing.JPanel {
         jLabel4.setText("\u03a3");
         jPanel4.add(jLabel4, java.awt.BorderLayout.NORTH);
 
-        listNTerm.setToolTipText("");
-        jPanel4.add(listNTerm, java.awt.BorderLayout.CENTER);
+        listAlf.setToolTipText("");
+        jPanel4.add(listAlf, java.awt.BorderLayout.CENTER);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -64,8 +67,8 @@ public class CadAlfMT extends javax.swing.JPanel {
         jPanel5.setLayout(new java.awt.BorderLayout());
 
         jPanel5.setToolTipText("S\u00edmbolos do Alfabeto da Pilha");
-        listTerm.setToolTipText("");
-        jPanel5.add(listTerm, java.awt.BorderLayout.CENTER);
+        listAlfAux.setToolTipText("");
+        jPanel5.add(listAlfAux, java.awt.BorderLayout.CENTER);
 
         jLabel5.setFont(new java.awt.Font("Verdana", 0, 18));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -90,7 +93,7 @@ public class CadAlfMT extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 20, 0, 0);
-        add(addRemButtonsNTerm, gridBagConstraints);
+        add(addRemButtonsAlf, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -99,7 +102,7 @@ public class CadAlfMT extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(10, 131, 0, 0);
-        add(addRemButtonsTerm, gridBagConstraints);
+        add(addRemButtonsAlfAux, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -110,17 +113,75 @@ public class CadAlfMT extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
     
+    private void posInitComponents() {
+        this.letterNumber.enableCbNumber(false);
+        this.letterNumber.forceAllLowerCase(true);
+        
+         // Para o alfabeto dos alfAuxbolos nao-alfAuxinais
+        this.addRemButtonsAlf.getBAdd().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                addActionalf(null);
+            }
+        });
+        
+        this.addRemButtonsAlf.getBRemove().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                removeActionalf();
+            }
+        });
+        
+        // Para o alfabeto dos alfAuxbolos da pilha
+        this.addRemButtonsAlfAux.getBAdd().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                addActioAlf(null);
+            }
+        });
+        
+        this.addRemButtonsAlfAux.getBRemove().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                removeActioalf();
+            }
+        });
+    }
+    
+    private void removeActionAlf() {
+      for(Object o : this.listAlf.removeItens())
+          this.glcGUI.removeSimbolo(
+                new Simbolo((Character)o));            
+    }
+        
+    private void addActionAlf(Simbolo simbalf) {
+        if(simbalf==null)
+            simbalf = new Simbolo(
+                    Character.toUpperCase(this.letterNumber.getLetter()));
+        
+         this.listAlf.addItem(simbalf.getNome());
+    }
+       
+   private void removeActioAlfAux() {
+      for(Object o : this.listAlfAux.removeItens())
+          this.glcGUI.removeSimbolo(
+                new Simbolo((Character)o));                      
+    }
+        
+    private void addActioAlfAux(Simbolo simbalfAux) { 
+        if(simbAlfAux==null)
+            simbAlfAux = new Simbolo(
+                    Character.toLowerCase(this.letterNumber.getLetter()));
+        
+        this.listAlfAux.addItem(simbalfAux.getNome());
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemButtonsNTerm;
-    private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemButtonsTerm;
+    private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemButtonsAlf;
+    private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemButtonsAlfAux;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private cassolato.rafael.sctmf.view.components.LetterNumber letterNumber;
-    private cassolato.rafael.sctmf.view.components.GenericJList listNTerm;
-    private cassolato.rafael.sctmf.view.components.GenericJList listTerm;
+    private cassolato.rafael.sctmf.view.components.GenericJList listAlf;
+    private cassolato.rafael.sctmf.view.components.GenericJList listAlfAux;
     // End of variables declaration//GEN-END:variables
     
 }
