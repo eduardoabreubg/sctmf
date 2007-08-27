@@ -14,6 +14,7 @@ import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.AP;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.GLC;
+import cassolato.rafael.sctmf.model.pojo.MT;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.RegraProducao;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
@@ -54,6 +55,9 @@ public class ValidaSequencia implements Validacao {
         
         else if(mf instanceof GLC )
             status = this.valida((GLC)mf, sequencia);
+        
+        else if(mf instanceof MT)
+            status = this.valida((MT)mf, sequencia);
         
         this.sendMessage(status);
     }
@@ -350,6 +354,16 @@ public class ValidaSequencia implements Validacao {
             if(s.getNome()==glc.getSimbInicial().getNome())
                 return true;
         
+        return false;
+    }
+    
+    /**
+     * Faz o reconhecimento da sequencia digitada pelo usuáro.
+     *
+     * @param mt - Maquina de Turing
+     * @param sequencia - Sequencia a ser reconhecida
+     */
+    private boolean valida(MT mt, String sequencia) {
         return false;
     }
     
