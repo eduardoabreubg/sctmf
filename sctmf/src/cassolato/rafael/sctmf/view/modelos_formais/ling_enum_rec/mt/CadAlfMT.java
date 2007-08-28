@@ -6,6 +6,7 @@
 
 package cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt;
 
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,10 +15,13 @@ import java.awt.event.ActionListener;
  * @author  rafael2009_00
  */
 public class CadAlfMT extends javax.swing.JPanel {
+    MtGUI gui = null;
     
     /** Creates new form CadAlfMT */
-    public CadAlfMT() {
+    public CadAlfMT(MtGUI gui) {
+        this.gui = gui;
         initComponents();
+        posInitComponents();
     }
     
     /** This method is called from within the constructor to
@@ -117,59 +121,57 @@ public class CadAlfMT extends javax.swing.JPanel {
         this.letterNumber.enableCbNumber(false);
         this.letterNumber.forceAllLowerCase(true);
         
-         // Para o alfabeto dos alfAuxbolos nao-alfAuxinais
         this.addRemButtonsAlf.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
-                addActionalf(null);
+                addActionAlf(null);
             }
         });
         
         this.addRemButtonsAlf.getBRemove().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
-                removeActionalf();
+                removeActionAlf();
             }
         });
         
-        // Para o alfabeto dos alfAuxbolos da pilha
         this.addRemButtonsAlfAux.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
-                addActioAlf(null);
+                addActionAlfAux(null);
             }
         });
         
         this.addRemButtonsAlfAux.getBRemove().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
-                removeActioalf();
+                removeActionAlfAux();
             }
         });
     }
     
     private void removeActionAlf() {
       for(Object o : this.listAlf.removeItens())
-          this.glcGUI.removeSimbolo(
+          this.gui.removeSimbolo(
                 new Simbolo((Character)o));            
     }
         
-    private void addActionAlf(Simbolo simbalf) {
-        if(simbalf==null)
-            simbalf = new Simbolo(
-                    Character.toUpperCase(this.letterNumber.getLetter()));
-        
-         this.listAlf.addItem(simbalf.getNome());
-    }
-       
-   private void removeActioAlfAux() {
-      for(Object o : this.listAlfAux.removeItens())
-          this.glcGUI.removeSimbolo(
-                new Simbolo((Character)o));                      
-    }
-        
-    private void addActioAlfAux(Simbolo simbalfAux) { 
-        if(simbAlfAux==null)
-            simbAlfAux = new Simbolo(
+    private void addActionAlf(Simbolo simbAlf) {
+        if(simbAlf==null)
+            simbAlf = new Simbolo(
                     Character.toLowerCase(this.letterNumber.getLetter()));
         
-        this.listAlfAux.addItem(simbalfAux.getNome());
+         this.listAlf.addItem(simbAlf.getNome());
+    }
+       
+   private void removeActionAlfAux() {
+      for(Object o : this.listAlfAux.removeItens())
+          this.gui.removeSimbolo(
+               new Simbolo((Character)o));                      
+    }
+        
+    private void addActionAlfAux(Simbolo simbAlfAux) { 
+        if(simbAlfAux==null)
+            simbAlfAux = new Simbolo(
+                    Character.toUpperCase(this.letterNumber.getLetter()));
+        
+        this.listAlfAux.addItem(simbAlfAux.getNome());
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
