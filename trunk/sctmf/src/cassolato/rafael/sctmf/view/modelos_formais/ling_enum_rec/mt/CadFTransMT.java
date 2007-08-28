@@ -6,15 +6,54 @@
 
 package cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt;
 
+import cassolato.rafael.sctmf.model.pojo.Direcao;
+import cassolato.rafael.sctmf.model.pojo.Estado;
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
+import cassolato.rafael.sctmf.model.pojo.TransicaoMT;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  *
  * @author  rafael2009_00
  */
 public class CadFTransMT extends javax.swing.JPanel {
     
+    private MtGUI gui = null;
+    
+    // Collections com os nomes dos itens
+    final Set<Character> alf = new LinkedHashSet<Character>();
+    final Set<Character> alfAux = new LinkedHashSet<Character>();
+        
     /** Creates new form CadFTransMT */
-    public CadFTransMT() {
+    public CadFTransMT(MtGUI gui) {
+        this.gui = gui;
         initComponents();
+        posInitComponents();
+    }
+        
+    Set<TransicaoMT> getTransicoes() {
+        return null;
+    }
+    
+    void setTransicoes(Set<TransicaoMT> transicoes) {
+        
+    }
+    
+    private void posInitComponents() {
+        this.addRemTran.getBAdd().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                addActionTrans(null, null, null, null, null);
+            }
+        });
+        
+        this.addRemTran.getBRemove().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                removeActionTrans();
+            }
+        });
     }
     
     /** This method is called from within the constructor to
@@ -525,10 +564,34 @@ public class CadFTransMT extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addActionTrans(final Estado estOri, final Simbolo simbLido,
+                                final Estado estDest, final Simbolo sGrav, 
+                                final Direcao dir) {
+              
+    }
+    
+    private void removeActionTrans() {
+        this.listTrans.removeItens();
+    }
+    
     private void fSimASerGravadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fSimASerGravadoKeyReleased
         String value = this.fSimASerGravado.getText();
         int tam = value.length();
-        this.fSimASerGravado.setText(tam>0?value.substring(tam-1):"");
+        Character s = tam>0?value.substring(tam-1).charAt(0):null;
+        if(s!=null)  // verifica se o simbolo pertence a um dos alfabetos
+            if(Character.isLowerCase(s))  // alfabeto 
+                if(this.alf.contains(s))
+                    this.fSimASerGravado.setText(s.toString());
+                else
+                    this.fSimASerGravado.setText("");
+                
+            else // alfabeto auxiliar
+                if(this.alfAux.contains(s))
+                    this.fSimASerGravado.setText(s.toString());
+                else
+                    this.fSimASerGravado.setText("");
+        else
+            this.fSimASerGravado.setText("");                
     }//GEN-LAST:event_fSimASerGravadoKeyReleased
 
     private void bAddSimIniFitaDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimIniFitaDirActionPerformed
@@ -542,7 +605,21 @@ public class CadFTransMT extends javax.swing.JPanel {
     private void fSimASerLidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fSimASerLidoKeyReleased
         String value = this.fSimASerLido.getText();
         int tam = value.length();
-        this.fSimASerLido.setText(tam>0?value.substring(tam-1):"");
+        Character s = tam>0?value.substring(tam-1).charAt(0):null;
+        if(s!=null)  // verifica se o simbolo pertence a um dos alfabetos
+            if(Character.isLowerCase(s))  // alfabeto 
+                if(this.alf.contains(s))
+                    this.fSimASerLido.setText(s.toString());
+                else
+                    this.fSimASerLido.setText("");
+                
+            else // alfabeto auxiliar
+                if(this.alfAux.contains(s))
+                    this.fSimASerLido.setText(s.toString());
+                else
+                    this.fSimASerLido.setText("");
+        else
+            this.fSimASerLido.setText(""); 
     }//GEN-LAST:event_fSimASerLidoKeyReleased
 
     private void bAddSimIniFitaEsqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimIniFitaEsqActionPerformed
@@ -552,7 +629,40 @@ public class CadFTransMT extends javax.swing.JPanel {
     private void bAddSimbBrancEsqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimbBrancEsqActionPerformed
          this.fSimASerLido.setText("\u03B2");
     }//GEN-LAST:event_bAddSimbBrancEsqActionPerformed
+     
+    /**
+     * O Estado a ser Observado e o tipo de operação, 
+     * se for true ADD, false REMOVE.
+     */
+    void observer(Estado e, boolean oper) {  
+        final String nomeEstado = e.getNome();
+        if(oper) {
+            this.cbEstOri.addItem(nomeEstado);
+            this.cbEstDest.addItem(nomeEstado);
+            
+        }else {
+            this.cbEstOri.removeItem(nomeEstado);
+            this.cbEstDest.removeItem(nomeEstado);
+            
+        }            
+    }
     
+    /**
+     * Caso oper true, ADD. Caso false REMOVE.
+     * Se o charater é Upper... simbolos alfAux
+     * caso lower  simbolos Alf
+     *
+     */
+    void observer(Simbolo s, boolean oper) {     
+        Character c = s.getNome();
+        if(Character.isLowerCase(c)) // Alfabeto
+            if(oper) this.alf.add(c);
+            else this.alf.remove(c);
+        
+        else // Alfabeto auxiliar
+            if(oper) this.alfAux.add(c);
+            else this.alfAux.remove(c);
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemTran;
