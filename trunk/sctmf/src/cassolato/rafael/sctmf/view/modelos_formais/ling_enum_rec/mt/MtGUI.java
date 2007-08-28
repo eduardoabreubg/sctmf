@@ -7,6 +7,7 @@
 package cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt;
 
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.view.modelos_formais.ModeloFormalGUI;
 
 /**
@@ -15,7 +16,7 @@ import cassolato.rafael.sctmf.view.modelos_formais.ModeloFormalGUI;
  */
 public class MtGUI extends ModeloFormalGUI {
     
-    private CadAlfMT cadAlf = new CadAlfMT();
+    private CadAlfMT cadAlf = new CadAlfMT(this);
     private CadEstMT cadEst = new CadEstMT();
     private CadFTransMT cadFTrans = new CadFTransMT();
     private ValSeqMT valSeq = new ValSeqMT();
@@ -70,7 +71,10 @@ public class MtGUI extends ModeloFormalGUI {
     public ModeloFormal getModeloFormal() {
         return null;
     }
-    
+
+    void removeSimbolo(Simbolo simbolo) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane jTabbedPane1;
