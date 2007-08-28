@@ -9,6 +9,9 @@ package cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  *
@@ -16,6 +19,36 @@ import java.awt.event.ActionListener;
  */
 public class CadAlfMT extends javax.swing.JPanel {
     MtGUI gui = null;
+    
+     Set<Simbolo> getSimbAfabeto() {
+        Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
+        for(Object o : this.listAlf.getAllItens())
+            simbolos.add(new Simbolo((Character)o));
+            
+        return simbolos;
+    }
+    
+    Set<Simbolo> getSimbAfabetoAux() {
+        Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
+        for(Object o : this.listAlfAux.getAllItens())
+            simbolos.add(new Simbolo((Character)o));
+            
+        return simbolos;
+    }
+    
+    void setSimbAfabeto(Collection<Simbolo> simbAlf) {
+        this.listAlf.removeAllItens();
+        
+        for(Simbolo s : simbAlf)
+            this.listAlf.addItem(s.getNome());
+    }
+    
+    void setSimbAfabetoAux(Collection<Simbolo> simbAlfAux) {
+        this.listAlfAux.removeAllItens();
+        
+        for(Simbolo s : simbAlfAux)
+            this.listAlfAux.addItem(s.getNome());
+    }
     
     /** Creates new form CadAlfMT */
     public CadAlfMT(MtGUI gui) {
@@ -158,6 +191,8 @@ public class CadAlfMT extends javax.swing.JPanel {
                     Character.toLowerCase(this.letterNumber.getLetter()));
         
          this.listAlf.addItem(simbAlf.getNome());
+         
+         this.gui.addSimbolo(simbAlf);
     }
        
    private void removeActionAlfAux() {
@@ -172,6 +207,8 @@ public class CadAlfMT extends javax.swing.JPanel {
                     Character.toUpperCase(this.letterNumber.getLetter()));
         
         this.listAlfAux.addItem(simbAlfAux.getNome());
+        
+        this.gui.addSimbolo(simbAlfAux);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

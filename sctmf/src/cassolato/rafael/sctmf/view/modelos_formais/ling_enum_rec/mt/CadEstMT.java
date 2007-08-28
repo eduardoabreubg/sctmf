@@ -8,6 +8,10 @@ package cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt;
 
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.view.components.CEstado;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -15,11 +19,51 @@ import java.util.Set;
  * @author  rafael2009_00
  */
 public class CadEstMT extends javax.swing.JPanel implements CEstado {
+    private MtGUI gui = null;
     
     /** Creates new form CadEstMT */
-    public CadEstMT() {
+    public CadEstMT(MtGUI gui) {
+        this.gui = gui;
+        
         initComponents();
+        posInitComponents();
     }
+    
+    Set<Estado> getEstados() {
+        return this.cadEstado.getAllItens();        
+    }
+    
+    Estado getEstadoInicial() {
+        Collection<Object> o = this.listEstIni.getAllItens();
+        return o.size()>0?new Estado(o.iterator().next().toString()):null;
+    }
+    
+    Set<Estado> getEstadosFinais() {        
+        LinkedHashSet<Estado> estados = new LinkedHashSet<Estado>();
+        for(Object o : this.listEstFin.getAllItens()) 
+            estados.add(new Estado(o.toString()));
+        
+        return estados;
+    }
+    
+    void setEstados(Set<Estado> estados) {
+        this.cadEstado.removeAllItens();
+        
+        for(Estado e : estados)
+            this.cadEstado.addEstado(e);               
+    }
+    
+    void setEstadoInicial(Estado estado) {
+       this.listEstIni.removeAllItens();   
+       this.listEstIni.addItem(estado.getNome());
+    }
+    
+    void setEstadosFinais(Set<Estado> estFin) {
+       this.listEstFin.removeAllItens();
+       
+       for(Estado e : estFin)
+           this.listEstFin.addItem(e.getNome()); 
+    }    
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -150,15 +194,84 @@ public class CadEstMT extends javax.swing.JPanel implements CEstado {
 
     }// </editor-fold>//GEN-END:initComponents
 
+    private void posInitComponents() {         
+        this.addRemEstIni.getBAdd().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                addActionEstadoInicial();
+            }
+        });
+        
+        this.addRemEstIni.getBRemove().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                removeActionEstadoInicial();
+            }
+        });
+        
+        this.addRemEstFin.getBAdd().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                addActionEstadoFinal();
+            }
+        });
+        
+        this.addRemEstFin.getBRemove().addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae) {
+                removeActionEstadoFinal();
+            }
+        });
+    }
+    
+    private void removeActionEstadoInicial() {
+         this.listEstIni.removeItens(); 
+    }
+    
+    private void addActionEstadoInicial() {
+        Object item = this.cbEstIni.getSelectedItem();
+        if(item!=null) {
+            this.listEstIni.removeAllItens();
+            this.listEstIni.addItem(item.toString());
+        } 
+    }
+    
+    private void removeActionEstadoFinal() {
+        this.listEstFin.removeItens();
+    }
+    
+    private void addActionEstadoFinal() {
+        Object item = this.cbEstFin.getSelectedItem();
+        if(item!=null) 
+            this.listEstFin.addItem(item.toString());
+    }
+    
     public void addEstado(Estado estado) {
+        this.gui.addEstado(estado);
+        
+        final String nomeEstado = estado.getNome();
+        
+        this.cbEstIni.addItem(nomeEstado);        
+        this.cbEstFin.addItem(nomeEstado);     
     }
 
     public void remEstados(Set<Estado> estados) {
+        for(Estado e : estados) {
+            this.gui.removeEstado(e);
+            
+            String nomeEstado = e.getNome();
+            
+            this.cbEstIni.removeItem(nomeEstado);
+            this.listEstIni.removeItem(nomeEstado);
+            
+            this.cbEstFin.removeItem(nomeEstado);
+            this.listEstFin.removeItem(nomeEstado);
+        }
     }
 
-    public void removeAllItens() {
-    }
-    
+    public void removeAllItens() {        
+        this.cbEstIni.removeAllItems();
+        this.listEstIni.removeAllItens();
+        
+        this.cbEstFin.removeAllItems();
+        this.listEstFin.removeAllItens();
+    }          
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemEstFin;
@@ -188,5 +301,5 @@ public class CadEstMT extends javax.swing.JPanel implements CEstado {
     private javax.swing.JPanel pSul;
     private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables
-    
+  
 }

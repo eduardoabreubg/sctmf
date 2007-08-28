@@ -6,6 +6,7 @@
 
 package cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt;
 
+import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.view.modelos_formais.ModeloFormalGUI;
@@ -17,8 +18,8 @@ import cassolato.rafael.sctmf.view.modelos_formais.ModeloFormalGUI;
 public class MtGUI extends ModeloFormalGUI {
     
     private CadAlfMT cadAlf = new CadAlfMT(this);
-    private CadEstMT cadEst = new CadEstMT();
-    private CadFTransMT cadFTrans = new CadFTransMT();
+    private CadEstMT cadEst = new CadEstMT(this);
+    private CadFTransMT cadFTrans = new CadFTransMT(this);
     private ValSeqMT valSeq = new ValSeqMT();
     
     /** Creates new form MtGUI */
@@ -72,8 +73,20 @@ public class MtGUI extends ModeloFormalGUI {
         return null;
     }
 
+    void addSimbolo(Simbolo simbolo) {
+        this.cadFTrans.observer(simbolo, true);
+    }
+    
     void removeSimbolo(Simbolo simbolo) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        this.cadFTrans.observer(simbolo, false);
+    }
+        
+    void addEstado(Estado estado) {
+        this.cadFTrans.observer(estado, true);
+    }
+    
+    void removeEstado(Estado estado) {
+        this.cadFTrans.observer(estado, false);
     }    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
