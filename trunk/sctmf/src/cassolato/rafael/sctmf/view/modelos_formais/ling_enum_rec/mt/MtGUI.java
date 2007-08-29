@@ -7,8 +7,10 @@
 package cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt;
 
 import cassolato.rafael.sctmf.model.pojo.Estado;
+import cassolato.rafael.sctmf.model.pojo.MT;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
+import cassolato.rafael.sctmf.model.pojo.TransicaoMT;
 import cassolato.rafael.sctmf.view.modelos_formais.ModeloFormalGUI;
 
 /**
@@ -70,7 +72,27 @@ public class MtGUI extends ModeloFormalGUI {
     }
 
     public ModeloFormal getModeloFormal() {
-        return null;
+        MT mt = new MT();
+        mt.setAlfabeto(this.cadAlf.getSimbAfabeto());
+        mt.setAlfabetoAux(this.cadAlf.getSimbAfabetoAux());
+        
+        mt.setEstados(this.cadEst.getEstados());
+        mt.setEstIni(this.cadEst.getEstadoInicial());
+        mt.setEstFinais(this.cadEst.getEstadosFinais());
+        
+        mt.setTransicoes(this.cadFTrans.getTransicoes());
+        
+        for(TransicaoMT t : mt.getTransicoes()) {
+            System.out.println("\n"+t.getEstAtual().getNome());
+            System.out.println(t.getSimLido().getNome());
+            
+            System.out.println(t.getEstDestino().getNome());
+            System.out.println(t.getSimbEscrito().getNome());
+            System.out.println(t.getDirecao());
+        }
+            
+        
+        return mt;
     }
 
     void addSimbolo(Simbolo simbolo) {

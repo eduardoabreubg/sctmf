@@ -430,7 +430,7 @@ public class CadFunTransGLC extends javax.swing.JPanel {
     }
  
      private Matcher getMatcher(String str) {
-        String regex = "(.+) -> (.+)";
+        String regex = "(.+) -> (.+)";       
         
         return Pattern.compile(regex).matcher(str);
     }
