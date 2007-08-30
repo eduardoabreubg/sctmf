@@ -55,12 +55,12 @@ public class CadFTransMT extends javax.swing.JPanel {
             }
             
         }
-        
+                 
         return trans;
     }
     
     void setTransicoes(Set<TransicaoMT> transicoes) {
-        this.listTrans.removeItens();
+        this.listTrans.removeAllItens();
         
         for(TransicaoMT tmt : transicoes)
             this.addActionTrans(tmt.getEstAtual(), tmt.getSimLido(), 
@@ -603,21 +603,21 @@ public class CadFTransMT extends javax.swing.JPanel {
                 sGrav = new Simbolo(this.fSimASerGravado.getText().charAt(0));
                 dir = this.cbDirecao.getSelectedItem().toString().equals("D")?
                     Direcao.DIREITA:Direcao.ESQUERDA;
+             }
                 
-                StringBuilder sb = new StringBuilder("\u03B4(")
-                    .append(estOri.getNome())
-                    .append(", ")
-                    .append(simbLido.getNome())
-                    .append(") -> (")
-                    .append(estDest.getNome())
-                    .append(", ")
-                    .append(sGrav.getNome())
-                    .append(", ")
-                    .append(dir == Direcao.DIREITA?"D":"E")
-                    .append(")");
-                
-                this.listTrans.addItem(sb.toString());
-            }
+            StringBuilder sb = new StringBuilder("\u03B4(")
+                .append(estOri.getNome())
+                .append(", ")
+                .append(simbLido.getNome())
+                .append(") -> (")
+                .append(estDest.getNome())
+                .append(", ")
+                .append(sGrav.getNome())
+                .append(", ")
+                .append(dir == Direcao.DIREITA?"D":"E")
+                .append(")");
+
+            this.listTrans.addItem(sb.toString());           
            
         }catch(Exception ex) {
             ex.printStackTrace();
@@ -756,7 +756,7 @@ public class CadFTransMT extends javax.swing.JPanel {
      * @return Matcher
      */
      private Matcher getMatcher(String str) {        
-        String regex = ".?\\((.+),(.+)\\) -> \\((.+),(.+),(.+)\\)";
+        String regex = ".?\\((.+), (.+)\\) -> \\((.+), (.+), (.+)\\)";
         
         return Pattern.compile(regex).matcher(str);
     }

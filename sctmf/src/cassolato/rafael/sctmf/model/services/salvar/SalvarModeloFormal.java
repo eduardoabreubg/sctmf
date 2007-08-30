@@ -14,11 +14,13 @@ import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.AP;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.GLC;
+import cassolato.rafael.sctmf.model.pojo.MT;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.RegraProducao;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
+import cassolato.rafael.sctmf.model.pojo.TransicaoMT;
 import java.io.File;
 import java.io.FileWriter;
 
@@ -51,11 +53,14 @@ public class SalvarModeloFormal implements Salvar {
         
         else if(mf instanceof GLC)
             this.salvarGLC((GLC)mf);
+        
+        else if(mf instanceof MT)
+            this.salvarMT((MT)mf);
                                 
     }
     
     private void salvarAFD(AFD afd) throws SalvarException {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         
         sb.append("E:");  // Add Simbolos
         for(Simbolo s : afd.getSimbolos())
@@ -92,7 +97,7 @@ public class SalvarModeloFormal implements Salvar {
     }
     
     private void salvarAFND(AFND afnd) throws SalvarException {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         
         sb.append("E:");  // Add Simbolos
         for(Simbolo s : afnd.getSimbolos())
@@ -128,7 +133,7 @@ public class SalvarModeloFormal implements Salvar {
     }
     
     private void salvarAP(AP ap) throws SalvarException {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         
         sb.append("E:");  // Add Simbolos
         for(Simbolo s : ap.getSimbolos())
@@ -179,7 +184,7 @@ public class SalvarModeloFormal implements Salvar {
     }
     
     private void salvarGLC(GLC glc) throws SalvarException {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         
         sb.append("V:");  // Add Simbolos Nao-Termais
         for(Simbolo s : glc.getSimbNTerm())
@@ -209,6 +214,54 @@ public class SalvarModeloFormal implements Salvar {
             this.showOkMessage("GLC");
         }catch(Exception ioex) {
             throw new SalvarException("Erro ao Salvar GLC");
+        } 
+    }
+    
+    private void salvarMT(MT mt) throws SalvarException {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("E:");  // Add Simbolos do Alfabeo
+        for(Simbolo s : mt.getAlfabeto())
+            sb.append(s.getNome()+"-");     
+        
+        sb.append("\nV:");  // Add Simbolos do Alfabeto auxiliar
+        for(Simbolo s : mt.getAlfabetoAux())
+            sb.append(s.getNome()+"-"); 
+                       
+        sb.append("\nQ:"); // Add os estados
+        for(Estado e : mt.getEstados())
+            sb.append(e.getNome()+"-");          
+                       
+        sb.append("\nI:"); // Estado Inicial        
+        Estado aux = mt.getEstIni(); 
+        if(aux!=null)
+             sb.append(aux.getNome());   
+                        
+        sb.append("\nF:");
+        for(Estado e : mt.getEstFinais())
+            sb.append(e.getNome()+"-"); 
+         
+         for(TransicaoMT t : mt.getTransicoes()) {
+            sb.append("\nT:")
+            .append(t.getEstAtual().getNome())
+            .append("-")
+            .append(t.getSimLido().getNome())
+            .append("-")            
+            .append(t.getEstDestino().getNome())
+            .append("-")            
+            .append(t.getSimbEscrito().getNome())
+            .append("-")
+            .append(t.getDirecao());
+        }
+         
+        try {         
+            this.writeInFile(
+                    new File(
+                        this.file.getPath()+".mt"),sb.toString());
+            
+            this.showOkMessage("MT");
+        }catch(Exception ioex) {
+            throw new SalvarException("Erro ao Salvar MT");
         } 
     }
     

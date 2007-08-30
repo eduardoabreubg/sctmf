@@ -6,6 +6,11 @@
 
 package cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt;
 
+import cassolato.rafael.sctmf.model.pojo.Direcao;
+import cassolato.rafael.sctmf.model.pojo.Estado;
+import cassolato.rafael.sctmf.model.pojo.MT;
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
+import cassolato.rafael.sctmf.model.pojo.TransicaoMT;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,13 +19,66 @@ import java.awt.event.ActionListener;
  * @author  rafael2009_00
  */
 public class ValSeqMT extends javax.swing.JPanel {
+    private MT mt = null;
     
     /** Creates new form ValSeqMT */
     public ValSeqMT() {
         initComponents();
     }
     
-    public void observer() {
+    void observer(MT mt) {
+        this.mt = mt;
+                
+        this.validaSequenciaGUI.clearArea();   
+        this.validaSequenciaGUI.setTextAInf(
+                "M = <\u03a3, Q, \u03B4, q\u2080, F, V, \u03B2, \u00A4>\n");
+                
+        StringBuffer sb = new StringBuffer();        
+        sb.append("\u03a3 = {");  // Add Simbolos
+        for(Simbolo s : mt.getAlfabeto())
+            sb.append(s.getNome()+", ");                
+        sb = this.validaSequenciaGUI.formataSb(sb);
+                
+        sb.append("Q = {"); // Add Estados
+        for(Estado e : mt.getEstados())
+            sb.append("<"+e.getNome()+">, ");          
+        sb = this.validaSequenciaGUI.formataSb(sb);
+        
+        Estado aux = mt.getEstIni(); // Estado Inicial
+        sb.append("Q\u2080 = <");
+        if(aux!=null)
+             sb.append(aux.getNome());        
+        sb.append(">\n");
+        this.validaSequenciaGUI.setTextAInf(sb.toString());
+        
+        sb = new StringBuffer();
+        
+        sb.append("F = {"); // Add Estados FInais
+        for(Estado e : mt.getEstFinais())
+            sb.append("<"+e.getNome()+">, ");          
+        sb = this.validaSequenciaGUI.formataSb(sb);
+        
+        sb.append("V = {");  // Add Simbolos da Pilha
+        for(Simbolo s : mt.getAlfabetoAux())
+            sb.append(s.getNome()+", ");                
+        sb = this.validaSequenciaGUI.formataSb(sb);
+                        
+        for(TransicaoMT t : mt.getTransicoes()) {
+             sb.append("\n")           // pula a linha
+             .append("\u03B4(")
+             .append(t.getEstAtual().getNome())
+             .append(",")
+             .append(t.getSimLido().getNome())
+             .append(") -> (")            
+             .append(t.getEstDestino().getNome())             
+             .append(" ,")
+             .append(t.getSimbEscrito().getNome())             
+             .append(" ,")
+             .append(t.getDirecao()==Direcao.ESQUERDA?"E":"D")
+             .append(")");             
+        }
+        
+        this.validaSequenciaGUI.setTextAInf(sb.toString());
         
     }
     
@@ -44,7 +102,7 @@ public class ValSeqMT extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
      private void posInitComponents() { 
-        this.validaSequenciaGUI.setSplitPaneLocation(115);
+        this.validaSequenciaGUI.setSplitPaneLocation(150);
        
         this.validaSequenciaGUI.getBValidar().addActionListener(
                 new ActionListener() {
@@ -55,9 +113,9 @@ public class ValSeqMT extends javax.swing.JPanel {
         
     }         
      
-     private void validarSequencia() {   
+    private void validarSequencia() {   
         this.validaSequenciaGUI.validarSequencia(
-                null, // VER
+                this.mt, 
                 this.validaSequenciaGUI.getSequencia());
     }
     
