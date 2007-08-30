@@ -9,6 +9,7 @@
 
 package cassolato.rafael.sctmf.model.pojo;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -17,14 +18,13 @@ import java.util.Set;
  */
 public class MT extends ModeloFormal {
     
-    private Set<Simbolo> alfabeto;
-    private Set<Estado> estados;
-    private Set<TransicaoMT> transicoes;
+    private Set<Simbolo> alfabeto = new LinkedHashSet<Simbolo>();
+    private Set<Estado> estados = new LinkedHashSet<Estado>();
+    private Set<TransicaoMT> transicoes = new LinkedHashSet<TransicaoMT>();
     private Estado estIni;
-    private Set<Estado> estFinais;
-    private Set<Simbolo> alfabetoAux;
+    private Set<Estado> estFinais = new LinkedHashSet<Estado>();
+    private Set<Simbolo> alfabetoAux = new LinkedHashSet<Simbolo>();
     private Simbolo simbIni;
-    private Simbolo simbBranco;
     
     /** Creates a new instance of MT */
     public MT() {
@@ -86,14 +86,24 @@ public class MT extends ModeloFormal {
         this.simbIni = simbIni;
     }
 
-    public Simbolo getSimbBranco() {
-        return simbBranco;
+    public void addTransicao(TransicaoMT t) {
+        this.transicoes.add(t);
+    }   
+
+    public void addSimbAlf(Simbolo simbolo) {
+        this.alfabeto.add(simbolo);
     }
 
-    public void setSimbBranco(Simbolo simbBranco) {
-        this.simbBranco = simbBranco;
+    public void addSimbAlfAux(Simbolo simbolo) {
+         this.alfabetoAux.add(simbolo);
     }
-    
-    
+
+    public void addEstado(Estado estado) {
+       this.estados.add(estado);
+    }
+
+    public void addEstadoFinal(Estado estado) {
+        this.estFinais.add(estado);
+    }
     
 }

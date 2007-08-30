@@ -12,13 +12,16 @@ package cassolato.rafael.sctmf.model.services.abrir;
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.AP;
+import cassolato.rafael.sctmf.model.pojo.Direcao;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.GLC;
+import cassolato.rafael.sctmf.model.pojo.MT;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.RegraProducao;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
+import cassolato.rafael.sctmf.model.pojo.TransicaoMT;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -54,6 +57,9 @@ public class AbrirModeloFormal implements Abrir {
         
         else if(extencionFile.equalsIgnoreCase("glc"))
             return this.abrirGLC(arquivo);
+        
+        else if(extencionFile.equalsIgnoreCase("mt"))
+            return this.abrirMT(arquivo);
         
         else
             return null;
@@ -265,6 +271,65 @@ public class AbrirModeloFormal implements Abrir {
         }
                 
         return glc;        
+    }
+    
+    private MT abrirMT(File arquivo) throws AbrirException {    
+        MT mt = new MT();
+        
+        try {
+         BufferedReader br = new BufferedReader(new FileReader(arquivo));
+         while(br.ready()) {
+             String line = br.readLine();
+             if(line.length()>2) {                 
+                 if(line.startsWith("T")) { // Transicoes
+                     line = line.substring(2);
+                     String str[] = line.split("-");
+                     
+                     TransicaoMT t = new TransicaoMT();                     
+                     t.setEstAtual(new Estado(str[0]));
+                     
+                     char c = str[1].charAt(0);                     
+                     t.setSimLido(new Simbolo(c=='?'?'\u03B2':c));
+                     
+                     t.setEstDestino(new Estado(str[2]));
+                     c = str[3].charAt(0);            
+                     t.setSimbEscrito(new Simbolo(c=='?'?'\u03B2':c));
+                     t.setDirecao(str[4].equals("ESQUERDA")?
+                            Direcao.ESQUERDA:Direcao.DIREITA);
+                     
+                     mt.addTransicao(t);
+                     
+                 }else if(line.startsWith("E")) { // Alfabeto                                        
+                    for(String s : line.substring(2,line.length()-1).split("-"))
+                        mt.addSimbAlf(new Simbolo(s.charAt(0)));
+                    
+                 }else if(line.startsWith("V")) { // Alfabeto Auxiliar                                       
+                    for(String s : line.substring(2,line.length()-1).split("-"))
+                        mt.addSimbAlfAux(new Simbolo(s.charAt(0)));
+
+                 }else if(line.startsWith("Q")) { // Estados                  
+                     for(String e: line.substring(2,line.length()-1).split("-"))
+                         mt.addEstado(new Estado(e));
+
+                 }else if(line.startsWith("F")) { // Estados Finais
+                     for(String f : line.substring(2,line.length()-1).split("-"))
+                         mt.addEstadoFinal(new Estado(f));
+                                      
+                 }if(line.startsWith("I")) {
+                        mt.setEstIni(
+                            new Estado(line.substring(2)));
+                 }
+             }                 
+             
+         }//end while
+         
+         br.close();
+        }catch(Exception ex) {
+            ex.printStackTrace();
+            throw new AbrirException("Erro Ao abrir modelo Formal");            
+        }
+                
+        return mt;  
     }
     
 }

@@ -36,7 +36,7 @@ public class MtGUI extends ModeloFormalGUI {
      */
     // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tpMT = new javax.swing.JTabbedPane();
         pCadAlf = new javax.swing.JPanel();
         pCadEst = new javax.swing.JPanel();
         pCadFTrans = new javax.swing.JPanel();
@@ -44,31 +44,52 @@ public class MtGUI extends ModeloFormalGUI {
 
         setLayout(new java.awt.BorderLayout());
 
-        pCadAlf.setLayout(new java.awt.GridLayout());
+        pCadAlf.setLayout(new java.awt.GridLayout(1, 0));
 
         pCadAlf.add(this.cadAlf);
-        jTabbedPane1.addTab("Alfabetos", pCadAlf);
+        tpMT.addTab("Alfabetos", pCadAlf);
 
-        pCadEst.setLayout(new java.awt.GridLayout());
+        pCadEst.setLayout(new java.awt.GridLayout(1, 0));
 
         pCadEst.add(this.cadEst);
-        jTabbedPane1.addTab("Estados", pCadEst);
+        tpMT.addTab("Estados", pCadEst);
 
-        pCadFTrans.setLayout(new java.awt.GridLayout());
+        pCadFTrans.setLayout(new java.awt.GridLayout(1, 0));
 
         pCadFTrans.add(this.cadFTrans);
-        jTabbedPane1.addTab("Transi\u00e7\u00f5es", pCadFTrans);
+        tpMT.addTab("Transi\u00e7\u00f5es", pCadFTrans);
 
-        pValSeq.setLayout(new java.awt.GridLayout());
+        pValSeq.setLayout(new java.awt.GridLayout(1, 0));
 
         pValSeq.add(this.valSeq);
-        jTabbedPane1.addTab("Valid. Sequ\u00eancia", pValSeq);
+        pValSeq.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                pValSeqComponentShown(evt);
+            }
+        });
 
-        add(jTabbedPane1, java.awt.BorderLayout.CENTER);
+        tpMT.addTab("Valid. Sequ\u00eancia", pValSeq);
+
+        add(tpMT, java.awt.BorderLayout.CENTER);
 
     }// </editor-fold>//GEN-END:initComponents
 
+    private void pValSeqComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_pValSeqComponentShown
+        this.valSeq.observer((MT)this.getModeloFormal());
+    }//GEN-LAST:event_pValSeqComponentShown
+
     public void setModeloFormal(ModeloFormal mf) {
+        MT mt = (MT)mf;
+        this.cadAlf.setSimbAfabeto(mt.getAlfabeto());
+        this.cadAlf.setSimbAfabetoAux(mt.getAlfabetoAux());
+        
+        this.cadEst.setEstados(mt.getEstados());
+        this.cadEst.setEstadoInicial(mt.getEstIni());
+        this.cadEst.setEstadosFinais(mt.getEstFinais());
+        
+        this.cadFTrans.setTransicoes(mt.getTransicoes());
+        
+        this.tpMT.setSelectedIndex(0);
     }
 
     public ModeloFormal getModeloFormal() {
@@ -81,16 +102,6 @@ public class MtGUI extends ModeloFormalGUI {
         mt.setEstFinais(this.cadEst.getEstadosFinais());
         
         mt.setTransicoes(this.cadFTrans.getTransicoes());
-        
-        for(TransicaoMT t : mt.getTransicoes()) {
-            System.out.println("\n"+t.getEstAtual().getNome());
-            System.out.println(t.getSimLido().getNome());
-            
-            System.out.println(t.getEstDestino().getNome());
-            System.out.println(t.getSimbEscrito().getNome());
-            System.out.println(t.getDirecao());
-        }
-            
         
         return mt;
     }
@@ -112,11 +123,11 @@ public class MtGUI extends ModeloFormalGUI {
     }    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel pCadAlf;
     private javax.swing.JPanel pCadEst;
     private javax.swing.JPanel pCadFTrans;
     private javax.swing.JPanel pValSeq;
+    private javax.swing.JTabbedPane tpMT;
     // End of variables declaration//GEN-END:variables
     
 }
