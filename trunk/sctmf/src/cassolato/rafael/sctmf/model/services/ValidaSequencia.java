@@ -12,6 +12,7 @@ package cassolato.rafael.sctmf.model.services;
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.AP;
+import cassolato.rafael.sctmf.model.pojo.Direcao;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.GLC;
 import cassolato.rafael.sctmf.model.pojo.MT;
@@ -20,6 +21,8 @@ import cassolato.rafael.sctmf.model.pojo.RegraProducao;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
+import cassolato.rafael.sctmf.model.pojo.TransicaoMT;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -364,7 +367,42 @@ public class ValidaSequencia implements Validacao {
      * @param sequencia - Sequencia a ser reconhecida
      */
     private boolean valida(MT mt, String sequencia) {
-        return false;
+        List<Simbolo> fita = new ArrayList<Simbolo>();
+        // Coloca os simbolos na fita da maquina
+        fita.add(new Simbolo('\u00A4'));
+        for(char c : sequencia.toCharArray()) fita.add(new Simbolo(c));                       
+        Estado estadoAtual = mt.getEstIni();
+        
+        int cursor = 0;        
+        while(true) {
+            label : {
+                for(TransicaoMT t : mt.getTransicoes())        
+                    if(t.getEstAtual().getNome().equals(estadoAtual.getNome())&&
+                       t.getSimLido().getNome().equals(fita.get(cursor).getNome())) {
+
+                       estadoAtual = t.getEstDestino(); // altera o estado
+                       fita.set(cursor,t.getSimbEscrito()); // Escreve o simbolo na fita
+                       if(t.getDirecao()==Direcao.DIREITA) {
+                           cursor++;
+                           if(fita.size()==cursor) // add um simbolo em braco                           
+                               fita.add(new Simbolo('\u03B2'));
+                           
+                       }else cursor--; // altera o valor do cursor
+
+                       // caso a fita ja se encontrava na celula mais a esquerda
+                       if(cursor<0) return false;                                                   
+                                                                   
+                       for(Estado e : mt.getEstFinais())
+                           if(e.getNome().equals(estadoAtual.getNome()))
+                               return true; // estado final foi assumido
+                       
+                       break label;
+                    }
+
+                return false; // Nenhuma transica foi encontrada
+            } // label
+        } // while
+            
     }
     
     /**
