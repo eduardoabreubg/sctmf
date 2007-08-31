@@ -24,6 +24,7 @@ public class ValSeqMT extends javax.swing.JPanel {
     /** Creates new form ValSeqMT */
     public ValSeqMT() {
         initComponents();
+         posInitComponents(); 
     }
     
     void observer(MT mt) {
@@ -113,7 +114,7 @@ public class ValSeqMT extends javax.swing.JPanel {
         
     }         
      
-    private void validarSequencia() {   
+    private void validarSequencia() {
         this.validaSequenciaGUI.validarSequencia(
                 this.mt, 
                 this.validaSequenciaGUI.getSequencia());
