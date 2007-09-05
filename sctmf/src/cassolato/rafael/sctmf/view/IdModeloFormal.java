@@ -17,6 +17,7 @@ public enum IdModeloFormal {
     // Linguagens Regulares
     AFD,
     AFND,
+    ER,
     
     // Linguagens Livres de Contexto
     AP,
