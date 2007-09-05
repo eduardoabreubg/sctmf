@@ -261,7 +261,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="ER"/>
                 <Property name="toolTipText" type="java.lang.String" value="Express&#xf5;es Regulares "/>
-                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[70, 25]"/>
                 </Property>
