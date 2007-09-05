@@ -392,12 +392,16 @@ public class ValidaSequencia implements Validacao {
                        // caso a fita ja se encontrava na celula mais a esquerda
                        if(cursor<0) return false;                                                   
                                                                    
-                       for(Estado e : mt.getEstFinais())
-                           if(e.getNome().equals(estadoAtual.getNome()))
-                               return true; // estado final foi assumido
+                       //for(Estado e : mt.getEstFinais())
+                        //   if(e.getNome().equals(estadoAtual.getNome()))
+                          //     return true; // estado final foi assumido
                        
-                       break label;
+                      break label;
                     }
+                
+                for(Estado e : mt.getEstFinais())
+                    if(e.getNome().equals(estadoAtual.getNome()))
+                        return true; // estado final foi assumido
 
                 return false; // Nenhuma transica foi encontrada
             } // label
