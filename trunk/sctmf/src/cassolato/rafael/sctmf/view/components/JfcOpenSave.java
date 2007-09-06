@@ -98,6 +98,10 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
                 return new FileNameExtensionFilter(
                         "Autômato Finito Não Determinístico", "afnd", "AFND");
                 
+            case ER:
+                return new FileNameExtensionFilter(
+                        "Expressão Regular", "er", "ER");                
+                
             case AP:
                 return new FileNameExtensionFilter(
                         "Autômato com Pilha", "ap", "AP");

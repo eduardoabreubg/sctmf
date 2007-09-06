@@ -12,6 +12,7 @@ package cassolato.rafael.sctmf.model.services.salvar;
 import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.AP;
+import cassolato.rafael.sctmf.model.pojo.ER;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.GLC;
 import cassolato.rafael.sctmf.model.pojo.MT;
@@ -50,6 +51,9 @@ public class SalvarModeloFormal implements Salvar {
             
         else if(mf instanceof AFND)
             this.salvarAFND((AFND)mf);  
+        
+        else if(mf instanceof ER)
+            this.salvarER((ER)mf); 
         
         else if(mf instanceof GLC)
             this.salvarGLC((GLC)mf);
@@ -130,6 +134,17 @@ public class SalvarModeloFormal implements Salvar {
         }catch(Exception ioex) {
             throw new SalvarException("Erro ao Salvar AFND");
         }
+    }
+    
+    private void salvarER(ER er) {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("E:");  // Add Simbolos
+        for(Simbolo s : er.getAlfabeto())
+            sb.append(s.getNome()+"-"); 
+        
+        sb.append("\nR:") // Add a expressao regular
+        .append(er.getExpressaoRegular());
     }
     
     private void salvarAP(AP ap) throws SalvarException {
@@ -280,6 +295,5 @@ public class SalvarModeloFormal implements Salvar {
                 nameFormalModel+" Salvo com Sucesso", "Operação Concluída",
                 javax.swing.JOptionPane.INFORMATION_MESSAGE);
         
-    }
-    
+    }   
 }
