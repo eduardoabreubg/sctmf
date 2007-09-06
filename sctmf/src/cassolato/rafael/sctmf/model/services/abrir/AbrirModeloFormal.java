@@ -13,6 +13,7 @@ import cassolato.rafael.sctmf.model.pojo.AFD;
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.AP;
 import cassolato.rafael.sctmf.model.pojo.Direcao;
+import cassolato.rafael.sctmf.model.pojo.ER;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.GLC;
 import cassolato.rafael.sctmf.model.pojo.MT;
@@ -51,6 +52,9 @@ public class AbrirModeloFormal implements Abrir {
         
         else if(extencionFile.equalsIgnoreCase("afnd"))
             return this.abrirAFND(arquivo);
+        
+        else if(extencionFile.equalsIgnoreCase("er"))
+            return this.abrirER(arquivo);
         
         else if(extencionFile.equalsIgnoreCase("ap"))
             return this.abrirAP(arquivo);
@@ -160,8 +164,34 @@ public class AbrirModeloFormal implements Abrir {
                 
         return afnd;  
     }
+     
+    private ModeloFormal abrirER(File arquivo) throws AbrirException {
+        ER er = new ER();
+        try {
+         BufferedReader br = new BufferedReader(new FileReader(arquivo));
+         while(br.ready()) {
+             String line = br.readLine();
+             if(line.length()>2) {                 
+                 if(line.startsWith("E")) {
+                    for(String s : line.substring(2,line.length()-1).split("-"))
+                        er.addSimboAlf(new Simbolo(s.charAt(0)));
+                        
+                 }else if(line.startsWith("R")) 
+                      er.setExpressaoRegular(line.substring(2));
+                 
+             }                              
+         }//end while
+         
+         br.close();
+        }catch(Exception ex) {
+            ex.printStackTrace();
+            throw new AbrirException("Erro Ao abrir Modelo Formal");            
+        }
+                
+        return er;     
+    }
     
-     private AP abrirAP(File arquivo) throws AbrirException {
+    private AP abrirAP(File arquivo) throws AbrirException {
         AP ap = new AP();
         try {
          BufferedReader br = new BufferedReader(new FileReader(arquivo));
@@ -330,6 +360,6 @@ public class AbrirModeloFormal implements Abrir {
         }
                 
         return mt;  
-    }
+    }   
     
 }

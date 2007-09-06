@@ -129,6 +129,10 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
                 this.setTitle("AFND - Autômatos Finitos Não Determinísticos");
                 break;
                 
+            case ER :
+                this.setTitle("ER - Expressões Regulares");
+                break;
+                
             case AP :
                 this.setTitle("AP - Autômatos Com Pilha");
                 break;
@@ -140,7 +144,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
             case MT :
                 this.setTitle("MT - Maquina de Turing");
                 break;
-                
+                            
         }
         
         this.gui = GUIFactory.getInstanceMF(this.idMF);

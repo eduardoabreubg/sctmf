@@ -15,6 +15,7 @@ import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.AfdGUI;
 import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afnd.AfndGUI;
 import cassolato.rafael.sctmf.view.modelos_formais.ling_liv_contex.ap.ApGUI;
 import cassolato.rafael.sctmf.view.modelos_formais.ModeloFormalGUI;
+import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.er.ErGUI;
 
 
 /**
@@ -35,11 +36,16 @@ public class GUIFactory {
             case AFND : 
                 return new AfndGUI();
                 
+            case ER : 
+                return new ErGUI();                
+                
+                
             case AP : 
                 return new ApGUI();
                 
            case GLC : 
                 return new GlcGUI();
+                
                 
            case MT : 
                 return new MtGUI();     
