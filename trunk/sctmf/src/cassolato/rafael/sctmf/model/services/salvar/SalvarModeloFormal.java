@@ -136,7 +136,7 @@ public class SalvarModeloFormal implements Salvar {
         }
     }
     
-    private void salvarER(ER er) {
+    private void salvarER(ER er) throws SalvarException {
         StringBuilder sb = new StringBuilder();
         
         sb.append("E:");  // Add Simbolos
@@ -145,6 +145,16 @@ public class SalvarModeloFormal implements Salvar {
         
         sb.append("\nR:") // Add a expressao regular
         .append(er.getExpressaoRegular());
+        
+          try {         
+            this.writeInFile(
+                    new File(
+                        this.file.getPath()+".er"),sb.toString());
+            
+            this.showOkMessage("ER");
+        }catch(Exception ioex) {
+            throw new SalvarException("Erro ao Salvar AFND");
+        }
     }
     
     private void salvarAP(AP ap) throws SalvarException {
