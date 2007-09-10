@@ -297,10 +297,12 @@ public class ValidaSequencia implements Validacao {
                 List<Simbolo> simbs = rp.getSimbLDireito();
                 // busca as regras de producao com terminais no lado direito
                 if(simbs.size()==1&&simbs.get(0).getNome()==c) {
-                    Set<Simbolo> lista = new HashSet<Simbolo>();
-                    lista.add(rp.getSimbLEsq());
-                    tabela[1][i] = lista;
-                    break;
+                    Set<Simbolo> simbolos = tabela[1][i];                    
+                    if(simbolos==null)  // inicia a lista
+                        simbolos = new HashSet<Simbolo>();
+                    
+                    simbolos.add(rp.getSimbLEsq());                
+                    tabela[1][i] = simbolos;               
                 }
             }
             // caso nao exista uma producao para o simbolo da sequencia
@@ -352,10 +354,15 @@ public class ValidaSequencia implements Validacao {
                 } // for das linhas                        
             }
         
-        // Verifica se o simbolo no topo da piramete é o simbolo inicial
-        for(Simbolo s : (Set<Simbolo>)tabela[tabela.length-1][0])
-            if(s.getNome()==glc.getSimbInicial().getNome())
-                return true;
+        // caso o simbolo do topo da piramede esteje null
+        Set<Simbolo> topoPiramede = tabela[tabela.length-1][0];
+        if(topoPiramede==null)
+            return false;
+        
+        else // Verifica se o simbolo no topo da piramete é o simbolo inicial            
+            for(Simbolo s : topoPiramede)
+                if(s.getNome()==glc.getSimbInicial().getNome())
+                    return true;
         
         return false;
     }
