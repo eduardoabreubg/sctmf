@@ -186,7 +186,7 @@ public class SalvarModeloFormal implements Salvar {
             sb.append("\nT:");
             sb.append(t.getEstOri().getNome());
             sb.append("-");
-            sb.append(t.getSimbolo().getNome());
+            sb.append(t.getSimbolo().getNome()=='\u03BB'?"?":t.getSimbolo().getNome());
             sb.append("-");
             sb.append(t.getSimBasePilha().getNome());
             sb.append("-");

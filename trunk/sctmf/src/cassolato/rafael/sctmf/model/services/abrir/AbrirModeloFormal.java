@@ -211,7 +211,7 @@ public class AbrirModeloFormal implements Abrir {
                      char s = str[1].charAt(0);                     
                      t.setSimbolo(new Simbolo(s=='?'?'\u03BB':s));
                      s = str[2].charAt(0);  
-                     t.setSimBasePilha(new Simbolo(s=='?'?'\u03BB':s));
+                     t.setSimBasePilha(new Simbolo(s));
                      
                      t.setEstDest(new Estado(str[3]));
                      // Entrada da pilha
