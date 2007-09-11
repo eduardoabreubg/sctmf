@@ -15,18 +15,18 @@ package cassolato.rafael.sctmf.model.pojo;
  */
 public class AFMV extends AFND {
     
-    private Simbolo simbInicial;
+    private Estado estInicial;
     
     /** Creates a new instance of AFMV */
     public AFMV() {
     }
 
-    public Simbolo getSimbInicial() {
-        return simbInicial;
+    public Estado getEstInicial() {
+        return estInicial;
     }
 
-    public void setSimbInicial(Simbolo simbInicial) {
-        this.simbInicial = simbInicial;
+    public void setEstInicial(Estado estInicial) {
+        this.estInicial = estInicial;
     }
     
 }

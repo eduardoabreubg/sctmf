@@ -59,6 +59,7 @@ public class MainWindow extends javax.swing.JFrame {
         mLingRegul = new javax.swing.JMenu();
         miAFD = new javax.swing.JMenuItem();
         miAFND = new javax.swing.JMenuItem();
+        miAFMV = new javax.swing.JMenuItem();
         miExpReg = new javax.swing.JMenuItem();
         mLingLivContex = new javax.swing.JMenu();
         miAutComPilha = new javax.swing.JMenuItem();
@@ -113,6 +114,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         bAFMV.setBackground(new java.awt.Color(255, 255, 204));
         bAFMV.setText("AFMV");
+        bAFMV.setToolTipText("Aut\u00f4mato Finito com Movimentos Vazios");
         bAFMV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bAFMVActionPerformed(evt);
@@ -241,8 +243,17 @@ public class MainWindow extends javax.swing.JFrame {
 
         mLingRegul.add(miAFND);
 
+        miAFMV.setText("AFMV");
+        miAFMV.setToolTipText("");
+        miAFMV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAFMVActionPerformed(evt);
+            }
+        });
+
+        mLingRegul.add(miAFMV);
+
         miExpReg.setText("Express\u00f5es Regulares ");
-        miExpReg.setEnabled(false);
         miExpReg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miExpRegActionPerformed(evt);
@@ -255,7 +266,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         mLingLivContex.setText("Linguagens Livres de Contexto ");
         miAutComPilha.setText("Aut\u00f4mato com Pilha ");
-        miAutComPilha.setEnabled(false);
         miAutComPilha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miAutComPilhaActionPerformed(evt);
@@ -265,7 +275,6 @@ public class MainWindow extends javax.swing.JFrame {
         mLingLivContex.add(miAutComPilha);
 
         miGramLivrContex.setText("Gram\u00e1tica Livre de Contexto ");
-        miGramLivrContex.setEnabled(false);
         miGramLivrContex.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miGramLivrContexActionPerformed(evt);
@@ -278,7 +287,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         mLingSensContex.setText("Linguagens Sens\u00edveis ao Contexto");
         miGramSensContex.setText("Gram\u00e1tica Sens\u00edvel ao Contexto ");
-        miGramSensContex.setEnabled(false);
         miGramSensContex.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miGramSensContexActionPerformed(evt);
@@ -288,7 +296,6 @@ public class MainWindow extends javax.swing.JFrame {
         mLingSensContex.add(miGramSensContex);
 
         miAutComDuasPilha.setText("Aut\u00f4mato com Duas Pilhas");
-        miAutComDuasPilha.setEnabled(false);
         miAutComDuasPilha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miAutComDuasPilhaActionPerformed(evt);
@@ -301,7 +308,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         mLingEnumRec.setText("Linguagens Enumer\u00e1veis Recursivamente ");
         miMaqTuring.setText("M\u00e1quina de Turing ");
-        miMaqTuring.setEnabled(false);
         miMaqTuring.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 miMaqTuringActionPerformed(evt);
@@ -341,6 +347,10 @@ public class MainWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void miAFMVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAFMVActionPerformed
+        this.showFormalModel(IdModeloFormal.AFMV);
+    }//GEN-LAST:event_miAFMVActionPerformed
 
     private void bAFMVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAFMVActionPerformed
         this.showFormalModel(IdModeloFormal.AFMV);
@@ -500,6 +510,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu mModelos;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem miAFD;
+    private javax.swing.JMenuItem miAFMV;
     private javax.swing.JMenuItem miAFND;
     private javax.swing.JMenuItem miAutComDuasPilha;
     private javax.swing.JMenuItem miAutComPilha;
