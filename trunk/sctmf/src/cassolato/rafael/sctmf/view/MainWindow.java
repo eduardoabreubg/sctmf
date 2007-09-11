@@ -40,6 +40,7 @@ public class MainWindow extends javax.swing.JFrame {
         pLingRegul = new javax.swing.JPanel();
         bAFD = new javax.swing.JButton();
         bAFND = new javax.swing.JButton();
+        bAFMV = new javax.swing.JButton();
         bExpReg = new javax.swing.JButton();
         pLingLivContex = new javax.swing.JPanel();
         bAutComPilha = new javax.swing.JButton();
@@ -109,6 +110,16 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         pLingRegul.add(bAFND);
+
+        bAFMV.setBackground(new java.awt.Color(255, 255, 204));
+        bAFMV.setText("AFMV");
+        bAFMV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAFMVActionPerformed(evt);
+            }
+        });
+
+        pLingRegul.add(bAFMV);
 
         bExpReg.setBackground(new java.awt.Color(255, 255, 204));
         bExpReg.setText("ER");
@@ -331,6 +342,10 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bAFMVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAFMVActionPerformed
+        this.showFormalModel(IdModeloFormal.AFMV);
+    }//GEN-LAST:event_bAFMVActionPerformed
+
     private void bAutComPilhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAutComPilhaActionPerformed
         this.showFormalModel(IdModeloFormal.AP);
     }//GEN-LAST:event_bAutComPilhaActionPerformed
@@ -464,6 +479,7 @@ public class MainWindow extends javax.swing.JFrame {
             
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
     private javax.swing.JButton bAFD;
+    private javax.swing.JButton bAFMV;
     private javax.swing.JButton bAFND;
     private javax.swing.JButton bAutComDuasPilhas;
     private javax.swing.JButton bAutComPilha;
