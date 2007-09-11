@@ -191,6 +191,30 @@ public class ValidaSequencia implements Validacao {
      * @return boolean
      */
     private boolean valida(ER er, String sequencia) {
+        int cEstado = 0;
+        if(sequencia.length()==0) return false;
+        
+        // cria os AFMV inicialmente para cada um dos
+        // simbolos distintos do alfabeto.
+        List<AFMV> list = new ArrayList<AFMV>();
+        for(char c : sequencia.toCharArray()) 
+            if(Character.isLetter(c)) {
+                final AFMV afmv = new AFMV();
+                
+                if(this.existeAFMV(list,c)) {
+                    final Estado eOrig = new Estado("S"+cEstado++);
+                    final Estado eDest = new Estado("S"+cEstado++);                
+                    afmv.addTransicao(new Transicao(eOrig, new Simbolo(c), eDest));
+
+                    afmv.setEstInicial(eOrig);
+                    afmv.addEstadoFinal(eDest);
+
+                    list.add(afmv);
+                }
+                
+            }
+        
+        
         return false;
     }
     
@@ -478,6 +502,15 @@ public class ValidaSequencia implements Validacao {
         return afmv;
     }
     
+    private boolean existeAFMV(List<AFMV> values, char nomeSimboloTrans) {
+        for(AFMV a : values)
+            for(Transicao t : a.getTransicoes())
+                if(t.getSimbolo().getNome()==nomeSimboloTrans)
+                    return false;
+            
+        return true;
+    }
+        
     private void sendMessage(boolean isOK) {
         if(isOK)
             javax.swing.JOptionPane.showMessageDialog(null,
@@ -493,7 +526,7 @@ public class ValidaSequencia implements Validacao {
     public static ValidaSequencia getInstance() {
         return singleton;
     }
-    
+ 
     static {
         singleton =
                 new ValidaSequencia();

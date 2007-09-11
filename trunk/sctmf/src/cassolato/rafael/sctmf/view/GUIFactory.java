@@ -41,8 +41,7 @@ public class GUIFactory {
                 return new AfmvGUI();
                 
             case ER : 
-                return new ErGUI();                
-                
+                return new ErGUI();                                
                 
             case AP : 
                 return new ApGUI();

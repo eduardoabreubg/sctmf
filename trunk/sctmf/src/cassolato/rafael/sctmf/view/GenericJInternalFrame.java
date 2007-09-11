@@ -130,7 +130,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
                 break;
                 
             case AFMV :
-                this.setTitle("AFMV - Autômatos Finitos De Movimentos Vazios");
+                this.setTitle("AFMV - Autômato Finito com Movimentos Vazios");
                 break;    
                 
             case ER :

@@ -9,6 +9,8 @@ package cassolato.rafael.sctmf.view.modelos_formais.ling_regul.er;
 import cassolato.rafael.sctmf.model.pojo.ER;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
+import cassolato.rafael.sctmf.model.services.ValidaSequencia;
+import cassolato.rafael.sctmf.model.services.Validacao;
 import cassolato.rafael.sctmf.view.modelos_formais.ModeloFormalGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +21,8 @@ import java.awt.event.ActionListener;
  * @author  rafael2009_00
  */
 public class ErGUI extends ModeloFormalGUI {
-    
+    private Validacao validacao = ValidaSequencia.getInstance();
+        
     /** Creates new form ErGUI */
     public ErGUI() {
         initComponents();
@@ -260,7 +263,7 @@ public class ErGUI extends ModeloFormalGUI {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bTestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTestarActionPerformed
-        System.out.println(this.fSequencia.getText());
+        validacao.valida(this.getModeloFormal(), this.fExprReg.getText());
     }//GEN-LAST:event_bTestarActionPerformed
 
     private void bDesfazerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDesfazerActionPerformed

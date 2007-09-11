@@ -100,7 +100,7 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
                 
             case AFMV:
                 return new FileNameExtensionFilter(
-                        "Autômato Finito de Movimentos Vazios", "afmv", "AFMV");                    
+                        "Autômato Finito com Movimentos Vazios", "afmv", "AFMV");                    
                 
             case ER:
                 return new FileNameExtensionFilter(
