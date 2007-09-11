@@ -22,7 +22,7 @@ public class MtGUI extends ModeloFormalGUI {
     private CadAlfMT cadAlf = new CadAlfMT(this);
     private CadEstMT cadEst = new CadEstMT(this);
     private CadFTransMT cadFTrans = new CadFTransMT(this);
-    private ValSeqMT valSeq = new ValSeqMT();
+    private ValSeqMT valSeq = new ValSeqMT(this);
     
     /** Creates new form MtGUI */
     public MtGUI() {

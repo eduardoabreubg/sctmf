@@ -27,7 +27,7 @@ public class AfndGUI extends AfdGUI {
     public AfndGUI() {
         cea = new CadEstAFND();
         cfta = new CadFunTransAFND();
-        vsa = new ValSeqAFND();
+        vsa = new ValSeqAFND(this);
         this.posInit();
     } 
     

@@ -16,10 +16,11 @@ import cassolato.rafael.sctmf.model.pojo.Transicao;
  * @author  rafael2009_00
  */
 public class ValSeqAFND extends javax.swing.JPanel {
-    private AFND afnd = null;
+    private AfndGUI gui = null;
     
     /** Creates new form ValSeqAFND */
-    public ValSeqAFND() {
+    public ValSeqAFND(AfndGUI gui) {
+        this.gui = gui;
         initComponents();
         posInitComponents();
     }
@@ -53,15 +54,14 @@ public class ValSeqAFND extends javax.swing.JPanel {
      
     private void validarSequencia() {        
         this.validaSequenciaGUI.validarSequencia(
-                this.afnd,
+                (AFND)this.gui.getModeloFormal(),
                 this.validaSequenciaGUI.getSequencia());
     }
     
     /**
      * Atualiza os dados do automato com pilha, da Area de Informações.
      */
-    void observerValSeq(AFND afnd) {
-        this.afnd = afnd;        
+    void observerValSeq(AFND afnd) {   
         this.validaSequenciaGUI.clearArea();   
         this.validaSequenciaGUI.setTextAInf(
                 "V = <\u03a3, S, S\u2080, \u03B4, F>\n");

@@ -19,17 +19,16 @@ import java.awt.event.ActionListener;
  * @author  rafael2009_00
  */
 public class ValSeqMT extends javax.swing.JPanel {
-    private MT mt = null;
+    private MtGUI gui = null;
     
     /** Creates new form ValSeqMT */
-    public ValSeqMT() {
+    public ValSeqMT(MtGUI gui) {
+        this.gui = gui;
         initComponents();
-         posInitComponents(); 
+        posInitComponents(); 
     }
     
-    void observer(MT mt) {
-        this.mt = mt;
-                
+    void observer(MT mt) {                
         this.validaSequenciaGUI.clearArea();   
         this.validaSequenciaGUI.setTextAInf(
                 "M = <\u03a3, Q, \u03B4, q\u2080, F, V, \u03B2, \u00A4>\n");
@@ -116,7 +115,7 @@ public class ValSeqMT extends javax.swing.JPanel {
      
     private void validarSequencia() {
         this.validaSequenciaGUI.validarSequencia(
-                this.mt, 
+                (MT)this.gui.getModeloFormal(), 
                 this.validaSequenciaGUI.getSequencia());
     }
     

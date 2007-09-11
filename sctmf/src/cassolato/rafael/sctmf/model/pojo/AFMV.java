@@ -13,20 +13,12 @@ package cassolato.rafael.sctmf.model.pojo;
  *
  * @author Cassolato
  */
-public class AFMV extends AFND {
+public class AFMV extends AFD {
     
     private Estado estInicial;
     
     /** Creates a new instance of AFMV */
     public AFMV() {
-    }
-
-    public Estado getEstInicial() {
-        return estInicial;
-    }
-
-    public void setEstInicial(Estado estInicial) {
-        this.estInicial = estInicial;
-    }
-    
+    }    
+   
 }

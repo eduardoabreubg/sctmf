@@ -18,11 +18,11 @@ import java.awt.event.ActionListener;
  * @author  rafael2009_00
  */
 public class ValSeqAP extends javax.swing.JPanel {
-    
-    private AP ap;
+    private ApGUI gui = null;
     
     /** Creates new form ValSeqAP */
-    public ValSeqAP() {        
+    public ValSeqAP(ApGUI gui) {        
+        this.gui = gui;
         initComponents();
         posInitComponents();
     }
@@ -56,16 +56,14 @@ public class ValSeqAP extends javax.swing.JPanel {
      
     private void validarSequencia() {   
         this.validaSequenciaGUI.validarSequencia(
-                this.ap,
+                (AP)this.gui.getModeloFormal(),
                 this.validaSequenciaGUI.getSequencia());
     }
     
     /**
      * Atualiza os dados do automato com pilha, da Area de Informações.
      */
-    void observerValSeq(AP ap) {
-        this.ap = ap;
-        
+    void observerValSeq(AP ap) {        
         this.validaSequenciaGUI.clearArea();   
         this.validaSequenciaGUI.setTextAInf(
                 "V = <\u03a3,\u0393, S, S\u2080, \u03B4, B>\n");
