@@ -18,16 +18,16 @@ import java.awt.event.ActionListener;
  */
 public class ValSeqGLC extends javax.swing.JPanel {
     
-    private GLC glc;
+    private GlcGUI gui;
     
     /** Creates new form ValSeqGLC */
-    public ValSeqGLC() {
+    public ValSeqGLC(GlcGUI gui) {
+        this.gui = gui;
         initComponents();
-         posInitComponents();
+        posInitComponents();
     }
     
     void observer(GLC glc) {
-        this.glc = glc;
         this.validaSequenciaGUI.clearArea();   
          
         this.validaSequenciaGUI.setTextAInf(
@@ -102,7 +102,7 @@ public class ValSeqGLC extends javax.swing.JPanel {
      
      private void validarSequencia() {   
         this.validaSequenciaGUI.validarSequencia(
-                this.glc, 
+                (GLC)this.gui.getModeloFormal(), 
                 this.validaSequenciaGUI.getSequencia());
     }
     

@@ -19,12 +19,13 @@ import cassolato.rafael.sctmf.model.services.Validacao;
  * @author  rafael2009_00
  */
 public class ValSeqAFD extends javax.swing.JPanel {   
-    private AFD afd = null;
+    private AfdGUI gui = null;
     
     /**
      * Creates new form ValSeqAFD
      */
-    public ValSeqAFD() {
+    public ValSeqAFD(AfdGUI gui) {
+        this.gui = gui;
         initComponents();
         posInitComponents();
     }
@@ -58,15 +59,14 @@ public class ValSeqAFD extends javax.swing.JPanel {
      
     private void validarSequencia() {        
         this.validaSequenciaGUI.validarSequencia(
-                this.afd,
+                (AFD)this.gui.getModeloFormal(),
                 this.validaSequenciaGUI.getSequencia());
     }
     
     /**
      * Atualiza os dados do automato com pilha, da Area de Informações.
      */
-    void observerValSeq(AFD afd) {
-        this.afd = afd;        
+    void observerValSeq(AFD afd) {    
         this.validaSequenciaGUI.clearArea();   
         this.validaSequenciaGUI.setTextAInf(
                 "V = <\u03a3, S, S\u2080, \u03B4, F>\n");

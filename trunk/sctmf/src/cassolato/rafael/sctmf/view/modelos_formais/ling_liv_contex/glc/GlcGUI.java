@@ -19,7 +19,7 @@ public class GlcGUI
     
     private CadAlfGLC cadAlf = new CadAlfGLC(this);
     private CadFunTransGLC cadFTrans = new CadFunTransGLC();
-    private ValSeqGLC valSeq = new ValSeqGLC();
+    private ValSeqGLC valSeq = new ValSeqGLC(this);
     
     /** Creates new form GlcGUI */
     public GlcGUI() {

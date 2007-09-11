@@ -21,7 +21,7 @@ public class AfdGUI extends ModeloFormalGUI {
     private final CadAlfAFD pCadAlf = new CadAlfAFD();
     private final CadEstAFD pCadEst = new CadEstAFD();
     private final CadFunTransAFD pCadFunTrans = new CadFunTransAFD();
-    private final ValSeqAFD vs = new ValSeqAFD();
+    private final ValSeqAFD vs = new ValSeqAFD(this);
                 
     /** Creates new form AfdGUI */
     public AfdGUI() {

@@ -24,7 +24,7 @@ public class ApGUI
     private CadAlfAP cadAlf = new CadAlfAP(this);
     private CadEstSimIniAP cadESIP = new CadEstSimIniAP(this);
     private CadFunTransAP cadFunTrans = new CadFunTransAP();
-    private ValSeqAP valSeq = new ValSeqAP();
+    private ValSeqAP valSeq = new ValSeqAP(this);
     
     /** Creates new form BeanForm */
     public ApGUI() {

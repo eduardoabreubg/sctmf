@@ -52,7 +52,7 @@ public class ValidaSequencia implements Validacao {
         if(mf instanceof AP)
             status = this.valida((AP)mf, sequencia);
         
-        else if(mf instanceof AFD )
+        else if(mf instanceof AFD)
             status = this.valida((AFD)mf, sequencia);
         
         else if(mf instanceof AFMV)
@@ -206,7 +206,7 @@ public class ValidaSequencia implements Validacao {
                     final Estado eDest = new Estado("S"+cEstado++);                
                     afmv.addTransicao(new Transicao(eOrig, new Simbolo(c), eDest));
 
-                    afmv.setEstInicial(eOrig);
+                    afmv.setEstadoInicial(eOrig);
                     afmv.addEstadoFinal(eDest);
 
                     list.add(afmv);
@@ -226,6 +226,7 @@ public class ValidaSequencia implements Validacao {
      * @return boolean
      */
     private boolean valida(AP ap, String sequencia) {
+        
         // Pilha do Automato
         final Stack<Simbolo> pilha = new Stack<Simbolo>();
         
@@ -289,26 +290,23 @@ public class ValidaSequencia implements Validacao {
             // ainda contem simbolos, é verificado se existem transicoes
             // que contenham o lambinda como simbolo do alfabeto
             // e tenta-se aplicar a regra de producao.
-            boolean status;
+            boolean status = false;
             do {
-                label : {
-                    for(TransicaoAP t : ap.getTransicoesAP()) {
-                        if((t.getSimbolo().getNome().charValue()=='\u03BB')&&
-                                (estadoAtual.getNome().equals(t.getEstOri().getNome()))&&
-                                (t.getSimBasePilha().getNome().equals(
-                                pilha.peek().getNome()))){
-                            
-                            // Faz a alteração na pilha
-                            this.alterarPilha(pilha, estadoAtual, t);
-                            
-                            if(pilha.empty()) return true;
-                            status = true;
-                            break label;
-                        }
-                    }
-                    
-                    status = false; // seta o status para sair do while
-                }// final break label;
+                for(TransicaoAP t : ap.getTransicoesAP()) 
+                    if((t.getSimbolo().getNome().charValue()=='\u03BB')&&
+                            (estadoAtual.getNome().equals(t.getEstOri().getNome()))&&
+                            (t.getSimBasePilha().getNome().equals(
+                            pilha.peek().getNome()))){
+
+                        // Faz a alteração na pilha
+                        this.alterarPilha(pilha, estadoAtual, t);
+
+                        if(pilha.empty()) return true;
+                        status = true;
+                        break;
+                        
+                    }else status = false; // seta o status para sair do while
+                                                    
             }while(status);
             
         }// fim do else
@@ -475,7 +473,7 @@ public class ValidaSequencia implements Validacao {
      */
     private void alterarPilha(Stack pilha, Estado ea, TransicaoAP t) {
         // Altera o estado Destino
-        ea = t.getEstDest();
+        ea.setNome(t.getEstDest().getNome());
         
         // remove o simbolo do topo da pilha
         if(!pilha.empty()) pilha.pop();
@@ -498,10 +496,18 @@ public class ValidaSequencia implements Validacao {
         }
     }
     
-    private AFND tranformERemAFND(AFMV afmv) {
-        return afmv;
+    /**
+     * Transforma uma ER em um AFND
+     */
+    private AFND tranformERemAFND(ER er) {
+        return null;
     }
     
+    /**
+     * Método usado para verificar se já exste um automato finito com
+     * movimentos vazio na lista. Metodo usado para tranformacao de uma
+     * ER em um AFND.
+     */
     private boolean existeAFMV(List<AFMV> values, char nomeSimboloTrans) {
         for(AFMV a : values)
             for(Transicao t : a.getTransicoes())
@@ -531,5 +537,5 @@ public class ValidaSequencia implements Validacao {
         singleton =
                 new ValidaSequencia();
     }
-    
+     
 }
