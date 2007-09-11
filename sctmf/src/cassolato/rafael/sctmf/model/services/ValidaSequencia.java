@@ -10,9 +10,11 @@
 package cassolato.rafael.sctmf.model.services;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
+import cassolato.rafael.sctmf.model.pojo.AFMV;
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.AP;
 import cassolato.rafael.sctmf.model.pojo.Direcao;
+import cassolato.rafael.sctmf.model.pojo.ER;
 import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.GLC;
 import cassolato.rafael.sctmf.model.pojo.MT;
@@ -53,8 +55,14 @@ public class ValidaSequencia implements Validacao {
         else if(mf instanceof AFD )
             status = this.valida((AFD)mf, sequencia);
         
-        else if(mf instanceof AFND )
+        else if(mf instanceof AFMV)
+            status = this.valida((AFMV)mf, sequencia);
+        
+        else if(mf instanceof AFND)
             status = this.valida((AFND)mf, sequencia);
+        
+        else if(mf instanceof ER)
+            status = this.valida((ER)mf, sequencia);
         
         else if(mf instanceof GLC )
             status = this.valida((GLC)mf, sequencia);
@@ -161,6 +169,28 @@ public class ValidaSequencia implements Validacao {
             if(estadosAtivos.containsKey(ef.getNome()))
                 return true;
         
+        return false;
+    }
+        
+    /**
+     * Valida a expressao regular
+     *
+     * @param afmv - Automato Finito de Movimentos Vazios
+     * @param sequencia - Sequencia a ser Validada.
+     * @return boolean
+     */
+    private boolean valida(AFMV afmv, String sequencia) {
+        return this.valida(afmv, sequencia);
+    }
+    
+    /**
+     * Valida a expressao regular
+     *
+     * @param er - Expressao Regular
+     * @param sequencia - Sequencia a ser Validada.
+     * @return boolean
+     */
+    private boolean valida(ER er, String sequencia) {
         return false;
     }
     
@@ -442,6 +472,10 @@ public class ValidaSequencia implements Validacao {
             }else
                 pilha.push(s);
         }
+    }
+    
+    private AFND tranformERemAFND(AFMV afmv) {
+        return afmv;
     }
     
     private void sendMessage(boolean isOK) {

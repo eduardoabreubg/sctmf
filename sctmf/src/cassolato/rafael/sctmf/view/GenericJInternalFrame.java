@@ -129,6 +129,10 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
                 this.setTitle("AFND - Autômatos Finitos Não Determinísticos");
                 break;
                 
+            case AFMV :
+                this.setTitle("AFMV - Autômatos Finitos De Movimentos Vazios");
+                break;    
+                
             case ER :
                 this.setTitle("ER - Expressões Regulares");
                 break;
