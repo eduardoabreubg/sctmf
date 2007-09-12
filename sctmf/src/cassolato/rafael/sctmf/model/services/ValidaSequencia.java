@@ -153,7 +153,7 @@ public class ValidaSequencia implements Validacao {
             
             // Atribui o clone do objeto auxEA para os estados ativos
             // e limpa o auxEA
-            try {
+            try {               
                 estadosAtivos = (Map) auxEA.getClass().
                         getMethod("clone").invoke(auxEA);
                 auxEA.clear();
@@ -191,13 +191,16 @@ public class ValidaSequencia implements Validacao {
      * @return boolean
      */
     private boolean valida(ER er, String sequencia) {
+        final String expressaoRegular = er.getExpressaoRegular();
+        if(expressaoRegular.length()==0) return false;
+        
         int cEstado = 0;
-        if(sequencia.length()==0) return false;
+        if(sequencia.length()==0) return false;                
         
         // cria os AFMV inicialmente para cada um dos
         // simbolos distintos do alfabeto.
         List<AFMV> list = new ArrayList<AFMV>();
-        for(char c : sequencia.toCharArray()) 
+        for(char c : expressaoRegular.toCharArray()) 
             if(Character.isLetter(c)) {
                 final AFMV afmv = new AFMV();
                 
@@ -212,8 +215,100 @@ public class ValidaSequencia implements Validacao {
                     list.add(afmv);
                 }
                 
-            }
+            }        
+           
+        AFMV afmv = null;  // AFMV que sera retornado
+        // Calcula X + Y
+        String[] str = expressaoRegular.split("\\+");
+        if(str.length>1) 
+            for(int i=1;i<str.length;i++) {
+                AFMV afmv_1 = null;                               
+                if(afmv==null)  // caso seja
+                    afmv_1 = this.getAFMV(list, str[i-1].charAt(0));                                        
+                    
+                else  // pega o AFMV ja construido 
+                    afmv_1 = afmv;                                                        
+                
+                AFMV afmv_2 = this.getAFMV(list, str[i].charAt(0));    
+                afmv = new AFMV();
+                                         
+                afmv.setEstadoInicial(new Estado("S"+cEstado++));
+                afmv.addEstadoFinal(new Estado("S"+cEstado++));
+                
+                // Add transicao superior esquerda
+                afmv.addTransicao(new Transicao(afmv.getEstadoInicial(),
+                                                new Simbolo('e'),
+                                                afmv_1.getEstadoInicial()));
+                
+                // Add transicao inferior esquerda
+                afmv.addTransicao(new Transicao(afmv.getEstadoInicial(),
+                                                new Simbolo('e'),
+                                                afmv_2.getEstadoInicial()));  
+                
+                // add as transições dos automatos anteriores
+                afmv.addAllTransicoes(afmv_1.getTransicoes());
+                afmv.addAllTransicoes(afmv_2.getTransicoes());   
+                
+                // Add transicao superior direita
+                afmv.addTransicao(new Transicao(afmv_1.getEstadosFinais()
+                                                        .iterator().next(),
+                                                new Simbolo('e'),
+                                                afmv.getEstadosFinais()
+                                                        .iterator().next())); 
+                
+                // Add transicao inferior direita
+                afmv.addTransicao(new Transicao(afmv_2.getEstadosFinais()
+                                                        .iterator().next(),
+                                                new Simbolo('e'),
+                                                afmv.getEstadosFinais()
+                                                        .iterator().next()));                                            
+                
+            } // fim do for para +
         
+        else if(expressaoRegular.contains("*")) {
+            str = expressaoRegular.split("\\*");
+            for(String s : str) {
+                // caso nao estiver vazio
+                AFMV afmv_1 = afmv==null?this.getAFMV(list, s.charAt(0)):afmv;                
+                afmv = new AFMV(); 
+                
+                afmv.setEstadoInicial(new Estado("S"+cEstado++));
+                afmv.addEstadoFinal(new Estado("S"+cEstado++));
+                
+                // add transicao direita/esquerda superior
+                afmv.addTransicao(new Transicao(afmv_1.getEstadosFinais()
+                                                        .iterator().next(),
+                                                new Simbolo('e'),
+                                                afmv_1.getEstadoInicial()));  
+
+                // add transicao da esquerda
+                afmv.addTransicao(new Transicao(afmv.getEstadoInicial(),
+                                                new Simbolo('e'),
+                                                afmv_1.getEstadoInicial()));  
+                
+                // add transicao da direita
+                afmv.addTransicao(new Transicao(afmv_1.getEstadosFinais()
+                                                        .iterator().next(),
+                                                new Simbolo('e'),
+                                                afmv.getEstadosFinais()
+                                                         .iterator().next())); 
+                
+                // add transicao esquerda/direita inferior
+                afmv.addTransicao(new Transicao(afmv.getEstadoInicial(),
+                                                new Simbolo('e'),
+                                                afmv.getEstadosFinais()
+                                                        .iterator().next()));  
+                // add as transicoes
+                afmv.addAllTransicoes(afmv_1.getTransicoes());                
+                
+            }
+        }
+                
+        
+        for(Transicao t : afmv.getTransicoes())    
+            System.out.println(t.getEstOri().getNome()+","+
+                               t.getSimbolo().getNome()+"->"+
+                               t.getEstDest().getNome());
         
         return false;
     }
@@ -495,14 +590,7 @@ public class ValidaSequencia implements Validacao {
                 pilha.push(s);
         }
     }
-    
-    /**
-     * Transforma uma ER em um AFND
-     */
-    private AFND tranformERemAFND(ER er) {
-        return null;
-    }
-    
+      
     /**
      * Método usado para verificar se já exste um automato finito com
      * movimentos vazio na lista. Metodo usado para tranformacao de uma
@@ -516,7 +604,20 @@ public class ValidaSequencia implements Validacao {
             
         return true;
     }
-        
+     
+    /**
+     * Recebe o simbolo da transicao e a a lista de AFMVs como parametro, 
+     * e retorna o AFMV no qual contem a transicao correspondente.
+     */
+    private AFMV getAFMV(List<AFMV> values, Character nomeSimbolo) {
+        for(AFMV afmv : values)
+            for(Transicao t : afmv.getTransicoes())
+                if(t.getSimbolo().getNome()==nomeSimbolo)
+                    return afmv;
+            
+        return null;
+    }
+    
     private void sendMessage(boolean isOK) {
         if(isOK)
             javax.swing.JOptionPane.showMessageDialog(null,

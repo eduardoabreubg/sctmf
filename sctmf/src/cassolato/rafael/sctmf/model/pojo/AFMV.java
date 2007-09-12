@@ -14,9 +14,7 @@ package cassolato.rafael.sctmf.model.pojo;
  * @author Cassolato
  */
 public class AFMV extends AFD {
-    
-    private Estado estInicial;
-    
+      
     /** Creates a new instance of AFMV */
     public AFMV() {
     }    

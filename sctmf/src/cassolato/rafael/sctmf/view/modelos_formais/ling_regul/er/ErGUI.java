@@ -263,7 +263,7 @@ public class ErGUI extends ModeloFormalGUI {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bTestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTestarActionPerformed
-        validacao.valida(this.getModeloFormal(), this.fExprReg.getText());
+        validacao.valida(this.getModeloFormal(), this.fSequencia.getText());
     }//GEN-LAST:event_bTestarActionPerformed
 
     private void bDesfazerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDesfazerActionPerformed

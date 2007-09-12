@@ -54,9 +54,12 @@ public abstract class Automato extends ModeloFormal {
         estados.remove(e);
     }
     
-    public void addAllTransicoes(Collection<Transicao> c) {        
-        this.transicoes.clear();
+    public void addAllTransicoes(Collection<Transicao> c) {               
         this.transicoes.addAll(c);
+    }
+    
+    public void clearAllTransicoes() {
+        this.transicoes.clear();
     }
     
     public void addTransicao(Transicao t) {
