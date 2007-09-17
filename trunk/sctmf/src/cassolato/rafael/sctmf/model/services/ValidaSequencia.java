@@ -635,7 +635,7 @@ public class ValidaSequencia implements Validacao {
                                                 final AFMV afmv_2 ) {                              
             
             final AFMV afmv = new AFMV();
-            afmv.setEstadoInicial(this.getNewEstado());
+            /*afmv.setEstadoInicial(this.getNewEstado());
             afmv.addEstadoFinal(this.getNewEstado());
             
             // add transicao estIniAfmv/estIniAfmv_1
@@ -655,6 +655,19 @@ public class ValidaSequencia implements Validacao {
                     afmv_2.getEstadosFinais().iterator().next(), 
                     new Simbolo('\u03B5'),
                     afmv.getEstadosFinais().iterator().next()));
+            
+            afmv.addAllTransicoes(afmv_1.getTransicoes());
+            afmv.addAllTransicoes(afmv_2.getTransicoes());*/
+            
+            // Add o estado inicial do 1 e o estado final do 2
+            afmv.setEstadoInicial(afmv_1.getEstadoInicial());
+            afmv.addAllEstFinais(afmv_2.getEstadosFinais());
+            
+            // Add transicao de ligacao
+            afmv.addTransicao(new Transicao(
+                                afmv_1.getEstadosFinais().iterator().next(),
+                                new Simbolo('\u03B5'),
+                                afmv_2.getEstadoInicial()));
             
             afmv.addAllTransicoes(afmv_1.getTransicoes());
             afmv.addAllTransicoes(afmv_2.getTransicoes());
