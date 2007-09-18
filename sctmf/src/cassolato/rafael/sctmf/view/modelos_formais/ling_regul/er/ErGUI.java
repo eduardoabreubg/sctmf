@@ -263,7 +263,20 @@ public class ErGUI extends ModeloFormalGUI {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bTestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bTestarActionPerformed
-        validacao.valida(this.getModeloFormal(), this.fSequencia.getText());
+        String valor = this.fExprReg.getText();
+        int cont = 0;
+        for(char c : valor.toCharArray())
+            if(c == 40)
+                cont++;
+            else if(c == 41)
+                cont--;
+                
+        if(cont==0)        
+            validacao.valida(this.getModeloFormal(), this.fSequencia.getText());
+        
+        else 
+            javax.swing.JOptionPane.showMessageDialog(
+                    null, " Verifique os parenteses da ER!");
     }//GEN-LAST:event_bTestarActionPerformed
 
     private void bDesfazerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDesfazerActionPerformed
