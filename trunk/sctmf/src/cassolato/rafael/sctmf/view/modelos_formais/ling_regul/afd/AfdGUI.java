@@ -120,7 +120,9 @@ public class AfdGUI extends ModeloFormalGUI {
         afd.setEstadoInicial(pCadEst.getEstadoInicial());
         afd.addAllEstFinais(pCadEst.getEstadosFinais());
                 
-        pCadFunTrans.observer(estados,simbolos);        
+        pCadFunTrans.observer(estados,simbolos);      
+        
+        afd.clearAllTransicoes();
         afd.addAllTransicoes(pCadFunTrans.getFuncTrans());
                 
         return afd;

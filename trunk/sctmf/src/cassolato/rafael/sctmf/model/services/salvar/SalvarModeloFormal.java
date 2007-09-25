@@ -10,6 +10,7 @@
 package cassolato.rafael.sctmf.model.services.salvar;
 
 import cassolato.rafael.sctmf.model.pojo.AFD;
+import cassolato.rafael.sctmf.model.pojo.AFMV;
 import cassolato.rafael.sctmf.model.pojo.AFND;
 import cassolato.rafael.sctmf.model.pojo.AP;
 import cassolato.rafael.sctmf.model.pojo.ER;
@@ -46,11 +47,14 @@ public class SalvarModeloFormal implements Salvar {
         if(mf instanceof AP)
             this.salvarAP((AP)mf);
         
+        else if(mf instanceof AFMV)
+            this.salvarAFMV((AFMV)mf); 
+        
         else if(mf instanceof AFD)
             this.salvarAFD((AFD)mf);   
             
         else if(mf instanceof AFND)
-            this.salvarAFND((AFND)mf);  
+            this.salvarAFND((AFND)mf);           
         
         else if(mf instanceof ER)
             this.salvarER((ER)mf); 
@@ -154,6 +158,43 @@ public class SalvarModeloFormal implements Salvar {
             this.showOkMessage("ER");
         }catch(Exception ioex) {
             throw new SalvarException("Erro ao Salvar AFND");
+        }
+    }
+    
+     private void salvarAFMV(AFMV afmv) throws SalvarException {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("E:");  // Add Simbolos
+        for(Simbolo s : afmv.getSimbolos())
+            sb.append(s.getNome()+"-");     
+                       
+        sb.append("\nS:");
+        for(Estado e : afmv.getEstados())
+            sb.append(e.getNome()+"-");          
+                       
+        Estado aux = afmv.getEstadoInicial();
+        sb.append("\nI:");
+        if(aux!=null)
+             sb.append(aux.getNome()); 
+                        
+        sb.append("\nF:");
+        for(Estado e : afmv.getEstadosFinais())
+            sb.append(e.getNome()+"-"); 
+                
+        for(Transicao t : afmv.getTransicoes())
+        sb.append("\nT:"+
+                t.getEstOri().getNome()+"-"+
+                t.getSimbolo().getNome()+"-"+
+                t.getEstDest().getNome()); 
+    
+        try {         
+            this.writeInFile(
+                    new File(
+                        this.file.getPath()+".afmv"),sb.toString());
+            
+            this.showOkMessage("AFMV");
+        }catch(Exception ioex) {
+            throw new SalvarException("Erro ao Salvar AFMV");
         }
     }
     

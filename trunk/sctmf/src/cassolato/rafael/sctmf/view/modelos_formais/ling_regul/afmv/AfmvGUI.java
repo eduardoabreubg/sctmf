@@ -52,7 +52,7 @@ public class AfmvGUI extends AfdGUI {
         afmv.addAllSimbolos(simbolos);        
         Collection<Estado> estados = cadEst.getEstados();
         afmv.addAllEstados(estados);
-        //afmv.setEstadoInicial(cadEst.ge);
+        afmv.setEstadoInicial(cadEst.getEstadoInicial());
         afmv.addAllEstFinais(cadEst.getEstadosFinais());
                 
         cadFunTrans.observer(estados,simbolos);        

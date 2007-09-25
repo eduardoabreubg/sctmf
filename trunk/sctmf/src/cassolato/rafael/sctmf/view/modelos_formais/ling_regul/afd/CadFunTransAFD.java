@@ -317,7 +317,7 @@ public class CadFunTransAFD extends javax.swing.JPanel {
         this.genericJList.removeItens();  
     }                                       
 
-    private void addAction(Estado estOri, Simbolo s, Estado estFin) {                                     
+    protected void addAction(Estado estOri, Simbolo s, Estado estFin) {                                     
         StringBuffer sb = new StringBuffer("\u03B4 (");
        
         // Indica que foi executada uma acao pelo usuário
@@ -325,9 +325,9 @@ public class CadFunTransAFD extends javax.swing.JPanel {
         try {
          
             if(estOri==null) {
-                estOri = new Estado(cbEstOri.getSelectedItem().toString());
-                s = new Simbolo(cbSimb.getSelectedItem().toString().charAt(0));
-                estFin = new Estado(cbEstDes.getSelectedItem().toString());
+                estOri = new Estado(getItemCbEstOri());
+                s = new Simbolo(getItemCbSimb());
+                estFin = new Estado(getItemCbEstDest());
             }
 
             sb.append(estOri.getNome()); // EstOri
@@ -350,6 +350,10 @@ public class CadFunTransAFD extends javax.swing.JPanel {
         }catch(Exception ex) {
             System.out.println("Algum JComboBox está null");
         }
+    }
+    
+    protected cassolato.rafael.sctmf.view.components.GenericJList getGJList() {
+        return this.genericJList;
     }
     
     /**
@@ -386,7 +390,7 @@ public class CadFunTransAFD extends javax.swing.JPanel {
             if(m.find()) {
                 t.setEstOri(new Estado(m.group(1)));
                 t.setSimbolo(new Simbolo(m.group(2).charAt(0)));
-                t.setEstDest(new Estado(m.group(3)));
+                t.setEstDest(new Estado(m.group(3)));                            
                 
                 transicoes.add(t);
             }
@@ -446,11 +450,12 @@ public class CadFunTransAFD extends javax.swing.JPanel {
      * @param estados
      */
     private void observerFuncCad(String simbolos, String estados) {
-        List<String> sim = Arrays.asList(simbolos.split("-"));
+        simbolos+="\u03BB-"; // caso do AFMV
+        List<String> sim = Arrays.asList(simbolos.split("-"));        
         List<String> est = Arrays.asList(estados.split("-"));
         
         for(Object obj : genericJList.getAllItens()) {
-            Matcher m = this.getMatcher(obj.toString());
+            Matcher m = this.getMatcher(obj.toString());            
             
             if(m.find())
                 if(!(est.contains(m.group(1))&&est.contains(m.group(3))&&
@@ -485,9 +490,9 @@ public class CadFunTransAFD extends javax.swing.JPanel {
      * @param str
      * @return Matcher
      */
-    private Matcher getMatcher(String str) {
+    protected Matcher getMatcher(String str) {
         //String regex = ".*\\((.{2}),.*(.{1})\\).*=.*(.{2})$";
-        String regex = ".?\\((.{2}), (.{1})\\).?=.?(.{2})";        
+        String regex = ".?\\((.{2}), (.1)\\).?=.?(.{2})";        
                 
         return Pattern.compile(regex).matcher(str);
     }
@@ -506,6 +511,18 @@ public class CadFunTransAFD extends javax.swing.JPanel {
         });        
      }
     
+     protected String getItemCbEstOri() {
+         return cbEstOri.getSelectedItem().toString();
+     }
+     
+     protected Character getItemCbSimb() {
+         return cbSimb.getSelectedItem().toString().charAt(0);
+     }
+     
+     protected String getItemCbEstDest() {
+         return cbEstDes.getSelectedItem().toString();
+     }
+     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
     private cassolato.rafael.sctmf.view.components.AddRemButtonsPanel addRemButtonsPanel;
     private javax.swing.JComboBox cbEstDes;
