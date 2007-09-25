@@ -52,15 +52,15 @@ public class ValidaSequencia implements Validacao {
         if(mf instanceof AP)
             status = this.valida((AP)mf, sequencia);
         
-        else if(mf instanceof AFD)
-            status = this.valida((AFD)mf, sequencia);
-        
         else if(mf instanceof AFMV)
             status = this.valida((AFMV)mf, sequencia);
         
         else if(mf instanceof AFND)
             status = this.valida((AFND)mf, sequencia);
-        
+                
+        else if(mf instanceof AFD)
+            status = this.valida((AFD)mf, sequencia);
+                
         else if(mf instanceof ER)
             status = this.valida((ER)mf, sequencia);
         
@@ -180,7 +180,54 @@ public class ValidaSequencia implements Validacao {
      * @return boolean
      */
     private boolean valida(AFMV afmv, String sequencia) {
-        return this.valida(afmv, sequencia);
+        // Estados que podem estar ativos no AFMV
+        Map<String, Estado> estadosAtivos = new HashMap<String, Estado>();
+        // Estados ativos - Var Auxiliar
+        Map<String, Estado> auxEA = new HashMap<String, Estado>();
+        
+        // Preeche o estado ativo
+        Estado est = afmv.getEstadoInicial();
+        estadosAtivos.put(est.getNome(), est);
+        
+        // Percorre a sequencia
+        for(char c : sequencia.toCharArray()) {
+            // Percorre as transicoes
+            for(Transicao t : afmv.getTransicoes()) {
+                Estado e = t.getEstOri();
+                Simbolo s = t.getSimbolo();
+                
+                Estado aux = estadosAtivos.get(e.getNome());
+                // Verifica se existe uma transicao cadastrada
+                // que ativa um estado novo
+                if(aux!=null&&c==s.getNome().charValue()) {
+                    Estado ed = t.getEstDest();
+                    auxEA.put(ed.getNome(), ed);
+                }
+                
+            }
+            
+            if(auxEA.size()==0)  // retorna falso caso nao existe uma transicao
+                return false;    // que leve um determinado estado a outro
+            
+            // Atribui o clone do objeto auxEA para os estados ativos
+            // e limpa o auxEA
+            try {               
+                estadosAtivos = (Map) auxEA.getClass().
+                        getMethod("clone").invoke(auxEA);
+                auxEA.clear();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            
+        }
+        
+        // Vefirica se existe algum estado ativo
+        // contem dentro dos estados finais.
+        for(Estado ef : afmv.getEstadosFinais())
+            if(estadosAtivos.containsKey(ef.getNome()))
+                return true;
+               
+        return false;
     }
     
     /**
