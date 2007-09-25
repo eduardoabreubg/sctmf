@@ -425,7 +425,7 @@ public class CadFunTransAFD extends javax.swing.JPanel {
             est+= e+"-";
         }
         
-        cbSimb.removeAllItems();
+        cbSimb.removeAllItems();        
         
         Iterator<Simbolo> is = simbolos.iterator();
         while(is.hasNext()) {
@@ -469,6 +469,10 @@ public class CadFunTransAFD extends javax.swing.JPanel {
     protected void setLDirTrans(String label) {
         if(label==null) label = "S"; // Caso do AFD        
         this.lDirTrans.setText(label);
+    }
+    
+    protected void addSimCbSimb(String label) {        
+        this.cbSimb.addItem(label);
     }
     
     /**

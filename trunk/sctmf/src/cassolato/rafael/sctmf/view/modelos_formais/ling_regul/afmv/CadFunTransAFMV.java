@@ -6,7 +6,10 @@
 
 package cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afmv;
 
+import cassolato.rafael.sctmf.model.pojo.Estado;
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.CadFunTransAFD;
+import java.util.Collection;
 
 /**
  *
@@ -22,9 +25,18 @@ public class CadFunTransAFMV extends CadFunTransAFD {
     }        
     
     private void posInitComponents() {
-        setLEsqTrans("(E U {e})");      
+        setLEsqTrans("(\u03a3U{\u03BB})");      
         setLDirTrans("2q");        
-    }
+        addSimCbSimb("\u03BB");
+    }   
+    
+    @Override
+    public void observer(
+            Collection<Estado> estados, Collection<Simbolo> simbolos) { 
+       super.observer(estados,simbolos);
+       addSimCbSimb("\u03BB");
+    }    
+    
     
     /** This method is called from within the constructor to
      * initialize the form.
