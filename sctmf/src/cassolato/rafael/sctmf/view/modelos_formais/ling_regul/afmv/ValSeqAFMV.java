@@ -7,6 +7,9 @@
 package cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afmv;
 
 import cassolato.rafael.sctmf.model.pojo.AFMV;
+import cassolato.rafael.sctmf.model.pojo.Estado;
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
+import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.view.components.ValidaSequenciaGUI;
 
 /**
@@ -49,39 +52,41 @@ public class ValSeqAFMV extends javax.swing.JPanel {
         this.validaSequenciaGUI.setTextAInf(
                 "V = <\u03a3, S, S\u2080, \u03B4, F>\n");
                 
-        StringBuffer sb = new StringBuffer();
-        /*
+        StringBuffer sb = new StringBuffer();        
         sb.append("\u03a3 = {");  // Add Simbolos
-        for(Simbolo s : afnd.getSimbolos())
+        for(Simbolo s : afmv.getSimbolos())
             sb.append(s.getNome()+", ");                
         sb = this.validaSequenciaGUI.formataSb(sb);
                 
         sb.append("S = {");
-        for(Estado e : afnd.getEstados())
+        for(Estado e : afmv.getEstados())
             sb.append("<"+e.getNome()+">, ");          
-        sb = this.validaSequenciaGUI.formataSb(sb);
-               
+        sb = this.validaSequenciaGUI.formataSb(sb);              
         
         sb.append("S\u2080 = {");
-        for(Estado ef : afnd.getEstadosIniciais())            
-            sb.append("<"+ef.getNome()+">, ");        
-        sb = this.validaSequenciaGUI.formataSb(sb);
+        Estado aux = afmv.getEstadoInicial();
+        if(aux!=null)
+             sb.append("<"+aux.getNome()+">");        
+        sb.append("}\n");
+        this.validaSequenciaGUI.setTextAInf(sb.toString());
+        
+        sb = new StringBuffer();
         
         sb.append("F = {");
-       for(Estado e : afnd.getEstadosFinais())
+       for(Estado e : afmv.getEstadosFinais())
             sb.append("<"+e.getNome()+">, "); 
         sb = this.validaSequenciaGUI.formataSb(sb);        
         
-        for(Transicao t : afnd.getTransicoes()) {
+        for(Transicao t : afmv.getTransicoes()) {
             sb.append("\n");
             sb.append("\u03B4(<");
             sb.append(t.getEstOri().getNome());
             sb.append(">, ");
             sb.append(t.getSimbolo().getNome());
-            sb.append(") = <");
+            sb.append(") -> <");
             sb.append(t.getEstDest().getNome());
             sb.append(">");
-        } */        
+        }         
                 
         this.validaSequenciaGUI.setTextAInf(sb.toString());
     }
