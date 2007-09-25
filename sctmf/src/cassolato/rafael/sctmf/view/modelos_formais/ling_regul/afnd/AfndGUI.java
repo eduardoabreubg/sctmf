@@ -109,6 +109,8 @@ public class AfndGUI extends AfdGUI {
         afnd.addAllEstFinais(cea.getEstadosFinais());
                 
         cfta.observer(estados,simbolos);        
+        
+        afnd.clearAllTransicoes();
         afnd.addAllTransicoes(cfta.getFuncTrans());
                 
         return afnd;

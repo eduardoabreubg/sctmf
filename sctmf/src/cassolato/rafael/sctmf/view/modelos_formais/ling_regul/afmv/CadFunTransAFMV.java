@@ -10,6 +10,8 @@ import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.CadFunTransAFD;
 import java.util.Collection;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -37,6 +39,45 @@ public class CadFunTransAFMV extends CadFunTransAFD {
        addSimCbSimb("\u03BB");
     }    
     
+    @Override
+    protected boolean wayAdd(String transicao) {        
+        return true;
+    }
+    
+    @Override
+    protected void addAction(Estado estOri, Simbolo s, Estado estFin) {                                     
+        StringBuffer sb = new StringBuffer("\u03B4 (");
+       
+        // Indica que foi executada uma acao pelo usuário
+        // de adicao de Transicao
+        try {
+         
+            if(estOri==null) {
+                estOri = new Estado(getItemCbEstOri());
+                s = new Simbolo(getItemCbSimb());
+                estFin = new Estado(getItemCbEstDest());
+            }
+
+            sb.append(estOri.getNome()); // EstOri
+            sb.append(", ");
+            sb.append(s.getNome());   // Simb
+            sb.append(") -> ");
+            sb.append(estFin.getNome()); // EstOri
+
+            String transicao = sb.toString();
+            getGJList().addItem(transicao);           
+        
+        }catch(Exception ex) {
+            System.out.println("Algum JComboBox está null");
+        }
+    }
+    
+    @Override
+    protected Matcher getMatcher(String str) {
+        String regex = ".*\\((.+), (.+)\\) -> (.+)";        
+                
+        return Pattern.compile(regex).matcher(str);
+    }
     
     /** This method is called from within the constructor to
      * initialize the form.
