@@ -6,25 +6,103 @@
 
 package cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afmv;
 
+import cassolato.rafael.sctmf.model.pojo.AFMV;
+import cassolato.rafael.sctmf.model.pojo.Estado;
 import cassolato.rafael.sctmf.model.pojo.ModeloFormal;
-import cassolato.rafael.sctmf.view.modelos_formais.ModeloFormalGUI;
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
+import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.AfdGUI;
+import java.util.Collection;
 
 /**
  *
  * @author  Cassolato
  */
-public class AfmvGUI extends ModeloFormalGUI {
+public class AfmvGUI extends AfdGUI {
+    
+    private CadEstAFMV cadEst;
+    private CadFunTransAFMV cadFunTrans;
+    private ValSeqAFMV valSeq;
     
     /** Creates new form AfmvGUI */
     public AfmvGUI() {
+        cadEst = new CadEstAFMV();
+        cadFunTrans = new CadFunTransAFMV();
+        valSeq = new ValSeqAFMV(this);
+        
         initComponents();
+        posInit();
     }
     
-    public void setModeloFormal(ModeloFormal mf) {
+    public void setModeloFormal(ModeloFormal fm) {
+        AFMV afmv = (AFMV)fm;
+        this.getPCadAlf().addSimbolos(afmv.getSimbolos());  
+  
+        cadEst.setEstados(afmv.getEstados());        
+        cadEst.setEstadoInicial(afmv.getEstadoInicial());
+        cadEst.setEstadosFinais(afmv.getEstadosFinais());
+        
+        cadFunTrans.setFuncTrans(afmv.getTransicoes());
+        
+        this.changeCards(-1); // volta o card para o primeiro card*/
     }
 
     public ModeloFormal getModeloFormal() {
-        return null;
+        AFMV afmv = new AFMV();
+        Collection<Simbolo> simbolos = getPCadAlf().getSimbolos();
+        afmv.addAllSimbolos(simbolos);        
+        Collection<Estado> estados = cadEst.getEstados();
+        afmv.addAllEstados(estados);
+        //afmv.setEstadoInicial(cadEst.ge);
+        afmv.addAllEstFinais(cadEst.getEstadosFinais());
+                
+        cadFunTrans.observer(estados,simbolos);        
+        afmv.addAllTransicoes(cadFunTrans.getFuncTrans());        
+        return afmv;
+    }
+    
+     private void posInit() {
+        // Substitui o Panel de Cadastro de Estados
+        getPCard().remove(1);
+        getPCard().add(cadEst, cardNames.get(1),1);
+        // Substitui o Panel de Cadastro de Transicoes
+        getPCard().remove(2);
+        getPCard().add(cadFunTrans, cardNames.get(2),2);        
+        // Substitui o Panel de Validacao de Sequencias
+        getPCard().remove(3);
+        getPCard().add(valSeq, cardNames.get(3),3);
+    }
+    
+    protected void changeCards(final int direction) {
+        switch(direction) {
+            case NEXT :
+                activeCard++;
+                
+                if(activeCard==2)
+                    cadFunTrans.observer(
+                            cadEst.getEstados(),
+                            getPCadAlf().getSimbolos());
+                
+                else if(activeCard==3)                  
+                    valSeq.observerValSeq((AFMV)getModeloFormal());
+                 
+                
+                break;
+                
+            case PREVIOUS : 
+                activeCard--;
+                
+                break;
+                                 
+            default : {
+                activeCard = 0;
+                getBNext().setEnabled(true);
+                getBBack().setEnabled(false);
+            }                
+        }
+        
+        ((java.awt.CardLayout)getPCard().getLayout()).
+                show(getPCard(),cardNames.get(activeCard));
+        
     }
     
     /** This method is called from within the constructor to
@@ -35,16 +113,6 @@ public class AfmvGUI extends ModeloFormalGUI {
     // <editor-fold defaultstate="collapsed" desc=" Código Gerado ">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
     }// </editor-fold>//GEN-END:initComponents
     
     

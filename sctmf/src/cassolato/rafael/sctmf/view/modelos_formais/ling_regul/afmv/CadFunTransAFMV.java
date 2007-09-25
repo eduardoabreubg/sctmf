@@ -1,10 +1,10 @@
 /*
- * CadFunTransAFND.java
+ * CadFunTransAFMV.java
  *
- * Created on 26 de Maio de 2007, 17:22
+ * Created on 24 de Setembro de 2007, 20:26
  */
 
-package cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afnd;
+package cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afmv;
 
 import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.CadFunTransAFD;
 
@@ -12,16 +12,17 @@ import cassolato.rafael.sctmf.view.modelos_formais.ling_regul.afd.CadFunTransAFD
  *
  * @author  Cassolato
  */
-public class CadFunTransAFND extends CadFunTransAFD {
+public class CadFunTransAFMV extends CadFunTransAFD {
     
-    /** Creates new form BeanForm */
-    public CadFunTransAFND() {
+    /** Creates new form CadFunTransAFMV */
+    public CadFunTransAFMV() {
         super();
-        initComponents(); 
+        initComponents();
         posInitComponents();
     }        
     
-    private void posInitComponents() {        
+    private void posInitComponents() {
+        setLEsqTrans("(E U {e})");      
         setLDirTrans("2q");        
     }
     
@@ -33,19 +34,9 @@ public class CadFunTransAFND extends CadFunTransAFD {
     // <editor-fold defaultstate="collapsed" desc=" Código Gerado ">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+
     }// </editor-fold>//GEN-END:initComponents
     
-    /**
-     * Metodo sobrescrito para permitir um estado origem<br>
-     * e um simbolo, possam chegar a mais de um estado final<br>
-     * caracteristica essa do AFND.
-     *
-     * @param String
-     * @return boolean
-     */
-    protected boolean wayAdd(String transicao) {        
-        return true;
-    }
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
     // Fim da declaração de variáveis//GEN-END:variables

@@ -203,14 +203,14 @@ public class CadEstAFD extends javax.swing.JPanel
         return this.cadEstado.getAllItens();        
     }
     
-    void setEstadoInicial(Estado ei) {
+    public void setEstadoInicial(Estado ei) {
         this.listEstIni.removeAllItens();
         if(ei!=null)             
             this.listEstIni.addItem(ei.getNome());
                     
     }
     
-    Estado getEstadoInicial() {
+    public Estado getEstadoInicial() {
         for(Object o :listEstIni.getAllItens())
             return new Estado(o.toString());
         
