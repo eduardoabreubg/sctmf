@@ -32,6 +32,8 @@ public class CadFunTransAFD extends javax.swing.JPanel {
     public CadFunTransAFD() {
         initComponents();
         posInitComponents();
+        setLEsqTrans(null);
+        setLDirTrans(null);
     }
     
     /** This method is called from within the constructor to
@@ -54,7 +56,7 @@ public class CadFunTransAFD extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         cbSimb = new javax.swing.JComboBox();
-        jLabel14 = new javax.swing.JLabel();
+        lEsqTrans = new javax.swing.JLabel();
         jPanel16 = new javax.swing.JPanel();
         jPanel18 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -63,7 +65,7 @@ public class CadFunTransAFD extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
         cbEstDes = new javax.swing.JComboBox();
-        jLabel10 = new javax.swing.JLabel();
+        lDirTrans = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -151,12 +153,11 @@ public class CadFunTransAFD extends javax.swing.JPanel {
         cbSimb.setPreferredSize(new java.awt.Dimension(40, 22));
         jPanel4.add(cbSimb, java.awt.BorderLayout.CENTER);
 
-        jLabel14.setFont(new java.awt.Font("Verdana", 1, 16));
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jLabel14.setPreferredSize(new java.awt.Dimension(0, 30));
-        jLabel14.setText("\u03a3");
-        jPanel4.add(jLabel14, java.awt.BorderLayout.NORTH);
+        lEsqTrans.setFont(new java.awt.Font("Verdana", 1, 11));
+        lEsqTrans.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lEsqTrans.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        lEsqTrans.setPreferredSize(new java.awt.Dimension(0, 30));
+        jPanel4.add(lEsqTrans, java.awt.BorderLayout.NORTH);
 
         jPanel2.add(jPanel4);
 
@@ -190,12 +191,11 @@ public class CadFunTransAFD extends javax.swing.JPanel {
         cbEstDes.setForeground(new java.awt.Color(255, 102, 102));
         jPanel6.add(cbEstDes, java.awt.BorderLayout.CENTER);
 
-        jLabel10.setFont(new java.awt.Font("Verdana", 1, 16));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("S");
-        jLabel10.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jLabel10.setPreferredSize(new java.awt.Dimension(12, 30));
-        jPanel6.add(jLabel10, java.awt.BorderLayout.NORTH);
+        lDirTrans.setFont(new java.awt.Font("Verdana", 1, 16));
+        lDirTrans.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lDirTrans.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        lDirTrans.setPreferredSize(new java.awt.Dimension(12, 30));
+        jPanel6.add(lDirTrans, java.awt.BorderLayout.NORTH);
 
         jLabel11.setPreferredSize(new java.awt.Dimension(5, 0));
         jPanel6.add(jLabel11, java.awt.BorderLayout.EAST);
@@ -458,7 +458,18 @@ public class CadFunTransAFD extends javax.swing.JPanel {
                     genericJList.removeItem(obj);
                 
         }        
-    }    
+    }  
+    
+    protected void setLEsqTrans(String label) {
+        if(label==null) label = "\u03a3"; // Caso do AFD
+        this.lEsqTrans.setText(label);
+        
+    }
+    
+    protected void setLDirTrans(String label) {
+        if(label==null) label = "S"; // Caso do AFD        
+        this.lDirTrans.setText(label);
+    }
     
     /**
      * Retorna o matcher para ser feito a pesquisa.<br>
@@ -498,11 +509,9 @@ public class CadFunTransAFD extends javax.swing.JPanel {
     private javax.swing.JComboBox cbSimb;
     private cassolato.rafael.sctmf.view.components.GenericJList genericJList;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -539,6 +548,8 @@ public class CadFunTransAFD extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel lDirTrans;
+    private javax.swing.JLabel lEsqTrans;
     private javax.swing.JPanel pCenter;
     private javax.swing.JPanel pEast;
     private javax.swing.JPanel pS0;

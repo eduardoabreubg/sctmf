@@ -24,7 +24,8 @@ public class CadEstAFND extends CadEstAFD {
      * Creates new form CadEstAFND
      */
     public CadEstAFND() {
-        //initComponents();       
+        super();
+       // initComponents();        
     }
     
     /** This method is called from within the constructor to
