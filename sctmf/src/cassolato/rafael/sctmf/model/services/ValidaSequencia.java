@@ -263,8 +263,7 @@ public class ValidaSequencia implements Validacao {
         // cria os AFMV inicialmente para cada um dos
         // simbolos distintos do alfabeto.
         final List<AFMV> list = new ArrayList<AFMV>();
-        for(char c : expressaoRegular.toCharArray()) 
-            
+        for(char c : expressaoRegular.toCharArray())             
             if(Character.isLetter(c)) {
                 final AFMV afmv = new AFMV();
                 
@@ -281,8 +280,41 @@ public class ValidaSequencia implements Validacao {
            }      
            
         AFMV afmv = null;  // AFMV que sera retornado
-        String str = serviceClass.new UtilsER().getExpressaoPosFixa("(a+b)*cde");        
-              
+        String str = serviceClass.new UtilsER()
+                .getExpressaoPosFixa(expressaoRegular);  
+        
+        final Stack<AFMV> pilha = new Stack<AFMV>();
+        for(char c : str.toCharArray()) {
+            if(Character.isLetter(c))
+                pilha.push(serviceClass.getAFMV(list, c));
+            
+            else {
+                AFMV a1 = null;
+                if(!Character.isDigit(c))
+                   a1 = pilha.pop();
+                            
+                switch (c) {
+                    case '*' : 
+                        pilha.push(serviceClass.processaFechoKleene(a1));
+                        
+                        break;                        
+                    case '+' : 
+                        pilha.push(
+                                serviceClass.processaUniao(a1,
+                                                           pilha.pop()));
+                        
+                        break;
+                    case '|' :
+                         pilha.push(
+                                serviceClass.processaContatenacao(a1,
+                                                           pilha.pop()));
+                        break;                        
+                }
+            }            
+        }
+        
+        afmv = pilha.pop();      
+        
         for(Transicao t : afmv.getTransicoes())    
             System.out.println(t.getEstOri().getNome()+","+
                                t.getSimbolo().getNome()+"->"+
