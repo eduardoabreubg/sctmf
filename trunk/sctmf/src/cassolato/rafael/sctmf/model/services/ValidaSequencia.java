@@ -306,8 +306,8 @@ public class ValidaSequencia implements Validacao {
                         break;
                     case '|' :
                          pilha.push(
-                                serviceClass.processaContatenacao(a1,
-                                                           pilha.pop()));
+                                serviceClass.processaContatenacao(pilha.pop(),
+                                                                  a1));
                         break;                        
                 }
             }            
@@ -323,7 +323,7 @@ public class ValidaSequencia implements Validacao {
         System.out.println("Estado Inicial: "+afmv.getEstadoInicial().getNome());
         System.out.println("Estado Final: "+afmv.getEstadosFinais().iterator().next().getNome());
         
-        return false;
+        return this.valida(afmv,sequencia);
     }
     
     /**
