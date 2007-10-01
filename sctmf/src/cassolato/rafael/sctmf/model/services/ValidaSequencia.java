@@ -189,21 +189,38 @@ public class ValidaSequencia implements Validacao {
         Estado est = afmv.getEstadoInicial();
         estadosAtivos.put(est.getNome(), est);
         
-        // caso no inicio ja exista transicoes que contenham lambida
-        for(Transicao tt : afmv.getTransicoes()) 
-            if(estadosAtivos.containsKey(tt.getEstOri().getNome())&&
-               tt.getSimbolo().getNome()=='\u03BB') {                        
-               Estado e = tt.getEstDest();                
-               estadosAtivos.put(e.getNome(),e);
+        boolean novamente = false;
+        do {
+            novamente = false;
+            // caso no inicio ja exista transicoes que contenham lambida
+            for(Transicao tt : afmv.getTransicoes()) 
+                if(estadosAtivos.containsKey(tt.getEstOri().getNome())&&
+                   tt.getSimbolo().getNome()=='\u03BB') {                        
+                   Estado e = tt.getEstDest();                
+                   auxEA.put(e.getNome(),e);
+                   novamente = true;
+                }
+
+            try { 
+                if(novamente) {
+                    estadosAtivos.clear();
+                    estadosAtivos = (Map) auxEA.getClass().
+                            getMethod("clone").invoke(auxEA);   
+                }
+                auxEA.clear();
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-                
+            
+        }while(novamente);        
+       
         // Percorre a sequencia
         for(char c : sequencia.toCharArray()) {
             // Percorre as transicoes
-            for(Transicao t : afmv.getTransicoes()) {
+            for(Transicao t : afmv.getTransicoes()) {                
                 Estado e = t.getEstOri();
                 Simbolo s = t.getSimbolo();
-                
+
                 Estado aux = estadosAtivos.get(e.getNome());
                 char nSim = s.getNome();
                 // Verifica se existe uma transicao cadastrada
@@ -212,23 +229,23 @@ public class ValidaSequencia implements Validacao {
                     Estado ed = t.getEstDest();
                     auxEA.put(ed.getNome(), ed);
                 }
-                
+
             }
-            
+
             if(auxEA.size()==0)  // retorna falso caso nao existe uma transicao
                 return false;    // que leve um determinado estado a outro
-            
+
             // Atribui o clone do objeto auxEA para os estados ativos
             // e limpa o auxEA
             try {               
                 estadosAtivos = (Map) auxEA.getClass().
                         getMethod("clone").invoke(auxEA);
-                auxEA.clear();
+                auxEA.clear(); 
+
             } catch (Exception ex) {
                 ex.printStackTrace();
-            }
-            
-        }
+            }            
+        } // fim for
         
         // Verifica o caso do lambida para o fim da sequencia
         for(Transicao tt : afmv.getTransicoes()) 
@@ -259,26 +276,7 @@ public class ValidaSequencia implements Validacao {
         if(expressaoRegular.length()==0||sequencia.length()==0) return false;
         
         final ConversoesERparaAFMV serviceClass = new ConversoesERparaAFMV();
-        
-        // cria os AFMV inicialmente para cada um dos
-        // simbolos distintos do alfabeto.
-        final List<AFMV> list = new ArrayList<AFMV>();
-        for(char c : expressaoRegular.toCharArray())             
-            if(Character.isLetter(c)) {
-                final AFMV afmv = new AFMV();
-                
-                if(serviceClass.existeAFMV(list,c)) {
-                    final Estado eOrig = serviceClass.getNewEstado();
-                    final Estado eDest = serviceClass.getNewEstado();                
-                    afmv.addTransicao(new Transicao(eOrig, new Simbolo(c), eDest));
-
-                    afmv.setEstadoInicial(eOrig);
-                    afmv.addEstadoFinal(eDest);
-
-                    list.add(afmv);
-                }
-           }      
-           
+                         
         AFMV afmv = null;  // AFMV que sera retornado
         String str = serviceClass.new UtilsER()
                 .getExpressaoPosFixa(expressaoRegular);  
@@ -286,7 +284,7 @@ public class ValidaSequencia implements Validacao {
         final Stack<AFMV> pilha = new Stack<AFMV>();
         for(char c : str.toCharArray()) {
             if(Character.isLetter(c))
-                pilha.push(serviceClass.getAFMV(list, c));
+                pilha.push(serviceClass.getNewAFMV(c));
             
             else {
                 AFMV a1 = null;
@@ -739,21 +737,7 @@ public class ValidaSequencia implements Validacao {
                                                     .iterator().next())); 
             
             return afmv;
-        }                
-        
-        /**
-         * Recebe o simbolo da transicao e a a lista de AFMVs como parametro, 
-         * e retorna o AFMV no qual contem a transicao correspondente.
-         */
-        private AFMV getAFMV(List<AFMV> values, Character nomeSimbolo) {
-            for(AFMV afmv : values)
-                for(Transicao t : afmv.getTransicoes())
-                    if(t.getSimbolo().getNome()==nomeSimbolo)
-                        return afmv;
-
-            return null;
-        }
-        
+        }                                
         /**
          * Método usado para verificar se já exste um automato finito com
          * movimentos vazio na lista. Metodo usado para tranformacao de uma
@@ -773,6 +757,23 @@ public class ValidaSequencia implements Validacao {
          */
         private Estado getNewEstado() {
             return new Estado("S"+cEstado++);
+        }
+
+        /**
+         * Cria um novo AFMV com o simbolo recebido na transicao
+         */
+        private AFMV getNewAFMV(char c) {
+            final AFMV afmv = new AFMV();
+
+            final Estado eOrig = this.getNewEstado();
+            final Estado eDest = this.getNewEstado();                
+            afmv.addTransicao(new Transicao(eOrig, new Simbolo(c), eDest));
+
+            afmv.setEstadoInicial(eOrig);
+            afmv.addEstadoFinal(eDest);
+            
+            return afmv;
+                 
         }
         
         private class UtilsER {
