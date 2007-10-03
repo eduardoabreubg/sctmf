@@ -184,38 +184,19 @@ public class ValidaSequencia implements Validacao {
         Map<String, Estado> estadosAtivos = new HashMap<String, Estado>();
         // Estados ativos - Var Auxiliar
         Map<String, Estado> auxEA = new HashMap<String, Estado>();
+        // Estados que garantiram que os estados ativos continuaram ativos
+        Map<String, Estado> auxEANNAtivSeq = new HashMap<String, Estado>();
         
         // Preeche o estado ativo
         Estado est = afmv.getEstadoInicial();
         estadosAtivos.put(est.getNome(), est);
-        
-        boolean novamente = false;
-        do {
-            novamente = false;
-            // caso no inicio ja exista transicoes que contenham lambida
-            for(Transicao tt : afmv.getTransicoes()) 
-                if(estadosAtivos.containsKey(tt.getEstOri().getNome())&&
-                   tt.getSimbolo().getNome()=='\u03BB') {                        
-                   Estado e = tt.getEstDest();                
-                   auxEA.put(e.getNome(),e);
-                   novamente = true;
-                }
-
-            try { 
-                if(novamente) {
-                    estadosAtivos.clear();
-                    estadosAtivos = (Map) auxEA.getClass().
-                            getMethod("clone").invoke(auxEA);   
-                }
-                auxEA.clear();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-            
-        }while(novamente);        
-       
+        auxEANNAtivSeq.put(est.getNome(), est);          
+                      
         // Percorre a sequencia
         for(char c : sequencia.toCharArray()) {
+            estadosAtivos = UtilAFMV.getLambidaCase(estadosAtivos, 
+                                                    afmv.getTransicoes());
+            
             // Percorre as transicoes
             for(Transicao t : afmv.getTransicoes()) {                
                 Estado e = t.getEstOri();
@@ -225,9 +206,10 @@ public class ValidaSequencia implements Validacao {
                 char nSim = s.getNome();
                 // Verifica se existe uma transicao cadastrada
                 // que ativa um estado novo
-                if(aux!=null&&(nSim=='\u03BB'||c==nSim)) {
+                if(aux!=null&&c==nSim) {
                     Estado ed = t.getEstDest();
                     auxEA.put(ed.getNome(), ed);
+                    auxEANNAtivSeq.remove(t.getEstOri().getNome());
                 }
 
             }
@@ -237,23 +219,30 @@ public class ValidaSequencia implements Validacao {
 
             // Atribui o clone do objeto auxEA para os estados ativos
             // e limpa o auxEA
-            try {               
+            try {       
+                estadosAtivos.clear();
                 estadosAtivos = (Map) auxEA.getClass().
                         getMethod("clone").invoke(auxEA);
                 auxEA.clear(); 
-
+                estadosAtivos.putAll(auxEANNAtivSeq); // garante os estados
+                auxEANNAtivSeq.clear();
+                auxEANNAtivSeq.putAll(estadosAtivos);
+                    
             } catch (Exception ex) {
                 ex.printStackTrace();
             }            
         } // fim for
         
         // Verifica o caso do lambida para o fim da sequencia
-        for(Transicao tt : afmv.getTransicoes()) 
+        /*for(Transicao tt : afmv.getTransicoes()) 
             if(estadosAtivos.containsKey(tt.getEstOri().getNome())&&
                tt.getSimbolo().getNome()=='\u03BB') {                        
                Estado e = tt.getEstDest();                
                estadosAtivos.put(e.getNome(),e);
-            }
+            }*/
+        
+        estadosAtivos = UtilAFMV.getLambidaCase(estadosAtivos, 
+                                                afmv.getTransicoes());
         
         // Vefirica se existe algum estado ativo
         // contem dentro dos estados finais.
@@ -623,6 +612,58 @@ public class ValidaSequencia implements Validacao {
     }
     
     /**
+     * Classe utilitaria pra o AFMV
+     */
+    private static final class UtilAFMV {
+        /**
+         * Trata o caso do lambida, recebe a lista de estados ativos
+         * caso existe alguma transicao capaz de ativar outra que tenha somente
+         * UMA TRANSICAO para um UM ESTADO, entao remove o estado ativo, e colo
+         * ca o estado ativo atual, caso exista mais de uma, entao mantem.
+         *
+         */
+        private static Map<String, Estado> getLambidaCase(
+                Map<String, Estado> estadosAtivos, 
+                Set<Transicao> transicoesAFMV) {
+            
+            final Map<String, Estado> aux = new HashMap<String, Estado>();            
+            boolean novamente = false; // verifica ate nao ocorre nenhuma
+            boolean primVez = true;
+            do {
+                if(primVez) 
+                    aux.putAll(estadosAtivos);
+                else {
+                    estadosAtivos.clear();
+                    estadosAtivos.putAll(aux);                   
+                }
+                
+                novamente = false;
+                for(Transicao t : transicoesAFMV) {
+                    final Estado e = estadosAtivos.get(t.getEstOri().getNome());
+                    if(e!=null&&t.getSimbolo().getNome()=='\u03BB') {
+                        final String nEst = e.getNome();
+                        boolean canRemove = true;
+                        for(Transicao tt : transicoesAFMV)
+                            if(tt.getEstOri().getNome().equals(nEst)&&
+                                tt.getSimbolo().getNome()!='\u03BB')
+                                canRemove = false;
+
+                        if(canRemove) aux.remove(nEst);
+                        aux.put(t.getEstDest().getNome(), t.getEstDest()); 
+                        novamente = true;
+
+                    }
+                }
+                
+                primVez = false;
+            }while(novamente);            
+            
+            return aux;
+        
+        }
+    }
+    
+    /**
      * Classe especial para conversao das ER em AFMV
      * possui os tres metodos para conversao.
      *
@@ -632,7 +673,7 @@ public class ValidaSequencia implements Validacao {
      * 3) a+a
      *
      * OBS:Parentese funciona igual nas expressoes aritimeticas
-     */
+     */    
     private final class ConversoesERparaAFMV {
         private int cEstado = 0;    
         
@@ -774,7 +815,7 @@ public class ValidaSequencia implements Validacao {
             
             return afmv;
                  
-        }
+        }                
         
         private class UtilsER {
             final Stack<Character> pilha = new Stack<Character>();
