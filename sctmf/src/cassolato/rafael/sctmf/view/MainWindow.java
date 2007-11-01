@@ -8,7 +8,6 @@ package cassolato.rafael.sctmf.view;
 
 import cassolato.rafael.sctmf.control.Controller;
 import cassolato.rafael.sctmf.view.components.SobreGUI;
-import java.beans.PropertyVetoException;
 
 /**
  *
@@ -450,7 +449,7 @@ public class MainWindow extends javax.swing.JFrame {
         this.oFundo.add(jif);
         try {
             jif.setSelected(true);
-        } catch (PropertyVetoException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
         jif.setVisible(true);

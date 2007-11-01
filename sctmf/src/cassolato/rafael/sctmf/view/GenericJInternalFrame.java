@@ -146,7 +146,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
                 break;
                 
             case MT :
-                this.setTitle("MT - Maquina de Turing");
+                this.setTitle("MT - Máquina de Turing");
                 break;
                             
         }

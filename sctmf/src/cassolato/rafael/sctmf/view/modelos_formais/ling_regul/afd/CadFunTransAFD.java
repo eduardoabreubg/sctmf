@@ -491,8 +491,7 @@ public class CadFunTransAFD extends javax.swing.JPanel {
      * @return Matcher
      */
     protected Matcher getMatcher(String str) {
-        //String regex = ".*\\((.{2}),.*(.{1})\\).*=.*(.{2})$";
-        String regex = ".?\\((.{2}), (.1)\\).?=.?(.{2})";        
+        String regex = ".*\\((.{2}),.*(.{1})\\).*=.*(.{2})$";    
                 
         return Pattern.compile(regex).matcher(str);
     }
