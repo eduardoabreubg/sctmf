@@ -544,7 +544,10 @@ public class ValidaSequencia implements Validacao {
                        }else cursor--; // altera o valor do cursor
 
                        // caso a fita ja se encontrava na celula mais a esquerda
-                       if(cursor<0) return false;                                                   
+                       if(cursor<0) {
+                           showFitaMT(fita);
+                           return false;    
+                       }                              
                                                                    
                        //for(Estado e : mt.getEstFinais())
                         //   if(e.getNome().equals(estadoAtual.getNome()))
@@ -554,14 +557,33 @@ public class ValidaSequencia implements Validacao {
                     }
                 
                 for(Estado e : mt.getEstFinais())
-                    if(e.getNome().equals(estadoAtual.getNome()))
+                    if(e.getNome().equals(estadoAtual.getNome())) {
+                        showFitaMT(fita);
                         return true; // estado final foi assumido
-
+                    }
+                        
+                showFitaMT(fita);
                 return false; // Nenhuma transica foi encontrada
             } // label
         } // while
             
     }
+    
+    /**
+     * Exibe a Fita da Maquina de Turing
+     *
+     * @param fitaMT
+     */
+     private void showFitaMT(List<Simbolo> fitaMT) {
+        final StringBuilder sb = new StringBuilder();
+        for(Simbolo s : fitaMT)
+            sb.append(s.getNome());
+        
+        javax.swing.JOptionPane.showMessageDialog(
+                null, sb.toString(), 
+                "FITA da Máquina de Turing", 
+                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+     }
     
     /**
      * Faz a alteração na pilha do automato com pilha.
@@ -856,6 +878,7 @@ public class ValidaSequencia implements Validacao {
 		return saida.toString();                	      
 
             }
+           
 
             private int getValorOperador(char c) {
 		switch (c) {
