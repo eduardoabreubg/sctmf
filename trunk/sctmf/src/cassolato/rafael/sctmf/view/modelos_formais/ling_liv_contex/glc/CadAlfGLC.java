@@ -164,7 +164,6 @@ public class CadAlfGLC extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
      private void posInitComponents() {
-        this.letterNumber.enableCbNumber(false);
         this.letterNumber.forceAllLowerCase(true);
         
          // Para o alfabeto dos Termbolos nao-terminais

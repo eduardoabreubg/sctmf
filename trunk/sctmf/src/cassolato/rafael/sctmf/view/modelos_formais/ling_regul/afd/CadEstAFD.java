@@ -233,7 +233,7 @@ public class CadEstAFD extends javax.swing.JPanel
         return estFin;  
     }    
     
-    private void posInitComponents() {         
+    private void posInitComponents() {        
         this.addRemEstIni.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
                 addActionEstadoInicial();

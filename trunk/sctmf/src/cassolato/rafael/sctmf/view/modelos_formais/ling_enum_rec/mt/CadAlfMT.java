@@ -151,7 +151,6 @@ public class CadAlfMT extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     private void posInitComponents() {
-        this.letterNumber.enableCbNumber(false);
         this.letterNumber.forceAllLowerCase(true);
         
         this.addRemButtonsAlf.getBAdd().addActionListener(new ActionListener(){
