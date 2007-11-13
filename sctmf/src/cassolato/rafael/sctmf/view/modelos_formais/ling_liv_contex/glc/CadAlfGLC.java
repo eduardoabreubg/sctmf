@@ -203,7 +203,7 @@ public class CadAlfGLC extends javax.swing.JPanel {
     private void addActionNTerm(Simbolo simbNTerm) {
         if(simbNTerm==null)
             simbNTerm = new Simbolo(
-                    Character.toUpperCase(this.letterNumber.getLetter()));
+                    Character.toUpperCase(this.letterNumber.getValue()));
         
          this.listNTerm.addItem(simbNTerm.getNome());
     }
@@ -217,7 +217,7 @@ public class CadAlfGLC extends javax.swing.JPanel {
     private void addActionTerm(Simbolo simbTerm) { 
         if(simbTerm==null)
             simbTerm = new Simbolo(
-                    Character.toLowerCase(this.letterNumber.getLetter()));
+                    Character.toLowerCase(this.letterNumber.getValue()));
         
         this.listTerm.addItem(simbTerm.getNome());
     }

@@ -189,10 +189,7 @@ public class CadAlfAP extends javax.swing.JPanel {
     }
         
     private void addActionSim() {    
-        this.listSim.addItem(
-            Character.toLowerCase(
-                this.letterNumber.getLetter()));
-
+        this.listSim.addItem(this.letterNumber.getValue());
     }
        
    private void removeActionSimP() {
@@ -203,9 +200,7 @@ public class CadAlfAP extends javax.swing.JPanel {
     private void addActionSimP() {   
         this.apGUI.addSimPilha(
             new Simbolo(
-                this.listSimPilha.addItem(
-                    Character.toUpperCase(
-                        this.letterNumber.getLetter()))));             
+                this.listSimPilha.addItem(this.letterNumber.getValue())));             
     }
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables

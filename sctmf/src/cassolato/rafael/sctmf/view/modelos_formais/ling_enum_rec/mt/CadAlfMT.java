@@ -188,7 +188,7 @@ public class CadAlfMT extends javax.swing.JPanel {
     private void addActionAlf(Simbolo simbAlf) {
         if(simbAlf==null)
             simbAlf = new Simbolo(
-                    Character.toLowerCase(this.letterNumber.getLetter()));
+                    Character.toLowerCase(this.letterNumber.getValue()));
         
          this.listAlf.addItem(simbAlf.getNome());
          
@@ -204,7 +204,7 @@ public class CadAlfMT extends javax.swing.JPanel {
     private void addActionAlfAux(Simbolo simbAlfAux) { 
         if(simbAlfAux==null)
             simbAlfAux = new Simbolo(
-                    Character.toUpperCase(this.letterNumber.getLetter()));
+                    Character.toUpperCase(this.letterNumber.getValue()));
         
         this.listAlfAux.addItem(simbAlfAux.getNome());
         

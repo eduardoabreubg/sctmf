@@ -326,7 +326,7 @@ public class ErGUI extends ModeloFormalGUI {
     
     private void addAction(Simbolo s) {
         if(s==null) 
-            s = new Simbolo(letterNumber.getLetter());                   
+            s = new Simbolo(letterNumber.getValue());                   
                
         final char name = s.getNome();
         if(this.listSimb.addItem(name)!=null)      
