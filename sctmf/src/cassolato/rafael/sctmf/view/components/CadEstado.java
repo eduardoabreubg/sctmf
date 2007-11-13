@@ -99,6 +99,9 @@ public class CadEstado extends javax.swing.JPanel
     }// </editor-fold>//GEN-END:initComponents
     
     private void posInitComponents() {
+        lN.enableRbLetter(false);
+        lN.enableRbNumber(false);
+        
         this.addRemEstado.getBAdd().addActionListener(
                 new java.awt.event.ActionListener(){
             public void actionPerformed(java.awt.event.ActionEvent ae) {

@@ -152,7 +152,6 @@ public class CadAlfAP extends javax.swing.JPanel {
     }
 
     private void posInitComponents() {
-        this.letterNumber.enableCbNumber(false);
         this.letterNumber.forceAllLowerCase(true);
         this.listSim.setToolTipText("Símbolos do Alfabeto da Linguagem");
         this.listSimPilha.setToolTipText("Símbolos do Alfabeto da Pilha");
@@ -200,7 +199,7 @@ public class CadAlfAP extends javax.swing.JPanel {
     private void addActionSimP() {   
         this.apGUI.addSimPilha(
             new Simbolo(
-                this.listSimPilha.addItem(this.letterNumber.getValue())));             
+                this.listSimPilha.addItem(Character.toUpperCase(letterNumber.getValue()))));             
     }
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables

@@ -321,7 +321,6 @@ public class ErGUI extends ModeloFormalGUI {
             }
         });
         
-        letterNumber.enableCbNumber(false);
     }
     
     private void addAction(Simbolo s) {
