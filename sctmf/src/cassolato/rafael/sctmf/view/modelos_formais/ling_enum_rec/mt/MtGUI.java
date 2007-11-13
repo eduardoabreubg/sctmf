@@ -106,12 +106,12 @@ public class MtGUI extends ModeloFormalGUI {
         return mt;
     }
 
-    void addSimbolo(Simbolo simbolo) {
-        this.cadFTrans.observer(simbolo, true);
+    void addSimbolo(Simbolo simbolo, int cod) {
+        this.cadFTrans.observer(simbolo, true, cod);
     }
     
-    void removeSimbolo(Simbolo simbolo) {
-        this.cadFTrans.observer(simbolo, false);
+    void removeSimbolo(Simbolo simbolo, int cod) {
+        this.cadFTrans.observer(simbolo, false, cod);
     }
         
     void addEstado(Estado estado) {

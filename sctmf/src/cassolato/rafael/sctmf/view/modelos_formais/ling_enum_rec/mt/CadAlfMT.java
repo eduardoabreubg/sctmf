@@ -40,14 +40,16 @@ public class CadAlfMT extends javax.swing.JPanel {
         this.listAlf.removeAllItens();
         
         for(Simbolo s : simbAlf)
-            this.listAlf.addItem(s.getNome());
+           // this.listAlf.addItem(s.getNome());
+            this.addActionAlf(s);
     }
     
     void setSimbAfabetoAux(Collection<Simbolo> simbAlfAux) {
         this.listAlfAux.removeAllItens();
         
         for(Simbolo s : simbAlfAux)
-            this.listAlfAux.addItem(s.getNome());
+            //this.listAlfAux.addItem(s.getNome());
+            this.addActionAlfAux(s);
     }
     
     /** Creates new form CadAlfMT */
@@ -181,7 +183,7 @@ public class CadAlfMT extends javax.swing.JPanel {
     private void removeActionAlf() {
       for(Object o : this.listAlf.removeItens())
           this.gui.removeSimbolo(
-                new Simbolo((Character)o));            
+                new Simbolo((Character)o), 0);            
     }
         
     private void addActionAlf(Simbolo simbAlf) {
@@ -191,13 +193,13 @@ public class CadAlfMT extends javax.swing.JPanel {
         
          this.listAlf.addItem(simbAlf.getNome());
          
-         this.gui.addSimbolo(simbAlf);
+         this.gui.addSimbolo(simbAlf, 0);
     }
        
    private void removeActionAlfAux() {
       for(Object o : this.listAlfAux.removeItens())
           this.gui.removeSimbolo(
-               new Simbolo((Character)o));                      
+               new Simbolo((Character)o),1);                      
     }
         
     private void addActionAlfAux(Simbolo simbAlfAux) { 
@@ -207,7 +209,7 @@ public class CadAlfMT extends javax.swing.JPanel {
         
         this.listAlfAux.addItem(simbAlfAux.getNome());
         
-        this.gui.addSimbolo(simbAlfAux);
+        this.gui.addSimbolo(simbAlfAux,1);
     }
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables

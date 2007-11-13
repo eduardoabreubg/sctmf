@@ -33,7 +33,6 @@ import java.util.Set;
 import java.util.Stack;
 
 
-
 /**
  *
  * @author rafael2009_00
@@ -190,13 +189,14 @@ public class ValidaSequencia implements Validacao {
         // Preeche o estado ativo
         Estado est = afmv.getEstadoInicial();
         estadosAtivos.put(est.getNome(), est);
-        auxEANNAtivSeq.put(est.getNome(), est);          
-                      
+        auxEANNAtivSeq.put(est.getNome(), est); 
+                              
         // Percorre a sequencia
-        for(char c : sequencia.toCharArray()) {
+        for(char c : sequencia.toCharArray()) {            
+            
             estadosAtivos = UtilAFMV.getLambidaCase(estadosAtivos, 
                                                     afmv.getTransicoes());
-            
+                       
             // Percorre as transicoes
             for(Transicao t : afmv.getTransicoes()) {                
                 Estado e = t.getEstOri();
@@ -213,7 +213,7 @@ public class ValidaSequencia implements Validacao {
                 }
 
             }
-
+                      
             if(auxEA.size()==0)  // retorna falso caso nao existe uma transicao
                 return false;    // que leve um determinado estado a outro
 
@@ -232,7 +232,7 @@ public class ValidaSequencia implements Validacao {
                 ex.printStackTrace();
             }            
         } // fim for
-        
+                
         // Verifica o caso do lambida para o fim da sequencia
         /*for(Transicao tt : afmv.getTransicoes()) 
             if(estadosAtivos.containsKey(tt.getEstOri().getNome())&&
@@ -541,10 +541,11 @@ public class ValidaSequencia implements Validacao {
                            if(fita.size()==cursor) // add um simbolo em braco                           
                                fita.add(new Simbolo('\u03B2'));
                            
-                       }else cursor--; // altera o valor do cursor
+                       }else 
+                           cursor--; // altera o valor do cursor
 
                        // caso a fita ja se encontrava na celula mais a esquerda
-                       if(cursor<0) {
+                       if(cursor < 0) {
                            showFitaMT(fita);
                            return false;    
                        }                              
