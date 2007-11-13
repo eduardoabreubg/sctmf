@@ -159,8 +159,8 @@ public class CadAlfAFD extends javax.swing.JPanel {
     }
         
     private void addAction() {
-        Character item = this.genericJList.addItem(
-                    this.letterNumberCA.getLetter());
+        Character item 
+                = this.genericJList.addItem(this.letterNumberCA.getValue());
         this.letterNumberCA.removeItem(item.toString().toUpperCase());
     }
     
