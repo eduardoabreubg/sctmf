@@ -630,23 +630,7 @@ public class CadFTransMT extends javax.swing.JPanel {
     }
     
     private void fSimASerGravadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fSimASerGravadoKeyReleased
-        String value = this.fSimASerGravado.getText();
-        int tam = value.length();
-        Character s = tam>0?value.substring(tam-1).charAt(0):null;
-        if(s!=null)  // verifica se o simbolo pertence a um dos alfabetos
-            if(Character.isLowerCase(s))  // alfabeto
-                if(this.alf.contains(s))
-                    this.fSimASerGravado.setText(s.toString());
-                else
-                    this.fSimASerGravado.setText("");
-        
-            else // alfabeto auxiliar
-                if(this.alfAux.contains(s))
-                    this.fSimASerGravado.setText(s.toString());
-                else
-                    this.fSimASerGravado.setText("");
-        else
-            this.fSimASerGravado.setText("");
+        this.controlKeyListener(this.fSimASerGravado);
     }//GEN-LAST:event_fSimASerGravadoKeyReleased
     
     private void bAddSimIniFitaDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimIniFitaDirActionPerformed
@@ -658,24 +642,28 @@ public class CadFTransMT extends javax.swing.JPanel {
     }//GEN-LAST:event_bAddSimbBrancDirActionPerformed
     
     private void fSimASerLidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fSimASerLidoKeyReleased
-        String value = this.fSimASerLido.getText();
+        this.controlKeyListener(this.fSimASerLido);
+    }//GEN-LAST:event_fSimASerLidoKeyReleased
+   
+    private final void controlKeyListener(final javax.swing.JTextField field) {
+        String value = field.getText();
         int tam = value.length();
         Character s = tam>0?value.substring(tam-1).charAt(0):null;
         if(s!=null)  // verifica se o simbolo pertence a um dos alfabetos
-            if(Character.isLowerCase(s))  // alfabeto
+            if(Character.isLowerCase(s)||Character.isDigit(s))  // alfabeto
                 if(this.alf.contains(s))
-                    this.fSimASerLido.setText(s.toString());
+                    field.setText(s.toString());
                 else
-                    this.fSimASerLido.setText("");
+                   field.setText("");
         
             else // alfabeto auxiliar
                 if(this.alfAux.contains(s))
-                    this.fSimASerLido.setText(s.toString());
+                    field.setText(s.toString());
                 else
-                    this.fSimASerLido.setText("");
+                    field.setText("");
         else
             this.fSimASerLido.setText("");
-    }//GEN-LAST:event_fSimASerLidoKeyReleased
+    }
     
     private void bAddSimIniFitaEsqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimIniFitaEsqActionPerformed
         this.fSimASerLido.setText("\u00A4");
@@ -709,17 +697,21 @@ public class CadFTransMT extends javax.swing.JPanel {
      * caso lower  simbolos Alf
      *
      */
-    void observer(Simbolo s, boolean oper) {
+    void observer(Simbolo s, boolean oper, int alf) {
         Character c = s.getNome();
-        if(Character.isLowerCase(c)) // Alfabeto
-            if(oper) this.alf.add(c);
+        if(alf==0) { // Alfabeto
+            if(oper) 
+                this.alf.add(c);
+        
             else {
                 this.alf.remove(c);
                 this.observerRemove(c);
             }
         
-        else // Alfabeto auxiliar
-            if(oper) this.alfAux.add(c);
+        } else // Alfabeto auxiliar
+            if(oper) 
+                this.alfAux.add(c);
+        
             else {
                 this.alfAux.remove(c);
                 this.observerRemove(c);
