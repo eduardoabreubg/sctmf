@@ -926,7 +926,7 @@ public class ValidaSequencia implements Validacao {
                         continue;
                     }
 
-                    if(c=='*') list.add(++i,'1'); // case a*
+                    if(c=='*') list.add(++i,'%'); // case a*
 
 		}
 		
