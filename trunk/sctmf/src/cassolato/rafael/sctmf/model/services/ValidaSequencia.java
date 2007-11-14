@@ -309,12 +309,13 @@ public class ValidaSequencia implements Validacao {
         
         final Stack<AFMV> pilha = new Stack<AFMV>();
         for(char c : str.toCharArray()) {
+        //for(char c : "AB+*A|A|%".toCharArray()) {
             if(Character.isLetter(c))
                 pilha.push(serviceClass.getNewAFMV(c));
             
             else {
                 AFMV a1 = null;
-                if(!Character.isDigit(c))
+                if(c!='%')
                    a1 = pilha.pop();
                             
                 switch (c) {
@@ -921,7 +922,10 @@ public class ValidaSequencia implements Validacao {
 		for(int i=0;i<list.size();i++) {
                     char c = list.get(i);
 
-                    if(Character.isLetter(c)&&i>0&&Character.isLetterOrDigit(list.get(i-1))) {
+                    if( Character.isLetter(c) 
+                        &&i>0
+                        &&Character.isLetterOrDigit(list.get(i-1))) {
+                        
                         list.add(i,'|');
                         continue;
                     }
