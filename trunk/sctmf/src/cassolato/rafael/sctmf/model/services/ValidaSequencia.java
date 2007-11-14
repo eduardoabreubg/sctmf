@@ -26,6 +26,7 @@ import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
 import cassolato.rafael.sctmf.model.pojo.TransicaoMT;
 import cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt.util.ShowFitaMT;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -308,8 +309,7 @@ public class ValidaSequencia implements Validacao {
                 .getExpressaoPosFixa(expressaoRegular);  
         
         final Stack<AFMV> pilha = new Stack<AFMV>();
-        for(char c : str.toCharArray()) {
-        //for(char c : "AB+*A|A|%".toCharArray()) {
+        for(char c : str.toCharArray()) {        
             if(Character.isLetter(c))
                 pilha.push(serviceClass.getNewAFMV(c));
             
@@ -901,6 +901,49 @@ public class ValidaSequencia implements Validacao {
                 // esvazia a pilha
 		while(!pilha.empty()) 
                     saida.append(pilha.pop());
+                
+                List<Character> values = null;
+                
+                // Caso da concatenação *AA| é necessário inserir um |
+                // como... *A|A|                
+                if(saida.length() > 4) {
+                    boolean status1 = false;
+                    boolean status2 = false;
+                    boolean status3 = false;
+                    
+                    values = new ArrayList<Character>();
+                    for(char c : saida.toString().toCharArray())
+                        values.add(c);
+                    
+                    for(int i=0; i < values.size(); i++) {        
+                        char c = values.get(i);
+                        if(c=='*' || c=='+') {
+                            status1 = true;
+                            status2 = false;
+                            status3 = false;
+                            continue;
+                            
+                        } else if(status1 && Character.isLetterOrDigit(c)) {
+                            status1 = false;
+                            status2 = true;
+                            continue;
+                            
+                        } else if(status2 && Character.isLetterOrDigit(c)) {
+                            status2 = false;
+                            status3 = true;
+                            continue;
+                            
+                        } else if(status3 && c=='|') {
+                            status3 = false;
+                            values.add(i-1,'|');
+                            continue;
+                        }
+                        
+                    }
+                    
+                    saida = new StringBuilder();                
+                    for(Character c : values) saida.append(c);
+                }                
 
 		return saida.toString();                	      
 
@@ -932,10 +975,11 @@ public class ValidaSequencia implements Validacao {
 
                     if(c=='*') list.add(++i,'%'); // case a*
 
-		}
-		
+		}                
+               
 		return list;
             }
+            
             
         } // fim da classe
     
