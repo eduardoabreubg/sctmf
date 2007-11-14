@@ -95,6 +95,8 @@ public class AbrirModeloFormal implements Abrir {
                      
                      afd.addTransicao(t);
                      
+                      continue;
+                     
                  }else if(line.startsWith("E")) {                                          
                     for(String s : line.substring(2,line.length()-1).split("-"))
                         afd.addSimbolo(new Simbolo(s.charAt(0)));
@@ -143,6 +145,7 @@ public class AbrirModeloFormal implements Abrir {
                      t.setEstDest(new Estado(str[2]));
                      
                      afmv.addTransicao(t);
+                     continue;
                      
                  }else if(line.startsWith("E")) {                                          
                     for(String s : line.substring(2,line.length()-1).split("-"))
@@ -380,18 +383,19 @@ public class AbrirModeloFormal implements Abrir {
                             Direcao.ESQUERDA:Direcao.DIREITA);
                      
                      mt.addTransicao(t);
+                     continue;
                      
                  }else if(line.startsWith("E")) { // Alfabeto                                        
                     for(String s : line.substring(2,line.length()-1).split("-"))
-                        mt.addSimbAlf(new Simbolo(s.charAt(0)));
+                        mt.addSimbAlf(new Simbolo(s.charAt(0)));                     
                     
                  }else if(line.startsWith("V")) { // Alfabeto Auxiliar                                       
                     for(String s : line.substring(2,line.length()-1).split("-"))
-                        mt.addSimbAlfAux(new Simbolo(s.charAt(0)));
+                        mt.addSimbAlfAux(new Simbolo(s.charAt(0)));                     
 
                  }else if(line.startsWith("Q")) { // Estados                  
                      for(String e: line.substring(2,line.length()-1).split("-"))
-                         mt.addEstado(new Estado(e));
+                         mt.addEstado(new Estado(e));                     
 
                  }else if(line.startsWith("F")) { // Estados Finais
                      for(String f : line.substring(2,line.length()-1).split("-"))
