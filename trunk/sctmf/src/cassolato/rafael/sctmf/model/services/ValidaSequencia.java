@@ -24,7 +24,7 @@ import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
 import cassolato.rafael.sctmf.model.pojo.TransicaoMT;
-import cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt.ShowFitaMT;
+import cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt.util.ShowFitaMT;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;

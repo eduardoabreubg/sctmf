@@ -4,7 +4,7 @@
  * Created on 13 de Novembro de 2007, 16:47
  */
 
-package cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt;
+package cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt.util;
 
 import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import java.util.List;
@@ -40,8 +40,7 @@ public class ShowFitaMT extends javax.swing.JDialog {
          for(Simbolo s : fitaMT) 
             if(Character.isLetterOrDigit(s.getNome()))
                 pLabels.add(createLabel(s.getNome()));           
-        
-         System.out.println(pLabels.getComponentCount());         
+               
          setVisible(true);   
         
      }
