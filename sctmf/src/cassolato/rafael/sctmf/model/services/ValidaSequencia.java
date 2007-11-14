@@ -867,8 +867,8 @@ public class ValidaSequencia implements Validacao {
         
         private class UtilsER {
             final Stack<Character> pilha = new Stack<Character>();
-
-            private final String getExpressaoPosFixa(String expressao) {
+            
+            private final String getExpressaoPosFixa(String expressao) {                
                 StringBuilder saida = new StringBuilder();
 		for(char c : formatExpressao(expressao))     
 			if(Character.isLetterOrDigit(c))
@@ -888,8 +888,7 @@ public class ValidaSequencia implements Validacao {
                                             break;
 					}
                                     }
-				else 
-                                    if(!pilha.isEmpty()&&c!=40&&
+				else if(!pilha.isEmpty()&&c!=40&&
                                         this.getValorOperador(c)<=
 					this.getValorOperador(pilha.peek())) 
 					
@@ -904,13 +903,12 @@ public class ValidaSequencia implements Validacao {
 
 		return saida.toString();                	      
 
-            }
-           
+            }           
 
             private int getValorOperador(char c) {
 		switch (c) {
-                    case '|': return 0;				
-                    case '+': return 1;				
+                    case '+': return 0;				
+                    case '|': return 1;				
                     case '*': return 2;
                     default: return -1;
 		}
