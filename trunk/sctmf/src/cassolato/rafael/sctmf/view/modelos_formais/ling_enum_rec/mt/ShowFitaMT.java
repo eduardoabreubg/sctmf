@@ -6,20 +6,57 @@
 
 package cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt;
 
+import cassolato.rafael.sctmf.model.pojo.Simbolo;
+import java.util.List;
+import javax.swing.JLabel;
+
 /**
  *
  * @author  rafael2009_00
  */
 public class ShowFitaMT extends javax.swing.JDialog {
     
+    private static final ShowFitaMT singleton = new ShowFitaMT();
+    
     /** Creates new form ShowFitaMT */
-    public ShowFitaMT(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    private ShowFitaMT() {
         setLocationRelativeTo(null);
         initComponents();
         setSize(400,100); 
         setModal(true);
     }
+    
+    /**
+     * Exibe a Fita da Maquina de Turing
+     *
+     * @param fitaMT
+     */
+     public void showFitaMT(List<Simbolo> fitaMT) {   
+         final int tamFita = fitaMT.size();
+         pLabels.removeAll();
+         //pLabels.setLayout(new java.awt.GridLayout(1, tamFita));
+         pLabels.setLayout(new java.awt.GridLayout(1, 1));
+         
+         for(Simbolo s : fitaMT) 
+            if(Character.isLetterOrDigit(s.getNome()))
+                pLabels.add(createLabel(s.getNome()));           
+        
+         System.out.println(pLabels.getComponentCount());         
+         setVisible(true);   
+        
+     }
+     
+     private JLabel createLabel(Character text) {
+         final JLabel label = new JLabel(" "+text+" ");
+         label.setFont(new java.awt.Font("Verdana", 0, 36));
+         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+         
+         label.setBorder(
+                javax.swing.BorderFactory
+                    .createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+                  
+         return label;
+     }
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -28,48 +65,30 @@ public class ShowFitaMT extends javax.swing.JDialog {
      */
     // <editor-fold defaultstate="collapsed" desc=" Código Gerado ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        pane = new javax.swing.JScrollPane();
+        pLabels = new javax.swing.JPanel();
 
-        getContentPane().setLayout(new java.awt.GridLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
-        jPanel1.setLayout(new java.awt.GridLayout(1, 3));
+        setTitle("Fita da M\u00e1quina de Turing");
+        pane.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        pLabels.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
 
-        jLabel1.setText("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jLabel1);
+        pane.setViewportView(pLabels);
 
-        jLabel2.setText("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-        jLabel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(jLabel2);
-
-        jScrollPane1.setViewportView(jPanel1);
-
-        getContentPane().add(jScrollPane1);
+        getContentPane().add(pane);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ShowFitaMT(new javax.swing.JFrame(), true).setVisible(true);
-            }
-        });
-    }
-    
+        
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel pLabels;
+    private javax.swing.JScrollPane pane;
     // Fim da declaração de variáveis//GEN-END:variables
+    
+    public static final ShowFitaMT getInstance() {
+        return singleton;
+    }
     
 }

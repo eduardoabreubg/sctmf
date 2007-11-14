@@ -24,6 +24,7 @@ import cassolato.rafael.sctmf.model.pojo.Simbolo;
 import cassolato.rafael.sctmf.model.pojo.Transicao;
 import cassolato.rafael.sctmf.model.pojo.TransicaoAP;
 import cassolato.rafael.sctmf.model.pojo.TransicaoMT;
+import cassolato.rafael.sctmf.view.modelos_formais.ling_enum_rec.mt.ShowFitaMT;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -192,11 +193,37 @@ public class ValidaSequencia implements Validacao {
         auxEANNAtivSeq.put(est.getNome(), est); 
                               
         // Percorre a sequencia
+        //for(char c : sequencia.toCharArray()) {
+        int tamSeq = sequencia.length();
+        //for(int i = 0; i<tamSeq; i++) {
+          //  char c = sequencia.charAt(i);
+            
         for(char c : sequencia.toCharArray()) {            
             
             estadosAtivos = UtilAFMV.getLambidaCase(estadosAtivos, 
-                                                    afmv.getTransicoes());
+                                                    afmv.getTransicoes(),
+                                                    auxEANNAtivSeq);
                        
+           // boolean statusValidador = false;            
+            
+           /* Map<String, Estado> check = null;
+           / try {
+                check = (Map) estadosAtivos.getClass().
+                        getMethod("clone").invoke(auxEA);
+           //}catch(Exception ex) {
+                ex.printStackTrace();
+            }*/
+            
+            estadosAtivos 
+                    = UtilAFMV.getLambidaCase(estadosAtivos, 
+                                              afmv.getTransicoes(),
+                                              auxEANNAtivSeq );
+            
+            //statusValidador = !estadosAtivos.equals(check);                        
+            
+            //if(i==tamSeq-1)  // caso validador
+               // statusValidador = false;
+                
             // Percorre as transicoes
             for(Transicao t : afmv.getTransicoes()) {                
                 Estado e = t.getEstOri();
@@ -210,10 +237,19 @@ public class ValidaSequencia implements Validacao {
                     Estado ed = t.getEstDest();
                     auxEA.put(ed.getNome(), ed);
                     auxEANNAtivSeq.remove(t.getEstOri().getNome());
+                    
+                   // if(!statusValidador&&i==tamSeq-1) {
+                   //     for(Estado ef : afmv.getEstadosFinais())
+                    //        if(ef.getNome().equals(ed.getNome()))
+                   //             statusValidador = true;
+                   // }
                 }
 
-            }
-                      
+            } // fim for...
+            
+           // if(!statusValidador)  // indica que o ultimo simbolo da sequencia                
+           //     return false;     // nao ativou um estadoo final
+
             if(auxEA.size()==0)  // retorna falso caso nao existe uma transicao
                 return false;    // que leve um determinado estado a outro
 
@@ -242,7 +278,8 @@ public class ValidaSequencia implements Validacao {
             }*/
         
         estadosAtivos = UtilAFMV.getLambidaCase(estadosAtivos, 
-                                                afmv.getTransicoes());
+                                                afmv.getTransicoes(),
+                                                 auxEANNAtivSeq);
         
         // Vefirica se existe algum estado ativo
         // contem dentro dos estados finais.
@@ -546,7 +583,7 @@ public class ValidaSequencia implements Validacao {
 
                        // caso a fita ja se encontrava na celula mais a esquerda
                        if(cursor < 0) {
-                           showFitaMT(fita);
+                           ShowFitaMT.getInstance().showFitaMT(fita);
                            return false;    
                        }                              
                                                                    
@@ -559,33 +596,17 @@ public class ValidaSequencia implements Validacao {
                 
                 for(Estado e : mt.getEstFinais())
                     if(e.getNome().equals(estadoAtual.getNome())) {
-                        showFitaMT(fita);
+                        ShowFitaMT.getInstance().showFitaMT(fita);
                         return true; // estado final foi assumido
                     }
                         
-                showFitaMT(fita);
+                ShowFitaMT.getInstance().showFitaMT(fita);
                 return false; // Nenhuma transica foi encontrada
             } // label
         } // while
             
     }
-    
-    /**
-     * Exibe a Fita da Maquina de Turing
-     *
-     * @param fitaMT
-     */
-     private void showFitaMT(List<Simbolo> fitaMT) {
-        final StringBuilder sb = new StringBuilder();
-        for(Simbolo s : fitaMT)
-            sb.append(s.getNome());
         
-        javax.swing.JOptionPane.showMessageDialog(
-                null, sb.toString(), 
-                "FITA da Máquina de Turing", 
-                javax.swing.JOptionPane.INFORMATION_MESSAGE);
-     }
-    
     /**
      * Faz a alteração na pilha do automato com pilha.
      */
@@ -647,7 +668,8 @@ public class ValidaSequencia implements Validacao {
          */
         private static Map<String, Estado> getLambidaCase(
                 Map<String, Estado> estadosAtivos, 
-                Set<Transicao> transicoesAFMV) {
+                Set<Transicao> transicoesAFMV,
+                Map<String, Estado> estadSeguros) {
             
             final Map<String, Estado> aux = new HashMap<String, Estado>();            
             boolean novamente = false; // verifica ate nao ocorre nenhuma
@@ -671,7 +693,10 @@ public class ValidaSequencia implements Validacao {
                                 tt.getSimbolo().getNome()!='\u03BB')
                                 canRemove = false;
 
-                        if(canRemove) aux.remove(nEst);
+                        if(canRemove) {
+                            estadSeguros.remove(nEst);
+                            aux.remove(nEst);
+                        }
                         aux.put(t.getEstDest().getNome(), t.getEstDest()); 
                         novamente = true;
 
@@ -685,7 +710,7 @@ public class ValidaSequencia implements Validacao {
         
         }
     }
-    
+        
     /**
      * Classe especial para conversao das ER em AFMV
      * possui os tres metodos para conversao.
@@ -874,7 +899,8 @@ public class ValidaSequencia implements Validacao {
                             }
 			
                 // esvazia a pilha
-		while(!pilha.empty()) saida.append(pilha.pop());
+		while(!pilha.empty()) 
+                    saida.append(pilha.pop());
 
 		return saida.toString();                	      
 
