@@ -565,7 +565,8 @@ public class ValidaSequencia implements Validacao {
         for(char c : sequencia.toCharArray()) fita.add(new Simbolo(c));                       
         Estado estadoAtual = mt.getEstIni();
         
-        int cursor = 1;        
+        int cursor = sequencia.length()>0?1:0;        
+        
         while(true) {
             label : {
                 for(TransicaoMT t : mt.getTransicoes())        
