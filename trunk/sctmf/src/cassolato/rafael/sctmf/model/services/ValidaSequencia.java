@@ -700,8 +700,17 @@ public class ValidaSequencia implements Validacao {
                             estadSeguros.remove(nEst);
                             aux.remove(nEst);
                         }
-                        aux.put(t.getEstDest().getNome(), t.getEstDest()); 
-                        novamente = true;
+                        String nomeEstDest = t.getEstDest().getNome();
+                        
+                        if(!aux.containsKey(nomeEstDest)) {
+                            aux.put(nomeEstDest, t.getEstDest());                             
+                            novamente = true;
+                            
+                        }else {
+                            novamente = false;
+                            
+                        }
+                        
 
                     }
                 }
