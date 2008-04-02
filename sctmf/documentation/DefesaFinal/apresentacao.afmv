@@ -1,0 +1,10 @@
+E:a-b-
+S:S0-S1-S2-S9-
+I:S0
+F:S9-
+T:S0-a-S1
+T:S1-b-S2
+T:S2-b-S1
+T:S2-b-S9
+T:S1-a-S9
+T:S0-?-S9
