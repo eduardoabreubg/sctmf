@@ -1,0 +1,14 @@
+E:a-b-
+P:A-B-
+S:S1-R1-T1-
+I:S1
+B:B
+T:S1-a-B-S1-A
+T:S1-a-A-S1-AA
+T:S1-b-B-R1-B
+T:S1-b-A-R1-A
+T:R1-?-B-R1-?
+T:R1-b-B-R1-B
+T:R1-b-A-R1-A
+T:R1-a-A-T1-?
+T:T1-a-A-T1-?
