@@ -27,7 +27,7 @@ public class CadFunTransAFMV extends CadFunTransAFD {
     }        
     
     private void posInitComponents() {
-        setLEsqTrans("(\u03a3U{\u03BB})");      
+        setLEsqTrans("\u03a3U{\u03BB}");      
         setLDirTrans("2q");        
         addSimCbSimb("\u03BB");
     }   

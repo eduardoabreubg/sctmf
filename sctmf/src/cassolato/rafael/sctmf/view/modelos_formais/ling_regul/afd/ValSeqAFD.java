@@ -69,7 +69,7 @@ public class ValSeqAFD extends javax.swing.JPanel {
     void observerValSeq(AFD afd) {    
         this.validaSequenciaGUI.clearArea();   
         this.validaSequenciaGUI.setTextAInf(
-                "V = <\u03a3, S, S\u2080, \u03B4, F>\n");
+                "V = \u03a3, S, S\u2080, \u03B4, F\n");
                 
         StringBuffer sb = new StringBuffer();
         
@@ -80,32 +80,31 @@ public class ValSeqAFD extends javax.swing.JPanel {
                 
         sb.append("S = {");
         for(Estado e : afd.getEstados())
-            sb.append("<"+e.getNome()+">, ");          
+            sb.append(e.getNome()+", ");          
         sb = this.validaSequenciaGUI.formataSb(sb);
                
         Estado aux = afd.getEstadoInicial();
-        sb.append("S\u2080 = <");
+        sb.append("S\u2080 = ");
         if(aux!=null)
              sb.append(aux.getNome());        
-        sb.append(">\n");
+        sb.append("\n");
         this.validaSequenciaGUI.setTextAInf(sb.toString());
         
         sb = new StringBuffer();
         
         sb.append("F = {");
         for(Estado e : afd.getEstadosFinais())
-            sb.append("<"+e.getNome()+">, "); 
+            sb.append(e.getNome()+", "); 
         sb = this.validaSequenciaGUI.formataSb(sb);        
         
         for(Transicao t : afd.getTransicoes()) {
             sb.append("\n");
-            sb.append("\u03B4(<");
+            sb.append("\u03B4(");
             sb.append(t.getEstOri().getNome());
-            sb.append(">, ");
+            sb.append(", ");
             sb.append(t.getSimbolo().getNome());
-            sb.append(") = <");
+            sb.append(") = ");
             sb.append(t.getEstDest().getNome());
-            sb.append(">");
         }         
                 
         this.validaSequenciaGUI.setTextAInf(sb.toString());

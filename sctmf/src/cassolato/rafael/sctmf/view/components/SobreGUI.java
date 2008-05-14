@@ -55,6 +55,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel7 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -160,7 +161,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel10.add(jLabel15);
 
         jLabel16.setFont(new java.awt.Font("Dialog", 0, 11));
-        jLabel16.setText("yandre.costa@gmail.com");
+        jLabel16.setText("yandre@din.uem.br");
         jLabel16.setPreferredSize(new java.awt.Dimension(200, 17));
         jPanel10.add(jLabel16);
 
@@ -185,14 +186,14 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel6.setLayout(new java.awt.BorderLayout());
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel7.setLayout(new java.awt.GridLayout(2, 0, 0, 5));
+        jPanel7.setLayout(new java.awt.GridLayout(4, 0));
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel10.setForeground(new java.awt.Color(0, 0, 102));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("FAFIMAN");
+        jLabel10.setText("FAFIMAN / UEM");
         jPanel7.add(jLabel10);
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 11));
@@ -200,16 +201,18 @@ public class SobreGUI extends javax.swing.JDialog {
         jLabel9.setText(" Faculdade de Filosofia Ci\u00eancias e Letras de Mandaguari");
         jPanel7.add(jLabel9);
 
-        jPanel6.add(jPanel7, java.awt.BorderLayout.NORTH);
+        jLabel19.setFont(new java.awt.Font("Arial", 0, 11));
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setText("Universidade Estadual de Maring\u00e1");
+        jPanel7.add(jLabel19);
 
-        jLabel8.setFont(new java.awt.Font("Bitstream Vera Sans", 1, 11));
+        jLabel8.setFont(new java.awt.Font("Verdana", 1, 11));
         jLabel8.setForeground(new java.awt.Color(51, 0, 51));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Ci\u00eancia da Computa\u00e7\u00e3o");
-        jLabel8.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jLabel8.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jLabel8.setPreferredSize(new java.awt.Dimension(34, 20));
-        jPanel6.add(jLabel8, java.awt.BorderLayout.SOUTH);
+        jPanel7.add(jLabel8);
+
+        jPanel6.add(jPanel7, java.awt.BorderLayout.NORTH);
 
         jPanel3.add(jPanel6, java.awt.BorderLayout.CENTER);
 
@@ -233,7 +236,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jLabel3.setPreferredSize(new java.awt.Dimension(10, 0));
         jPanel11.add(jLabel3, java.awt.BorderLayout.EAST);
 
-        jLabel4.setPreferredSize(new java.awt.Dimension(0, 10));
+        jLabel4.setPreferredSize(new java.awt.Dimension(0, 2));
         jPanel11.add(jLabel4, java.awt.BorderLayout.SOUTH);
 
         getContentPane().add(jPanel11);
@@ -252,6 +255,7 @@ public class SobreGUI extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -24,6 +24,32 @@ public class LetterNumber extends javax.swing.JPanel {
         initComponents();
         buttonGroup.add(rbLetter);
         buttonGroup.add(rbNumber);
+                
+        jcb.setVisible(false);
+    }
+    
+    public void setCustomTextInBorderTitle(String customText) {
+        jPanel1.setBorder(
+                javax.swing.BorderFactory.createTitledBorder(
+                    new javax.swing.border.SoftBevelBorder(
+                            javax.swing.border.BevelBorder.RAISED), 
+                    customText, 
+                    javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, 
+                    javax.swing.border.TitledBorder.DEFAULT_POSITION, 
+                    new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 51, 51)));
+    }
+    
+    public void hideRadioButtons() {
+        rbLetter.setVisible(false);
+        rbNumber.setVisible(false);
+    }
+    
+    public void checkLetraMauscula() {
+        jcb.setSelected(true);
+    }
+    
+    public void showCheck() {
+        jcb.setVisible(true);
     }
     
     /** This method is called from within the constructor to
