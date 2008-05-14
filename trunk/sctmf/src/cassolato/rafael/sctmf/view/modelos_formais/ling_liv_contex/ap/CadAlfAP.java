@@ -196,10 +196,24 @@ public class CadAlfAP extends javax.swing.JPanel {
             this.apGUI.remSimPilha(new Simbolo((Character)o));                      
     }
         
-    private void addActionSimP() {   
-        this.apGUI.addSimPilha(
+    private void addActionSimP() {  
+        Character c = letterNumber.getValue();
+        if (!Character.isDigit(c)) {
+            this.apGUI.addSimPilha(
             new Simbolo(
-                this.listSimPilha.addItem(Character.toUpperCase(letterNumber.getValue()))));             
+                this.listSimPilha.addItem(
+                    Character.toUpperCase(c))));             
+            
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "São permitidos somente LETRAS para\n" +
+                    "os Símbolos do Alfabeto da Pilha",
+                    "Atenção",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
     }
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables

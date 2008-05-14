@@ -20,7 +20,14 @@ import java.util.Set;
 public class CadAlfMT extends javax.swing.JPanel {
     MtGUI gui = null;
     
-     Set<Simbolo> getSimbAfabeto() {
+    /** Creates new form CadAlfMT */
+    public CadAlfMT(MtGUI gui) {
+        this.gui = gui;
+        initComponents();
+        posInitComponents();
+    }
+    
+    Set<Simbolo> getSimbAfabeto() {
         Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
         for(Object o : this.listAlf.getAllItens())
             simbolos.add(new Simbolo((Character)o));
@@ -50,13 +57,6 @@ public class CadAlfMT extends javax.swing.JPanel {
         for(Simbolo s : simbAlfAux)
             //this.listAlfAux.addItem(s.getNome());
             this.addActionAlfAux(s);
-    }
-    
-    /** Creates new form CadAlfMT */
-    public CadAlfMT(MtGUI gui) {
-        this.gui = gui;
-        initComponents();
-        posInitComponents();
     }
     
     /** This method is called from within the constructor to
@@ -187,13 +187,14 @@ public class CadAlfMT extends javax.swing.JPanel {
     }
         
     private void addActionAlf(Simbolo simbAlf) {
+        Character c = letterNumber.getValue();
+        
         if(simbAlf==null)
             simbAlf = new Simbolo(
-                    Character.toLowerCase(this.letterNumber.getValue()));
+                    Character.toLowerCase(c));
         
-         this.listAlf.addItem(simbAlf.getNome());
-         
-         this.gui.addSimbolo(simbAlf, 0);
+        this.listAlf.addItem(simbAlf.getNome());         
+        this.gui.addSimbolo(simbAlf, 0);          
     }
        
    private void removeActionAlfAux() {
@@ -203,13 +204,24 @@ public class CadAlfMT extends javax.swing.JPanel {
     }
         
     private void addActionAlfAux(Simbolo simbAlfAux) { 
-        if(simbAlfAux==null)
+        Character c = letterNumber.getValue();
+        
+        if (!Character.isDigit(c)) {
+            if(simbAlfAux==null)
             simbAlfAux = new Simbolo(
                     Character.toUpperCase(this.letterNumber.getValue()));
         
-        this.listAlfAux.addItem(simbAlfAux.getNome());
-        
-        this.gui.addSimbolo(simbAlfAux,1);
+            this.listAlfAux.addItem(simbAlfAux.getNome());
+            this.gui.addSimbolo(simbAlfAux,1);
+                                 
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "São permitidos somente LETRAS para\n" +
+                    "o Alfabeto Auxiliar",
+                    "Atenção",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables

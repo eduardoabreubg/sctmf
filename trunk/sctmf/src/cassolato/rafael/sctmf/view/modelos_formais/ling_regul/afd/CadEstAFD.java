@@ -31,6 +31,17 @@ public class CadEstAFD extends javax.swing.JPanel
         this.posInitComponents();
     }
     
+    protected void setTitleInPEstIni(String title) {
+        pEstIni.setBorder(
+                javax.swing.BorderFactory.createTitledBorder(
+                    null, 
+                    title, 
+                    javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, 
+                    javax.swing.border.TitledBorder.DEFAULT_POSITION, 
+                    new java.awt.Font("Tahoma", 0, 11), 
+                    new java.awt.Color(19, 92, 34)));
+    }
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -233,7 +244,7 @@ public class CadEstAFD extends javax.swing.JPanel
         return estFin;  
     }    
     
-    private void posInitComponents() {        
+    private void posInitComponents() {         
         this.addRemEstIni.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
                 addActionEstadoInicial();

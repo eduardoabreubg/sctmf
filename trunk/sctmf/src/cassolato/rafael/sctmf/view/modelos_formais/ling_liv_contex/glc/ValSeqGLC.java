@@ -31,7 +31,7 @@ public class ValSeqGLC extends javax.swing.JPanel {
         this.validaSequenciaGUI.clearArea();   
          
         this.validaSequenciaGUI.setTextAInf(
-                "G = <V, T, P, S>\n");
+                "G = V, T, P, S\n");
                 
         StringBuffer sb = new StringBuffer();        
         sb.append("V = {");  // Add Simbolos Nao-Terminais
@@ -45,10 +45,10 @@ public class ValSeqGLC extends javax.swing.JPanel {
         sb = this.validaSequenciaGUI.formataSb(sb);
                               
         Simbolo aux = glc.getSimbInicial();
-        sb.append("S = <");
+        sb.append("S = ");
         if(aux!=null)
              sb.append(aux.getNome());        
-        sb.append(">\n");
+        sb.append("\n");
         this.validaSequenciaGUI.setTextAInf(sb.toString());
         
         sb = new StringBuffer("P = {");              

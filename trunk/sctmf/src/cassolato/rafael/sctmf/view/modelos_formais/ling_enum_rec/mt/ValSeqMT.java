@@ -31,7 +31,7 @@ public class ValSeqMT extends javax.swing.JPanel {
     void observer(MT mt) {                
         this.validaSequenciaGUI.clearArea();   
         this.validaSequenciaGUI.setTextAInf(
-                "M = <\u03a3, Q, \u03B4, q\u2080, F, V, \u03B2, \u00A4>\n");
+                "M = \u03a3, Q, \u03B4, q\u2080, F, V, \u03B2, \u00A4\n");
                 
         StringBuffer sb = new StringBuffer();        
         sb.append("\u03a3 = {");  // Add Simbolos
@@ -41,21 +41,21 @@ public class ValSeqMT extends javax.swing.JPanel {
                 
         sb.append("Q = {"); // Add Estados
         for(Estado e : mt.getEstados())
-            sb.append("<"+e.getNome()+">, ");          
+            sb.append(e.getNome()+", ");          
         sb = this.validaSequenciaGUI.formataSb(sb);
         
         Estado aux = mt.getEstIni(); // Estado Inicial
-        sb.append("Q\u2080 = <");
+        sb.append("Q\u2080 = ");
         if(aux!=null)
              sb.append(aux.getNome());        
-        sb.append(">\n");
+        sb.append("\n");
         this.validaSequenciaGUI.setTextAInf(sb.toString());
         
         sb = new StringBuffer();
         
         sb.append("F = {"); // Add Estados FInais
         for(Estado e : mt.getEstFinais())
-            sb.append("<"+e.getNome()+">, ");          
+            sb.append(e.getNome()+", ");          
         sb = this.validaSequenciaGUI.formataSb(sb);
         
         sb.append("V = {");  // Add Simbolos da Pilha

@@ -128,7 +128,7 @@ public class CadAlfAFD extends javax.swing.JPanel {
     }
     
     private void posInitComponents() {
-        this.letterNumberCA.enableCbNumber(false);
+        //this.letterNumberCA.enableCbNumber(false);
         this.letterNumberCA.forceAllLowerCase(true);
         
         this.addRemoveButtons.getBAdd().addActionListener(new ActionListener(){

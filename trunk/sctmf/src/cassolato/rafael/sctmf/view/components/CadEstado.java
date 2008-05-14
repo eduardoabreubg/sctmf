@@ -28,7 +28,7 @@ public class CadEstado extends javax.swing.JPanel
         this.component = component;
                 
         initComponents();
-         this.posInitComponents();
+        this.posInitComponents();
     }
     
     /** This method is called from within the constructor to
@@ -99,9 +99,9 @@ public class CadEstado extends javax.swing.JPanel
     }// </editor-fold>//GEN-END:initComponents
     
     private void posInitComponents() {
-        lN.enableRbLetter(false);
-        lN.enableRbNumber(false);
-        
+        lN.setCustomTextInBorderTitle("Nome do Estado");        
+        lN.hideRadioButtons();
+                
         this.addRemEstado.getBAdd().addActionListener(
                 new java.awt.event.ActionListener(){
             public void actionPerformed(java.awt.event.ActionEvent ae) {

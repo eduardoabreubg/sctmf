@@ -200,11 +200,23 @@ public class CadAlfGLC extends javax.swing.JPanel {
     }
         
     private void addActionNTerm(Simbolo simbNTerm) {
-        if(simbNTerm==null)
-            simbNTerm = new Simbolo(
-                    Character.toUpperCase(this.letterNumber.getValue()));
-        
-         this.listNTerm.addItem(simbNTerm.getNome());
+        Character c = this.letterNumber.getValue();
+        if (!Character.isDigit(c)) {
+            if(simbNTerm==null)
+                simbNTerm = new Simbolo(
+                        Character.toUpperCase(c));
+
+             this.listNTerm.addItem(simbNTerm.getNome());    
+             
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "São permitidos somente LETRAS para\n" +
+                    "os Símbolos Não-Terminais",
+                    "Atenção",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+                
     }
        
    private void removeActionTerm() {

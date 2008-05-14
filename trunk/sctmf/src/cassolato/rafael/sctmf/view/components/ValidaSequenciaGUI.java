@@ -92,9 +92,8 @@ public class ValidaSequenciaGUI extends javax.swing.JPanel {
 
         jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 10));
 
-        bValidar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Preferences24.gif")));
-        bValidar.setText("Validar");
-        bValidar.setPreferredSize(new java.awt.Dimension(150, 40));
+        bValidar.setText("Analisar a Seq\u00fc\u00eancia");
+        bValidar.setPreferredSize(new java.awt.Dimension(180, 40));
         jPanel8.add(bValidar);
 
         pDigSeq.add(jPanel8);

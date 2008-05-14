@@ -25,7 +25,7 @@ public class CadEstAFND extends CadEstAFD {
      */
     public CadEstAFND() {
         super();
-       // initComponents();        
+        setTitleInPEstIni(" Estado(s) Inicial(is) ");
     }
     
     /** This method is called from within the constructor to

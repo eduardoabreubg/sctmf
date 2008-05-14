@@ -308,7 +308,9 @@ public class ErGUI extends ModeloFormalGUI {
             this.fExprReg.setText(fExprReg.getText()+o.toString());     
     }//GEN-LAST:event_bAddSimboloActionPerformed
     
-    private void posInitComponents() {        
+    private void posInitComponents() {     
+        letterNumber.showCheck();
+        
         this.addRemButtons.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
                 addAction(null);

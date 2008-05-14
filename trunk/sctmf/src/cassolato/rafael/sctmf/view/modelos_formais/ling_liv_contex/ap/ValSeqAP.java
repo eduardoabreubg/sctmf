@@ -66,7 +66,7 @@ public class ValSeqAP extends javax.swing.JPanel {
     void observerValSeq(AP ap) {        
         this.validaSequenciaGUI.clearArea();   
         this.validaSequenciaGUI.setTextAInf(
-                "V = <\u03a3,\u0393, S, S\u2080, \u03B4, B>\n");
+                "V = \u03a3,\u0393, S, S\u2080, \u03B4, B\n");
                 
         StringBuffer sb = new StringBuffer();        
         sb.append("\u03a3 = {");  // Add Simbolos
@@ -81,23 +81,23 @@ public class ValSeqAP extends javax.swing.JPanel {
         
         sb.append("S = {");
         for(Estado e : ap.getEstados())
-            sb.append("<"+e.getNome()+">, ");          
+            sb.append(e.getNome()+", ");          
         sb = this.validaSequenciaGUI.formataSb(sb);
                       
         Estado aux = ap.getEstadoInicial();
-        sb.append("S\u2080 = <");
+        sb.append("S\u2080 = ");
         if(aux!=null)
              sb.append(aux.getNome());        
-        sb.append(">\n");
+        sb.append("\n");
         this.validaSequenciaGUI.setTextAInf(sb.toString());
         
         sb = new StringBuffer();
         
         Simbolo s = ap.getTopoPilha();
-        sb.append("B = <");
+        sb.append("B = ");
         if(s!=null)
              sb.append(s.getNome());        
-        sb.append(">\n");
+        sb.append("\n");
         
         for(TransicaoAP t : ap.getTransicoesAP()) {
              sb.append("\n");           // pula a linha
@@ -107,12 +107,12 @@ public class ValSeqAP extends javax.swing.JPanel {
              sb.append(t.getSimbolo().getNome());
              sb.append(",");
              sb.append(t.getSimBasePilha().getNome());
-             sb.append(") = {<");
+             sb.append(") = {");
              sb.append(t.getEstDest().getNome());
              sb.append(",");
              for(Simbolo x : t.getEntradaPilha())
                  sb.append(x.getNome());
-             sb.append(">}");
+             sb.append("}");
         }
         
         this.validaSequenciaGUI.setTextAInf(sb.toString());
