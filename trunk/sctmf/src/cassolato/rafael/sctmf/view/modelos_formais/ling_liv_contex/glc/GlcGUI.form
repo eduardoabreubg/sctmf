@@ -45,8 +45,8 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Trasi&#xe7;&#xf5;es/Simb.Ini">
-                <Property name="tabTitle" type="java.lang.String" value="Trasi&#xe7;&#xf5;es/Simb.Ini"/>
+              <JTabbedPaneConstraints tabName="Regras de Produ&#xe7;&#xe3;o/Simb.Ini">
+                <Property name="tabTitle" type="java.lang.String" value="Regras de Produ&#xe7;&#xe3;o/Simb.Ini"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
