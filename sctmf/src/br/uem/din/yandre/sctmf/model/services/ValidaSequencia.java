@@ -561,56 +561,83 @@ public class ValidaSequencia implements Validacao {
      */
     private boolean valida(MT mt, String sequencia) {
         List<Simbolo> fita = new ArrayList<Simbolo>();
-        // Coloca os simbolos na fita da maquina
+        List<Copia> sera = new ArrayList<Copia>();
+
         fita.add(new Simbolo('\u00A4'));
-        for(char c : sequencia.toCharArray()) fita.add(new Simbolo(c));                       
+        // Coloca os simbolos na fita da maquina
+        for (char c : sequencia.toCharArray()) {
+            fita.add(new Simbolo(c));
+        }
         Estado estadoAtual = mt.getEstIni();
-        
-        int cursor = (sequencia.length() > 0) ? 1 : 0;        
-        
-        while(true) {
-            label : {
-                for(TransicaoMT t : mt.getTransicoes())        
-                    if(t.getEstAtual().getNome().equals(estadoAtual.getNome())
-                        && t.getSimLido().getNome().equals(
-                            fita.get(cursor).getNome())) {
+        int cursor = 1;
+        //int cursor = (sequencia.length() > 0) ? 1 : 0;
+        //adiciona beta na fita se for vazia
+        if (sequencia.length() == 0) {
+            fita.add(new Simbolo('\u03B2'));
+        }
 
-                       estadoAtual = t.getEstDestino(); // altera o estado
-                       fita.set(cursor,t.getSimbEscrito()); // Escreve o simbolo na fita
-                       if(t.getDirecao()==Direcao.DIREITA) {
-                           cursor++;
-                           if(fita.size()==cursor) // add um simbolo em braco                           
-                               fita.add(new Simbolo('\u03B2'));
-                           
-                       }else 
-                           cursor--; // altera o valor do cursor
+        while (true) {
+            label:
+            {
+                for (TransicaoMT t : mt.getTransicoes()) {
+                    if (t.getEstAtual().getNome().equals(estadoAtual.getNome()) && t.getSimLido().getNome().equals(fita.get(cursor).getNome())) {
 
-                       // caso a fita ja se encontrava na celula mais a esquerda
-                       if(cursor < 0) {
-                           ShowFitaMT.getInstance().showFitaMT(fita);
-                           return false;    
-                       }                              
-                                                                   
-                       //for(Estado e : mt.getEstFinais())
+                        /*BEGIN da verificação de looping make by michelmenega*/
+                        Copia c1 = new Copia(cursor, estadoAtual.getNome(), fita.hashCode());
+
+//                        System.out.println(c1.getCopiaFita());
+//                        System.out.println(c1.getEstAtual());
+//                        System.out.println(c1.getCursor());
+//                        System.out.println("------------");
+
+                        if (sera.contains(c1)) {
+                            //System.out.println("OILA");
+                            //System.out.println(sera.toString());
+                            ShowFitaMT.getInstance().showFitaMT(fita);
+                            return false;
+                        }
+
+                        sera.add(c1);
+                        /*END da verificação de looping make by michelmenega*/
+
+                        estadoAtual = t.getEstDestino(); // altera o estado
+                        fita.set(cursor, t.getSimbEscrito()); // Escreve o simbolo na fita
+                        if (t.getDirecao() == Direcao.DIREITA) {
+                            cursor++;
+                            if (fita.size() == cursor) // add um simbolo em branco
+                            {
+                                fita.add(new Simbolo('\u03B2'));
+                            }
+
+                        } else {
+                            cursor--; // altera o valor do cursor
+                        }
+                        // caso a fita ja se encontrava na celula mais a esquerda
+                        if (cursor < 0) {
+                            ShowFitaMT.getInstance().showFitaMT(fita);
+                            return false;
+                        }
+
+                        //for(Estado e : mt.getEstFinais())
                         //   if(e.getNome().equals(estadoAtual.getNome()))
-                          //     return true; // estado final foi assumido
-                       
-                      break label;
+                        //     return true; // estado final foi assumido
+
+                        break label;
                     }
-                
-                for(Estado e : mt.getEstFinais())
-                    if(e.getNome().equals(estadoAtual.getNome())) {
+                }
+
+                for (Estado e : mt.getEstFinais()) {
+                    if (e.getNome().equals(estadoAtual.getNome())) {
                         ShowFitaMT.getInstance().showFitaMT(fita);
                         return true; // estado final foi assumido
                     }
-                        
+                }
+
                 ShowFitaMT.getInstance().showFitaMT(fita);
                 return false; // Nenhuma transica foi encontrada
             } // label
         } // while
-            
     }
-        
     /**
      * Faz a alteração na pilha do automato com pilha.
      */
