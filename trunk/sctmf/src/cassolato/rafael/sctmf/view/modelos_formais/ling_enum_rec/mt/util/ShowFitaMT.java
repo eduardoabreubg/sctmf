@@ -36,13 +36,13 @@ public class ShowFitaMT extends javax.swing.JDialog {
          pLabels.removeAll();
          //pLabels.setLayout(new java.awt.GridLayout(1, tamFita));
          pLabels.setLayout(new java.awt.GridLayout(1, 1));
-         
+
          for(Simbolo s : fitaMT) 
             if(Character.isLetterOrDigit(s.getNome()))
                 pLabels.add(createLabel(s.getNome()));           
-               
+         
          setVisible(true);   
-        
+
      }
      
      private JLabel createLabel(Character text) {

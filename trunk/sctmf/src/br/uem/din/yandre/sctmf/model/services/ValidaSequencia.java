@@ -33,6 +33,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -300,56 +303,65 @@ public class ValidaSequencia implements Validacao {
      */ 
     private boolean valida(ER er, String sequencia) {                
         final String expressaoRegular = er.getExpressaoRegular();
-        if(expressaoRegular.length()==0||sequencia.length()==0) return false;
-        
+
+        Pattern espressao = Pattern.compile(expressaoRegular);
+        Matcher testar = espressao.matcher(sequencia);
+
+        if(testar.matches()){
+            return true;
+        }else{
+            return false;
+        }
+        /*if(expressaoRegular.length()==0||sequencia.length()==0) return false;
+
         final ConversoesERparaAFMV serviceClass = new ConversoesERparaAFMV();
-                         
+
         AFMV afmv = null;  // AFMV que sera retornado
         String str = serviceClass.new UtilsER()
-                .getExpressaoPosFixa(expressaoRegular);  
-        
+        .getExpressaoPosFixa(expressaoRegular);
+
         final Stack<AFMV> pilha = new Stack<AFMV>();
-        for(char c : str.toCharArray()) {        
-            if(Character.isLetterOrDigit(c))
-                pilha.push(serviceClass.getNewAFMV(c));
-            
-            else {
-                AFMV a1 = null;
-                if(c!='%')
-                   a1 = pilha.pop();
-                            
-                switch (c) {
-                    case '*' : 
-                        pilha.push(serviceClass.processaFechoKleene(a1));
-                        
-                        break;                        
-                    case '+' : 
-                        pilha.push(
-                                serviceClass.processaUniao(a1,
-                                                           pilha.pop()));
-                        
-                        break;
-                    case '|' :
-                         pilha.push(
-                                serviceClass.processaContatenacao(
-                                                    pilha.pop(),a1));
-                                           
-                        break;                        
-                }
-            }            
+        for(char c : str.toCharArray()) {
+        if(Character.isLetterOrDigit(c))
+        pilha.push(serviceClass.getNewAFMV(c));
+
+        else {
+        AFMV a1 = null;
+        if(c!='%')
+        a1 = pilha.pop();
+
+        switch (c) {
+        case '*' :
+        pilha.push(serviceClass.processaFechoKleene(a1));
+
+        break;
+        case '+' :
+        pilha.push(
+        serviceClass.processaUniao(a1,
+        pilha.pop()));
+
+        break;
+        case '|' :
+        pilha.push(
+        serviceClass.processaContatenacao(
+        pilha.pop(),a1));
+
+        break;
         }
-        
-        afmv = pilha.pop();      
-        
-        for(Transicao t : afmv.getTransicoes())    
-            System.out.println(t.getEstOri().getNome()+","+
-                               t.getSimbolo().getNome()+"->"+
-                               t.getEstDest().getNome());
-        
+        }
+        }
+
+        afmv = pilha.pop();
+
+        for(Transicao t : afmv.getTransicoes())
+        System.out.println(t.getEstOri().getNome()+","+
+        t.getSimbolo().getNome()+"->"+
+        t.getEstDest().getNome());
+
         System.out.println("Estado Inicial: "+afmv.getEstadoInicial().getNome());
         System.out.println("Estado Final: "+afmv.getEstadosFinais().iterator().next().getNome());
-        
-        return this.valida(afmv,sequencia);
+
+        return this.valida(afmv,sequencia);*/
     }
     
     /**
@@ -573,7 +585,7 @@ public class ValidaSequencia implements Validacao {
         //int cursor = (sequencia.length() > 0) ? 1 : 0;
         //adiciona beta na fita se for vazia
         if (sequencia.length() == 0) {
-            fita.add(new Simbolo('\u03B2'));
+            fita.add(new Simbolo('<'));
         }
 
         while (true) {
@@ -593,6 +605,8 @@ public class ValidaSequencia implements Validacao {
                         if (sera.contains(c1)) {
                             //System.out.println("OILA");
                             //System.out.println(sera.toString());
+                            JOptionPane.showMessageDialog(null,"MT em Looping","Atenção",
+    JOptionPane.INFORMATION_MESSAGE);
                             ShowFitaMT.getInstance().showFitaMT(fita);
                             return false;
                         }
