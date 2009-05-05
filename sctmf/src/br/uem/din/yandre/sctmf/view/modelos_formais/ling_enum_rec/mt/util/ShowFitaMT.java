@@ -22,7 +22,7 @@ public class ShowFitaMT extends javax.swing.JDialog {
     private ShowFitaMT() {
         setLocationRelativeTo(null);
         initComponents();
-        setSize(400,100); 
+        setSize(600,120);
         setModal(true);
     }
     
@@ -37,10 +37,14 @@ public class ShowFitaMT extends javax.swing.JDialog {
          //pLabels.setLayout(new java.awt.GridLayout(1, tamFita));
          pLabels.setLayout(new java.awt.GridLayout(1, 1));
          
-         for(Simbolo s : fitaMT) 
+         pLabels.add(createLabel('<'));
+         for(Simbolo s : fitaMT)
             if(Character.isLetterOrDigit(s.getNome()))
                 pLabels.add(createLabel(s.getNome()));           
-               
+         pLabels.add(createLabel('\u03B2'));
+         pLabels.add(createLabel('\u03B2'));
+         pLabels.add(createLabel('\u03B2'));
+ 
          setVisible(true);   
         
      }

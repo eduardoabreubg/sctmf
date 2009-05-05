@@ -31,7 +31,7 @@ public class ValSeqMT extends javax.swing.JPanel {
     void observer(MT mt) {                
         this.validaSequenciaGUI.clearArea();   
         this.validaSequenciaGUI.setTextAInf(
-                "M = \u03a3, Q, \u03B4, q\u2080, F, V, \u03B2, \u00A4\n");
+                "M = \u03a3, Q, \u03B4, q\u2080, F, V, \u03B2, <\n");
                 
         StringBuffer sb = new StringBuffer();        
         sb.append("\u03a3 = {");  // Add Simbolos
