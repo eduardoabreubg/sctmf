@@ -16,6 +16,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -448,7 +449,7 @@ public class CadFTransMT extends javax.swing.JPanel {
         jPanel61.setPreferredSize(new java.awt.Dimension(60, 30));
         jPanel61.setLayout(new java.awt.BorderLayout());
 
-        bAddSimIniFitaDir.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 11)); // NOI18N
+        bAddSimIniFitaDir.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 11));
         bAddSimIniFitaDir.setText("<");
         bAddSimIniFitaDir.setPreferredSize(new java.awt.Dimension(45, 23));
         bAddSimIniFitaDir.addActionListener(new java.awt.event.ActionListener() {
@@ -458,7 +459,7 @@ public class CadFTransMT extends javax.swing.JPanel {
         });
         jPanel61.add(bAddSimIniFitaDir, java.awt.BorderLayout.EAST);
 
-        bAddSimbBrancDir.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 10)); // NOI18N
+        bAddSimbBrancDir.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 10));
         bAddSimbBrancDir.setPreferredSize(new java.awt.Dimension(45, 23));
         bAddSimbBrancDir.setText("\u03B2");
         bAddSimbBrancDir.addActionListener(new java.awt.event.ActionListener() {
@@ -549,7 +550,7 @@ public class CadFTransMT extends javax.swing.JPanel {
 
         jPanel11.setLayout(new javax.swing.BoxLayout(jPanel11, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel3.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Verdana", 1, 10));
         jLabel3.setText("<");
         jPanel11.add(jLabel3);
 
@@ -561,7 +562,7 @@ public class CadFTransMT extends javax.swing.JPanel {
 
         jPanel12.setLayout(new javax.swing.BoxLayout(jPanel12, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel5.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Verdana", 1, 10));
         jLabel5.setText("B");
         jLabel5.setText("\u03B2 ");
         jPanel12.add(jLabel5);
@@ -622,6 +623,14 @@ public class CadFTransMT extends javax.swing.JPanel {
                 dir = this.cbDirecao.getSelectedItem().toString().equals("D")?
                     Direcao.DIREITA:Direcao.ESQUERDA;
              }
+
+            if ((simbLido.getNome().equals('<')) || (sGrav.getNome().equals('<'))) {
+                simbLido = new Simbolo('<');
+                sGrav = new Simbolo('<');
+                dir = Direcao.DIREITA;
+                JOptionPane.showMessageDialog(null, "Única Opção de Inserção \n " +
+                        "\u03B4(" + estOri.getNome() + ",\u003C) \u2192 (" + estDest.getNome() + ",\u003C,D)", "Atenção", JOptionPane.WARNING_MESSAGE);
+            }
                 
             StringBuilder sb = new StringBuilder("\u03B4(")
                 .append(estOri.getNome())
@@ -652,7 +661,9 @@ public class CadFTransMT extends javax.swing.JPanel {
     }//GEN-LAST:event_fSimASerGravadoKeyReleased
     
     private void bAddSimIniFitaDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimIniFitaDirActionPerformed
-        this.fSimASerGravado.setText("<");
+        this.fSimASerGravado.setText("\u003C");//\u003C = <
+        this.fSimASerLido.setText("\u003C");
+        this.cbDirecao.setSelectedIndex(1);
     }//GEN-LAST:event_bAddSimIniFitaDirActionPerformed
     
     private void bAddSimbBrancDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimbBrancDirActionPerformed
@@ -684,7 +695,9 @@ public class CadFTransMT extends javax.swing.JPanel {
     }
     
     private void bAddSimIniFitaEsqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimIniFitaEsqActionPerformed
-        this.fSimASerLido.setText("<");
+        this.fSimASerLido.setText("\u003C");
+        this.fSimASerGravado.setText("\u003C");
+        this.cbDirecao.setSelectedIndex(1);
     }//GEN-LAST:event_bAddSimIniFitaEsqActionPerformed
     
     private void bAddSimbBrancEsqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimbBrancEsqActionPerformed

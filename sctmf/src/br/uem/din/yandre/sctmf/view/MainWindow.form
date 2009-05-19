@@ -104,20 +104,12 @@
                 <Property name="text" type="java.lang.String" value="Linguagens Sens&#xed;veis ao Contexto"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="miGramSensContex">
+                <MenuItem class="javax.swing.JMenuItem" name="miAutomatoLinearmenteLimitado">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Gram&#xe1;tica Sens&#xed;vel ao Contexto "/>
+                    <Property name="text" type="java.lang.String" value="Automato Linearmente Limitado"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miGramSensContexActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="miAutComDuasPilha">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Aut&#xf4;mato com Duas Pilhas"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAutComDuasPilhaActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAutomatoLinearmenteLimitadoActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>
@@ -360,31 +352,20 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="bGramSensContex">
+            <Component class="javax.swing.JButton" name="bAutomatoLinearmenteLimitado">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="GSC"/>
-                <Property name="toolTipText" type="java.lang.String" value="Gram&#xe1;tica Sens&#xed;vel ao Contexto "/>
-                <Property name="enabled" type="boolean" value="false"/>
+                <Property name="text" type="java.lang.String" value="ALL"/>
+                <Property name="toolTipText" type="java.lang.String" value="Automato Linearmente Limitado"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[70, 25]"/>
                 </Property>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="bAutComDuasPilhas">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="cc" green="cc" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="ADP"/>
-                <Property name="toolTipText" type="java.lang.String" value="Aut&#xf4;mato com Duas Pilhas"/>
-                <Property name="enabled" type="boolean" value="false"/>
-                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[70, 25]"/>
-                </Property>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bAutomatoLinearmenteLimitadoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

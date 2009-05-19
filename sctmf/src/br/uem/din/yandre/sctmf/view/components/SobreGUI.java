@@ -122,12 +122,12 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel20.setBackground(new java.awt.Color(255, 255, 255));
         jPanel20.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
 
-        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel36.setText("Nome :");
         jLabel36.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel20.add(jLabel36);
 
-        jLabel37.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel37.setFont(new java.awt.Font("Dialog", 0, 11));
         jLabel37.setText("Prof. Msc. Yandre M. e G. da Costa");
         jLabel37.setPreferredSize(new java.awt.Dimension(200, 15));
         jPanel20.add(jLabel37);
@@ -141,13 +141,13 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel21.setBackground(new java.awt.Color(255, 255, 255));
         jPanel21.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
 
-        jLabel39.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel39.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel39.setText("e-mail :");
         jLabel39.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel21.add(jLabel39);
 
         jLabel40.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
-        jLabel40.setText("yandre.costa@gmail.com");
+        jLabel40.setText("yandre@din.uem.br");
         jLabel40.setPreferredSize(new java.awt.Dimension(200, 15));
         jPanel21.add(jLabel40);
 
@@ -156,12 +156,12 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel12.setText("Nome :");
         jLabel12.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel4.add(jLabel12);
 
-        jLabel5.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Dialog", 0, 11));
         jLabel5.setText("Rafael Cassolato de Meneses");
         jLabel5.setPreferredSize(new java.awt.Dimension(200, 15));
         jPanel4.add(jLabel5);
@@ -175,7 +175,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel11.setText("e-mail :");
         jLabel11.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel5.add(jLabel11);
@@ -190,12 +190,12 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel15.setBackground(new java.awt.Color(255, 255, 255));
         jPanel15.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
 
-        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel23.setText("Nome :");
         jLabel23.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel15.add(jLabel23);
 
-        jLabel24.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel24.setFont(new java.awt.Font("Dialog", 0, 11));
         jLabel24.setText("Fabio Schneider Bortolotto");
         jLabel24.setPreferredSize(new java.awt.Dimension(200, 15));
         jPanel15.add(jLabel24);
@@ -209,12 +209,12 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
         jPanel14.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel20.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel20.setText("e-mail :");
         jLabel20.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel14.add(jLabel20);
 
-        jLabel21.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel21.setFont(new java.awt.Font("Dialog", 0, 11));
         jLabel21.setText("fsbfsb@gmail.com");
         jLabel21.setPreferredSize(new java.awt.Dimension(200, 15));
         jPanel14.add(jLabel21);
@@ -224,12 +224,12 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
         jPanel16.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
 
-        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel22.setText("Nome :");
         jLabel22.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel16.add(jLabel22);
 
-        jLabel25.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel25.setFont(new java.awt.Font("Dialog", 0, 11));
         jLabel25.setText("Bruno Meneguello");
         jLabel25.setPreferredSize(new java.awt.Dimension(200, 15));
         jPanel16.add(jLabel25);
@@ -243,12 +243,12 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel17.setBackground(new java.awt.Color(255, 255, 255));
         jPanel17.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
 
-        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel26.setText("e-mail :");
         jLabel26.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel17.add(jLabel26);
 
-        jLabel27.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel27.setFont(new java.awt.Font("Dialog", 0, 11));
         jLabel27.setText("bruno.meneguello@gmail.com");
         jLabel27.setPreferredSize(new java.awt.Dimension(200, 15));
         jPanel17.add(jLabel27);
@@ -258,7 +258,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel18.setBackground(new java.awt.Color(255, 255, 255));
         jPanel18.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
 
-        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel28.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel28.setText("Nome :");
         jLabel28.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel18.add(jLabel28);
@@ -277,12 +277,12 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel19.setBackground(new java.awt.Color(255, 255, 255));
         jPanel19.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
 
-        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel30.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel30.setText("e-mail :");
         jLabel30.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel19.add(jLabel30);
 
-        jLabel31.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel31.setFont(new java.awt.Font("Dialog", 0, 11));
         jLabel31.setText("michelmenega@gmail.com");
         jLabel31.setPreferredSize(new java.awt.Dimension(200, 15));
         jPanel19.add(jLabel31);
@@ -320,18 +320,18 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel7.setLayout(new java.awt.GridLayout(4, 0));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel10.setForeground(new java.awt.Color(0, 0, 102));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("FAFIMAN / UEM");
         jPanel7.add(jLabel10);
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 11));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText(" Faculdade de Filosofia Ciências e Letras de Mandaguari");
         jPanel7.add(jLabel9);
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
+        jLabel19.setFont(new java.awt.Font("Arial", 0, 11));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Universidade Estadual de Maringá");
         jPanel7.add(jLabel19);
@@ -354,7 +354,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel11.add(jPanel1, java.awt.BorderLayout.CENTER);
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans", 1, 13)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Bitstream Vera Sans", 1, 13));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Software de Criação e Teste de Modelos Formais");
         jLabel1.setPreferredSize(new java.awt.Dimension(82, 40));
