@@ -3,7 +3,6 @@
  *
  * Created on 10 de Fevereiro de 2007, 12:56
  */
-
 package br.uem.din.yandre.sctmf.view;
 
 import br.uem.din.yandre.sctmf.control.Controller;
@@ -15,18 +14,18 @@ import br.uem.din.yandre.sctmf.view.components.SobreGUI;
  * @author  Cassolato
  */
 public class MainWindow extends javax.swing.JFrame {
-       
+
     private Controller ctrl = null;
-    
+
     /** Creates new form MainWindow */
     public MainWindow(Controller ctrl) {
         this.ctrl = ctrl;
-        
+
         this.initComponents();
         this.posInitComponents();
-        this.setLocationRelativeTo(null);        
+        this.setLocationRelativeTo(null);
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -47,8 +46,7 @@ public class MainWindow extends javax.swing.JFrame {
         bAutComPilha = new javax.swing.JButton();
         bGramLivrContex = new javax.swing.JButton();
         pLingSensContex = new javax.swing.JPanel();
-        bGramSensContex = new javax.swing.JButton();
-        bAutComDuasPilhas = new javax.swing.JButton();
+        bAutomatoLinearmenteLimitado = new javax.swing.JButton();
         pLingEnumRec = new javax.swing.JPanel();
         bMaqTuring = new javax.swing.JButton();
         bGramEstruFrase = new javax.swing.JButton();
@@ -66,8 +64,7 @@ public class MainWindow extends javax.swing.JFrame {
         miAutComPilha = new javax.swing.JMenuItem();
         miGramLivrContex = new javax.swing.JMenuItem();
         mLingSensContex = new javax.swing.JMenu();
-        miGramSensContex = new javax.swing.JMenuItem();
-        miAutComDuasPilha = new javax.swing.JMenuItem();
+        miAutomatoLinearmenteLimitado = new javax.swing.JMenuItem();
         mLingEnumRec = new javax.swing.JMenu();
         miMaqTuring = new javax.swing.JMenuItem();
         miGramEstruFrase = new javax.swing.JMenuItem();
@@ -165,19 +162,16 @@ public class MainWindow extends javax.swing.JFrame {
         pLingSensContex.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(255, 153, 153), null, new java.awt.Color(255, 0, 0)));
         pLingSensContex.setToolTipText("Linguagens Sensíveis ao Contexto");
 
-        bGramSensContex.setBackground(new java.awt.Color(255, 204, 204));
-        bGramSensContex.setText("GSC");
-        bGramSensContex.setToolTipText("Gramática Sensível ao Contexto ");
-        bGramSensContex.setEnabled(false);
-        bGramSensContex.setPreferredSize(new java.awt.Dimension(70, 25));
-        pLingSensContex.add(bGramSensContex);
-
-        bAutComDuasPilhas.setBackground(new java.awt.Color(255, 204, 204));
-        bAutComDuasPilhas.setText("ADP");
-        bAutComDuasPilhas.setToolTipText("Autômato com Duas Pilhas");
-        bAutComDuasPilhas.setEnabled(false);
-        bAutComDuasPilhas.setPreferredSize(new java.awt.Dimension(70, 25));
-        pLingSensContex.add(bAutComDuasPilhas);
+        bAutomatoLinearmenteLimitado.setBackground(new java.awt.Color(255, 204, 204));
+        bAutomatoLinearmenteLimitado.setText("ALL");
+        bAutomatoLinearmenteLimitado.setToolTipText("Automato Linearmente Limitado");
+        bAutomatoLinearmenteLimitado.setPreferredSize(new java.awt.Dimension(70, 25));
+        bAutomatoLinearmenteLimitado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAutomatoLinearmenteLimitadoActionPerformed(evt);
+            }
+        });
+        pLingSensContex.add(bAutomatoLinearmenteLimitado);
 
         jToolBar.add(pLingSensContex);
 
@@ -281,21 +275,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         mLingSensContex.setText("Linguagens Sensíveis ao Contexto");
 
-        miGramSensContex.setText("Gramática Sensível ao Contexto ");
-        miGramSensContex.addActionListener(new java.awt.event.ActionListener() {
+        miAutomatoLinearmenteLimitado.setText("Automato Linearmente Limitado");
+        miAutomatoLinearmenteLimitado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miGramSensContexActionPerformed(evt);
+                miAutomatoLinearmenteLimitadoActionPerformed(evt);
             }
         });
-        mLingSensContex.add(miGramSensContex);
-
-        miAutComDuasPilha.setText("Autômato com Duas Pilhas");
-        miAutComDuasPilha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miAutComDuasPilhaActionPerformed(evt);
-            }
-        });
-        mLingSensContex.add(miAutComDuasPilha);
+        mLingSensContex.add(miAutomatoLinearmenteLimitado);
 
         mModelos.add(mLingSensContex);
 
@@ -369,7 +355,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_bGramLivrContexActionPerformed
 
     private void bExpRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExpRegActionPerformed
-      this.showFormalModel(IdModeloFormal.ER);
+        this.showFormalModel(IdModeloFormal.ER);
     }//GEN-LAST:event_bExpRegActionPerformed
 
     private void bAFNDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAFNDActionPerformed
@@ -377,7 +363,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_bAFNDActionPerformed
 
     private void bAFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAFDActionPerformed
-       this.showFormalModel(IdModeloFormal.AFD);
+        this.showFormalModel(IdModeloFormal.AFD);
     }//GEN-LAST:event_bAFDActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -385,7 +371,7 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void miSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSobreActionPerformed
-        new SobreGUI(this,true);
+        new SobreGUI(this, true);
     }//GEN-LAST:event_miSobreActionPerformed
 
     private void miGramEstruFraseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGramEstruFraseActionPerformed
@@ -396,13 +382,9 @@ public class MainWindow extends javax.swing.JFrame {
         this.showFormalModel(IdModeloFormal.MT);
     }//GEN-LAST:event_miMaqTuringActionPerformed
 
-    private void miAutComDuasPilhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAutComDuasPilhaActionPerformed
-// TODO adicione seu código de manipulação aqui:
-    }//GEN-LAST:event_miAutComDuasPilhaActionPerformed
-
-    private void miGramSensContexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGramSensContexActionPerformed
-// TODO adicione seu código de manipulação aqui:
-    }//GEN-LAST:event_miGramSensContexActionPerformed
+    private void miAutomatoLinearmenteLimitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAutomatoLinearmenteLimitadoActionPerformed
+        this.showFormalModel(IdModeloFormal.ALL);
+}//GEN-LAST:event_miAutomatoLinearmenteLimitadoActionPerformed
 
     private void miGramLivrContexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGramLivrContexActionPerformed
         this.showFormalModel(IdModeloFormal.GLC);
@@ -423,30 +405,34 @@ public class MainWindow extends javax.swing.JFrame {
     private void miAFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAFDActionPerformed
         this.showFormalModel(IdModeloFormal.AFD);
     }//GEN-LAST:event_miAFDActionPerformed
-    
+
     private void miSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSairActionPerformed
-        this.actionSair();        
+        this.actionSair();
     }//GEN-LAST:event_miSairActionPerformed
 
     private void mHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mHelpActionPerformed
         new DisplayHelp();
     }//GEN-LAST:event_mHelpActionPerformed
-    
+
+    private void bAutomatoLinearmenteLimitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAutomatoLinearmenteLimitadoActionPerformed
+        this.showFormalModel(IdModeloFormal.ALL);        // TODO add your handling code here:
+    }//GEN-LAST:event_bAutomatoLinearmenteLimitadoActionPerformed
+
     /**
      * Manipula a ação de Saída do Sistema
      */
-    private void actionSair() {           
-        int i = jop.showOptionDialog(null, "Deseja Sair do Sistema ?", "",   
-                 jop.YES_NO_OPTION,jop.QUESTION_MESSAGE,   
-                 null, new String[]{"Sim","Não"}, null);
-        
-        if(i==0) {
-            this.setVisible(false);            
+    private void actionSair() {
+        int i = jop.showOptionDialog(null, "Deseja Sair do Sistema ?", "",
+                jop.YES_NO_OPTION, jop.QUESTION_MESSAGE,
+                null, new String[]{"Sim", "Não"}, null);
+
+        if (i == 0) {
+            this.setVisible(false);
             System.exit(0);
         }
-            
+
     }
-    
+
     /**
      * Add o JInternalFrame no Fundo
      */
@@ -459,48 +445,44 @@ public class MainWindow extends javax.swing.JFrame {
         }
         jif.setVisible(true);
     }
-    
+
     /**
      * Pós inicia os componentes 
      */
     private void posInitComponents() {
         this.miSair.setAccelerator(
-                javax.swing.KeyStroke.getKeyStroke( 
-                   java.awt.event.KeyEvent.VK_F4, 
-                    java.awt.event.ActionEvent.ALT_MASK));
-        
+                javax.swing.KeyStroke.getKeyStroke(
+                java.awt.event.KeyEvent.VK_F4,
+                java.awt.event.ActionEvent.ALT_MASK));
+
         this.miSobre.setAccelerator(
                 javax.swing.KeyStroke.getKeyStroke("F1"));
-                
+
         this.notVisible();
     }
-    
+
     /**
      * Retira os componentes que a principio não vao 
      * estar no TCC
      */
     private void notVisible() {
-        this.pLingSensContex.setVisible(false);
         this.bGramEstruFrase.setVisible(false);
-        this.mLingSensContex.setVisible(false);
         this.miGramEstruFrase.setVisible(false);
     }
-    
-    private void showFormalModel(IdModeloFormal idFM) {        
+
+    private void showFormalModel(IdModeloFormal idFM) {
         this.addJIF(
                 new GenericJInternalFrame(ctrl, idFM));
     }
-            
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAFD;
     private javax.swing.JButton bAFMV;
     private javax.swing.JButton bAFND;
-    private javax.swing.JButton bAutComDuasPilhas;
     private javax.swing.JButton bAutComPilha;
+    private javax.swing.JButton bAutomatoLinearmenteLimitado;
     private javax.swing.JButton bExpReg;
     private javax.swing.JButton bGramEstruFrase;
     private javax.swing.JButton bGramLivrContex;
-    private javax.swing.JButton bGramSensContex;
     private javax.swing.JButton bMaqTuring;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar jToolBar;
@@ -517,12 +499,11 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem miAFD;
     private javax.swing.JMenuItem miAFMV;
     private javax.swing.JMenuItem miAFND;
-    private javax.swing.JMenuItem miAutComDuasPilha;
     private javax.swing.JMenuItem miAutComPilha;
+    private javax.swing.JMenuItem miAutomatoLinearmenteLimitado;
     private javax.swing.JMenuItem miExpReg;
     private javax.swing.JMenuItem miGramEstruFrase;
     private javax.swing.JMenuItem miGramLivrContex;
-    private javax.swing.JMenuItem miGramSensContex;
     private javax.swing.JMenuItem miMaqTuring;
     private javax.swing.JMenuItem miSair;
     private javax.swing.JMenuItem miSobre;
@@ -532,5 +513,4 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel pLingRegul;
     private javax.swing.JPanel pLingSensContex;
     // End of variables declaration//GEN-END:variables
-    
 }

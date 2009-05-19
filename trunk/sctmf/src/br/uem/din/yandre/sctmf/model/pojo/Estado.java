@@ -15,6 +15,7 @@ package br.uem.din.yandre.sctmf.model.pojo;
  */
 public class Estado {
     private String nome;
+    private boolean naoDeterministico;
     
     /** Creates a new instance of Estado */
     public Estado(String nome) {
@@ -27,6 +28,36 @@ public class Estado {
     
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public boolean isNDeterministico() {
+        return naoDeterministico;
+    }
+
+    public void setNDeterministico(boolean naoDeterministico) {
+        this.naoDeterministico = naoDeterministico;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Estado other = (Estado) obj;
+        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 31 * hash + (this.nome != null ? this.nome.hashCode() : 0);
+        return hash;
     }
 
 }
