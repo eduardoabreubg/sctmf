@@ -23,5 +23,27 @@ public class Simbolo {
 
     public Character getNome() {
         return nome;
-    }    
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Simbolo other = (Simbolo) obj;
+        if (this.nome != other.nome && (this.nome == null || !this.nome.equals(other.nome))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + (this.nome != null ? this.nome.hashCode() : 0);
+        return hash;
+    }
 }

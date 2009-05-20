@@ -113,6 +113,10 @@ public class JfcOpenSave extends javax.swing.JFileChooser {
             case GLC:
                 return new FileNameExtensionFilter(
                         "Gramática Livre de Contexto", "glc", "GLC");
+
+            case ALL:
+                return new FileNameExtensionFilter(
+                        "Autômato Linearmente Limitado", "all", "ALL");
                 
             case MT:
                 return new FileNameExtensionFilter(
