@@ -6,6 +6,7 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
+
 package br.uem.din.yandre.sctmf.model.services.abrir;
 
 import br.uem.din.yandre.sctmf.model.pojo.AFD;
@@ -16,11 +17,13 @@ import br.uem.din.yandre.sctmf.model.pojo.AP;
 import br.uem.din.yandre.sctmf.model.pojo.Direcao;
 import br.uem.din.yandre.sctmf.model.pojo.ER;
 import br.uem.din.yandre.sctmf.model.pojo.Estado;
+import br.uem.din.yandre.sctmf.model.pojo.EstadoComparavel;
 import br.uem.din.yandre.sctmf.model.pojo.GLC;
 import br.uem.din.yandre.sctmf.model.pojo.MT;
 import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;
 import br.uem.din.yandre.sctmf.model.pojo.RegraProducao;
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
+import br.uem.din.yandre.sctmf.model.pojo.SimboloString;
 import br.uem.din.yandre.sctmf.model.pojo.Transicao;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoALL;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoAP;
@@ -28,21 +31,23 @@ import br.uem.din.yandre.sctmf.model.pojo.TransicaoMT;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
  * @author rafael2009_00
  */
 public class AbrirModeloFormal implements Abrir {
-
+    
     /**
      * Creates a new instance of AbrirModeloFormal
      */
     public AbrirModeloFormal() {
     }
-
+    
     public ModeloFormal abrir(File arquivo) throws AbrirException {
         // pega a extenção do arquivo
         String aux[] = arquivo.getName().split("\\.");
@@ -71,7 +76,7 @@ public class AbrirModeloFormal implements Abrir {
             return null;
         }
     }
-
+    
     private AFD abrirAFD(File arquivo) throws AbrirException {
         AFD afd = new AFD();
         try {
@@ -189,9 +194,9 @@ public class AbrirModeloFormal implements Abrir {
                         String str[] = line.split("-");
 
                         Transicao t = new Transicao();
-                        t.setEstOri(new Estado(str[0]));
+                        t.setEstOri(new EstadoComparavel(str[0]));
                         t.setSimbolo(new Simbolo(str[1].charAt(0)));
-                        t.setEstDest(new Estado(str[2]));
+                        t.setEstDest(new EstadoComparavel(str[2]));
 
                         afnd.addTransicao(t);
 
@@ -202,18 +207,18 @@ public class AbrirModeloFormal implements Abrir {
 
                     } else if (line.startsWith("S")) { // Simbolos
                         for (String e : line.substring(2, line.length() - 1).split("-")) {
-                            afnd.addEstado(new Estado(e));
+                            afnd.addEstado(new EstadoComparavel(e));
                         }
 
                     } else if (line.startsWith("F")) { // Estados Finais
                         for (String f : line.substring(2, line.length() - 1).split("-")) {
-                            afnd.addEstadoFinal(new Estado(f));
+                            afnd.addEstadoFinal(new EstadoComparavel(f));
                         }
 
                     } else if (line.startsWith("I")) { // Estados Iniciais
                         for (String ei : line.substring(2,
                                 line.length() - 1).split("-")) {
-                            afnd.addEstadoInicial(new Estado(ei));
+                            afnd.addEstadoInicial(new EstadoComparavel(ei));
                         }
                     }
                 }
@@ -322,53 +327,60 @@ public class AbrirModeloFormal implements Abrir {
 
         return ap;
     }
-
+    
+    private List<SimboloString> extractSimbolo(String simbolos) {
+        String[] ss = simbolos.split("</simbolo>");
+        List<SimboloString> ret = new LinkedList<SimboloString>();
+        for (String s : ss) 
+            ret.add(new SimboloString(s.replaceFirst("[^<]*<simbolo>", "")));
+        return ret;
+    }
+    
     private GLC abrirGLC(File arquivo) throws AbrirException {
         GLC glc = new GLC();
-
+       
         try {
-            BufferedReader br = new BufferedReader(new FileReader(arquivo));
-            while (br.ready()) {
-                String line = br.readLine();
-                if (line.length() > 2) {
-                    if (line.startsWith("S")) {
-                        glc.setSimbInicial(
-                                new Simbolo(line.substring(2).charAt(0)));
-
-                    } else if (line.startsWith("P")) {
-                        line = line.substring(2);
-                        String str[] = line.split("-");
-
-                        RegraProducao rp = new RegraProducao();
-                        rp.setSimbLEsq(new Simbolo(str[0].charAt(0)));
-
-                        // Lado Direito da regra
-                        List<Simbolo> simbolos = new LinkedList<Simbolo>();
-                        for (char c : str[1].toCharArray()) {
-                            simbolos.add(new Simbolo(c));
-                        }
-
-                        rp.setSimbLDireito(simbolos);
-
-                        glc.addRegraProducao(rp);
-
-                    } else if (line.startsWith("V")) { // Alfabeto Nao-Terminais
-                        for (String s : line.substring(2, line.length() - 1).split("-")) {
-                            glc.addSimbNTerm(new Simbolo(s.charAt(0)));
-                        }
-
-                    } else if (line.startsWith("T")) { // Alfabeto Terminais
-                        for (String s : line.substring(2, line.length() - 1).split("-")) {
-                            glc.addSimbTerm(new Simbolo(s.charAt(0)));
-                        }
-
-                    }
-                }
-
-            }//end while
-
-            br.close();
-        } catch (Exception ex) {
+         BufferedReader br = new BufferedReader(new FileReader(arquivo));
+         while(br.ready()) {
+             String line = br.readLine();
+             if(line.length()>2) {                 
+                 if(line.startsWith("S")) {
+                     glc.setSimbInicial(extractSimbolo(line.substring(2)).get(0));
+                 }else if(line.startsWith("P")) {
+                     line = line.substring(2);
+                     String str[] = line.split("-",2);
+                     
+                     RegraProducao rp = new RegraProducao();
+                     rp.setSimbLEsq(extractSimbolo(str[0]).get(0));
+                     
+                     // Lado Direito da regra
+                     List<SimboloString> simbolos = null;
+                     if (str.length == 2) simbolos = extractSimbolo(str[1]);
+                     else simbolos = new LinkedList<SimboloString>();
+                     if (simbolos.size() == 1 && simbolos.get(0).getNome().isEmpty()) 
+                         simbolos.set(0,GLC.LAMBDA);
+                         
+                     rp.setSimbLDireito(simbolos);
+                     
+                     glc.addRegraProducao(rp);
+                     
+                 } else if(line.startsWith("V")) { // Alfabeto Nao-Terminais
+                     List<SimboloString> l = extractSimbolo(line.substring(2));
+                     Set<SimboloString> s = new HashSet<SimboloString>();
+                     s.addAll(l);
+                     glc.setSimbNTerm(s);
+                 }else if(line.startsWith("T")) { // Alfabeto Terminais
+                     List<SimboloString> l = extractSimbolo(line.substring(2));
+                     Set<SimboloString> s = new HashSet<SimboloString>();
+                     s.addAll(l);
+                     glc.setSimbTerm(s);
+                 }
+             }                 
+             
+         }//end while
+         
+         br.close();
+        }catch(Exception ex) {
             ex.printStackTrace();
             throw new AbrirException("Erro Ao abrir modelo Formal - GLC");
         }
@@ -378,7 +390,7 @@ public class AbrirModeloFormal implements Abrir {
 
     private MT abrirMT(File arquivo) throws AbrirException {
         MT mt = new MT();
-
+        
         try {
             BufferedReader br = new BufferedReader(new FileReader(arquivo));
             while (br.ready()) {
