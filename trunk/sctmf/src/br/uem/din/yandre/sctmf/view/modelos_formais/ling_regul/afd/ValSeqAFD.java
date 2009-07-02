@@ -8,11 +8,8 @@ package br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.afd;
 
 import br.uem.din.yandre.sctmf.model.pojo.AFD;
 import br.uem.din.yandre.sctmf.model.pojo.Estado;
-import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
 import br.uem.din.yandre.sctmf.model.pojo.Transicao;
-import br.uem.din.yandre.sctmf.model.services.ValidaSequencia;
-import br.uem.din.yandre.sctmf.model.services.Validacao;
 
 /**
  *
