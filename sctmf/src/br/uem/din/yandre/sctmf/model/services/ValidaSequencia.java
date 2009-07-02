@@ -16,11 +16,12 @@ import br.uem.din.yandre.sctmf.model.pojo.AP;
 import br.uem.din.yandre.sctmf.model.pojo.Direcao;
 import br.uem.din.yandre.sctmf.model.pojo.ER;
 import br.uem.din.yandre.sctmf.model.pojo.Estado;
-import br.uem.din.yandre.sctmf.model.pojo.GLC;
+import br.uem.din.yandre.sctmf.model.pojo.GLCFNC;
 import br.uem.din.yandre.sctmf.model.pojo.MT;
 import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;
 import br.uem.din.yandre.sctmf.model.pojo.RegraProducao;
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
+import br.uem.din.yandre.sctmf.model.pojo.SimboloString;
 import br.uem.din.yandre.sctmf.model.pojo.Transicao;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoALL;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoAP;
@@ -65,8 +66,6 @@ public class ValidaSequencia implements Validacao {
             status = this.valida((AFD) mf, sequencia);
         } else if (mf instanceof ER) {
             status = this.valida((ER) mf, sequencia);
-        } else if (mf instanceof GLC) {
-            status = this.valida((GLC) mf, sequencia);
         } else if (mf instanceof MT) {
             status = this.valida((MT) mf, sequencia);
         } else if (mf instanceof ALL) {
@@ -74,7 +73,16 @@ public class ValidaSequencia implements Validacao {
         }
         this.sendMessage(status);
     }
-
+    
+    public void valida(ModeloFormal mf, List<SimboloString> sequencia) {
+        boolean status = false;
+        
+        if(mf instanceof GLCFNC )
+            status = this.valida((GLCFNC)mf, sequencia);
+        
+        this.sendMessage(status);
+    }
+    
     /**
      * Metodo que faz a validação de uma sequencia.
      *
@@ -483,85 +491,75 @@ public class ValidaSequencia implements Validacao {
      * @param sequencia - Sequencia a ser Validada.
      * @return boolean
      */
-    private boolean valida(GLC glc, String sequencia) {
+    public boolean valida(GLCFNC glc, List<SimboloString> sequencia) {
         // caso nao exista simbolo inicial cadastrado
-        if (glc.getSimbInicial() == null) {
-            return false;
-        }
-
-        final int tamSeq = sequencia.length();
-
+        if(glc.getSimbInicial()==null) return false;
+        
+        final int tamSeq = sequencia.size();
+        
         // cria a tabela
-        Set[][] tabela = new Set[tamSeq + 1][tamSeq];
-
+        Set[][] tabela = new Set[tamSeq+1][tamSeq];
+        
         // add a sequencia na posicao 0 da tabela
-        for (int i = 0; i < sequencia.length(); i++) {
+        for(int i=0;i<sequencia.size();i++) {
             Set s = tabela[0][i];
-            if (s == null) {
-                s = new HashSet<Simbolo>();
-            }
-
-            s.add(new Simbolo(sequencia.charAt(i)));
+            if(s==null) s = new HashSet<SimboloString>();
+            
+            s.add(sequencia.get(i));
             tabela[0][i] = s;
         }
-
+        
         // regride os nao terminais nos seus terminais
-        for (int i = 0; i < sequencia.length(); i++) {
-            Simbolo s = (Simbolo) tabela[0][i].iterator().next();
-            char c = s.getNome();
-            for (RegraProducao rp : glc.getRegrasProducao()) {
-                List<Simbolo> simbs = rp.getSimbLDireito();
+        for(int i=0;i<sequencia.size();i++) {
+            SimboloString s = (SimboloString)tabela[0][i].iterator().next();
+            String c = s.getNome();
+            for(RegraProducao rp : glc.getRegrasProducao()) {
+                List<SimboloString> simbs = rp.getSimbLDireito();
                 // busca as regras de producao com terminais no lado direito
-                if (simbs.size() == 1 && simbs.get(0).getNome() == c) {
-                    Set<Simbolo> simbolos = tabela[1][i];
-                    if (simbolos == null) // inicia a lista
-                    {
-                        simbolos = new HashSet<Simbolo>();
-                    }
-
-                    simbolos.add(rp.getSimbLEsq());
-                    tabela[1][i] = simbolos;
+                if(simbs.size()==1&&simbs.get(0).getNome().equals(c)) {
+                    Set<SimboloString> simbolos = tabela[1][i];                    
+                    if(simbolos==null)  // inicia a lista
+                        simbolos = new HashSet<SimboloString>();
+                    
+                    simbolos.add(rp.getSimbLEsq());                
+                    tabela[1][i] = simbolos;               
                 }
             }
             // caso nao exista uma producao para o simbolo da sequencia
-            if (tabela[1][i] == null) {
-                return false;
-            }
+            if(tabela[1][i]==null) return false;
         }
-
-        for (int j = 2; j <= tamSeq; j++) // Cantos da piramede....
-        {
-            for (int i = 0; i <= tamSeq - j; i++) {// Vertical da pirâmede
+        
+        for(int j=2;j<=tamSeq;j++) // Cantos da piramede....
+            for(int i=0;i<=tamSeq-j;i++) {// Vertical da pirâmede
                 // Posicao[j,i] -> (a,b);(c,d)
-                int a = j - 1, b = i, c = 0, d = j - 1 + i;
+                int a = j-1, b = i, c = 0, d = j-1+i;
 
-                for (int k = a; k > 0; k--) {// percorre as linhas
+                for(int k=a;k>0;k--) {// percorre as linhas
                     c++;
                     // posicao mais a esquerda
-                    Set<Simbolo> simb1 = tabela[k][b];
+                    Set<SimboloString> simb1 = tabela[k][b];
                     // posicao mais a direita
-                    Set<Simbolo> simb2 = tabela[c][(d - c + 1)];
+                    Set<SimboloString> simb2 = tabela[c][(d-c+1)];
 
-                    if (simb1 != null && simb2 != null) {
-                        for (Simbolo x : simb1) {
-                            for (Simbolo y : simb2) {
+                    if(simb1!=null&&simb2!=null)
+                        for(SimboloString x : simb1)
+                            for(SimboloString y : simb2) {
                                 // valores encontrados
-                                String valFounds = "" + x.getNome() + y.getNome();
+                                String valFounds = ""+x.getNome()+y.getNome();
                                 // Verifica se existe alguma producao
                                 // com esses simbolos encontrados
-                                for (RegraProducao rp : glc.getRegrasProducao()) // so compara as produções com simbolos n-terminais
-                                {
-                                    if (rp.getSimbLDireito().size() == 2) {
+                                for(RegraProducao rp : glc.getRegrasProducao())
+                                    // so compara as produções com simbolos n-terminais
+                                    if(rp.getSimbLDireito().size()==2) {
                                         String valRP = "";
-                                        for (Simbolo s : rp.getSimbLDireito()) {
+                                        for(SimboloString s : rp.getSimbLDireito())
                                             valRP += s.getNome();
-                                        }
 
-                                        if (valFounds.equals(valRP)) {
+                                        if(valFounds.equals(valRP)) {
                                             // se a List da posicao estiver nula
                                             // cria e add
                                             Set pos = tabela[j][i];
-                                            if (pos == null) {
+                                            if(pos==null) {
                                                 pos = new HashSet<Simbolo>();
                                                 tabela[j][i] = pos;
                                             }
@@ -570,32 +568,25 @@ public class ValidaSequencia implements Validacao {
 
                                         }
                                     }
-                                }
 
                             }
-                        }
-                    }
 
-                } // for das linhas
+                } // for das linhas                        
             }
-        }
-
+        
         // caso o simbolo do topo da piramede esteje null
-        Set<Simbolo> topoPiramede = tabela[tabela.length - 1][0];
-        if (topoPiramede == null) {
+        Set<SimboloString> topoPiramede = tabela[tabela.length-1][0];
+        if(topoPiramede==null)
             return false;
-        } else // Verifica se o simbolo no topo da piramete é o simbolo inicial
-        {
-            for (Simbolo s : topoPiramede) {
-                if (s.getNome() == glc.getSimbInicial().getNome()) {
+        
+        else // Verifica se o simbolo no topo da piramete é o simbolo inicial            
+            for(SimboloString s : topoPiramede)
+                if(s.getNome()==glc.getSimbInicial().getNome())
                     return true;
-                }
-            }
-        }
-
+        
         return false;
     }
-
+    
     /**
      * Faz o reconhecimento da sequencia digitada pelo usuáro.
      *

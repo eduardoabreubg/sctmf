@@ -17,7 +17,7 @@ import java.util.Set;
  * @author rafael2009_00
  */
 public class AFND extends Automato {
-    private Set<Estado> estadosIniciais = new LinkedHashSet<Estado>();
+    private Set<Estado> estadosIniciais = new LinkedHashSet();
     
     /** Creates a new instance of AFND */
     public AFND() {

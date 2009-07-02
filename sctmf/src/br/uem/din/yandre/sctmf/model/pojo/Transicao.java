@@ -51,5 +51,35 @@ public class Transicao {
     public void setEstDest(Estado estDest) {
         this.estDest = estDest;
     }
-    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Transicao other = (Transicao) obj;
+        if (this.estOri != other.estOri && (this.estOri == null || !this.estOri.equals(other.estOri))) {
+            return false;
+        }
+        if (this.simbolo != other.simbolo && (this.simbolo == null || !this.simbolo.equals(other.simbolo))) {
+            return false;
+        }
+        if (this.estDest != other.estDest && (this.estDest == null || !this.estDest.equals(other.estDest))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 53 * hash + (this.estOri != null ? this.estOri.hashCode() : 0);
+        hash = 53 * hash + (this.simbolo != null ? this.simbolo.hashCode() : 0);
+        hash = 53 * hash + (this.estDest != null ? this.estDest.hashCode() : 0);
+        return hash;
+    }
+
 }

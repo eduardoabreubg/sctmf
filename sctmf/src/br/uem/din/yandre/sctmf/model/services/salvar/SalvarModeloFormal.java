@@ -6,6 +6,7 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
+
 package br.uem.din.yandre.sctmf.model.services.salvar;
 
 import br.uem.din.yandre.sctmf.model.pojo.AFD;
@@ -20,12 +21,14 @@ import br.uem.din.yandre.sctmf.model.pojo.MT;
 import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;
 import br.uem.din.yandre.sctmf.model.pojo.RegraProducao;
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
+import br.uem.din.yandre.sctmf.model.pojo.SimboloString;
 import br.uem.din.yandre.sctmf.model.pojo.Transicao;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoALL;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoAP;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoMT;
 import java.io.File;
 import java.io.FileWriter;
+
 
 /**
  *
@@ -35,13 +38,13 @@ public class SalvarModeloFormal implements Salvar {
 
     private FileWriter fw;
     private File file;
-
+    
     /**
      * Creates a new instance of Salvar
      */
     public SalvarModeloFormal() {
     }
-
+    
     public void salvar(File arquivo, ModeloFormal mf) throws SalvarException {
         this.file = arquivo;
 
@@ -64,7 +67,7 @@ public class SalvarModeloFormal implements Salvar {
         }
 
     }
-
+    
     private void salvarAFD(AFD afd) throws SalvarException {
         StringBuilder sb = new StringBuilder();
 
@@ -273,26 +276,27 @@ public class SalvarModeloFormal implements Salvar {
         StringBuilder sb = new StringBuilder();
 
         sb.append("V:");  // Add Simbolos Nao-Termais
-        for (Simbolo s : glc.getSimbNTerm()) {
-            sb.append(s.getNome() + "-");
-        }
-
+        for(SimboloString s : glc.getSimbNTerm())
+            sb.append("<simbolo>"+s.getNome()+"</simbolo>");
+        
         sb.append("\nT:");  // Add Simbolos Termais
-        for (Simbolo s : glc.getSimbTerm()) {
-            sb.append(s.getNome() + "-");
-        }
-
-        Simbolo aux = glc.getSimbInicial(); // Simbolo Inicial
+        for(SimboloString s : glc.getSimbTerm())
+            sb.append("<simbolo>"+s.getNome()+"</simbolo>");
+                       
+        SimboloString aux = glc.getSimbInicial(); // Simbolo Inicial
         sb.append("\nS:");
-        if (aux != null) {
-            sb.append(aux.getNome());
-        }
-
-        for (RegraProducao rp : glc.getRegrasProducao()) {
-            sb.append("\nP:" + rp.getSimbLEsq().getNome()).append("-");
-            for (Simbolo x : rp.getSimbLDireito()) {
-                sb.append(x.getNome());
+        if(aux!=null)
+             sb.append("<simbolo>"+aux.getNome()+"</simbolo>");
+        
+        SimboloString lambda = GLC.LAMBDA;
+        for(RegraProducao rp : glc.getRegrasProducao()) {
+            sb.append("\nP:<simbolo>"+rp.getSimbLEsq().getNome()+"</simbolo>");
+            sb.append("-");
+            if (lambda.equals(rp.getSimbLDireito().get(0))) {
+                sb.append("<simbolo></simbolo>"); continue;
             }
+            for(SimboloString x: rp.getSimbLDireito())
+                sb.append("<simbolo>"+x.getNome()+"</simbolo>");
         }
 
         try {

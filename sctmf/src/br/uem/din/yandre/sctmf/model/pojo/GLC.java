@@ -18,44 +18,45 @@ import java.util.Set;
  */
 public class GLC extends Gramatica {
     
-    private Simbolo simbInicial;
-    private Set<Simbolo> simbTerm = new LinkedHashSet<Simbolo>();
-    private Set<Simbolo> simbNTerm = new LinkedHashSet<Simbolo>() ;
+    private SimboloString simbInicial;
+    private Set<SimboloString> simbTerm = new LinkedHashSet<SimboloString>();
+    private Set<SimboloString> simbNTerm = new LinkedHashSet<SimboloString>() ;
     private Set<RegraProducao> regrasProducao = new LinkedHashSet<RegraProducao>();
+    public static SimboloString LAMBDA = new SimboloString("\u03bb");
         
     /** Creates a new instance of GLC */
     public GLC() {
     }
 
-    public Simbolo getSimbInicial() {
+    public SimboloString getSimbInicial() {
         return simbInicial;
     }
 
-    public void setSimbInicial(Simbolo simbInicial) {
+    public void setSimbInicial(SimboloString simbInicial) {
         this.simbInicial = simbInicial;
     }
 
-    public Set<Simbolo> getSimbTerm() {
+    public Set<SimboloString> getSimbTerm() {
         return simbTerm;
     }
 
-    public void setSimbTerm(Set<Simbolo> simbTerm) {
+    public void setSimbTerm(Set<SimboloString> simbTerm) {
         this.simbTerm = simbTerm;
     }
 
-    public Set<Simbolo> getSimbNTerm() {
+    public Set<SimboloString> getSimbNTerm() {
         return simbNTerm;
     }
 
-    public void setSimbNTerm(Set<Simbolo> simbNTerm) {
+    public void setSimbNTerm(Set<SimboloString> simbNTerm) {
         this.simbNTerm = simbNTerm;
     }
            
-    public void addSimbNTerm(Simbolo s) {
+    public void addSimbNTerm(SimboloString s) {
         this.simbNTerm.add(s);
     }
     
-    public void addSimbTerm(Simbolo s) {
+    public void addSimbTerm(SimboloString s) {
         this.simbTerm.add(s);
     }
     
