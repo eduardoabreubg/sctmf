@@ -6,7 +6,6 @@
 
 package br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.afnd;
 
-import br.uem.din.yandre.sctmf.model.pojo.AFD;
 import br.uem.din.yandre.sctmf.model.pojo.AFND;
 import br.uem.din.yandre.sctmf.model.pojo.Estado;
 import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;

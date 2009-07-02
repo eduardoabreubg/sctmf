@@ -74,12 +74,12 @@ public class LetterNumber extends javax.swing.JPanel {
         jPanel1.setPreferredSize(new java.awt.Dimension(150, 80));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
 
-        cbLetter.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 18));
+        cbLetter.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 18)); // NOI18N
         cbLetter.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }));
         cbLetter.setPreferredSize(new java.awt.Dimension(50, 25));
         jPanel1.add(cbLetter);
 
-        cbNumber.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 18)); // NOI18N
+        cbNumber.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 18));
         cbNumber.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
         cbNumber.setPreferredSize(new java.awt.Dimension(50, 25));
         jPanel1.add(cbNumber);

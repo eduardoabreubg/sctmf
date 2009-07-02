@@ -48,7 +48,7 @@ public class GenericJList extends javax.swing.JScrollPane {
      */
     public Character addItem(Character item) {
         if(!this.dlm.contains(item)) {
-            this.dlm.addElement(item); 
+            this.dlm.addElement(item);             
             return item;
             
         }else
@@ -64,7 +64,7 @@ public class GenericJList extends javax.swing.JScrollPane {
      */
     public String addItem(String item) {
         if(!this.dlm.contains(item)) {
-            this.dlm.addElement(item);
+            this.dlm.addElement(item);             
             return item;
             
         }else
@@ -101,6 +101,10 @@ public class GenericJList extends javax.swing.JScrollPane {
         
         return itens;
         
+    }
+    
+    public boolean containsItem(Object item) {
+        return this.dlm.contains(item);
     }
     
     /**

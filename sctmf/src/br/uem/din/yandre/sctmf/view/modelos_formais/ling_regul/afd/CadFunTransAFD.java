@@ -364,7 +364,7 @@ public class CadFunTransAFD extends javax.swing.JPanel {
      * A1,a -> A1 (ele nao permite issso)</i>
      */
     protected boolean wayAdd(String transicao) {
-        transicao = transicao.substring(0,8);
+        transicao = transicao.substring(0,transicao.indexOf(')'));
         for(Object o :genericJList.getAllItens())
             if(o.toString().startsWith(transicao))
                 return false;
@@ -491,7 +491,7 @@ public class CadFunTransAFD extends javax.swing.JPanel {
      * @return Matcher
      */
     protected Matcher getMatcher(String str) {
-        String regex = ".*\\((.{2}),.*(.{1})\\).*=.*(.{2})$";    
+        String regex = "[^(]*\\(\\s*([^,]*),\\s*(.{1})\\s*\\)[^=]*=\\s*(.*+)$";
                 
         return Pattern.compile(regex).matcher(str);
     }

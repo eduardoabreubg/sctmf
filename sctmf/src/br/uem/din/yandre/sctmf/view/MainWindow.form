@@ -140,6 +140,53 @@
             </Menu>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="mTransformacoes">
+          <Properties>
+            <Property name="label" type="java.lang.String" value="Transforma&#xe7;&#xf5;es"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="miAFND2AFD">
+              <Properties>
+                <Property name="label" type="java.lang.String" value="AFND para AFD"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miAFND2AFD"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miMinimizacaoAFD">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Minimiza&#xe7;&#xe3;o de AFD"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miMinimizacaoAFDActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miSimplificacaoGLC">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Simplificacao GLC"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miSimplificacaoGLCActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miGLC2FNC">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="GLC para FNC"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miGLC2FNCActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="miGLC2FNG">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="GLC para FNG"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miGLC2FNGActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="mAjuda">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ajuda"/>

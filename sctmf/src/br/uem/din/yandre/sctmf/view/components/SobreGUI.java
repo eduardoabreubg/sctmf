@@ -71,7 +71,13 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel19 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        jPanel22 = new javax.swing.JPanel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jPanel23 = new javax.swing.JPanel();
+        jLabel44 = new javax.swing.JLabel();
+        jLabel45 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -117,7 +123,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel12.setLayout(new javax.swing.BoxLayout(jPanel12, javax.swing.BoxLayout.LINE_AXIS));
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel13.setLayout(new java.awt.GridLayout(10, 0));
+        jPanel13.setLayout(new java.awt.GridLayout(12, 0));
 
         jPanel20.setBackground(new java.awt.Color(255, 255, 255));
         jPanel20.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
@@ -146,7 +152,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jLabel39.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel21.add(jLabel39);
 
-        jLabel40.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel40.setFont(new java.awt.Font("Dialog", 0, 11));
         jLabel40.setText("yandre@din.uem.br");
         jLabel40.setPreferredSize(new java.awt.Dimension(200, 15));
         jPanel21.add(jLabel40);
@@ -180,7 +186,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jLabel11.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel5.add(jLabel11);
 
-        jLabel13.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Dialog", 0, 11));
         jLabel13.setText("rcassolato@gmail.com");
         jLabel13.setPreferredSize(new java.awt.Dimension(200, 15));
         jPanel5.add(jLabel13);
@@ -201,7 +207,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel15.add(jLabel24);
 
         jLabel33.setForeground(new java.awt.Color(153, 0, 204));
-        jLabel33.setText("Desenvolvedor");
+        jLabel33.setText("Desenvolvimento");
         jPanel15.add(jLabel33);
 
         jPanel13.add(jPanel15);
@@ -235,7 +241,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel16.add(jLabel25);
 
         jLabel34.setForeground(new java.awt.Color(153, 0, 204));
-        jLabel34.setText("Desenvolvedor");
+        jLabel34.setText("Desenvolvimento");
         jPanel16.add(jLabel34);
 
         jPanel13.add(jPanel16);
@@ -269,7 +275,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel18.add(jLabel29);
 
         jLabel35.setForeground(new java.awt.Color(153, 0, 204));
-        jLabel35.setText("Desenvolvedor");
+        jLabel35.setText("Desenvolvimento");
         jPanel18.add(jLabel35);
 
         jPanel13.add(jPanel18);
@@ -289,11 +295,41 @@ public class SobreGUI extends javax.swing.JDialog {
 
         jPanel13.add(jPanel19);
 
-        jPanel12.add(jPanel13);
+        jPanel22.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel22.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
 
-        jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cassolato/rafael/sctmf/view/icons/duke.png"))); // NOI18N
-        jLabel18.setPreferredSize(new java.awt.Dimension(70, 40));
-        jPanel12.add(jLabel18);
+        jLabel41.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel41.setText("Nome :");
+        jLabel41.setPreferredSize(new java.awt.Dimension(45, 17));
+        jPanel22.add(jLabel41);
+
+        jLabel42.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel42.setText("Willian Magalhães");
+        jLabel42.setPreferredSize(new java.awt.Dimension(200, 15));
+        jPanel22.add(jLabel42);
+
+        jLabel43.setForeground(new java.awt.Color(153, 0, 204));
+        jLabel43.setText("Documentação");
+        jPanel22.add(jLabel43);
+
+        jPanel13.add(jPanel22);
+
+        jPanel23.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel23.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 0));
+
+        jLabel44.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel44.setText("e-mail :");
+        jLabel44.setPreferredSize(new java.awt.Dimension(45, 17));
+        jPanel23.add(jLabel44);
+
+        jLabel45.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel45.setText("will_magalhaes@yahoo.com.br");
+        jLabel45.setPreferredSize(new java.awt.Dimension(200, 15));
+        jPanel23.add(jLabel45);
+
+        jPanel13.add(jPanel23);
+
+        jPanel12.add(jPanel13);
 
         pAutor.add(jPanel12);
 
@@ -308,7 +344,6 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel3.setLayout(new java.awt.BorderLayout());
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cassolato/rafael/sctmf/view/icons/logo_help.png"))); // NOI18N
         jLabel7.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jLabel7.setPreferredSize(new java.awt.Dimension(80, 80));
         jPanel3.add(jLabel7, java.awt.BorderLayout.WEST);
@@ -381,7 +416,6 @@ public class SobreGUI extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -407,6 +441,11 @@ public class SobreGUI extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel42;
+    private javax.swing.JLabel jLabel43;
+    private javax.swing.JLabel jLabel44;
+    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -424,6 +463,8 @@ public class SobreGUI extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
+    private javax.swing.JPanel jPanel23;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

@@ -6,8 +6,18 @@
 package br.uem.din.yandre.sctmf.view;
 
 import br.uem.din.yandre.sctmf.control.Controller;
+import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;
+import br.uem.din.yandre.sctmf.model.services.transformacoes.AFND2AFD;
+import br.uem.din.yandre.sctmf.model.services.transformacoes.GLC2FNC;
+import br.uem.din.yandre.sctmf.model.services.transformacoes.GLC2FNG;
+import br.uem.din.yandre.sctmf.model.services.transformacoes.MinimizacaoAFD;
+import br.uem.din.yandre.sctmf.model.services.transformacoes.SimplificacaoGLC;
+import br.uem.din.yandre.sctmf.model.services.transformacoes.Transformacao;
+import br.uem.din.yandre.sctmf.view.components.JfcOpenSave;
 import br.uem.din.yandre.sctmf.view.components.DisplayHelp;
 import br.uem.din.yandre.sctmf.view.components.SobreGUI;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -68,6 +78,12 @@ public class MainWindow extends javax.swing.JFrame {
         mLingEnumRec = new javax.swing.JMenu();
         miMaqTuring = new javax.swing.JMenuItem();
         miGramEstruFrase = new javax.swing.JMenuItem();
+        mTransformacoes = new javax.swing.JMenu();
+        miAFND2AFD = new javax.swing.JMenuItem();
+        miMinimizacaoAFD = new javax.swing.JMenuItem();
+        miSimplificacaoGLC = new javax.swing.JMenuItem();
+        miGLC2FNC = new javax.swing.JMenuItem();
+        miGLC2FNG = new javax.swing.JMenuItem();
         mAjuda = new javax.swing.JMenu();
         mHelp = new javax.swing.JMenuItem();
         miSobre = new javax.swing.JMenuItem();
@@ -308,6 +324,50 @@ public class MainWindow extends javax.swing.JFrame {
 
         menuBar.add(mModelos);
 
+        mTransformacoes.setLabel("Transformações");
+
+        miAFND2AFD.setLabel("AFND para AFD");
+        miAFND2AFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miAFND2AFD(evt);
+            }
+        });
+        mTransformacoes.add(miAFND2AFD);
+
+        miMinimizacaoAFD.setText("Minimização de AFD");
+        miMinimizacaoAFD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miMinimizacaoAFDActionPerformed(evt);
+            }
+        });
+        mTransformacoes.add(miMinimizacaoAFD);
+
+        miSimplificacaoGLC.setText("Simplificacao GLC");
+        miSimplificacaoGLC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSimplificacaoGLCActionPerformed(evt);
+            }
+        });
+        mTransformacoes.add(miSimplificacaoGLC);
+
+        miGLC2FNC.setText("GLC para FNC");
+        miGLC2FNC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miGLC2FNCActionPerformed(evt);
+            }
+        });
+        mTransformacoes.add(miGLC2FNC);
+
+        miGLC2FNG.setText("GLC para FNG");
+        miGLC2FNG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miGLC2FNGActionPerformed(evt);
+            }
+        });
+        mTransformacoes.add(miGLC2FNG);
+
+        menuBar.add(mTransformacoes);
+
         mAjuda.setText("Ajuda");
 
         mHelp.setText("Help...");
@@ -418,6 +478,69 @@ public class MainWindow extends javax.swing.JFrame {
         this.showFormalModel(IdModeloFormal.ALL);        // TODO add your handling code here:
     }//GEN-LAST:event_bAutomatoLinearmenteLimitadoActionPerformed
 
+    private void transformar(Transformacao t,IdModeloFormal src, IdModeloFormal tgt) throws Exception {
+	    JfcOpenSave fc = new JfcOpenSave( JfcOpenSave.ABRIR, src);
+            
+	    // Envia para o Controller o Arquivo selecionado
+	    // e recebe o objeto correspondente
+	    java.io.File arquivo = fc.getFile();
+	    if(arquivo!=null) {
+	        ModeloFormal mf = this.ctrl.abrirModeloFormal(arquivo);
+                t.setModeloFormalOrigem(mf);
+	        // Envia pra a gui setar o Modelo Formal caso ele não esteja null
+	        if(mf!=null) {
+	            JfcOpenSave fs = new JfcOpenSave(JfcOpenSave.SALVAR, tgt);
+	            java.io.File saida = fs.getFile();
+	            this.ctrl.salvarModeloFormal(saida, t.transformar());
+	        }
+	    }
+    }
+    
+	private void miAFND2AFD(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miAFND2AFD
+            try {
+                transformar(new AFND2AFD(), IdModeloFormal.AFND, IdModeloFormal.AFD);
+            } catch (Exception ex) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+	}//GEN-LAST:event_miAFND2AFD
+
+	private void miSimplificacaoGLCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSimplificacaoGLCActionPerformed
+            try {
+                transformar(new SimplificacaoGLC() 
+                        ,IdModeloFormal.GLC ,IdModeloFormal.GLC);
+            } catch (Exception ex) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+	}//GEN-LAST:event_miSimplificacaoGLCActionPerformed
+
+	private void miMinimizacaoAFDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMinimizacaoAFDActionPerformed
+            try {
+                transformar(new MinimizacaoAFD() 
+                        ,IdModeloFormal.AFD ,IdModeloFormal.AFD);
+            } catch (Exception ex) {
+                javax.swing.JOptionPane.showMessageDialog( this ,ex.getMessage()
+                        ,"Atenção" ,javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+	}//GEN-LAST:event_miMinimizacaoAFDActionPerformed
+
+	private void miGLC2FNCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGLC2FNCActionPerformed
+            try {
+                transformar(new GLC2FNC() 
+                        ,IdModeloFormal.GLC ,IdModeloFormal.GLC);
+            } catch (Exception ex) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+	}//GEN-LAST:event_miGLC2FNCActionPerformed
+
+	private void miGLC2FNGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miGLC2FNGActionPerformed
+            try {
+                transformar(new GLC2FNG() 
+                        ,IdModeloFormal.GLC ,IdModeloFormal.GLC);
+            } catch (Exception ex) {
+                Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+	}//GEN-LAST:event_miGLC2FNGActionPerformed
+
     /**
      * Manipula a ação de Saída do Sistema
      */
@@ -457,7 +580,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         this.miSobre.setAccelerator(
                 javax.swing.KeyStroke.getKeyStroke("F1"));
-
+        
+        this.miGLC2FNG.setVisible(false);
         this.notVisible();
     }
 
@@ -495,17 +619,23 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu mLingRegul;
     private javax.swing.JMenu mLingSensContex;
     private javax.swing.JMenu mModelos;
+    private javax.swing.JMenu mTransformacoes;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem miAFD;
     private javax.swing.JMenuItem miAFMV;
     private javax.swing.JMenuItem miAFND;
+    private javax.swing.JMenuItem miAFND2AFD;
     private javax.swing.JMenuItem miAutComPilha;
     private javax.swing.JMenuItem miAutomatoLinearmenteLimitado;
     private javax.swing.JMenuItem miExpReg;
+    private javax.swing.JMenuItem miGLC2FNC;
+    private javax.swing.JMenuItem miGLC2FNG;
     private javax.swing.JMenuItem miGramEstruFrase;
     private javax.swing.JMenuItem miGramLivrContex;
     private javax.swing.JMenuItem miMaqTuring;
+    private javax.swing.JMenuItem miMinimizacaoAFD;
     private javax.swing.JMenuItem miSair;
+    private javax.swing.JMenuItem miSimplificacaoGLC;
     private javax.swing.JMenuItem miSobre;
     private javax.swing.JDesktopPane oFundo;
     private javax.swing.JPanel pLingEnumRec;
