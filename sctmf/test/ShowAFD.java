@@ -1,7 +1,7 @@
-import cassolato.rafael.sctmf.model.pojo.AFD;
-import cassolato.rafael.sctmf.model.pojo.Estado;
-import cassolato.rafael.sctmf.model.pojo.Simbolo;
-import cassolato.rafael.sctmf.model.pojo.Transicao;
+import br.uem.din.yandre.sctmf.model.pojo.AFD;
+import br.uem.din.yandre.sctmf.model.pojo.Estado;
+import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
+import br.uem.din.yandre.sctmf.model.pojo.Transicao;
 /*
  * ValSeq.java
  *
