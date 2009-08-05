@@ -59,6 +59,7 @@ public class LetterNumber extends javax.swing.JPanel {
      */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
@@ -72,45 +73,72 @@ public class LetterNumber extends javax.swing.JPanel {
         jPanel1.setMaximumSize(new java.awt.Dimension(150, 80));
         jPanel1.setMinimumSize(new java.awt.Dimension(150, 80));
         jPanel1.setPreferredSize(new java.awt.Dimension(150, 80));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 10, 5));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        cbLetter.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 18)); // NOI18N
+        cbLetter.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 18));
         cbLetter.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" }));
         cbLetter.setPreferredSize(new java.awt.Dimension(50, 25));
-        jPanel1.add(cbLetter);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(cbLetter, gridBagConstraints);
 
         cbNumber.setFont(new java.awt.Font("Lucida Sans Typewriter", 1, 18));
         cbNumber.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }));
         cbNumber.setPreferredSize(new java.awt.Dimension(50, 25));
-        jPanel1.add(cbNumber);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(cbNumber, gridBagConstraints);
 
+        jcb.setText("Letra Minúscula");
         jcb.setToolTipText("Letra Minúscula");
         jcb.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jcb.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jPanel1.add(jcb);
+        jcb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(jcb, gridBagConstraints);
 
         rbLetter.setSelected(true);
         rbLetter.setText("A-Z");
         rbLetter.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         rbLetter.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jPanel1.add(rbLetter);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(rbLetter, gridBagConstraints);
 
         rbNumber.setText("0-9");
         rbNumber.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         rbNumber.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jPanel1.add(rbNumber);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        jPanel1.add(rbNumber, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jcbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbActionPerformed
         
     public void enableCbNumber(boolean arg) {
         this.cbNumber.setEnabled(arg);
