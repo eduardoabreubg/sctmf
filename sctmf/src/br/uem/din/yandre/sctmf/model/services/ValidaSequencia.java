@@ -316,12 +316,17 @@ public class ValidaSequencia implements Validacao {
      * @return boolean
      */
     private boolean valida(ER er, String sequencia) {
-        final String expressaoRegular = er.getExpressaoRegular();
+        String expressaoRegular = er.getExpressaoRegular();
 
-        Pattern espressao = Pattern.compile(expressaoRegular);
-        Matcher testar = espressao.matcher(sequencia);
 
-        if (testar.matches()) {
+        expressaoRegular = expressaoRegular.replace('(', '[');
+        expressaoRegular = expressaoRegular.replace(')', ']');
+        //System.out.println(expressaoRegular);
+
+        //Pattern expressao = Pattern.compile(expressaoRegular);
+        //Matcher testar = expressao.matcher(sequencia);
+
+        if (sequencia.matches(expressaoRegular)) {
             return true;
         } else {
             return false;
