@@ -262,7 +262,7 @@ public class CadFTransALL extends javax.swing.JPanel {
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel34.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel34.setPreferredSize(new java.awt.Dimension(20, 30));
-        jLabel34.setText("(\u03a3\u222AV\u222A{\u03B2,\u00A4})");
+        jLabel34.setText("(\u03a3\u222AV\u222A{<,>})");
         jPanel26.add(jLabel34, java.awt.BorderLayout.NORTH);
 
         fSimASerLido.setBackground(new java.awt.Color(255, 255, 204));
@@ -334,11 +334,11 @@ public class CadFTransALL extends javax.swing.JPanel {
         });
         jPanel32.add(fSimASerGravado, java.awt.BorderLayout.CENTER);
 
-        jLabel36.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12));
+        jLabel36.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12)); // NOI18N
         jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel36.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel36.setPreferredSize(new java.awt.Dimension(20, 30));
-        jLabel36.setText("(\u03a3\u222AV\u222A{\u03B2,\u00A4})");
+        jLabel36.setText("(\u03a3\u222AV\u222A{<,>})");
         jPanel32.add(jLabel36, java.awt.BorderLayout.NORTH);
 
         jPanel8.add(jPanel32);
@@ -412,7 +412,7 @@ public class CadFTransALL extends javax.swing.JPanel {
         jPanel57.setPreferredSize(new java.awt.Dimension(60, 30));
         jPanel57.setLayout(new java.awt.BorderLayout());
 
-        bAddLimiteDireita1.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 11)); // NOI18N
+        bAddLimiteDireita1.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 11));
         bAddLimiteDireita1.setText(">");
         bAddLimiteDireita1.setPreferredSize(new java.awt.Dimension(45, 23));
         bAddLimiteDireita1.addActionListener(new java.awt.event.ActionListener() {
@@ -422,7 +422,7 @@ public class CadFTransALL extends javax.swing.JPanel {
         });
         jPanel57.add(bAddLimiteDireita1, java.awt.BorderLayout.EAST);
 
-        bAddLimiteEsquerda1.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 10)); // NOI18N
+        bAddLimiteEsquerda1.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 10));
         bAddLimiteEsquerda1.setText("<");
         bAddLimiteEsquerda1.setPreferredSize(new java.awt.Dimension(45, 23));
         bAddLimiteEsquerda1.addActionListener(new java.awt.event.ActionListener() {
@@ -462,7 +462,7 @@ public class CadFTransALL extends javax.swing.JPanel {
         jPanel61.setPreferredSize(new java.awt.Dimension(60, 30));
         jPanel61.setLayout(new java.awt.BorderLayout());
 
-        bAddLimiteDireita2.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 11)); // NOI18N
+        bAddLimiteDireita2.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 11));
         bAddLimiteDireita2.setText(">");
         bAddLimiteDireita2.setPreferredSize(new java.awt.Dimension(45, 23));
         bAddLimiteDireita2.addActionListener(new java.awt.event.ActionListener() {
@@ -472,7 +472,7 @@ public class CadFTransALL extends javax.swing.JPanel {
         });
         jPanel61.add(bAddLimiteDireita2, java.awt.BorderLayout.EAST);
 
-        bAddLimiteEsquerda2.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 10)); // NOI18N
+        bAddLimiteEsquerda2.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 10));
         bAddLimiteEsquerda2.setText("<");
         bAddLimiteEsquerda2.setPreferredSize(new java.awt.Dimension(45, 23));
         bAddLimiteEsquerda2.addActionListener(new java.awt.event.ActionListener() {
@@ -555,7 +555,7 @@ public class CadFTransALL extends javax.swing.JPanel {
         jPanel15.setBackground(new java.awt.Color(200, 245, 240));
         jPanel21.add(jPanel15);
 
-        jLabel38.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
+        jLabel38.setFont(new java.awt.Font("Verdana", 0, 10));
         jLabel38.setText("Sentido do Movimento");
         jPanel21.add(jLabel38);
 
@@ -563,11 +563,11 @@ public class CadFTransALL extends javax.swing.JPanel {
 
         jPanel11.setLayout(new javax.swing.BoxLayout(jPanel11, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel3.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Verdana", 1, 10));
         jLabel3.setText("<");
         jPanel11.add(jLabel3);
 
-        jLabel4.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Verdana", 0, 10));
         jLabel4.setText("Limite da fita à esquerda");
         jPanel11.add(jLabel4);
 
@@ -575,11 +575,11 @@ public class CadFTransALL extends javax.swing.JPanel {
 
         jPanel12.setLayout(new javax.swing.BoxLayout(jPanel12, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel5.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Verdana", 1, 10));
         jLabel5.setText(">");
         jPanel12.add(jLabel5);
 
-        jLabel6.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Verdana", 0, 10));
         jLabel6.setText("Limite da fita à direita");
         jPanel12.add(jLabel6);
 
