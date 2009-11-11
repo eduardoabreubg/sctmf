@@ -83,8 +83,8 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -100,11 +100,11 @@ public class SobreGUI extends javax.swing.JDialog {
         jPanel11.setBackground(new java.awt.Color(255, 255, 255));
         jPanel11.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel11.setMinimumSize(new java.awt.Dimension(500, 300));
-        jPanel11.setPreferredSize(new java.awt.Dimension(500, 310));
+        jPanel11.setPreferredSize(new java.awt.Dimension(500, 400));
         jPanel11.setLayout(new java.awt.BorderLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(347, 150));
+        jPanel1.setPreferredSize(new java.awt.Dimension(300, 100));
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 153));
@@ -269,7 +269,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jLabel28.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel18.add(jLabel28);
 
-        jLabel29.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel29.setFont(new java.awt.Font("Dialog", 0, 11));
         jLabel29.setText("Michel Menegazzo");
         jLabel29.setPreferredSize(new java.awt.Dimension(200, 15));
         jPanel18.add(jLabel29);
@@ -303,7 +303,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jLabel41.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel22.add(jLabel41);
 
-        jLabel42.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel42.setFont(new java.awt.Font("Dialog", 0, 11));
         jLabel42.setText("Willian Magalhães");
         jLabel42.setPreferredSize(new java.awt.Dimension(200, 15));
         jPanel22.add(jLabel42);
@@ -322,7 +322,7 @@ public class SobreGUI extends javax.swing.JDialog {
         jLabel44.setPreferredSize(new java.awt.Dimension(45, 17));
         jPanel23.add(jLabel44);
 
-        jLabel45.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        jLabel45.setFont(new java.awt.Font("Dialog", 0, 11));
         jLabel45.setText("will_magalhaes@yahoo.com.br");
         jLabel45.setPreferredSize(new java.awt.Dimension(200, 15));
         jPanel23.add(jLabel45);
@@ -358,18 +358,18 @@ public class SobreGUI extends javax.swing.JDialog {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel10.setForeground(new java.awt.Color(0, 0, 102));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("FAFIMAN / UEM");
+        jLabel10.setText("UEM/FAFIMAM");
         jPanel7.add(jLabel10);
-
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 11));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText(" Faculdade de Filosofia Ciências e Letras de Mandaguari");
-        jPanel7.add(jLabel9);
 
         jLabel19.setFont(new java.awt.Font("Arial", 0, 11));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Universidade Estadual de Maringá");
         jPanel7.add(jLabel19);
+
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 11));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText(" Faculdade de Filosofia Ciências e Letras de Mandaguari");
+        jPanel7.add(jLabel9);
 
         jLabel8.setFont(new java.awt.Font("Verdana", 1, 11));
         jLabel8.setForeground(new java.awt.Color(51, 0, 51));

@@ -18,7 +18,9 @@ import br.uem.din.yandre.sctmf.model.pojo.ER;
 import br.uem.din.yandre.sctmf.model.pojo.Estado;
 import br.uem.din.yandre.sctmf.model.pojo.GLCFNC;
 import br.uem.din.yandre.sctmf.model.pojo.MT;
+import br.uem.din.yandre.sctmf.model.pojo.Mealy;
 import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;
+import br.uem.din.yandre.sctmf.model.pojo.Moore;
 import br.uem.din.yandre.sctmf.model.pojo.RegraProducao;
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
 import br.uem.din.yandre.sctmf.model.pojo.SimboloString;
@@ -27,9 +29,9 @@ import br.uem.din.yandre.sctmf.model.pojo.TransicaoALL;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoAP;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoMT;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.mt.util.ShowFitaMT;
+import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.util.ShowFitaLingRegul;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_sens_cont.all.util.ShowFitaALL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -37,8 +39,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 /**
@@ -70,19 +70,24 @@ public class ValidaSequencia implements Validacao {
             status = this.valida((MT) mf, sequencia);
         } else if (mf instanceof ALL) {
             status = this.valida((ALL) mf, sequencia);
+        } else if (mf instanceof Mealy) {
+            status = this.valida((Mealy) mf, sequencia);
+        } else if (mf instanceof Moore) {
+            status = this.valida((Moore) mf, sequencia);
         }
         this.sendMessage(status);
     }
-    
+
     public void valida(ModeloFormal mf, List<SimboloString> sequencia) {
         boolean status = false;
-        
-        if(mf instanceof GLCFNC )
-            status = this.valida((GLCFNC)mf, sequencia);
-        
+
+        if (mf instanceof GLCFNC) {
+            status = this.valida((GLCFNC) mf, sequencia);
+        }
+
         this.sendMessage(status);
     }
-    
+
     /**
      * Metodo que faz a validação de uma sequencia.
      *
@@ -498,73 +503,83 @@ public class ValidaSequencia implements Validacao {
      */
     public boolean valida(GLCFNC glc, List<SimboloString> sequencia) {
         // caso nao exista simbolo inicial cadastrado
-        if(glc.getSimbInicial()==null) return false;
-        
+        if (glc.getSimbInicial() == null) {
+            return false;
+        }
+
         final int tamSeq = sequencia.size();
-        
+
         // cria a tabela
-        Set[][] tabela = new Set[tamSeq+1][tamSeq];
-        
+        Set[][] tabela = new Set[tamSeq + 1][tamSeq];
+
         // add a sequencia na posicao 0 da tabela
-        for(int i=0;i<sequencia.size();i++) {
+        for (int i = 0; i < sequencia.size(); i++) {
             Set s = tabela[0][i];
-            if(s==null) s = new HashSet<SimboloString>();
-            
+            if (s == null) {
+                s = new HashSet<SimboloString>();
+            }
+
             s.add(sequencia.get(i));
             tabela[0][i] = s;
         }
-        
+
         // regride os nao terminais nos seus terminais
-        for(int i=0;i<sequencia.size();i++) {
-            SimboloString s = (SimboloString)tabela[0][i].iterator().next();
+        for (int i = 0; i < sequencia.size(); i++) {
+            SimboloString s = (SimboloString) tabela[0][i].iterator().next();
             String c = s.getNome();
-            for(RegraProducao rp : glc.getRegrasProducao()) {
+            for (RegraProducao rp : glc.getRegrasProducao()) {
                 List<SimboloString> simbs = rp.getSimbLDireito();
                 // busca as regras de producao com terminais no lado direito
-                if(simbs.size()==1&&simbs.get(0).getNome().equals(c)) {
-                    Set<SimboloString> simbolos = tabela[1][i];                    
-                    if(simbolos==null)  // inicia a lista
+                if (simbs.size() == 1 && simbs.get(0).getNome().equals(c)) {
+                    Set<SimboloString> simbolos = tabela[1][i];
+                    if (simbolos == null) // inicia a lista
+                    {
                         simbolos = new HashSet<SimboloString>();
-                    
-                    simbolos.add(rp.getSimbLEsq());                
-                    tabela[1][i] = simbolos;               
+                    }
+
+                    simbolos.add(rp.getSimbLEsq());
+                    tabela[1][i] = simbolos;
                 }
             }
             // caso nao exista uma producao para o simbolo da sequencia
-            if(tabela[1][i]==null) return false;
+            if (tabela[1][i] == null) {
+                return false;
+            }
         }
-        
-        for(int j=2;j<=tamSeq;j++) // Cantos da piramede....
-            for(int i=0;i<=tamSeq-j;i++) {// Vertical da pirâmede
-                // Posicao[j,i] -> (a,b);(c,d)
-                int a = j-1, b = i, c = 0, d = j-1+i;
 
-                for(int k=a;k>0;k--) {// percorre as linhas
+        for (int j = 2; j <= tamSeq; j++) // Cantos da piramede....
+        {
+            for (int i = 0; i <= tamSeq - j; i++) {// Vertical da pirâmede
+                // Posicao[j,i] -> (a,b);(c,d)
+                int a = j - 1, b = i, c = 0, d = j - 1 + i;
+
+                for (int k = a; k > 0; k--) {// percorre as linhas
                     c++;
                     // posicao mais a esquerda
                     Set<SimboloString> simb1 = tabela[k][b];
                     // posicao mais a direita
-                    Set<SimboloString> simb2 = tabela[c][(d-c+1)];
+                    Set<SimboloString> simb2 = tabela[c][(d - c + 1)];
 
-                    if(simb1!=null&&simb2!=null)
-                        for(SimboloString x : simb1)
-                            for(SimboloString y : simb2) {
+                    if (simb1 != null && simb2 != null) {
+                        for (SimboloString x : simb1) {
+                            for (SimboloString y : simb2) {
                                 // valores encontrados
-                                String valFounds = ""+x.getNome()+y.getNome();
+                                String valFounds = "" + x.getNome() + y.getNome();
                                 // Verifica se existe alguma producao
                                 // com esses simbolos encontrados
-                                for(RegraProducao rp : glc.getRegrasProducao())
-                                    // so compara as produções com simbolos n-terminais
-                                    if(rp.getSimbLDireito().size()==2) {
+                                for (RegraProducao rp : glc.getRegrasProducao()) // so compara as produções com simbolos n-terminais
+                                {
+                                    if (rp.getSimbLDireito().size() == 2) {
                                         String valRP = "";
-                                        for(SimboloString s : rp.getSimbLDireito())
+                                        for (SimboloString s : rp.getSimbLDireito()) {
                                             valRP += s.getNome();
+                                        }
 
-                                        if(valFounds.equals(valRP)) {
+                                        if (valFounds.equals(valRP)) {
                                             // se a List da posicao estiver nula
                                             // cria e add
                                             Set pos = tabela[j][i];
-                                            if(pos==null) {
+                                            if (pos == null) {
                                                 pos = new HashSet<Simbolo>();
                                                 tabela[j][i] = pos;
                                             }
@@ -573,25 +588,32 @@ public class ValidaSequencia implements Validacao {
 
                                         }
                                     }
+                                }
 
                             }
+                        }
+                    }
 
                 } // for das linhas                        
             }
-        
+        }
+
         // caso o simbolo do topo da piramede esteje null
-        Set<SimboloString> topoPiramede = tabela[tabela.length-1][0];
-        if(topoPiramede==null)
+        Set<SimboloString> topoPiramede = tabela[tabela.length - 1][0];
+        if (topoPiramede == null) {
             return false;
-        
-        else // Verifica se o simbolo no topo da piramete é o simbolo inicial            
-            for(SimboloString s : topoPiramede)
-                if(s.getNome()==glc.getSimbInicial().getNome())
+        } else // Verifica se o simbolo no topo da piramete é o simbolo inicial
+        {
+            for (SimboloString s : topoPiramede) {
+                if (s.getNome() == glc.getSimbInicial().getNome()) {
                     return true;
-        
+                }
+            }
+        }
+
         return false;
     }
-    
+
     /**
      * Faz o reconhecimento da sequencia digitada pelo usuáro.
      *
@@ -730,8 +752,7 @@ public class ValidaSequencia implements Validacao {
                     //System.out.println(transicaoALL.getEstAtual().getNome() + " " + transicaoALL.getSimLido().getNome() + " " + transicaoALL.getEstDestino().getNome() + " " + transicaoALL.getSimbEscrito().getNome());
                     //se tiver uma transiçao com o estado igual ao estado atual
                     //e o simblido for igual ao da posiçao atual da fita
-                    if (transicaoALL.getEstAtual().getNome().equals(estadoAtual.getNome()) 
-                            && transicaoALL.getSimLido().getNome().equals(fita.get(cursor).getNome())) {
+                    if (transicaoALL.getEstAtual().getNome().equals(estadoAtual.getNome()) && transicaoALL.getSimLido().getNome().equals(fita.get(cursor).getNome())) {
                         //System.out.println("OI");
                         //estadoAtual = transicaoALL.getEstDestino(); // altera o estado
                         //System.out.println(transicaoALL.getEstAtual().getNome());
@@ -739,9 +760,8 @@ public class ValidaSequencia implements Validacao {
                             //System.out.println(transicaoALL.getEstAtual().getNome() + "33");
 
                             for (TransicaoALL tALL : all.getTransicoes()) {
-                                
-                                if ((tALL.getEstAtual().getNome().equals(transicaoALL.getEstAtual().getNome())
-                                        && tALL.getSimLido().getNome().equals(fita.get(cursor).getNome())) && tALL != transicaoALL) {
+
+                                if ((tALL.getEstAtual().getNome().equals(transicaoALL.getEstAtual().getNome()) && tALL.getSimLido().getNome().equals(fita.get(cursor).getNome())) && tALL != transicaoALL) {
 
                                     //System.out.println(tALL.getSimbEscrito().getNome());
                                     try {
@@ -824,11 +844,11 @@ public class ValidaSequencia implements Validacao {
                     }
                     cursor = copia.getCursor();
                     estadoAtual = copia.getEstAtual();
-                    /*System.out.println("__recuperou____");
-                    System.out.println(fita.get(cursor).getNome());
-                    System.out.println(estadoAtual.getNome());
-                    System.out.println(cursor);
-                    System.out.println("__out for____");*/
+                /*System.out.println("__recuperou____");
+                System.out.println(fita.get(cursor).getNome());
+                System.out.println(estadoAtual.getNome());
+                System.out.println(cursor);
+                System.out.println("__out for____");*/
                 } else {
 
                     if (loop2) {
@@ -1245,5 +1265,86 @@ public class ValidaSequencia implements Validacao {
                 return list;
             }
         } // fim da classe
+    }
+
+    private boolean valida(Mealy mealy, String sequencia) {
+        // Estado Inicial
+        Estado estadoAtual = mealy.getEstadoInicial();
+        //fita de saida
+        List<Simbolo> fita = new ArrayList<Simbolo>();
+        System.out.println(sequencia);
+        for (char c : sequencia.toCharArray()) {
+            label:
+            {
+                for (Transicao t : mealy.getTransicoes()) {
+                    System.out.println(t.getEstOri().getNome());
+                    Estado e = t.getEstOri();
+                    Simbolo s = t.getSimbolo();
+                    if (estadoAtual.getNome().equals(e.getNome()) && c == (s.getNome())) {
+                        estadoAtual = t.getEstDest();
+                        fita.add(t.getSimboloSaida());
+                        break label;
+                    }
+                }
+                System.out.println(estadoAtual.getNome());
+
+            // caso nao exista nenhuma transicao que o leve ao proximo estado
+
+            }
+
+        }
+
+        // Verifica se o Estado atual eh algum
+        // Dos estados finais
+        for (Estado x : mealy.getEstadosFinais()) {
+            if (estadoAtual.getNome().equals(x.getNome())) {
+                ShowFitaLingRegul.getInstance().showFitaMT(fita);
+                return true;
+            }
+        }
+        ShowFitaLingRegul.getInstance().showFitaMT(fita);
+        return false;
+
+    }
+
+        private boolean valida(Moore moore, String sequencia) {
+        // Estado Inicial
+        Estado estadoAtual = moore.getEstadoInicial();
+        //fita de saida
+        List<Simbolo> fita = new ArrayList<Simbolo>();
+        System.out.println(sequencia);
+        for (char c : sequencia.toCharArray()) {
+            label:
+            {
+                for (Transicao t : moore.getTransicoes()) {
+                    System.out.println(t.getEstOri().getNome());
+                    Estado e = t.getEstOri();
+                    Simbolo s = t.getSimbolo();
+                    if (estadoAtual.getNome().equals(e.getNome()) && c == (s.getNome())) {
+                        System.out.println("AH TAh");
+                        estadoAtual = t.getEstDest();
+                        fita.add(t.getSimboloSaida());
+                        break label;
+                    }
+                }
+                System.out.println(estadoAtual.getNome());
+
+            // caso nao exista nenhuma transicao que o leve ao proximo estado
+
+            }
+
+        }
+
+        // Verifica se o Estado atual eh algum
+        // Dos estados finais
+        for (Estado x : moore.getEstadosFinais()) {
+            if (estadoAtual.getNome().equals(x.getNome())) {
+                ShowFitaLingRegul.getInstance().showFitaMT(fita);
+                return true;
+            }
+        }
+        ShowFitaLingRegul.getInstance().showFitaMT(fita);
+        return false;
+
     }
 }

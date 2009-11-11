@@ -16,7 +16,8 @@ package br.uem.din.yandre.sctmf.model.pojo;
 public class Transicao {
     private Estado estOri;
     private Simbolo simbolo;
-    private Estado estDest;    
+    private Estado estDest;
+    private Simbolo simboloSaida;
     
     /** Creates a new instance of Transicao */
     public Transicao() {
@@ -51,6 +52,16 @@ public class Transicao {
     public void setEstDest(Estado estDest) {
         this.estDest = estDest;
     }
+
+    public Simbolo getSimboloSaida() {
+        return simboloSaida;
+    }
+
+    public void setSimboloSaida(Simbolo simboloSaida) {
+        this.simboloSaida = simboloSaida;
+    }
+
+    
 
     @Override
     public boolean equals(Object obj) {

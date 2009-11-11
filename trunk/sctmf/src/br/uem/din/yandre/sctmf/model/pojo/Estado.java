@@ -16,6 +16,7 @@ package br.uem.din.yandre.sctmf.model.pojo;
 public class Estado {
     private String nome;
     private boolean naoDeterministico;
+    private Simbolo simboloSaida;
     
     /** Creates a new instance of Estado */
     public Estado(String nome) {
@@ -36,6 +37,14 @@ public class Estado {
 
     public void setNDeterministico(boolean naoDeterministico) {
         this.naoDeterministico = naoDeterministico;
+    }
+
+    public Simbolo getSaida() {
+        return simboloSaida;
+    }
+
+    public void setSaida(Simbolo saida) {
+        this.simboloSaida = saida;
     }
 
     @Override

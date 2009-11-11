@@ -10,7 +10,6 @@ import br.uem.din.yandre.sctmf.model.pojo.Estado;
 import br.uem.din.yandre.sctmf.model.pojo.MT;
 import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
-import br.uem.din.yandre.sctmf.model.pojo.TransicaoMT;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ModeloFormalGUI;
 
 /**

@@ -16,6 +16,8 @@ import br.uem.din.yandre.sctmf.view.modelos_formais.ling_liv_contex.ap.ApGUI;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ModeloFormalGUI;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.afmv.AfmvGUI;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.er.ErGUI;
+import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.mealy.MealyGUI;
+import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.moore.MooreGUI;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_sens_cont.all.AllGUI;
 
 /**
@@ -53,6 +55,12 @@ public class GUIFactory {
 
             case MT:
                 return new MtGUI();
+
+            case MEALY:
+                return new MealyGUI();
+
+            case MOORE:
+                return new MooreGUI();
 
             default:
                 return null;
