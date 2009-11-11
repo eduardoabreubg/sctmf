@@ -19,6 +19,8 @@ public enum IdModeloFormal {
     AFND,
     AFMV,
     ER,
+    MOORE,
+    MEALY,
     
     // Linguagens Livres de Contexto
     AP,

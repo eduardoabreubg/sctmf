@@ -26,7 +26,7 @@ public class MT extends ModeloFormal {
     private Set<Simbolo> alfabetoAux = new LinkedHashSet<Simbolo>();
     private Simbolo simbIni;
     
-    /** Creates a new instance of MT */
+    /** Creates a new instance of Mealy */
     public MT() {
     }
 

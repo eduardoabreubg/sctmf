@@ -28,7 +28,7 @@ public class ValSeqMT extends javax.swing.JPanel {
         posInitComponents(); 
     }
     
-    void observer(MT mt) {                
+    void observer(MT mt) {
         this.validaSequenciaGUI.clearArea();   
         this.validaSequenciaGUI.setTextAInf(
                 "M = \u03a3, Q, \u03B4, q\u2080, F, V, \u03B2, <\n");
@@ -115,7 +115,7 @@ public class ValSeqMT extends javax.swing.JPanel {
      
     private void validarSequencia() {
         this.validaSequenciaGUI.validarSequencia(
-                (MT)this.gui.getModeloFormal(), 
+                (MT)this.gui.getModeloFormal(),
                 this.validaSequenciaGUI.getSequencia());
     }
     

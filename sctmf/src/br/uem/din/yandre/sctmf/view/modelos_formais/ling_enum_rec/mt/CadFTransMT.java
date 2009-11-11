@@ -3,7 +3,6 @@
  *
  * Created on 23 de Agosto de 2007, 09:14
  */
-
 package br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.mt;
 
 import br.uem.din.yandre.sctmf.model.pojo.Direcao;
@@ -12,6 +11,8 @@ import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoMT;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -23,66 +24,68 @@ import javax.swing.JOptionPane;
  * @author  rafael2009_00
  */
 public class CadFTransMT extends javax.swing.JPanel {
-    
+
     private MtGUI gui = null;
-    
     // Collections com os nomes dos itens
     final Set<Character> alf = new LinkedHashSet<Character>();
     final Set<Character> alfAux = new LinkedHashSet<Character>();
-    
+    private HashMap<Estado, ArrayList<Simbolo>> determinismo = new HashMap<Estado, ArrayList<Simbolo>>();
+
     /** Creates new form CadFTransMT */
     public CadFTransMT(MtGUI gui) {
         this.gui = gui;
         initComponents();
         posInitComponents();
     }
-    
+
     Set<TransicaoMT> getTransicoes() {
         Set<TransicaoMT> trans = new LinkedHashSet<TransicaoMT>();
-        for(Object o : this.listTrans.getAllItens()) {
+        for (Object o : this.listTrans.getAllItens()) {
             Matcher m = this.getMatcher(o.toString());
             TransicaoMT t = new TransicaoMT();
-            
-            if(m.find()) {
+
+            if (m.find()) {
                 t.setEstAtual(new Estado(m.group(1)));
                 t.setSimLido(new Simbolo(m.group(2).charAt(0)));
-                
+
                 t.setEstDestino(new Estado(m.group(3)));
                 t.setSimbEscrito(new Simbolo(m.group(4).charAt(0)));
-                t.setDirecao(m.group(5).equals("E")?
-                                Direcao.ESQUERDA:Direcao.DIREITA);
-                                              
-                trans.add(t);                            
+                t.setDirecao(m.group(5).equals("E") ? Direcao.ESQUERDA : Direcao.DIREITA);
+
+                trans.add(t);
             }
-            
+
         }
-                 
+
         return trans;
     }
-    
+
     void setTransicoes(Set<TransicaoMT> transicoes) {
         this.listTrans.removeAllItens();
-        
-        for(TransicaoMT tmt : transicoes)
-            this.addActionTrans(tmt.getEstAtual(), tmt.getSimLido(), 
-                tmt.getEstDestino(), tmt.getSimbEscrito(),tmt.getDirecao());
-        
+
+        for (TransicaoMT tmt : transicoes) {
+            this.addActionTrans(tmt.getEstAtual(), tmt.getSimLido(),
+                    tmt.getEstDestino(), tmt.getSimbEscrito(), tmt.getDirecao());
+        }
+
     }
-    
+
     private void posInitComponents() {
-        this.addRemTran.getBAdd().addActionListener(new ActionListener(){
+        this.addRemTran.getBAdd().addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent ae) {
                 addActionTrans(null, null, null, null, null);
             }
         });
-        
-        this.addRemTran.getBRemove().addActionListener(new ActionListener(){
+
+        this.addRemTran.getBRemove().addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent ae) {
                 removeActionTrans();
             }
         });
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -608,21 +611,20 @@ public class CadFTransMT extends javax.swing.JPanel {
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void addActionTrans(Estado estOri, Simbolo simbLido,
-                                Estado estDest, Simbolo sGrav,
-                                Direcao dir) {
-        
-        try {            
-            if(simbLido==null) {
+            Estado estDest, Simbolo sGrav,
+            Direcao dir) {
+
+        try {
+            if (simbLido == null) {
                 estOri = new Estado(this.cbEstOri.getSelectedItem().toString());
                 simbLido = new Simbolo(this.fSimASerLido.getText().charAt(0));
-                
+
                 estDest = new Estado(this.cbEstDest.getSelectedItem().toString());
                 sGrav = new Simbolo(this.fSimASerGravado.getText().charAt(0));
-                dir = this.cbDirecao.getSelectedItem().toString().equals("D")?
-                    Direcao.DIREITA:Direcao.ESQUERDA;
-             }
+                dir = this.cbDirecao.getSelectedItem().toString().equals("D") ? Direcao.DIREITA : Direcao.ESQUERDA;
+            }
 
             if ((simbLido.getNome().equals('<')) || (sGrav.getNome().equals('<'))) {
                 simbLido = new Simbolo('<');
@@ -631,97 +633,95 @@ public class CadFTransMT extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Única Opção de Inserção \n " +
                         "\u03B4(" + estOri.getNome() + ",\u003C) \u2192 (" + estDest.getNome() + ",\u003C,D)", "Atenção", JOptionPane.WARNING_MESSAGE);
             }
-                
-            StringBuilder sb = new StringBuilder("\u03B4(")
-                .append(estOri.getNome())
-                .append(", ")
-                .append(simbLido.getNome())
-                .append(") -> (")
-                .append(estDest.getNome())
-                .append(", ")
-                .append(sGrav.getNome())
-                .append(", ")
-                .append(dir == Direcao.DIREITA?"D":"E")
-                .append(")");
+            if (!determinismo.containsKey(estOri)) {
+                determinismo.put(estOri, new ArrayList<Simbolo>());
+            }
+            if (!determinismo.get(estOri).contains(simbLido)) {
+                determinismo.get(estOri).add(simbLido);
+                StringBuilder sb = new StringBuilder("\u03B4(").append(estOri.getNome()).append(", ").
+                        append(simbLido.getNome()).append(") -> (").
+                        append(estDest.getNome()).append(", ").
+                        append(sGrav.getNome()).append(", ").
+                        append(dir == Direcao.DIREITA ? "D" : "E").
+                        append(")");
 
-            this.listTrans.addItem(sb.toString());           
-           
-        }catch(Exception ex) {
+                this.listTrans.addItem(sb.toString());
+            } else {
+                JOptionPane.showMessageDialog(null, "Não Determinismo não aplicável!");
+            }
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }        
-        
+        }
+
     }
-    
+
     private void removeActionTrans() {
         this.listTrans.removeItens();
     }
-    
+
     private void fSimASerGravadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fSimASerGravadoKeyReleased
-        this.controlKeyListener(this.fSimASerGravado);
+        this.controlKeyListener(this.fSimASerGravado, false);
     }//GEN-LAST:event_fSimASerGravadoKeyReleased
-    
+
     private void bAddSimIniFitaDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimIniFitaDirActionPerformed
         this.fSimASerGravado.setText("\u003C");//\u003C = <
         this.fSimASerLido.setText("\u003C");
         this.cbDirecao.setSelectedIndex(1);
     }//GEN-LAST:event_bAddSimIniFitaDirActionPerformed
-    
+
     private void bAddSimbBrancDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimbBrancDirActionPerformed
         this.fSimASerGravado.setText("\u03B2");
     }//GEN-LAST:event_bAddSimbBrancDirActionPerformed
-    
+
     private void fSimASerLidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fSimASerLidoKeyReleased
-        this.controlKeyListener(this.fSimASerLido);
+        this.controlKeyListener(this.fSimASerLido, true);
     }//GEN-LAST:event_fSimASerLidoKeyReleased
-   
-    private final void controlKeyListener(final javax.swing.JTextField field) {
+
+    private final void controlKeyListener(final javax.swing.JTextField field, boolean principal) {
         String value = field.getText();
+        field.setText("");
         int tam = value.length();
-        Character s = tam>0?value.substring(tam-1).charAt(0):null;
-        if(s!=null)  // verifica se o simbolo pertence a um dos alfabetos
-            if(Character.isLowerCase(s)||Character.isDigit(s))  // alfabeto
-                if(this.alf.contains(s))
-                    field.setText(s.toString());
-                else
-                   field.setText("");
-        
-            else // alfabeto auxiliar
-                if(this.alfAux.contains(s))
-                    field.setText(s.toString());
-                else
-                    field.setText("");
-        else
-            this.fSimASerLido.setText("");
+        Character s = tam > 0 ? value.substring(tam - 1).charAt(0) : null;
+        if (principal) // alfabeto
+        {
+            if (this.alf.contains(s)) {
+                this.fSimASerLido.setText(s.toString());
+            }
+        } else {// alfabeto auxiliar
+            if (this.alfAux.contains(s)) {
+                this.fSimASerGravado.setText(s.toString());
+            }
+        }
     }
-    
+
     private void bAddSimIniFitaEsqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimIniFitaEsqActionPerformed
         this.fSimASerLido.setText("\u003C");
         this.fSimASerGravado.setText("\u003C");
         this.cbDirecao.setSelectedIndex(1);
     }//GEN-LAST:event_bAddSimIniFitaEsqActionPerformed
-    
+
     private void bAddSimbBrancEsqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimbBrancEsqActionPerformed
         this.fSimASerLido.setText("\u03B2");
     }//GEN-LAST:event_bAddSimbBrancEsqActionPerformed
-    
+
     /**
      * O Estado a ser Observado e o tipo de operação,
      * se for true ADD, false REMOVE.
      */
     void observer(Estado e, boolean oper) {
         final String nomeEstado = e.getNome();
-        if(oper) {
+        if (oper) {
             this.cbEstOri.addItem(nomeEstado);
             this.cbEstDest.addItem(nomeEstado);
-            
-        }else {
+
+        } else {
             this.cbEstOri.removeItem(nomeEstado);
             this.cbEstDest.removeItem(nomeEstado);
-            
+
             this.observerRemove(e.getNome());
         }
     }
-    
+
     /**
      * Caso oper true, ADD. Caso false REMOVE.
      * Se o charater é Upper... simbolos alfAux
@@ -730,26 +730,23 @@ public class CadFTransMT extends javax.swing.JPanel {
      */
     void observer(Simbolo s, boolean oper, int alf) {
         Character c = s.getNome();
-        if(alf==0) { // Alfabeto
-            if(oper) 
+        if (alf == 0) { // Alfabeto
+            if (oper) {
                 this.alf.add(c);
-        
-            else {
+            } else {
                 this.alf.remove(c);
                 this.observerRemove(c);
             }
-        
+
         } else // Alfabeto auxiliar
-            if(oper) 
-                this.alfAux.add(c);
-        
-            else {
-                this.alfAux.remove(c);
-                this.observerRemove(c);
-            }
+        if (oper) {
+            this.alfAux.add(c);
+        } else {
+            this.alfAux.remove(c);
+            this.observerRemove(c);
+        }
     }
-    
-    
+
     /**
      * Verifica se existe alguma transicao com o simbolo,
      * caso exista, remove esta.
@@ -758,14 +755,16 @@ public class CadFTransMT extends javax.swing.JPanel {
     private void observerRemove(Object o) {
         this.fSimASerLido.setText("");
         this.fSimASerGravado.setText("");
-                
+
         String s = o.toString();
-        for(Object obj : this.listTrans.getAllItens())
-            if(obj.toString().contains(s))
+        for (Object obj : this.listTrans.getAllItens()) {
+            if (obj.toString().contains(s)) {
                 this.listTrans.removeItem(obj.toString());
-        
+            }
+        }
+
     }
-    
+
     /**
      * Retorna o matcher para ser feito a pesquisa.<br>
      * Usando o metodo <b>group</b> obtemos:<br>
@@ -778,12 +777,11 @@ public class CadFTransMT extends javax.swing.JPanel {
      * @param str
      * @return Matcher
      */
-     private Matcher getMatcher(String str) {        
+    private Matcher getMatcher(String str) {
         String regex = ".?\\((.+), (.+)\\) -> \\((.+), (.+), (.+)\\)";
-        
+
         return Pattern.compile(regex).matcher(str);
     }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private br.uem.din.yandre.sctmf.view.components.AddRemButtonsPanel addRemTran;
     private javax.swing.JButton bAddSimIniFitaDir;
@@ -871,5 +869,4 @@ public class CadFTransMT extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel9;
     private br.uem.din.yandre.sctmf.view.components.GenericJList listTrans;
     // End of variables declaration//GEN-END:variables
-    
 }

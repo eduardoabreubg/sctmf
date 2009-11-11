@@ -1,21 +1,18 @@
 /*
- * CadFTransMT.java
+ * CadFTransMOORE.java
  *
  * Created on 23 de Agosto de 2007, 09:14
  */
-package br.uem.din.yandre.sctmf.view.modelos_formais.ling_sens_cont.all;
+package br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.moore;
 
-import br.uem.din.yandre.sctmf.model.pojo.Direcao;
 import br.uem.din.yandre.sctmf.model.pojo.Estado;
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
-import br.uem.din.yandre.sctmf.model.pojo.TransicaoALL;
-import br.uem.din.yandre.sctmf.model.services.Copia;
+import br.uem.din.yandre.sctmf.model.pojo.Transicao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
-
-import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,39 +20,35 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author  michelmenega
+ * @author  rafael2009_00
  */
-public class CadFTransALL extends javax.swing.JPanel {
+public class CadFTransMOORE extends javax.swing.JPanel {
 
-    private AllGUI gui = null;
+    private MooreGUI gui = null;
     // Collections com os nomes dos itens
     final Set<Character> alf = new LinkedHashSet<Character>();
-    final Set<Character> alfAux = new LinkedHashSet<Character>();
-    List<Copia> sera = new ArrayList<Copia>();
-    final Set<Estado> estadosND = new LinkedHashSet<Estado>();
+    final Set<Character> alfSaida = new LinkedHashSet<Character>();
+    private HashMap<Estado, ArrayList<Simbolo>> determinismo = new HashMap<Estado, ArrayList<Simbolo>>();
 
-    ;
-
-    /** Creates new form CadFTransMT */
-    public CadFTransALL(AllGUI gui) {
+    /** Creates new form CadFTransMOORE */
+    public CadFTransMOORE(MooreGUI gui) {
         this.gui = gui;
         initComponents();
         posInitComponents();
     }
 
-    Set<TransicaoALL> getTransicoes() {
-        Set<TransicaoALL> trans = new LinkedHashSet<TransicaoALL>();
+    Set<Transicao> getTransicoes() {
+        Set<Transicao> trans = new LinkedHashSet<Transicao>();
         for (Object o : this.listTrans.getAllItens()) {
             Matcher m = this.getMatcher(o.toString());
-            TransicaoALL t = new TransicaoALL();
+            Transicao t = new Transicao();
 
             if (m.find()) {
-                t.setEstAtual(new Estado(m.group(1)));
-                t.setSimLido(new Simbolo(m.group(2).charAt(0)));
+                t.setEstOri(new Estado(m.group(1)));
+                t.setSimbolo(new Simbolo(m.group(2).charAt(0)));
 
-                t.setEstDestino(new Estado(m.group(3)));
-                t.setSimbEscrito(new Simbolo(m.group(4).charAt(0)));
-                t.setDirecao(m.group(5).equals("E") ? Direcao.ESQUERDA : Direcao.DIREITA);
+                t.setEstDest(new Estado(m.group(3)));
+                t.setSimboloSaida(new Simbolo(m.group(4).charAt(0)));
 
                 trans.add(t);
             }
@@ -65,17 +58,12 @@ public class CadFTransALL extends javax.swing.JPanel {
         return trans;
     }
 
-    Set<Estado> getEstadosND() {
-
-        return estadosND;
-    }
-
-    void setTransicoes(Set<TransicaoALL> transicoes) {
+    void setTransicoes(Set<Transicao> transicoes) {
         this.listTrans.removeAllItens();
 
-        for (TransicaoALL tall : transicoes) {
-            this.addActionTrans(tall.getEstAtual(), tall.getSimLido(),
-                    tall.getEstDestino(), tall.getSimbEscrito(), tall.getDirecao());
+        for (Transicao t : transicoes) {
+            this.addActionTrans(t.getEstOri(), t.getSimbolo(),
+                    t.getEstDest(), t.getSimboloSaida());
         }
 
     }
@@ -84,7 +72,7 @@ public class CadFTransALL extends javax.swing.JPanel {
         this.addRemTran.getBAdd().addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent ae) {
-                addActionTrans(null, null, null, null, null);
+                addActionTrans(null, null, null, null);
             }
         });
 
@@ -132,28 +120,18 @@ public class CadFTransALL extends javax.swing.JPanel {
         fSimASerGravado = new javax.swing.JTextField();
         jLabel36 = new javax.swing.JLabel();
         jPanel31 = new javax.swing.JPanel();
-        jLabel30 = new javax.swing.JLabel();
-        jPanel28 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        cbDirecao = new javax.swing.JComboBox();
         jPanel7 = new javax.swing.JPanel();
         jPanel54 = new javax.swing.JPanel();
         jLabel58 = new javax.swing.JLabel();
         jPanel55 = new javax.swing.JPanel();
         jPanel56 = new javax.swing.JPanel();
-        jPanel57 = new javax.swing.JPanel();
-        bAddLimiteDireita1 = new javax.swing.JButton();
-        bAddLimiteEsquerda1 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         jPanel58 = new javax.swing.JPanel();
         jLabel62 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
         jPanel59 = new javax.swing.JPanel();
         jPanel60 = new javax.swing.JPanel();
         jPanel61 = new javax.swing.JPanel();
-        bAddLimiteDireita2 = new javax.swing.JButton();
-        bAddLimiteEsquerda2 = new javax.swing.JButton();
+        bAddSimbBrancDir = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jPanel62 = new javax.swing.JPanel();
         jPanel63 = new javax.swing.JPanel();
@@ -172,11 +150,7 @@ public class CadFTransALL extends javax.swing.JPanel {
         jPanel36 = new javax.swing.JPanel();
         jLabel40 = new javax.swing.JLabel();
         jPanel21 = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
-        jLabel38 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -233,7 +207,7 @@ public class CadFTransALL extends javax.swing.JPanel {
 
         jLabel24.setFont(new java.awt.Font("Verdana", 1, 14));
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel24.setText("S");
+        jLabel24.setText("Q");
         jLabel24.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel24.setPreferredSize(new java.awt.Dimension(20, 30));
         jPanel24.add(jLabel24, java.awt.BorderLayout.NORTH);
@@ -258,11 +232,11 @@ public class CadFTransALL extends javax.swing.JPanel {
         jPanel26.setPreferredSize(new java.awt.Dimension(60, 30));
         jPanel26.setLayout(new java.awt.BorderLayout(0, 5));
 
-        jLabel34.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12)); // NOI18N
+        jLabel34.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12));
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel34.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel34.setPreferredSize(new java.awt.Dimension(20, 30));
-        jLabel34.setText("(\u03a3\u222AV\u222A{\u03B2,\u00A4})");
+        jLabel34.setText("\u03a3");
         jPanel26.add(jLabel34, java.awt.BorderLayout.NORTH);
 
         fSimASerLido.setBackground(new java.awt.Color(255, 255, 204));
@@ -300,7 +274,7 @@ public class CadFTransALL extends javax.swing.JPanel {
 
         jLabel33.setFont(new java.awt.Font("Verdana", 1, 14));
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel33.setText("S");
+        jLabel33.setText("Q");
         jLabel33.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel33.setPreferredSize(new java.awt.Dimension(20, 30));
         jPanel30.add(jLabel33, java.awt.BorderLayout.NORTH);
@@ -338,7 +312,7 @@ public class CadFTransALL extends javax.swing.JPanel {
         jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel36.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel36.setPreferredSize(new java.awt.Dimension(20, 30));
-        jLabel36.setText("(\u03a3\u222AV\u222A{\u03B2,\u00A4})");
+        jLabel36.setText("\u0394");
         jPanel32.add(jLabel36, java.awt.BorderLayout.NORTH);
 
         jPanel8.add(jPanel32);
@@ -346,38 +320,7 @@ public class CadFTransALL extends javax.swing.JPanel {
         jPanel31.setMaximumSize(new java.awt.Dimension(20, 60));
         jPanel31.setPreferredSize(new java.awt.Dimension(10, 60));
         jPanel31.setLayout(new java.awt.BorderLayout(0, 5));
-
-        jLabel30.setFont(new java.awt.Font("Verdana", 1, 12));
-        jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel30.setText("x");
-        jLabel30.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jLabel30.setPreferredSize(new java.awt.Dimension(20, 30));
-        jPanel31.add(jLabel30, java.awt.BorderLayout.NORTH);
-
         jPanel8.add(jPanel31);
-
-        jPanel28.setOpaque(false);
-        jPanel28.setPreferredSize(new java.awt.Dimension(15, 30));
-        jPanel28.setLayout(new java.awt.BorderLayout(0, 2));
-
-        jPanel9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 3, 8));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/toolbarButtonGraphics/media/StepBack16.gif"))); // NOI18N
-        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel9.add(jLabel1);
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/toolbarButtonGraphics/media/StepForward16.gif"))); // NOI18N
-        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        jPanel9.add(jLabel2);
-
-        jPanel28.add(jPanel9, java.awt.BorderLayout.NORTH);
-
-        cbDirecao.setBackground(new java.awt.Color(200, 245, 240));
-        cbDirecao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "E", "D" }));
-        cbDirecao.setToolTipText("Sentido de Movimento(Esquerda/Direita)");
-        jPanel28.add(cbDirecao, java.awt.BorderLayout.CENTER);
-
-        jPanel8.add(jPanel28);
 
         jPanel3.add(jPanel8, java.awt.BorderLayout.NORTH);
 
@@ -408,35 +351,6 @@ public class CadFTransALL extends javax.swing.JPanel {
         jPanel56.setLayout(new java.awt.BorderLayout(0, 5));
         jPanel7.add(jPanel56);
 
-        jPanel57.setOpaque(false);
-        jPanel57.setPreferredSize(new java.awt.Dimension(60, 30));
-        jPanel57.setLayout(new java.awt.BorderLayout());
-
-        bAddLimiteDireita1.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 11)); // NOI18N
-        bAddLimiteDireita1.setText(">");
-        bAddLimiteDireita1.setPreferredSize(new java.awt.Dimension(45, 23));
-        bAddLimiteDireita1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bAddLimiteDireita1ActionPerformed(evt);
-            }
-        });
-        jPanel57.add(bAddLimiteDireita1, java.awt.BorderLayout.EAST);
-
-        bAddLimiteEsquerda1.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 10)); // NOI18N
-        bAddLimiteEsquerda1.setText("<");
-        bAddLimiteEsquerda1.setPreferredSize(new java.awt.Dimension(45, 23));
-        bAddLimiteEsquerda1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bAddLimiteEsquerda1ActionPerformed(evt);
-            }
-        });
-        jPanel57.add(bAddLimiteEsquerda1, java.awt.BorderLayout.WEST);
-
-        jLabel7.setPreferredSize(new java.awt.Dimension(34, 5));
-        jPanel57.add(jLabel7, java.awt.BorderLayout.NORTH);
-
-        jPanel7.add(jPanel57);
-
         jPanel58.setPreferredSize(new java.awt.Dimension(10, 30));
         jPanel58.setLayout(new java.awt.BorderLayout(0, 5));
 
@@ -446,6 +360,7 @@ public class CadFTransALL extends javax.swing.JPanel {
         jLabel62.setPreferredSize(new java.awt.Dimension(20, 30));
         jLabel32.setText("\u2192");
         jPanel58.add(jLabel62, java.awt.BorderLayout.NORTH);
+        jPanel58.add(jPanel9, java.awt.BorderLayout.LINE_END);
 
         jPanel7.add(jPanel58);
 
@@ -460,30 +375,19 @@ public class CadFTransALL extends javax.swing.JPanel {
         jPanel7.add(jPanel60);
 
         jPanel61.setPreferredSize(new java.awt.Dimension(60, 30));
-        jPanel61.setLayout(new java.awt.BorderLayout());
 
-        bAddLimiteDireita2.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 11)); // NOI18N
-        bAddLimiteDireita2.setText(">");
-        bAddLimiteDireita2.setPreferredSize(new java.awt.Dimension(45, 23));
-        bAddLimiteDireita2.addActionListener(new java.awt.event.ActionListener() {
+        bAddSimbBrancDir.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 10));
+        bAddSimbBrancDir.setPreferredSize(new java.awt.Dimension(45, 23));
+        bAddSimbBrancDir.setText("\u03B2");
+        bAddSimbBrancDir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bAddLimiteDireita2ActionPerformed(evt);
+                bAddSimbBrancDirActionPerformed(evt);
             }
         });
-        jPanel61.add(bAddLimiteDireita2, java.awt.BorderLayout.EAST);
-
-        bAddLimiteEsquerda2.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 10)); // NOI18N
-        bAddLimiteEsquerda2.setText("<");
-        bAddLimiteEsquerda2.setPreferredSize(new java.awt.Dimension(45, 23));
-        bAddLimiteEsquerda2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bAddLimiteEsquerda2ActionPerformed(evt);
-            }
-        });
-        jPanel61.add(bAddLimiteEsquerda2, java.awt.BorderLayout.WEST);
+        jPanel61.add(bAddSimbBrancDir);
 
         jLabel8.setPreferredSize(new java.awt.Dimension(34, 5));
-        jPanel61.add(jLabel8, java.awt.BorderLayout.NORTH);
+        jPanel61.add(jLabel8);
 
         jPanel7.add(jPanel61);
 
@@ -551,36 +455,20 @@ public class CadFTransALL extends javax.swing.JPanel {
         jPanel4.add(jPanel35);
 
         jPanel21.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
-
-        jPanel15.setBackground(new java.awt.Color(200, 245, 240));
-        jPanel21.add(jPanel15);
-
-        jLabel38.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
-        jLabel38.setText("Sentido do Movimento");
-        jPanel21.add(jLabel38);
-
         jPanel4.add(jPanel21);
 
         jPanel11.setLayout(new javax.swing.BoxLayout(jPanel11, javax.swing.BoxLayout.LINE_AXIS));
-
-        jLabel3.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
-        jLabel3.setText("<");
-        jPanel11.add(jLabel3);
-
-        jLabel4.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
-        jLabel4.setText("Limite da fita à esquerda");
-        jPanel11.add(jLabel4);
-
         jPanel4.add(jPanel11);
 
         jPanel12.setLayout(new javax.swing.BoxLayout(jPanel12, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel5.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
-        jLabel5.setText(">");
+        jLabel5.setFont(new java.awt.Font("Verdana", 1, 10));
+        jLabel5.setText("B");
+        jLabel5.setText("\u03B2 ");
         jPanel12.add(jLabel5);
 
-        jLabel6.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
-        jLabel6.setText("Limite da fita à direita");
+        jLabel6.setFont(new java.awt.Font("Verdana", 0, 10));
+        jLabel6.setText("Célula em branco");
         jPanel12.add(jLabel6);
 
         jPanel4.add(jPanel12);
@@ -621,47 +509,32 @@ public class CadFTransALL extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addActionTrans(Estado estOri, Simbolo simbLido,
-            Estado estDest, Simbolo sGrav, Direcao dir) {
-
+     private void addActionTrans(Estado estOri, Simbolo simbLido,
+            Estado estDest, Simbolo sGrav) {
 
         try {
             if (simbLido == null) {
                 estOri = new Estado(this.cbEstOri.getSelectedItem().toString());
                 simbLido = new Simbolo(this.fSimASerLido.getText().charAt(0));
-
                 estDest = new Estado(this.cbEstDest.getSelectedItem().toString());
                 sGrav = new Simbolo(this.fSimASerGravado.getText().charAt(0));
-                dir = this.cbDirecao.getSelectedItem().toString().equals("D") ? Direcao.DIREITA : Direcao.ESQUERDA;
             }
-            //proteção para o cursor nao passar dos limites da fita
-            if ((simbLido.getNome().equals('<')) || (sGrav.getNome().equals('<'))) {
-                simbLido = new Simbolo('<');
-                sGrav = new Simbolo('<');
-                dir = Direcao.DIREITA;
-                JOptionPane.showMessageDialog(null, "Única Opção de Inserção \n " +
-                        "\u03B4(" + estOri.getNome() + ",<) \u2192 (" + estDest.getNome() + ",<,D)", "Atenção", JOptionPane.WARNING_MESSAGE);
+            if (!determinismo.containsKey(estOri)) {
+                determinismo.put(estOri, new ArrayList<Simbolo>());
             }
-            if ((simbLido.getNome().equals('>')) || (sGrav.getNome().equals('>'))) {
-                simbLido = new Simbolo('>');
-                sGrav = new Simbolo('>');
-                dir = Direcao.ESQUERDA;
-                JOptionPane.showMessageDialog(null, "Única Opção de Inserção \n " +
-                        "\u03B4(" + estOri.getNome() + ",>) \u2192 (" + estDest.getNome() + ",>,E)", "Atenção", JOptionPane.WARNING_MESSAGE);
+            if (!determinismo.get(estOri).contains(simbLido)) {
+                determinismo.get(estOri).add(simbLido);
+                StringBuilder sb = new StringBuilder("\u03B4(").append(estOri.getNome()).append(", ").
+                        append(simbLido.getNome()).append(") -> (").
+                        append(estDest.getNome()).append(", ").
+                        append(sGrav.getNome()).append(")");
+                this.listTrans.addItem(sb.toString());
+            } else {
+                JOptionPane.showMessageDialog(null, "Não Determinismo não aplicável!");
             }
-            Copia c1 = new Copia(estOri.getNome(), simbLido.getNome());
-            if (sera.contains(c1)) {
-                System.out.println("OLA MUNDO");
-                estOri.setNDeterministico(true);
-                estadosND.add(estOri);
-                //} else {
-                //  estOri.setNDeterministico(false);
-            }
-            sera.add(c1);
 
-            StringBuilder sb = new StringBuilder("\u03B4(").append(estOri.getNome()).append(", ").append(simbLido.getNome()).append(") -> (").append(estDest.getNome()).append(", ").append(sGrav.getNome()).append(", ").append(dir == Direcao.DIREITA ? "D" : "E").append(")");
 
-            this.listTrans.addItem(sb.toString());
+
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -674,53 +547,40 @@ public class CadFTransALL extends javax.swing.JPanel {
     }
 
     private void fSimASerGravadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fSimASerGravadoKeyReleased
-        this.controlKeyListener(this.fSimASerGravado, false);
+        this.controlKeyListener(this.fSimASerGravado);
     }//GEN-LAST:event_fSimASerGravadoKeyReleased
 
-    private void bAddLimiteDireita2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddLimiteDireita2ActionPerformed
-        this.fSimASerGravado.setText(">");
-        this.fSimASerLido.setText(">");
-        this.cbDirecao.setSelectedIndex(0);
-}//GEN-LAST:event_bAddLimiteDireita2ActionPerformed
-
-    private void bAddLimiteEsquerda2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddLimiteEsquerda2ActionPerformed
-        this.fSimASerGravado.setText("<");
-        this.fSimASerLido.setText("<");
-        this.cbDirecao.setSelectedIndex(1);
-}//GEN-LAST:event_bAddLimiteEsquerda2ActionPerformed
+    private void bAddSimbBrancDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimbBrancDirActionPerformed
+        this.fSimASerGravado.setText("\u03B2");
+    }//GEN-LAST:event_bAddSimbBrancDirActionPerformed
 
     private void fSimASerLidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fSimASerLidoKeyReleased
-        this.controlKeyListener(this.fSimASerLido, true);
+        this.controlKeyListener(this.fSimASerLido);
     }//GEN-LAST:event_fSimASerLidoKeyReleased
 
-    private final void controlKeyListener(final javax.swing.JTextField field, boolean principal) {
+    private final void controlKeyListener(final javax.swing.JTextField field) {
         String value = field.getText();
-        field.setText("");
         int tam = value.length();
         Character s = tam > 0 ? value.substring(tam - 1).charAt(0) : null;
-        if (principal) // alfabeto
+        if (s != null) // verifica se o simbolo pertence a um dos alfabetos
         {
-            if (this.alf.contains(s)) {
-                this.fSimASerLido.setText(s.toString());
+            if (Character.isLowerCase(s) || Character.isDigit(s)) // alfabeto
+            {
+                if (this.alf.contains(s)) {
+                    field.setText(s.toString());
+                } else {
+                    field.setText("");
+                }
+            } else // alfabeto auxiliar
+            if (this.alfSaida.contains(s)) {
+                field.setText(s.toString());
+            } else {
+                field.setText("");
             }
-        } else { // alfabeto auxiliar
-            if (this.alfAux.contains(s)) {
-                this.fSimASerGravado.setText(s.toString());
-            }
+        } else {
+            this.fSimASerLido.setText("");
         }
     }
-
-    private void bAddLimiteDireita1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddLimiteDireita1ActionPerformed
-        this.fSimASerLido.setText(">");
-        this.fSimASerGravado.setText(">");
-        this.cbDirecao.setSelectedIndex(0);
-}//GEN-LAST:event_bAddLimiteDireita1ActionPerformed
-
-    private void bAddLimiteEsquerda1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddLimiteEsquerda1ActionPerformed
-        this.fSimASerLido.setText("<");
-        this.fSimASerGravado.setText("<");
-        this.cbDirecao.setSelectedIndex(1);
-}//GEN-LAST:event_bAddLimiteEsquerda1ActionPerformed
 
     /**
      * O Estado a ser Observado e o tipo de operação,
@@ -742,7 +602,7 @@ public class CadFTransALL extends javax.swing.JPanel {
 
     /**
      * Caso oper true, ADD. Caso false REMOVE.
-     * Se o charater é Upper... simbolos alfAux
+     * Se o charater é Upper... simbolos alfSaida
      * caso lower  simbolos Alf
      *
      */
@@ -756,13 +616,12 @@ public class CadFTransALL extends javax.swing.JPanel {
                 this.observerRemove(c);
             }
 
-        } else {// Alfabeto auxiliar
-            if (oper) {
-                this.alfAux.add(c);
-            } else {
-                this.alfAux.remove(c);
-                this.observerRemove(c);
-            }
+        } else // Alfabeto auxiliar
+        if (oper) {
+            this.alfSaida.add(c);
+        } else {
+            this.alfSaida.remove(c);
+            this.observerRemove(c);
         }
     }
 
@@ -797,26 +656,20 @@ public class CadFTransALL extends javax.swing.JPanel {
      * @return Matcher
      */
     private Matcher getMatcher(String str) {
-        String regex = ".?\\((.+), (.+)\\) -> \\((.+), (.+), (.+)\\)";
+        String regex = ".?\\((.+), (.+)\\) -> \\((.+), (.+)\\)";
 
         return Pattern.compile(regex).matcher(str);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private br.uem.din.yandre.sctmf.view.components.AddRemButtonsPanel addRemTran;
-    private javax.swing.JButton bAddLimiteDireita1;
-    private javax.swing.JButton bAddLimiteDireita2;
-    private javax.swing.JButton bAddLimiteEsquerda1;
-    private javax.swing.JButton bAddLimiteEsquerda2;
-    private javax.swing.JComboBox cbDirecao;
+    private javax.swing.JButton bAddSimbBrancDir;
     private javax.swing.JComboBox cbEstDest;
     private javax.swing.JComboBox cbEstOri;
     private javax.swing.JTextField fSimASerGravado;
     private javax.swing.JTextField fSimASerLido;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -827,23 +680,18 @@ public class CadFTransALL extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -851,7 +699,6 @@ public class CadFTransALL extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
@@ -862,7 +709,6 @@ public class CadFTransALL extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel25;
     private javax.swing.JPanel jPanel26;
     private javax.swing.JPanel jPanel27;
-    private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel30;
@@ -875,7 +721,6 @@ public class CadFTransALL extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel54;
     private javax.swing.JPanel jPanel55;
     private javax.swing.JPanel jPanel56;
-    private javax.swing.JPanel jPanel57;
     private javax.swing.JPanel jPanel58;
     private javax.swing.JPanel jPanel59;
     private javax.swing.JPanel jPanel6;
