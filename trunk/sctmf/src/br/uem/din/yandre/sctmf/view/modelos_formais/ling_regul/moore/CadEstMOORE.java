@@ -218,6 +218,8 @@ public class CadEstMOORE extends javax.swing.JPanel implements CEstado {
         });
 
         this.cadEstado.showSimbSaida(true);
+
+        this.cadEstado.setCbSimbSaida(new Simbolo('\u03BB'), true);
     }
     
     private void removeActionEstadoInicial() {

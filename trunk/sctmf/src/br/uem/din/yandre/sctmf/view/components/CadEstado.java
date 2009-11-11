@@ -175,7 +175,7 @@ public class CadEstado extends javax.swing.JPanel
                 nomeEst = nomeEst + " -> " + estado.getSaida().getNome();
             }
             if (this.genericJList.addItem(nomeEst) != null) {
-                this.component.addEstado(new Estado(estado.getNome()));
+                this.component.addEstado(estado);
             }
             this.estados.add(estado.getNome());
         }

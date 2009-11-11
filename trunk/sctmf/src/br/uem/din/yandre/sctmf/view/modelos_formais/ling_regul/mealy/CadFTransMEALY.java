@@ -207,7 +207,7 @@ public class CadFTransMEALY extends javax.swing.JPanel {
 
         jLabel24.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel24.setText("Q");
+        jLabel24.setText("S");
         jLabel24.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel24.setPreferredSize(new java.awt.Dimension(20, 30));
         jPanel24.add(jLabel24, java.awt.BorderLayout.NORTH);
@@ -232,7 +232,7 @@ public class CadFTransMEALY extends javax.swing.JPanel {
         jPanel26.setPreferredSize(new java.awt.Dimension(60, 30));
         jPanel26.setLayout(new java.awt.BorderLayout(0, 5));
 
-        jLabel34.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12)); // NOI18N
+        jLabel34.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12));
         jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel34.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel34.setPreferredSize(new java.awt.Dimension(20, 30));
@@ -240,7 +240,7 @@ public class CadFTransMEALY extends javax.swing.JPanel {
         jPanel26.add(jLabel34, java.awt.BorderLayout.NORTH);
 
         fSimASerLido.setBackground(new java.awt.Color(255, 255, 204));
-        fSimASerLido.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
+        fSimASerLido.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14));
         fSimASerLido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         fSimASerLido.setToolTipText("Símbolo a ser lido");
         fSimASerLido.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -274,7 +274,7 @@ public class CadFTransMEALY extends javax.swing.JPanel {
 
         jLabel33.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel33.setText("Q");
+        jLabel33.setText("S");
         jLabel33.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel33.setPreferredSize(new java.awt.Dimension(20, 30));
         jPanel30.add(jLabel33, java.awt.BorderLayout.NORTH);
@@ -298,7 +298,7 @@ public class CadFTransMEALY extends javax.swing.JPanel {
         jPanel32.setLayout(new java.awt.BorderLayout(0, 5));
 
         fSimASerGravado.setBackground(new java.awt.Color(255, 204, 204));
-        fSimASerGravado.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14)); // NOI18N
+        fSimASerGravado.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 14));
         fSimASerGravado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         fSimASerGravado.setToolTipText("Símbolo a ser gravado");
         fSimASerGravado.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -308,7 +308,7 @@ public class CadFTransMEALY extends javax.swing.JPanel {
         });
         jPanel32.add(fSimASerGravado, java.awt.BorderLayout.CENTER);
 
-        jLabel36.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12)); // NOI18N
+        jLabel36.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12));
         jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel36.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel36.setPreferredSize(new java.awt.Dimension(20, 30));
@@ -354,7 +354,7 @@ public class CadFTransMEALY extends javax.swing.JPanel {
         jPanel58.setPreferredSize(new java.awt.Dimension(10, 30));
         jPanel58.setLayout(new java.awt.BorderLayout(0, 5));
 
-        jLabel62.setFont(new java.awt.Font("Arial", 1, 15)); // NOI18N
+        jLabel62.setFont(new java.awt.Font("Arial", 1, 15));
         jLabel62.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel62.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         jLabel62.setPreferredSize(new java.awt.Dimension(20, 30));
@@ -376,9 +376,9 @@ public class CadFTransMEALY extends javax.swing.JPanel {
 
         jPanel61.setPreferredSize(new java.awt.Dimension(60, 30));
 
-        bAddSimbBrancDir.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 10));
+        bAddSimbBrancDir.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 10)); // NOI18N
         bAddSimbBrancDir.setPreferredSize(new java.awt.Dimension(45, 23));
-        bAddSimbBrancDir.setText("\u03B2");
+        bAddSimbBrancDir.setText("\u03BB");
         bAddSimbBrancDir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bAddSimbBrancDirActionPerformed(evt);
@@ -448,7 +448,7 @@ public class CadFTransMEALY extends javax.swing.JPanel {
         jPanel36.setBackground(new java.awt.Color(255, 204, 204));
         jPanel35.add(jPanel36);
 
-        jLabel40.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
+        jLabel40.setFont(new java.awt.Font("Verdana", 0, 10));
         jLabel40.setText("Símbolo a ser gravado");
         jPanel35.add(jLabel40);
 
@@ -462,12 +462,12 @@ public class CadFTransMEALY extends javax.swing.JPanel {
 
         jPanel12.setLayout(new javax.swing.BoxLayout(jPanel12, javax.swing.BoxLayout.LINE_AXIS));
 
-        jLabel5.setFont(new java.awt.Font("Verdana", 1, 10));
+        jLabel5.setFont(new java.awt.Font("Verdana", 1, 10)); // NOI18N
         jLabel5.setText("B");
-        jLabel5.setText("\u03B2 ");
+        jLabel5.setText("\u03BB ");
         jPanel12.add(jLabel5);
 
-        jLabel6.setFont(new java.awt.Font("Verdana", 0, 10)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Verdana", 0, 10));
         jLabel6.setText("Célula em branco");
         jPanel12.add(jLabel6);
 
@@ -551,7 +551,7 @@ public class CadFTransMEALY extends javax.swing.JPanel {
     }//GEN-LAST:event_fSimASerGravadoKeyReleased
 
     private void bAddSimbBrancDirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAddSimbBrancDirActionPerformed
-        this.fSimASerGravado.setText("\u03B2");
+        this.fSimASerGravado.setText("\u03BB");
     }//GEN-LAST:event_bAddSimbBrancDirActionPerformed
 
     private void fSimASerLidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fSimASerLidoKeyReleased

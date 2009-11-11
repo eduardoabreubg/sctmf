@@ -29,7 +29,7 @@ import br.uem.din.yandre.sctmf.model.pojo.TransicaoALL;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoAP;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoMT;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.mt.util.ShowFitaMT;
-import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.util.ShowFitaLingRegul;
+//import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.util.ShowFitaLingRegul;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_sens_cont.all.util.ShowFitaALL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -1296,15 +1296,14 @@ public class ValidaSequencia implements Validacao {
 
         // Verifica se o Estado atual eh algum
         // Dos estados finais
-        for (Estado x : mealy.getEstadosFinais()) {
-            if (estadoAtual.getNome().equals(x.getNome())) {
-                ShowFitaLingRegul.getInstance().showFitaMT(fita);
-                return true;
-            }
-        }
+/*for (Estado x : mealy.getEstadosFinais()) {
+        if (estadoAtual.getNome().equals(x.getNome())) {
         ShowFitaLingRegul.getInstance().showFitaMT(fita);
+        return true;
+        }
+        }
+        ShowFitaLingRegul.getInstance().showFitaMT(fita);*/
         return false;
-
     }
 
         private boolean valida(Moore moore, String sequencia) {
@@ -1337,14 +1336,14 @@ public class ValidaSequencia implements Validacao {
 
         // Verifica se o Estado atual eh algum
         // Dos estados finais
-        for (Estado x : moore.getEstadosFinais()) {
+/*for (Estado x : moore.getEstadosFinais()) {
             if (estadoAtual.getNome().equals(x.getNome())) {
-                ShowFitaLingRegul.getInstance().showFitaMT(fita);
-                return true;
+            ShowFitaLingRegul.getInstance().showFitaMT(fita);
+            return true;
             }
-        }
-        ShowFitaLingRegul.getInstance().showFitaMT(fita);
-        return false;
+            }
+            ShowFitaLingRegul.getInstance().showFitaMT(fita);*/
+            return false;
 
     }
 }
