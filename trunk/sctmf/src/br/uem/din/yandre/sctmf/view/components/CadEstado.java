@@ -7,6 +7,7 @@ package br.uem.din.yandre.sctmf.view.components;
 
 import br.uem.din.yandre.sctmf.model.pojo.Estado;
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
+import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.moore.CadFTransMOORE;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -188,11 +189,22 @@ public class CadEstado extends javax.swing.JPanel
 
     public Set<Estado> getAllItens() {
         Set<Estado> estados = new LinkedHashSet<Estado>();
+        if (pSimbSaida.isVisible()) {
+            for (Object o : this.genericJList.getAllItens()) {
+                String[] s = o.toString().split(" ");
+                System.out.println(" " + s[0]);
+                Estado e = CadFTransMOORE.getEstadoCompleto(s[0]);
+                System.out.println("e " + e.getSaida().getNome());
+                estados.add(e);
+            }
+
+            return estados;
+        }
+        //System.out.println("OI");
         for (Object o : this.genericJList.getAllItens()) {
             estados.add(new Estado(o.toString()));
-
-
         }
+
         return estados;
     }
 

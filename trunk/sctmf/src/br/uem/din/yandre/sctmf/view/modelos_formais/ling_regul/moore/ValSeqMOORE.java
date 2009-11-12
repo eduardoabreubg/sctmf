@@ -69,7 +69,7 @@ public class ValSeqMOORE extends javax.swing.JPanel {
 
         for (Transicao t : moore.getTransicoes()) {
             sb.append("\n") // pula a linha
-                    .append("\u03B4(").append(t.getEstOri().getNome()).append(",").append(t.getSimbolo().getNome()).append(") -> (").append(t.getEstDest().getNome()).append(" ,").append(t.getSimboloSaida().getNome()).append(")");
+                    .append("\u03B4(").append(t.getEstOri().getNome()).append(",").append(t.getSimbolo().getNome()).append(") -> (").append(t.getEstDest().getNome()).append(" ,").append(")");
         }
 
         this.validaSequenciaGUI.setTextAInf(sb.toString());
