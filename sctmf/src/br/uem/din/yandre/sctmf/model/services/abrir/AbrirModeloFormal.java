@@ -6,7 +6,6 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
-
 package br.uem.din.yandre.sctmf.model.services.abrir;
 
 import br.uem.din.yandre.sctmf.model.pojo.AFD;
@@ -20,7 +19,9 @@ import br.uem.din.yandre.sctmf.model.pojo.Estado;
 import br.uem.din.yandre.sctmf.model.pojo.EstadoComparavel;
 import br.uem.din.yandre.sctmf.model.pojo.GLC;
 import br.uem.din.yandre.sctmf.model.pojo.MT;
+import br.uem.din.yandre.sctmf.model.pojo.Mealy;
 import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;
+import br.uem.din.yandre.sctmf.model.pojo.Moore;
 import br.uem.din.yandre.sctmf.model.pojo.RegraProducao;
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
 import br.uem.din.yandre.sctmf.model.pojo.SimboloString;
@@ -41,13 +42,13 @@ import java.util.Set;
  * @author rafael2009_00
  */
 public class AbrirModeloFormal implements Abrir {
-    
+
     /**
      * Creates a new instance of AbrirModeloFormal
      */
     public AbrirModeloFormal() {
     }
-    
+
     public ModeloFormal abrir(File arquivo) throws AbrirException {
         // pega a extenção do arquivo
         String aux[] = arquivo.getName().split("\\.");
@@ -72,11 +73,15 @@ public class AbrirModeloFormal implements Abrir {
             return this.abrirMT(arquivo);
         } else if (extencionFile.equalsIgnoreCase("all")) {
             return this.abrirALL(arquivo);
+        } else if (extencionFile.equalsIgnoreCase("mealy")) {
+            return this.abrirMealy(arquivo);
+        } else if (extencionFile.equalsIgnoreCase("moore")) {
+            return this.abrirMoore(arquivo);
         } else {
             return null;
         }
     }
-    
+
     private AFD abrirAFD(File arquivo) throws AbrirException {
         AFD afd = new AFD();
         try {
@@ -327,60 +332,65 @@ public class AbrirModeloFormal implements Abrir {
 
         return ap;
     }
-    
+
     private List<SimboloString> extractSimbolo(String simbolos) {
         String[] ss = simbolos.split("</simbolo>");
         List<SimboloString> ret = new LinkedList<SimboloString>();
-        for (String s : ss) 
+        for (String s : ss) {
             ret.add(new SimboloString(s.replaceFirst("[^<]*<simbolo>", "")));
+        }
         return ret;
     }
-    
+
     private GLC abrirGLC(File arquivo) throws AbrirException {
         GLC glc = new GLC();
-       
+
         try {
-         BufferedReader br = new BufferedReader(new FileReader(arquivo));
-         while(br.ready()) {
-             String line = br.readLine();
-             if(line.length()>2) {                 
-                 if(line.startsWith("S")) {
-                     glc.setSimbInicial(extractSimbolo(line.substring(2)).get(0));
-                 }else if(line.startsWith("P")) {
-                     line = line.substring(2);
-                     String str[] = line.split("-",2);
-                     
-                     RegraProducao rp = new RegraProducao();
-                     rp.setSimbLEsq(extractSimbolo(str[0]).get(0));
-                     
-                     // Lado Direito da regra
-                     List<SimboloString> simbolos = null;
-                     if (str.length == 2) simbolos = extractSimbolo(str[1]);
-                     else simbolos = new LinkedList<SimboloString>();
-                     if (simbolos.size() == 1 && simbolos.get(0).getNome().isEmpty()) 
-                         simbolos.set(0,GLC.LAMBDA);
-                         
-                     rp.setSimbLDireito(simbolos);
-                     
-                     glc.addRegraProducao(rp);
-                     
-                 } else if(line.startsWith("V")) { // Alfabeto Nao-Terminais
-                     List<SimboloString> l = extractSimbolo(line.substring(2));
-                     Set<SimboloString> s = new HashSet<SimboloString>();
-                     s.addAll(l);
-                     glc.setSimbNTerm(s);
-                 }else if(line.startsWith("T")) { // Alfabeto Terminais
-                     List<SimboloString> l = extractSimbolo(line.substring(2));
-                     Set<SimboloString> s = new HashSet<SimboloString>();
-                     s.addAll(l);
-                     glc.setSimbTerm(s);
-                 }
-             }                 
-             
-         }//end while
-         
-         br.close();
-        }catch(Exception ex) {
+            BufferedReader br = new BufferedReader(new FileReader(arquivo));
+            while (br.ready()) {
+                String line = br.readLine();
+                if (line.length() > 2) {
+                    if (line.startsWith("S")) {
+                        glc.setSimbInicial(extractSimbolo(line.substring(2)).get(0));
+                    } else if (line.startsWith("P")) {
+                        line = line.substring(2);
+                        String str[] = line.split("-", 2);
+
+                        RegraProducao rp = new RegraProducao();
+                        rp.setSimbLEsq(extractSimbolo(str[0]).get(0));
+
+                        // Lado Direito da regra
+                        List<SimboloString> simbolos = null;
+                        if (str.length == 2) {
+                            simbolos = extractSimbolo(str[1]);
+                        } else {
+                            simbolos = new LinkedList<SimboloString>();
+                        }
+                        if (simbolos.size() == 1 && simbolos.get(0).getNome().isEmpty()) {
+                            simbolos.set(0, GLC.LAMBDA);
+                        }
+
+                        rp.setSimbLDireito(simbolos);
+
+                        glc.addRegraProducao(rp);
+
+                    } else if (line.startsWith("V")) { // Alfabeto Nao-Terminais
+                        List<SimboloString> l = extractSimbolo(line.substring(2));
+                        Set<SimboloString> s = new HashSet<SimboloString>();
+                        s.addAll(l);
+                        glc.setSimbNTerm(s);
+                    } else if (line.startsWith("T")) { // Alfabeto Terminais
+                        List<SimboloString> l = extractSimbolo(line.substring(2));
+                        Set<SimboloString> s = new HashSet<SimboloString>();
+                        s.addAll(l);
+                        glc.setSimbTerm(s);
+                    }
+                }
+
+            }//end while
+
+            br.close();
+        } catch (Exception ex) {
             ex.printStackTrace();
             throw new AbrirException("Erro Ao abrir modelo Formal - GLC");
         }
@@ -390,7 +400,7 @@ public class AbrirModeloFormal implements Abrir {
 
     private MT abrirMT(File arquivo) throws AbrirException {
         MT mt = new MT();
-        
+
         try {
             BufferedReader br = new BufferedReader(new FileReader(arquivo));
             while (br.ready()) {
@@ -514,5 +524,127 @@ public class AbrirModeloFormal implements Abrir {
         }
 
         return all;
+    }
+
+    private Mealy abrirMealy(File arquivo) throws AbrirException {
+        Mealy mealy = new Mealy();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(arquivo));
+            while (br.ready()) {
+                String line = br.readLine();
+                if (line.length() > 2) {
+                    if (line.startsWith("I")) {
+                        mealy.setEstadoInicial(
+                                new Estado(line.substring(2)));
+
+                    } else if (line.startsWith("T")) {
+                        line = line.substring(2);
+                        String str[] = line.split("-");
+
+                        Transicao t = new Transicao();
+                        t.setEstOri(new Estado(str[0]));
+                        t.setSimbolo(new Simbolo(str[1].charAt(0)));
+                        t.setEstDest(new Estado(str[2]));
+                        t.setSimboloSaida(new Simbolo(str[3].charAt(0)));
+
+                        mealy.addTransicao(t);
+
+                        continue;
+
+                    } else if (line.startsWith("E")) {
+                        for (String s : line.substring(2, line.length() - 1).split("-")) {
+                            mealy.addSimbolo(new Simbolo(s.charAt(0)));
+                        }
+
+                    } else if (line.startsWith("O")) { //simbolos saida
+                        for (String s : line.substring(2, line.length() - 1).split("-")) {
+                            mealy.addSimboloSaida(new Simbolo(s.charAt(0)));
+                        }
+
+                    } else if (line.startsWith("S")) {
+                        for (String e : line.substring(2, line.length() - 1).split("-")) {
+                            mealy.addEstado(new Estado(e));
+                        }
+
+                    } else if (line.startsWith("F")) {
+                        for (String f : line.substring(2, line.length() - 1).split("-")) {
+                            mealy.addEstadoFinal(new Estado(f));
+                        }
+
+                    }
+                }
+
+            }//end while
+
+            br.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new AbrirException("Erro Ao abrir modelo Formal");
+        }
+
+        return mealy;
+    }
+
+    private Moore abrirMoore(File arquivo) throws AbrirException {
+        Moore moore = new Moore();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(arquivo));
+            while (br.ready()) {
+                String line = br.readLine();
+                if (line.length() > 2) {
+                    if (line.startsWith("I")) {
+                        moore.setEstadoInicial(
+                                new Estado(line.substring(2)));
+
+                    } else if (line.startsWith("T")) {
+                        line = line.substring(2);
+                        String str[] = line.split("-");
+
+                        Transicao t = new Transicao();
+                        t.setEstOri(new Estado(str[0]));
+                        t.setSimbolo(new Simbolo(str[1].charAt(0)));
+                        t.setEstDest(new Estado(str[2]));
+
+                        moore.addTransicao(t);
+
+                        continue;
+
+                    } else if (line.startsWith("E")) {
+                        for (String s : line.substring(2, line.length() - 1).split("-")) {
+                            moore.addSimbolo(new Simbolo(s.charAt(0)));
+                        }
+
+                    } else if (line.startsWith("O")) { //simbolos saida
+                        for (String s : line.substring(2, line.length() - 1).split("-")) {
+                            moore.addSimboloSaida(new Simbolo(s.charAt(0)));
+                            System.out.println("carregar " + s.charAt(0));
+                        }
+
+                    } else if (line.startsWith("S")) {
+                        line = line.substring(2);
+                        String str[] = line.split("-");
+
+                        Estado e = new Estado(str[0]);
+                        e.setSaida(new Simbolo(str[1].charAt(0)));
+                        
+                        moore.addEstado(e);
+
+                    } else if (line.startsWith("F")) {
+                        for (String f : line.substring(2, line.length() - 1).split("-")) {
+                            moore.addEstadoFinal(new Estado(f));
+                        }
+
+                    }
+                }
+
+            }//end while
+
+            br.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new AbrirException("Erro Ao abrir modelo Formal");
+        }
+
+        return moore;
     }
 }

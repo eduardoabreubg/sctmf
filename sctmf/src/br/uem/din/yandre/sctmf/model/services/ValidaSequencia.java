@@ -30,6 +30,7 @@ import br.uem.din.yandre.sctmf.model.pojo.TransicaoAP;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoMT;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.mt.util.ShowFitaMT;
 //import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.util.ShowFitaLingRegul;
+import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.util.ShowFitaLingRegul;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_sens_cont.all.util.ShowFitaALL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -258,11 +259,11 @@ public class ValidaSequencia implements Validacao {
                     auxEA.put(ed.getNome(), ed);
                     auxEANNAtivSeq.remove(t.getEstOri().getNome());
 
-                // if(!statusValidador&&i==tamSeq-1) {
-                //     for(Estado ef : afmv.getEstadosFinais())
-                //        if(ef.getNome().equals(ed.getNome()))
-                //             statusValidador = true;
-                // }
+                    // if(!statusValidador&&i==tamSeq-1) {
+                    //     for(Estado ef : afmv.getEstadosFinais())
+                    //        if(ef.getNome().equals(ed.getNome()))
+                    //             statusValidador = true;
+                    // }
                 }
 
             } // fim for...
@@ -336,56 +337,56 @@ public class ValidaSequencia implements Validacao {
         } else {
             return false;
         }
-    /*if(expressaoRegular.length()==0||sequencia.length()==0) return false;
+        /*if(expressaoRegular.length()==0||sequencia.length()==0) return false;
 
-    final ConversoesERparaAFMV serviceClass = new ConversoesERparaAFMV();
+        final ConversoesERparaAFMV serviceClass = new ConversoesERparaAFMV();
 
-    AFMV afmv = null;  // AFMV que sera retornado
-    String str = serviceClass.new UtilsER()
-    .getExpressaoPosFixa(expressaoRegular);
+        AFMV afmv = null;  // AFMV que sera retornado
+        String str = serviceClass.new UtilsER()
+        .getExpressaoPosFixa(expressaoRegular);
 
-    final Stack<AFMV> pilha = new Stack<AFMV>();
-    for(char c : str.toCharArray()) {
-    if(Character.isLetterOrDigit(c))
-    pilha.push(serviceClass.getNewAFMV(c));
+        final Stack<AFMV> pilha = new Stack<AFMV>();
+        for(char c : str.toCharArray()) {
+        if(Character.isLetterOrDigit(c))
+        pilha.push(serviceClass.getNewAFMV(c));
 
-    else {
-    AFMV a1 = null;
-    if(c!='%')
-    a1 = pilha.pop();
+        else {
+        AFMV a1 = null;
+        if(c!='%')
+        a1 = pilha.pop();
 
-    switch (c) {
-    case '*' :
-    pilha.push(serviceClass.processaFechoKleene(a1));
+        switch (c) {
+        case '*' :
+        pilha.push(serviceClass.processaFechoKleene(a1));
 
-    break;
-    case '+' :
-    pilha.push(
-    serviceClass.processaUniao(a1,
-    pilha.pop()));
+        break;
+        case '+' :
+        pilha.push(
+        serviceClass.processaUniao(a1,
+        pilha.pop()));
 
-    break;
-    case '|' :
-    pilha.push(
-    serviceClass.processaContatenacao(
-    pilha.pop(),a1));
+        break;
+        case '|' :
+        pilha.push(
+        serviceClass.processaContatenacao(
+        pilha.pop(),a1));
 
-    break;
-    }
-    }
-    }
+        break;
+        }
+        }
+        }
 
-    afmv = pilha.pop();
+        afmv = pilha.pop();
 
-    for(Transicao t : afmv.getTransicoes())
-    System.out.println(t.getEstOri().getNome()+","+
-    t.getSimbolo().getNome()+"->"+
-    t.getEstDest().getNome());
+        for(Transicao t : afmv.getTransicoes())
+        System.out.println(t.getEstOri().getNome()+","+
+        t.getSimbolo().getNome()+"->"+
+        t.getEstDest().getNome());
 
-    System.out.println("Estado Inicial: "+afmv.getEstadoInicial().getNome());
-    System.out.println("Estado Final: "+afmv.getEstadosFinais().iterator().next().getNome());
+        System.out.println("Estado Inicial: "+afmv.getEstadoInicial().getNome());
+        System.out.println("Estado Final: "+afmv.getEstadosFinais().iterator().next().getNome());
 
-    return this.valida(afmv,sequencia);*/
+        return this.valida(afmv,sequencia);*/
     }
 
     /**
@@ -445,7 +446,7 @@ public class ValidaSequencia implements Validacao {
                         }
                         break;
 
-                    // verifica a pilha
+                        // verifica a pilha
                     } else if (pilha.peek().getNome().equals(
                             tAP.getSimBasePilha().getNome())) {
                         // Faz a alteração na pilha
@@ -844,11 +845,11 @@ public class ValidaSequencia implements Validacao {
                     }
                     cursor = copia.getCursor();
                     estadoAtual = copia.getEstAtual();
-                /*System.out.println("__recuperou____");
-                System.out.println(fita.get(cursor).getNome());
-                System.out.println(estadoAtual.getNome());
-                System.out.println(cursor);
-                System.out.println("__out for____");*/
+                    /*System.out.println("__recuperou____");
+                    System.out.println(fita.get(cursor).getNome());
+                    System.out.println(estadoAtual.getNome());
+                    System.out.println(cursor);
+                    System.out.println("__out for____");*/
                 } else {
 
                     if (loop2) {
@@ -916,7 +917,6 @@ public class ValidaSequencia implements Validacao {
     public static ValidaSequencia getInstance() {
         return singleton;
     }
-
 
     static {
         singleton = new ValidaSequencia();
@@ -1288,7 +1288,7 @@ public class ValidaSequencia implements Validacao {
                 }
                 System.out.println(estadoAtual.getNome());
 
-            // caso nao exista nenhuma transicao que o leve ao proximo estado
+                // caso nao exista nenhuma transicao que o leve ao proximo estado
 
             }
 
@@ -1296,19 +1296,20 @@ public class ValidaSequencia implements Validacao {
 
         // Verifica se o Estado atual eh algum
         // Dos estados finais
-/*for (Estado x : mealy.getEstadosFinais()) {
-        if (estadoAtual.getNome().equals(x.getNome())) {
+        for (Estado x : mealy.getEstadosFinais()) {
+            if (estadoAtual.getNome().equals(x.getNome())) {
+                ShowFitaLingRegul.getInstance().showFitaMT(fita);
+                return true;
+            }
+        }
         ShowFitaLingRegul.getInstance().showFitaMT(fita);
-        return true;
-        }
-        }
-        ShowFitaLingRegul.getInstance().showFitaMT(fita);*/
         return false;
     }
 
-        private boolean valida(Moore moore, String sequencia) {
+    private boolean valida(Moore moore, String sequencia) {
         // Estado Inicial
         Estado estadoAtual = moore.getEstadoInicial();
+        System.out.println("moore saida  " + estadoAtual.getSaida().getNome());
         //fita de saida
         List<Simbolo> fita = new ArrayList<Simbolo>();
         System.out.println(sequencia);
@@ -1317,18 +1318,22 @@ public class ValidaSequencia implements Validacao {
             {
                 for (Transicao t : moore.getTransicoes()) {
                     System.out.println(t.getEstOri().getNome());
+                    System.out.println(t.getSimbolo().getNome());
+                    System.out.println(t.getEstDest().getNome());
                     Estado e = t.getEstOri();
                     Simbolo s = t.getSimbolo();
+                    
                     if (estadoAtual.getNome().equals(e.getNome()) && c == (s.getNome())) {
                         System.out.println("AH TAh");
                         estadoAtual = t.getEstDest();
-                        fita.add(t.getSimboloSaida());
+                        System.out.println("saida " + estadoAtual.getSaida().getNome());
+                        fita.add(estadoAtual.getSaida());
                         break label;
                     }
                 }
                 System.out.println(estadoAtual.getNome());
 
-            // caso nao exista nenhuma transicao que o leve ao proximo estado
+                // caso nao exista nenhuma transicao que o leve ao proximo estado
 
             }
 
@@ -1336,14 +1341,14 @@ public class ValidaSequencia implements Validacao {
 
         // Verifica se o Estado atual eh algum
         // Dos estados finais
-/*for (Estado x : moore.getEstadosFinais()) {
+        for (Estado x : moore.getEstadosFinais()) {
             if (estadoAtual.getNome().equals(x.getNome())) {
-            ShowFitaLingRegul.getInstance().showFitaMT(fita);
-            return true;
+                ShowFitaLingRegul.getInstance().showFitaMT(fita);
+                return true;
             }
-            }
-            ShowFitaLingRegul.getInstance().showFitaMT(fita);*/
-            return false;
+        }
+        ShowFitaLingRegul.getInstance().showFitaMT(fita);
+        return false;
 
     }
 }

@@ -30,7 +30,7 @@ public class CadFTransMOORE extends javax.swing.JPanel {
     final Set<Character> alf = new LinkedHashSet<Character>();
     final Set<Character> alfSaida = new LinkedHashSet<Character>();
     private HashMap<Estado, ArrayList<Simbolo>> determinismo = new HashMap<Estado, ArrayList<Simbolo>>();
-    private ArrayList<Estado> estados = new ArrayList<Estado>();
+    private static ArrayList<Estado> estados = new ArrayList<Estado>();
 
     /** Creates new form CadFTransMOORE */
     public CadFTransMOORE(MooreGUI gui) {
@@ -46,11 +46,11 @@ public class CadFTransMOORE extends javax.swing.JPanel {
             Transicao t = new Transicao();
 
             if (m.find()) {
-                t.setEstOri(new Estado(m.group(1)));
+                t.setEstOri(getEstadoCompleto(m.group(1)));
                 t.setSimbolo(new Simbolo(m.group(2).charAt(0)));
 
-                t.setEstDest(new Estado(m.group(3)));
-                t.setSimboloSaida(new Simbolo(m.group(4).charAt(0)));
+                t.setEstDest(getEstadoCompleto(m.group(3)));
+               
 
                 trans.add(t);
             }
@@ -507,7 +507,7 @@ public class CadFTransMOORE extends javax.swing.JPanel {
     }//GEN-LAST:event_fSimASerLidoKeyReleased
 
     private void cbEstOriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstOriActionPerformed
-        Estado e = estados.get(estados.indexOf(new Estado(cbEstOri.getSelectedItem().toString())));
+        Estado e = getEstadoCompleto(cbEstOri.getSelectedItem().toString());
         this.fSimASerGravado.setText(e.getNome() + " \u2192 " + e.getSaida().getNome());
     }//GEN-LAST:event_cbEstOriActionPerformed
 
@@ -538,6 +538,7 @@ public class CadFTransMOORE extends javax.swing.JPanel {
 
         final String nomeEstado = e.getNome();
         if (oper) {
+            System.out.println("aki " + e.getSaida().getNome());
             estados.add(e);
             this.cbEstOri.addItem(nomeEstado);
             this.cbEstDest.addItem(nomeEstado);
@@ -547,6 +548,10 @@ public class CadFTransMOORE extends javax.swing.JPanel {
             this.cbEstDest.removeItem(nomeEstado);
             this.observerRemove(e.getNome());
         }
+    }
+
+    public static Estado getEstadoCompleto(String s){
+        return estados.get(estados.indexOf(new Estado(s)));
     }
 
     /**
@@ -564,7 +569,6 @@ public class CadFTransMOORE extends javax.swing.JPanel {
                 this.alf.remove(c);
                 this.observerRemove(c);
             }
-
         } else // Alfabeto auxiliar
         if (oper) {
             this.alfSaida.add(c);
@@ -582,14 +586,12 @@ public class CadFTransMOORE extends javax.swing.JPanel {
     private void observerRemove(Object o) {
         this.fSimASerLido.setText("");
         this.fSimASerGravado.setText("");
-
         String s = o.toString();
         for (Object obj : this.listTrans.getAllItens()) {
             if (obj.toString().contains(s)) {
                 this.listTrans.removeItem(obj.toString());
             }
         }
-
     }
 
     /**
@@ -605,7 +607,7 @@ public class CadFTransMOORE extends javax.swing.JPanel {
      * @return Matcher
      */
     private Matcher getMatcher(String str) {
-        String regex = ".?\\((.+), (.+)\\) -> \\((.+), (.+)\\)";
+        String regex = ".?\\((.+), (.+)\\) -> (.+)\\;";
 
         return Pattern.compile(regex).matcher(str);
     }

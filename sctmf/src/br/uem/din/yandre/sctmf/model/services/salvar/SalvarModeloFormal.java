@@ -6,7 +6,6 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
-
 package br.uem.din.yandre.sctmf.model.services.salvar;
 
 import br.uem.din.yandre.sctmf.model.pojo.AFD;
@@ -18,7 +17,9 @@ import br.uem.din.yandre.sctmf.model.pojo.ER;
 import br.uem.din.yandre.sctmf.model.pojo.Estado;
 import br.uem.din.yandre.sctmf.model.pojo.GLC;
 import br.uem.din.yandre.sctmf.model.pojo.MT;
+import br.uem.din.yandre.sctmf.model.pojo.Mealy;
 import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;
+import br.uem.din.yandre.sctmf.model.pojo.Moore;
 import br.uem.din.yandre.sctmf.model.pojo.RegraProducao;
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
 import br.uem.din.yandre.sctmf.model.pojo.SimboloString;
@@ -29,7 +30,6 @@ import br.uem.din.yandre.sctmf.model.pojo.TransicaoMT;
 import java.io.File;
 import java.io.FileWriter;
 
-
 /**
  *
  * @author rafael2009_00
@@ -38,13 +38,13 @@ public class SalvarModeloFormal implements Salvar {
 
     private FileWriter fw;
     private File file;
-    
+
     /**
      * Creates a new instance of Salvar
      */
     public SalvarModeloFormal() {
     }
-    
+
     public void salvar(File arquivo, ModeloFormal mf) throws SalvarException {
         this.file = arquivo;
 
@@ -64,10 +64,14 @@ public class SalvarModeloFormal implements Salvar {
             this.salvarMT((MT) mf);
         } else if (mf instanceof ALL) {
             this.salvarALL((ALL) mf);
+        } else if (mf instanceof Mealy) {
+            this.salvarMealy((Mealy) mf);
+        } else if (mf instanceof Moore) {
+            this.salvarMoore((Moore) mf);
         }
 
     }
-    
+
     private void salvarAFD(AFD afd) throws SalvarException {
         StringBuilder sb = new StringBuilder();
 
@@ -276,27 +280,32 @@ public class SalvarModeloFormal implements Salvar {
         StringBuilder sb = new StringBuilder();
 
         sb.append("V:");  // Add Simbolos Nao-Termais
-        for(SimboloString s : glc.getSimbNTerm())
-            sb.append("<simbolo>"+s.getNome()+"</simbolo>");
-        
+        for (SimboloString s : glc.getSimbNTerm()) {
+            sb.append("<simbolo>" + s.getNome() + "</simbolo>");
+        }
+
         sb.append("\nT:");  // Add Simbolos Termais
-        for(SimboloString s : glc.getSimbTerm())
-            sb.append("<simbolo>"+s.getNome()+"</simbolo>");
-                       
+        for (SimboloString s : glc.getSimbTerm()) {
+            sb.append("<simbolo>" + s.getNome() + "</simbolo>");
+        }
+
         SimboloString aux = glc.getSimbInicial(); // Simbolo Inicial
         sb.append("\nS:");
-        if(aux!=null)
-             sb.append("<simbolo>"+aux.getNome()+"</simbolo>");
-        
+        if (aux != null) {
+            sb.append("<simbolo>" + aux.getNome() + "</simbolo>");
+        }
+
         SimboloString lambda = GLC.LAMBDA;
-        for(RegraProducao rp : glc.getRegrasProducao()) {
-            sb.append("\nP:<simbolo>"+rp.getSimbLEsq().getNome()+"</simbolo>");
+        for (RegraProducao rp : glc.getRegrasProducao()) {
+            sb.append("\nP:<simbolo>" + rp.getSimbLEsq().getNome() + "</simbolo>");
             sb.append("-");
             if (lambda.equals(rp.getSimbLDireito().get(0))) {
-                sb.append("<simbolo></simbolo>"); continue;
+                sb.append("<simbolo></simbolo>");
+                continue;
             }
-            for(SimboloString x: rp.getSimbLDireito())
-                sb.append("<simbolo>"+x.getNome()+"</simbolo>");
+            for (SimboloString x : rp.getSimbLDireito()) {
+                sb.append("<simbolo>" + x.getNome() + "</simbolo>");
+            }
         }
 
         try {
@@ -395,6 +404,103 @@ public class SalvarModeloFormal implements Salvar {
             this.showOkMessage("ALL");
         } catch (Exception ioex) {
             throw new SalvarException("Erro ao Salvar MT");
+        }
+    }
+
+    private void salvarMealy(Mealy mealy) throws SalvarException {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("E:");  // Add Simbolos
+        for (Simbolo s : mealy.getSimbolos()) {
+            sb.append(s.getNome() + "-");
+        }
+
+        sb.append("\nO:"); //simbolos saida
+        for (Simbolo s : mealy.getSimbolosSaida()) {
+            sb.append(s.getNome() + "-");
+        }
+
+        sb.append("\nS:");
+        for (Estado e : mealy.getEstados()) {
+            sb.append(e.getNome() + "-");
+        }
+
+        Estado aux = mealy.getEstadoInicial();
+        sb.append("\nI:");
+        if (aux != null) {
+            sb.append(aux.getNome());
+        }
+
+        sb.append("\nF:");
+        for (Estado e : mealy.getEstadosFinais()) {
+            sb.append(e.getNome() + "-");
+        }
+
+        for (Transicao t : mealy.getTransicoes()) {
+            sb.append("\nT:" +
+                    t.getEstOri().getNome() + "-" +
+                    t.getSimbolo().getNome() + "-" +
+                    t.getEstDest().getNome() + "-" +
+                    t.getSimboloSaida().getNome());
+        }
+
+        try {
+            this.writeInFile(
+                    new File(
+                    this.file.getPath() + ".mealy"), sb.toString());
+
+            this.showOkMessage("Mealy");
+        } catch (Exception ioex) {
+            throw new SalvarException("Erro ao Salvar Mealy");
+        }
+    }
+
+    private void salvarMoore(Moore moore) throws SalvarException {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("E:");  // Add Simbolos
+        for (Simbolo s : moore.getSimbolos()) {
+            sb.append(s.getNome() + "-");
+        }
+
+        sb.append("\nO:"); //simbolos saida
+        for (Simbolo s : moore.getSimbolosSaida()) {
+            sb.append(s.getNome() + "-");
+        }
+
+
+        for (Estado e : moore.getEstados()) {
+            sb.append("\nS:" +
+                    e.getNome() + "-" +
+                    e.getSaida().getNome());
+        }
+
+        Estado aux = moore.getEstadoInicial();
+        sb.append("\nI:");
+        if (aux != null) {
+            sb.append(aux.getNome());
+        }
+
+        sb.append("\nF:");
+        for (Estado e : moore.getEstadosFinais()) {
+            sb.append(e.getNome() + "-");
+        }
+
+        for (Transicao t : moore.getTransicoes()) {
+            sb.append("\nT:" +
+                    t.getEstOri().getNome() + "-" +
+                    t.getSimbolo().getNome() + "-" +
+                    t.getEstDest().getNome());
+        }
+
+        try {
+            this.writeInFile(
+                    new File(
+                    this.file.getPath() + ".moore"), sb.toString());
+
+            this.showOkMessage("Moore");
+        } catch (Exception ioex) {
+            throw new SalvarException("Erro ao Salvar Moore");
         }
     }
 

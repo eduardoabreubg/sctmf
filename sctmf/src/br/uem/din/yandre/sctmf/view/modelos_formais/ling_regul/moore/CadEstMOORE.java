@@ -36,13 +36,15 @@ public class CadEstMOORE extends javax.swing.JPanel implements CEstado {
     
     Estado getEstadoInicial() {
         Collection<Object> o = this.listEstIni.getAllItens();
-        return o.size()>0?new Estado(o.iterator().next().toString()):null;
+        if (o.size()>0)
+            return CadFTransMOORE.getEstadoCompleto(o.iterator().next().toString());
+        return null;
     }
     
     Set<Estado> getEstadosFinais() {        
         LinkedHashSet<Estado> estados = new LinkedHashSet<Estado>();
         for(Object o : this.listEstFin.getAllItens()) 
-            estados.add(new Estado(o.toString()));
+            estados.add(CadFTransMOORE.getEstadoCompleto(o.toString()));
         
         return estados;
     }
