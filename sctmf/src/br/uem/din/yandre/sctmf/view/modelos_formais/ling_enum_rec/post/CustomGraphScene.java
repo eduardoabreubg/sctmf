@@ -123,7 +123,11 @@ public class CustomGraphScene extends GraphScene.StringGraph {
     }
 
     public String criarTransicao(String source, String target) {
-        return criarTransicao(source, target, generateNewEdgeName());
+        if (source.contains("Ler")){
+            String transicao = JOptionPane.showInputDialog("Digite o Simbolo(s) da transição. Utilize virgula para separar.");
+            return criarTransicao(source, target, transicao);
+        }
+        return criarTransicao(source, target, "");
     }
 
     /*public void zoomIn() {
@@ -300,18 +304,10 @@ public class CustomGraphScene extends GraphScene.StringGraph {
             if (sourceWidget == null || targetWidget == null) {
                 return;
             }
-            String edge = criarTransicao(source, target);
-            if (sourceWidget.equals(targetWidget)) { //adiciona uma rota se origem e igual destino
-
-                Widget edgeWidget = findWidget(edge);
-                if (edgeWidget instanceof ConnectionWidget) {
-                    ConnectionWidget cw = (ConnectionWidget) edgeWidget;
-                    Collection<Point> points = new ArrayList<Point>();
-                    points.add(new Point(20, 20));
-                    points.add(new Point(20, 30));
-                    cw.setControlPoints(points, false);
-                }
+            if((!source.contains("Parada")) && (!target.equals("Partida"))){
+                criarTransicao(source, target);
             }
+
         }
 
         public ConnectorState isTargetWidget(Widget sourceWidget, Widget targetWidget) {
