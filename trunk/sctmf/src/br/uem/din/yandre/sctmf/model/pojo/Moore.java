@@ -4,13 +4,9 @@
  */
 package br.uem.din.yandre.sctmf.model.pojo;
 
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 /**
  *
- * @author root
+ * @author michelmenega
  */
 public class Moore extends Automato {
 

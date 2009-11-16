@@ -28,5 +28,6 @@ public enum IdModeloFormal {
     //Linguagens Sensiveis ao Contexto
     ALL,
     // Linguagens Enumeraveis Recursivamente
+    POST,
     MT;
 }

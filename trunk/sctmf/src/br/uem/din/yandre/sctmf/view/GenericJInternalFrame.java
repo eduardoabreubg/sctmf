@@ -9,6 +9,9 @@ import br.uem.din.yandre.sctmf.control.Controller;
 import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;
 import br.uem.din.yandre.sctmf.view.components.JfcOpenSave;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ModeloFormalGUI;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,9 +27,9 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
     public GenericJInternalFrame(Controller ctrl, IdModeloFormal idMF) {
         this.ctrl = ctrl;
         this.idMF = idMF;
-
         initComponents();
         this.posInitComponents();
+
     }
 
     /** This method is called from within the constructor to
@@ -125,7 +128,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
             case MEALY:
                 this.setTitle("Mealy - Máquina de Mealy");
                 break;
-                
+
             case MOORE:
                 this.setTitle("Moore - Máquina de Moore");
                 break;
@@ -158,9 +161,14 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
                 this.setTitle("ALL - Autômato Linearmente Limitado");
                 break;
 
+            case POST:
+                this.setTitle("Post - Máquina de Post");
+                break;
+
             case MT:
                 this.setTitle("MT - Máquina de Turing");
                 break;
+
 
         }
 

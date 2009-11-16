@@ -135,6 +135,14 @@
                 <Property name="text" type="java.lang.String" value="Linguagens Enumer&#xe1;veis Recursivamente "/>
               </Properties>
               <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="miMaqPost">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="M&#xe1;quina de Post"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miMaqPostActionPerformed"/>
+                  </Events>
+                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="miMaqTuring">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="M&#xe1;quina de Turing "/>
@@ -477,6 +485,21 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
           <SubComponents>
+            <Component class="javax.swing.JButton" name="bMaqPost">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="cc" red="cc" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Post"/>
+                <Property name="toolTipText" type="java.lang.String" value="M&#xe1;quina de Post"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[70, 25]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bMaqPostActionPerformed"/>
+              </Events>
+            </Component>
             <Component class="javax.swing.JButton" name="bMaqTuring">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

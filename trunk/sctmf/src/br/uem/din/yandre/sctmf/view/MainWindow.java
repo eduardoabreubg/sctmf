@@ -60,6 +60,7 @@ public class MainWindow extends javax.swing.JFrame {
         pLingSensContex = new javax.swing.JPanel();
         bAutomatoLinearmenteLimitado = new javax.swing.JButton();
         pLingEnumRec = new javax.swing.JPanel();
+        bMaqPost = new javax.swing.JButton();
         bMaqTuring = new javax.swing.JButton();
         bGramEstruFrase = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
@@ -80,6 +81,7 @@ public class MainWindow extends javax.swing.JFrame {
         mLingSensContex = new javax.swing.JMenu();
         miAutomatoLinearmenteLimitado = new javax.swing.JMenuItem();
         mLingEnumRec = new javax.swing.JMenu();
+        miMaqPost = new javax.swing.JMenuItem();
         miMaqTuring = new javax.swing.JMenuItem();
         miGramEstruFrase = new javax.swing.JMenuItem();
         mTransformacoes = new javax.swing.JMenu();
@@ -220,6 +222,17 @@ public class MainWindow extends javax.swing.JFrame {
         pLingEnumRec.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(153, 153, 255), null, new java.awt.Color(102, 0, 255)));
         pLingEnumRec.setToolTipText("Linguagens Enumeráveis Recursivamente ");
 
+        bMaqPost.setBackground(new java.awt.Color(204, 204, 255));
+        bMaqPost.setText("Post");
+        bMaqPost.setToolTipText("Máquina de Post");
+        bMaqPost.setPreferredSize(new java.awt.Dimension(70, 25));
+        bMaqPost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bMaqPostActionPerformed(evt);
+            }
+        });
+        pLingEnumRec.add(bMaqPost);
+
         bMaqTuring.setBackground(new java.awt.Color(204, 204, 255));
         bMaqTuring.setText("MT");
         bMaqTuring.setToolTipText("Máquina de Turing ");
@@ -344,6 +357,14 @@ public class MainWindow extends javax.swing.JFrame {
         mModelos.add(mLingSensContex);
 
         mLingEnumRec.setText("Linguagens Enumeráveis Recursivamente ");
+
+        miMaqPost.setText("Máquina de Post");
+        miMaqPost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miMaqPostActionPerformed(evt);
+            }
+        });
+        mLingEnumRec.add(miMaqPost);
 
         miMaqTuring.setText("Máquina de Turing ");
         miMaqTuring.addActionListener(new java.awt.event.ActionListener() {
@@ -596,6 +617,14 @@ public class MainWindow extends javax.swing.JFrame {
         this.showFormalModel(IdModeloFormal.MOORE);
     }//GEN-LAST:event_miMooreActionPerformed
 
+    private void bMaqPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMaqPostActionPerformed
+        this.showFormalModel(IdModeloFormal.POST);
+    }//GEN-LAST:event_bMaqPostActionPerformed
+
+    private void miMaqPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miMaqPostActionPerformed
+        this.showFormalModel(IdModeloFormal.POST);
+    }//GEN-LAST:event_miMaqPostActionPerformed
+
     /**
      * Manipula a ação de Saída do Sistema
      */
@@ -662,6 +691,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton bExpReg;
     private javax.swing.JButton bGramEstruFrase;
     private javax.swing.JButton bGramLivrContex;
+    private javax.swing.JButton bMaqPost;
     private javax.swing.JButton bMaqTuring;
     private javax.swing.JButton bMealy;
     private javax.swing.JButton bMoore;
@@ -689,6 +719,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem miGLC2FNG;
     private javax.swing.JMenuItem miGramEstruFrase;
     private javax.swing.JMenuItem miGramLivrContex;
+    private javax.swing.JMenuItem miMaqPost;
     private javax.swing.JMenuItem miMaqTuring;
     private javax.swing.JMenuItem miMealy;
     private javax.swing.JMenuItem miMinimizacaoAFD;
