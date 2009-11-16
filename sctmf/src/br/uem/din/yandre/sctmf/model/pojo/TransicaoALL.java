@@ -1,11 +1,4 @@
-/*
- * TransicaoMT.java
- *
- * Created on 24 de Agosto de 2007, 17:18
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
+
 
 package br.uem.din.yandre.sctmf.model.pojo;
 
@@ -22,7 +15,7 @@ public class TransicaoALL {
     private Simbolo simbEscrito;
     private Direcao direcao;
     
-    /** Creates a new instance of TransicaoMT */
+    /** Creates a new instance of TransicaoALL*/
     public TransicaoALL() {
     }
 

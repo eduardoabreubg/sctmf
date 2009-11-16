@@ -14,6 +14,7 @@ import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.afd.AfdGUI;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.afnd.AfndGUI;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_liv_contex.ap.ApGUI;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ModeloFormalGUI;
+import br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.post.PostGUI;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.afmv.AfmvGUI;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.er.ErGUI;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.mealy.MealyGUI;
@@ -61,6 +62,9 @@ public class GUIFactory {
 
             case MOORE:
                 return new MooreGUI();
+
+            case POST:
+                return new PostGUI();
 
             default:
                 return null;

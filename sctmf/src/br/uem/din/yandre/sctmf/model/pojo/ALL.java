@@ -8,7 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 /**
  *
- * @author Administrador
+ * @author michelmenega
  */
 public class ALL extends ModeloFormal{
 

@@ -7,7 +7,7 @@ package br.uem.din.yandre.sctmf.model.pojo;
 
 /**
  *
- * @author root
+ * @author michelmenega
  */
 public class Mealy extends Automato {
 
