@@ -1,24 +1,24 @@
 package br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.post;
 
-
 import br.uem.din.yandre.sctmf.model.pojo.Estado;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.awt.Paint;
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-import javax.swing.border.Border;
 
+import javax.swing.JPanel;
+
+
+import org.netbeans.api.visual.border.Border;
+import org.netbeans.api.visual.border.BorderFactory;
 import org.netbeans.api.visual.model.ObjectState;
 import org.netbeans.api.visual.widget.LabelWidget;
 import org.netbeans.api.visual.widget.Scene;
 
+class MyLabelWidget extends LabelWidget {
 
-class MyLabelWidget extends LabelWidget{
-
-    private static final Border NORMAL_BORDER = BorderFactory.createLineBorder(Color.BLACK, 1);
-    private static final Border HOOVER_BORDER = BorderFactory.createLineBorder(new Color(48, 162, 255));
+    private static final Border NORMAL_BORDER = BorderFactory.createRoundedBorder(10, 10, Color.LIGHT_GRAY, Color.BLACK);
+    private static final Border HOOVER_BORDER = BorderFactory.createRoundedBorder(10, 10, Color.gray, Color.BLUE);
     //private EstadoGui gui = new EstadoGui();
     //private Workflow workflow = new Workflow();
     private Estado estado = new Estado("oi");
@@ -43,8 +43,9 @@ class MyLabelWidget extends LabelWidget{
         String oldLabel = getLabel();
         try {
             super.setLabel(arg0);
-            if (estado != null)
+            if (estado != null) {
                 estado.setNome(arg0);
+            }
         } catch (Exception ex) {
             super.setLabel(oldLabel);
             System.out.println("Nome ja existe!!");
@@ -55,36 +56,25 @@ class MyLabelWidget extends LabelWidget{
     public void init() {
         setVerticalAlignment(LabelWidget.VerticalAlignment.CENTER);
         setAlignment(LabelWidget.Alignment.CENTER);
-        setPreferredSize(new Dimension(70, 40));
+        setPreferredSize(new Dimension(90, 35));
         setOpaque(true);
         normalLook();
     }
 
     public void normalLook() {
         setBorder(NORMAL_BORDER);
-        setBackground(backgroundPaint());
     }
 
     @Override
     protected void notifyStateChanged(ObjectState previousState, ObjectState newState) {
         super.notifyStateChanged(previousState, newState);
         if (newState.isSelected()) {
-            setBackground(selectedPaint());
             setBorder(NORMAL_BORDER);
         } else if (newState.isHovered()) {
-            setBackground(backgroundPaint());
             setBorder(HOOVER_BORDER);
         } else {
             normalLook();
         }
-    }
-
-    protected Paint selectedPaint() {
-        return new GradientPaint(0, 0, Color.WHITE, 200, 200, Color.CYAN, false);
-    }
-
-    protected Paint backgroundPaint() {
-        return new GradientPaint(0, 0, Color.WHITE, 200, 200, Color.YELLOW, false);
     }
 
     public void saveState() {
@@ -97,12 +87,11 @@ class MyLabelWidget extends LabelWidget{
         }*/
     }
 
-    public void loadState() {        
+    public void loadState() {
         /*gui.setNome(estado.getNome());
         //TODO CARREGAR TODOS SCRIPTS DO BD
         gui.setPreScriptsRightItems(estado.getPreScripts());
         gui.setPostScriptsRightItems(estado.getPreScripts());*/
-
     }
 
     public Estado getEstado() {
@@ -120,6 +109,6 @@ class MyLabelWidget extends LabelWidget{
     }
 
     public void onDelete() {
-      //  getEstado().delete();
+        //  getEstado().delete();
     }
 }
