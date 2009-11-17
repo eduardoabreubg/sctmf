@@ -16,7 +16,7 @@ import java.util.Set;
 public class CadAlfPost extends javax.swing.JPanel {
     PostGUI gui = null;
     
-    /** Creates new form CadAlfMT */
+    /** Creates new form CadAlfPost*/
     public CadAlfPost(PostGUI gui) {
         this.gui = gui;
         initComponents();
@@ -31,15 +31,8 @@ public class CadAlfPost extends javax.swing.JPanel {
         return simbolos;
     }
     
-    Set<Simbolo> getSimbAfabetoAux() {
-        Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
-        for(Object o : this.listAlfAux.getAllItens())
-            simbolos.add(new Simbolo((Character)o));
-            
-        return simbolos;
-    }
     
-  /*  void setSimbAfabeto(Collection<Simbolo> simbAlf) {
+    void setSimbAfabeto(Collection<Simbolo> simbAlf) {
         this.listAlf.removeAllItens();
         
         for(Simbolo s : simbAlf)
@@ -47,13 +40,7 @@ public class CadAlfPost extends javax.swing.JPanel {
             this.addActionAlf(s);
     }
     
-    void setSimbAfabetoAux(Collection<Simbolo> simbAlfAux) {
-        this.listAlfAux.removeAllItens();
-        
-        for(Simbolo s : simbAlfAux)
-            //this.listAlfAux.addItem(s.getNome());
-            this.addActionAlfAux(s);
-    }
+
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -67,11 +54,7 @@ public class CadAlfPost extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         listAlf = new br.uem.din.yandre.sctmf.view.components.GenericJList();
-        jPanel5 = new javax.swing.JPanel();
-        listAlfAux = new br.uem.din.yandre.sctmf.view.components.GenericJList();
-        jLabel5 = new javax.swing.JLabel();
         addRemButtonsAlf = new br.uem.din.yandre.sctmf.view.components.AddRemButtonsPanel();
-        addRemButtonsAlfAux = new br.uem.din.yandre.sctmf.view.components.AddRemButtonsPanel();
         letterNumber = new br.uem.din.yandre.sctmf.view.components.LetterNumber();
 
         setLayout(new java.awt.GridBagLayout());
@@ -79,7 +62,7 @@ public class CadAlfPost extends javax.swing.JPanel {
         jPanel4.setToolTipText("Símbolos do Alfabeto da Linguagem");
         jPanel4.setLayout(new java.awt.BorderLayout());
 
-        jLabel4.setFont(new java.awt.Font("Verdana", 0, 18));
+        jLabel4.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setToolTipText("Símbolos de Entrada");
         jLabel4.setText("\u03a3");
@@ -89,7 +72,7 @@ public class CadAlfPost extends javax.swing.JPanel {
         jPanel4.add(listAlf, java.awt.BorderLayout.CENTER);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridheight = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
@@ -98,54 +81,21 @@ public class CadAlfPost extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 10, 0);
         add(jPanel4, gridBagConstraints);
-
-        jPanel5.setToolTipText("Símbolos do Alfabeto da Pilha");
-        jPanel5.setLayout(new java.awt.BorderLayout());
-
-        listAlfAux.setToolTipText("");
-        jPanel5.add(listAlfAux, java.awt.BorderLayout.CENTER);
-
-        jLabel5.setFont(new java.awt.Font("Verdana", 0, 18));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("V");
-        jLabel5.setToolTipText("Alfabeto Auxiliar(Pode se Vazio)");
-        jPanel5.add(jLabel5, java.awt.BorderLayout.NORTH);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 4;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
-        gridBagConstraints.ipadx = 16;
-        gridBagConstraints.ipady = 166;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 21, 10, 21);
-        add(jPanel5, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 20, 0, 0);
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 10, 20);
         add(addRemButtonsAlf, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 131, 0, 0);
-        add(addRemButtonsAlfAux, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(10, 1, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 10, 20);
         add(letterNumber, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
     
    private void posInitComponents() {
-   /*(     this.letterNumber.forceAllLowerCase(true);
+       this.letterNumber.forceAllLowerCase(true);
         
         this.addRemButtonsAlf.getBAdd().addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
@@ -159,20 +109,10 @@ public class CadAlfPost extends javax.swing.JPanel {
             }
         });
         
-        this.addRemButtonsAlfAux.getBAdd().addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ae) {
-                addActionAlfAux(null);
-            }
-        });
-        
-        this.addRemButtonsAlfAux.getBRemove().addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ae) {
-                removeActionAlfAux();
-            }
-        });*/
+
     }
     
-  /*  private void removeActionAlf() {
+    private void removeActionAlf() {
       for(Object o : this.listAlf.removeItens())
           this.gui.removeSimbolo(
                 new Simbolo((Character)o), 0);            
@@ -188,7 +128,7 @@ public class CadAlfPost extends javax.swing.JPanel {
         this.listAlf.addItem(simbAlf.getNome());         
         this.gui.addSimbolo(simbAlf, 0);          
     }
-       
+       /*
    private void removeActionAlfAux() {
       for(Object o : this.listAlfAux.removeItens())
           this.gui.removeSimbolo(
@@ -218,14 +158,10 @@ public class CadAlfPost extends javax.swing.JPanel {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private br.uem.din.yandre.sctmf.view.components.AddRemButtonsPanel addRemButtonsAlf;
-    private br.uem.din.yandre.sctmf.view.components.AddRemButtonsPanel addRemButtonsAlfAux;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private br.uem.din.yandre.sctmf.view.components.LetterNumber letterNumber;
     private br.uem.din.yandre.sctmf.view.components.GenericJList listAlf;
-    private br.uem.din.yandre.sctmf.view.components.GenericJList listAlfAux;
     // End of variables declaration//GEN-END:variables
     
 }

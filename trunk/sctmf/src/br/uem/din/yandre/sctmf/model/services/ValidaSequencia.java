@@ -21,6 +21,7 @@ import br.uem.din.yandre.sctmf.model.pojo.MT;
 import br.uem.din.yandre.sctmf.model.pojo.Mealy;
 import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;
 import br.uem.din.yandre.sctmf.model.pojo.Moore;
+import br.uem.din.yandre.sctmf.model.pojo.Post;
 import br.uem.din.yandre.sctmf.model.pojo.RegraProducao;
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
 import br.uem.din.yandre.sctmf.model.pojo.SimboloString;
@@ -28,6 +29,7 @@ import br.uem.din.yandre.sctmf.model.pojo.Transicao;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoALL;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoAP;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoMT;
+import br.uem.din.yandre.sctmf.model.pojo.TransicaoPost;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.mt.util.ShowFitaMT;
 //import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.util.ShowFitaLingRegul;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.util.ShowFitaLingRegul;
@@ -38,6 +40,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 import javax.swing.JOptionPane;
@@ -75,6 +78,8 @@ public class ValidaSequencia implements Validacao {
             status = this.valida((Mealy) mf, sequencia);
         } else if (mf instanceof Moore) {
             status = this.valida((Moore) mf, sequencia);
+        } else if (mf instanceof Post) {
+            status = this.valida((Post) mf, sequencia);
         }
         this.sendMessage(status);
     }
@@ -1272,12 +1277,10 @@ public class ValidaSequencia implements Validacao {
         Estado estadoAtual = mealy.getEstadoInicial();
         //fita de saida
         List<Simbolo> fita = new ArrayList<Simbolo>();
-        System.out.println(sequencia);
         for (char c : sequencia.toCharArray()) {
             label:
             {
                 for (Transicao t : mealy.getTransicoes()) {
-                    System.out.println(t.getEstOri().getNome());
                     Estado e = t.getEstOri();
                     Simbolo s = t.getSimbolo();
                     if (estadoAtual.getNome().equals(e.getNome()) && c == (s.getNome())) {
@@ -1309,34 +1312,21 @@ public class ValidaSequencia implements Validacao {
     private boolean valida(Moore moore, String sequencia) {
         // Estado Inicial
         Estado estadoAtual = moore.getEstadoInicial();
-        System.out.println("moore saida  " + estadoAtual.getSaida().getNome());
         //fita de saida
         List<Simbolo> fita = new ArrayList<Simbolo>();
-        System.out.println(sequencia);
         for (char c : sequencia.toCharArray()) {
             label:
             {
                 for (Transicao t : moore.getTransicoes()) {
-                    System.out.println(t.getEstOri().getNome());
-                    System.out.println(t.getSimbolo().getNome());
-                    System.out.println(t.getEstDest().getNome());
                     Estado e = t.getEstOri();
                     Simbolo s = t.getSimbolo();
-                    
                     if (estadoAtual.getNome().equals(e.getNome()) && c == (s.getNome())) {
-                        System.out.println("AH TAh");
                         estadoAtual = t.getEstDest();
-                        System.out.println("saida " + estadoAtual.getSaida().getNome());
                         fita.add(estadoAtual.getSaida());
                         break label;
                     }
                 }
-                System.out.println(estadoAtual.getNome());
-
-                // caso nao exista nenhuma transicao que o leve ao proximo estado
-
             }
-
         }
 
         // Verifica se o Estado atual eh algum
@@ -1349,6 +1339,95 @@ public class ValidaSequencia implements Validacao {
         }
         ShowFitaLingRegul.getInstance().showFitaMT(fita);
         return false;
+
+    }
+
+    private boolean valida(Post post, String sequencia) {
+        // Estado Inicial
+        Estado estadoAtual = new Estado("Partida");
+        //System.out.println("seq " + sequencia);
+        //fita de saida
+        List<Character> fita = new ArrayList<Character>();
+        //Queue<Character> fila = new Queue<Character>();
+        for (int i = 0; i < sequencia.length(); i++) {
+            fita.add(sequencia.charAt(i));
+        }
+        System.out.println("fit " + fita);
+
+        //     for (TransicaoPost t : post.getTransicoes()) {
+        //       System.out.println(" " + t.getEstadoOrigem().getNome());
+        //     System.out.println(" " + t.getEstadoDestino().getNome());
+        //     System.out.println(" " + t.getSimbolo().getNome());
+        //}
+        // for (char c : sequencia.toCharArray()) {
+        while (true) {
+            label:
+            {
+
+                for (TransicaoPost t : post.getTransicoes()) {
+                    // System.out.println(" " + t.getEstadoOrigem().getNome());
+                    // System.out.println(" " + t.getEstadoDestino().getNome());
+                    // System.out.println(" " + t.getSimbolo().getNome());
+                    Estado e = t.getEstadoOrigem();
+                    if (estadoAtual.getNome().equals(e.getNome())) {
+                        //    System.out.println("entrei!! =D");
+                        if (e.getNome().contains("X <- X")) { //atribuicao
+                            System.out.println("atribuicao");
+                            fita.add(t.getSimbolo().getNome());
+                            System.out.println("f" + fita);
+                            estadoAtual = t.getEstadoDestino();
+                        } else if (e.getNome().contains("Ler")) { //leitura
+                            System.out.println("ler");
+                            for (TransicaoPost trans : post.getTransicoes()) {
+                                System.out.println("buaaaaaaaa");
+                                System.out.println(" " + trans.getEstadoOrigem().getNome());
+                                System.out.println(" " + trans.getEstadoDestino().getNome());
+                                System.out.println(" " + trans.getSimbolo().getNome());
+
+                                if (trans.getEstadoOrigem().equals(e)) {
+                                    System.out.println("unheeeeeeeeee");
+
+                                    Character c = (fita.size() > 0) ? fita.remove(0) : '!';
+
+                                    if (c == trans.getSimbolo().getNome()) {
+                                        System.out.println("caraio");
+                                        estadoAtual = trans.getEstadoDestino();
+                                        break;
+                                    } else {
+                                        System.out.println("porra");
+                                        fita.add(0, c);
+                                    }
+                                }
+                            }
+                            if (t.getEstadoOrigem().equals(estadoAtual)) {
+                                return false;
+                            }
+
+                        } else {
+                            estadoAtual = t.getEstadoDestino();
+                        }
+                        if (estadoAtual.getNome().contains("Aceita")) {
+                            System.out.println("aceita");
+                            return true;
+                        }
+                        if (estadoAtual.getNome().contains("Rejeita")) {
+                            System.out.println("rejeita");
+                            return false;
+                        }
+                        break label;
+                    } else {
+                        System.out.println("OI");
+                    }
+                }
+
+
+                // caso nao exista nenhuma transicao que o leve ao proximo estado
+
+            }
+
+        }
+
+        // return false;
 
     }
 }

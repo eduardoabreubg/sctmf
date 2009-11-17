@@ -79,7 +79,7 @@ public class GraphSceneImpl extends GraphScene.StringGraph {
 
         if (PostGUI.bEstadoPartida.isSelected()) {
             widget.setLabel("Partida");
-        } else if (PostGUI.bEstadoParada.isSelected()) {
+        } else if (PostGUI.bEstadoAceita.isSelected()) {
             widget.setLabel("Parada");
         } else if (PostGUI.bEstadoLer.isSelected()) {
             widget.setLabel("Ler");
