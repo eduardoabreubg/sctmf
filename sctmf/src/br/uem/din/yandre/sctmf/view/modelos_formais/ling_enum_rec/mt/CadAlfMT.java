@@ -3,7 +3,6 @@
  *
  * Created on 23 de Agosto de 2007, 08:37
  */
-
 package br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.mt;
 
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
@@ -18,47 +17,52 @@ import java.util.Set;
  * @author  rafael2009_00
  */
 public class CadAlfMT extends javax.swing.JPanel {
+
     MtGUI gui = null;
-    
+
     /** Creates new form CadAlfMT */
     public CadAlfMT(MtGUI gui) {
         this.gui = gui;
         initComponents();
         posInitComponents();
     }
-    
+
     Set<Simbolo> getSimbAfabeto() {
         Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
-        for(Object o : this.listAlf.getAllItens())
-            simbolos.add(new Simbolo((Character)o));
-            
+        for (Object o : this.listAlf.getAllItens()) {
+            simbolos.add(new Simbolo((Character) o));
+        }
+
         return simbolos;
     }
-    
+
     Set<Simbolo> getSimbAfabetoAux() {
         Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
-        for(Object o : this.listAlfAux.getAllItens())
-            simbolos.add(new Simbolo((Character)o));
-            
+        for (Object o : this.listAlfAux.getAllItens()) {
+            simbolos.add(new Simbolo((Character) o));
+        }
+
         return simbolos;
     }
-    
+
     void setSimbAfabeto(Collection<Simbolo> simbAlf) {
         this.listAlf.removeAllItens();
-        
-        for(Simbolo s : simbAlf)
-           // this.listAlf.addItem(s.getNome());
+
+        for (Simbolo s : simbAlf) // this.listAlf.addItem(s.getNome());
+        {
             this.addActionAlf(s);
+        }
     }
-    
+
     void setSimbAfabetoAux(Collection<Simbolo> simbAlfAux) {
         this.listAlfAux.removeAllItens();
-        
-        for(Simbolo s : simbAlfAux)
-            //this.listAlfAux.addItem(s.getNome());
+
+        for (Simbolo s : simbAlfAux) //this.listAlfAux.addItem(s.getNome());
+        {
             this.addActionAlfAux(s);
+        }
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -151,69 +155,77 @@ public class CadAlfMT extends javax.swing.JPanel {
         add(letterNumber, gridBagConstraints);
 
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void posInitComponents() {
         this.letterNumber.forceAllLowerCase(true);
-        
-        this.addRemButtonsAlf.getBAdd().addActionListener(new ActionListener(){
+
+        this.addRemButtonsAlf.getBAdd().addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent ae) {
                 addActionAlf(null);
             }
         });
-        
-        this.addRemButtonsAlf.getBRemove().addActionListener(new ActionListener(){
+
+        this.addRemButtonsAlf.getBRemove().addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent ae) {
                 removeActionAlf();
             }
         });
-        
-        this.addRemButtonsAlfAux.getBAdd().addActionListener(new ActionListener(){
+
+        this.addRemButtonsAlfAux.getBAdd().addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent ae) {
                 addActionAlfAux(null);
             }
         });
-        
-        this.addRemButtonsAlfAux.getBRemove().addActionListener(new ActionListener(){
+
+        this.addRemButtonsAlfAux.getBRemove().addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent ae) {
                 removeActionAlfAux();
             }
         });
     }
-    
+
     private void removeActionAlf() {
-      for(Object o : this.listAlf.removeItens())
-          this.gui.removeSimbolo(
-                new Simbolo((Character)o), 0);            
+        for (Object o : this.listAlf.removeItens()) {
+            this.gui.removeSimbolo(
+                    new Simbolo((Character) o), 0);
+        }
     }
-        
+
     private void addActionAlf(Simbolo simbAlf) {
         Character c = letterNumber.getValue();
-        
-        if(simbAlf==null)
+
+        if (simbAlf == null) {
             simbAlf = new Simbolo(
                     Character.toLowerCase(c));
-        
-        this.listAlf.addItem(simbAlf.getNome());         
-        this.gui.addSimbolo(simbAlf, 0);          
+        }
+
+        this.listAlf.addItem(simbAlf.getNome());
+        this.gui.addSimbolo(simbAlf, 0);
     }
-       
-   private void removeActionAlfAux() {
-      for(Object o : this.listAlfAux.removeItens())
-          this.gui.removeSimbolo(
-               new Simbolo((Character)o),1);                      
+
+    private void removeActionAlfAux() {
+        for (Object o : this.listAlfAux.removeItens()) {
+            this.gui.removeSimbolo(
+                    new Simbolo((Character) o), 1);
+        }
     }
-        
-    private void addActionAlfAux(Simbolo simbAlfAux) { 
+
+    private void addActionAlfAux(Simbolo simbAlfAux) {
         Character c = letterNumber.getValue();
-        
+
         if (!Character.isDigit(c)) {
-            if(simbAlfAux==null)
-            simbAlfAux = new Simbolo(
-                    Character.toUpperCase(this.letterNumber.getValue()));
-        
+            if (simbAlfAux == null) {
+                simbAlfAux = new Simbolo(
+                        Character.toUpperCase(this.letterNumber.getValue()));
+            }
+
             this.listAlfAux.addItem(simbAlfAux.getNome());
-            this.gui.addSimbolo(simbAlfAux,1);
-                                 
+            this.gui.addSimbolo(simbAlfAux, 1);
+
         } else {
             javax.swing.JOptionPane.showMessageDialog(
                     this,
@@ -223,7 +235,6 @@ public class CadAlfMT extends javax.swing.JPanel {
                     javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }
-    
     // Declaração de variáveis - não modifique//GEN-BEGIN:variables
     private br.uem.din.yandre.sctmf.view.components.AddRemButtonsPanel addRemButtonsAlf;
     private br.uem.din.yandre.sctmf.view.components.AddRemButtonsPanel addRemButtonsAlfAux;
@@ -235,5 +246,4 @@ public class CadAlfMT extends javax.swing.JPanel {
     private br.uem.din.yandre.sctmf.view.components.GenericJList listAlf;
     private br.uem.din.yandre.sctmf.view.components.GenericJList listAlfAux;
     // Fim da declaração de variáveis//GEN-END:variables
-    
 }

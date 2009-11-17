@@ -3,7 +3,6 @@
  *
  * Created on 3 de Maio de 2007, 09:47
  */
-
 package br.uem.din.yandre.sctmf.view.modelos_formais.ling_regul.afd;
 
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
@@ -14,21 +13,20 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-
 /**
  *
  * @author  rafael2009_00
  */
 public class CadAlfAFD extends javax.swing.JPanel {
-    
+
     /**
      * Creates new form CadAlfAFD
      */
     public CadAlfAFD() {
-        initComponents();   
+        initComponents();
         this.posInitComponents();
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -105,66 +103,69 @@ public class CadAlfAFD extends javax.swing.JPanel {
         add(pCadAlf);
 
     }// </editor-fold>//GEN-END:initComponents
-          
+
     public Collection<Simbolo> getSimbolos() {
         Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
-        Iterator<Object> i = 
+        Iterator<Object> i =
                 this.genericJList.getAllItens().iterator();
-        
-        while(i.hasNext()) 
-            simbolos.add(new Simbolo((Character)i.next())) ;
-        
-        return simbolos;            
+
+        while (i.hasNext()) {
+            simbolos.add(new Simbolo((Character) i.next()));
+        }
+
+        return simbolos;
     }
-    
-    public void addSimbolos(Collection<Simbolo> simbolos ) {
+
+    public void addSimbolos(Collection<Simbolo> simbolos) {
         // Remove os itens antigos da JList
         this.removeAction(this.genericJList.getAllItens());
-        
-        Iterator<Simbolo> i = simbolos.iterator();        
-        while(i.hasNext())
+
+        Iterator<Simbolo> i = simbolos.iterator();
+        while (i.hasNext()) {
             this.addAction(i.next().getNome());
-        
+        }
+
     }
-    
+
     private void posInitComponents() {
         //this.letterNumberCA.enableCbNumber(false);
         this.letterNumberCA.forceAllLowerCase(true);
-        
-        this.addRemoveButtons.getBAdd().addActionListener(new ActionListener(){
+
+        this.addRemoveButtons.getBAdd().addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent ae) {
                 addAction();
             }
         });
-        
-        this.addRemoveButtons.getBRemove().addActionListener(new ActionListener(){
+
+        this.addRemoveButtons.getBRemove().addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent ae) {
                 removeAction();
             }
         });
     }
-    
+
     private void removeAction() {
-        for(Object o : this.genericJList.removeItens())
-            this.letterNumberCA.addItem(o.toString().toUpperCase());  
-        
-    }
-    
-    private void removeAction(Collection<Object> objetosRemovidos) {
-        for(Object o : objetosRemovidos)
+        for (Object o : this.genericJList.removeItens()) {
             this.letterNumberCA.addItem(o.toString().toUpperCase());
-        
-        this.genericJList.removeAllItens();
-        
+        }
     }
-        
+
+    private void removeAction(Collection<Object> objetosRemovidos) {
+        for (Object o : objetosRemovidos) {
+            this.letterNumberCA.addItem(o.toString().toUpperCase());
+        }
+
+        this.genericJList.removeAllItens();
+
+    }
+
     private void addAction() {
-        Character item 
-                = this.genericJList.addItem(this.letterNumberCA.getValue());
+        Character item = this.genericJList.addItem(this.letterNumberCA.getValue());
         this.letterNumberCA.removeItem(item.toString().toUpperCase());
     }
-    
-    
+
     private void addAction(Character c) {
         c = this.genericJList.addItem(c);
         this.letterNumberCA.removeItem(c.toString().toUpperCase());
@@ -181,5 +182,4 @@ public class CadAlfAFD extends javax.swing.JPanel {
     private br.uem.din.yandre.sctmf.view.components.LetterNumber letterNumberCA;
     private javax.swing.JPanel pCadAlf;
     // Fim da declaração de variáveis//GEN-END:variables
-    
 }

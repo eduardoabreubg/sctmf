@@ -5,7 +5,7 @@
 package br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.post;
 
 import br.uem.din.yandre.sctmf.model.pojo.Estado;
-import br.uem.din.yandre.sctmf.model.pojo.TransicaoMP;
+import br.uem.din.yandre.sctmf.model.pojo.TransicaoPost;
 import org.netbeans.api.visual.layout.LayoutFactory;
 import org.netbeans.api.visual.widget.ConnectionWidget;
 import org.netbeans.api.visual.widget.LabelWidget;
@@ -23,13 +23,13 @@ public class MyConnectionWidget extends ConnectionWidget {
     }
     //private AssociacaoGui gui = new AssociacaoGui();
     private LabelWidget connectionLabel;
-    private TransicaoMP transicao;
+    private TransicaoPost transicao;
 
-    public TransicaoMP getTransicao() {
+    public TransicaoPost getTransicao() {
         return transicao;
     }
 
-    public void setTransicao(TransicaoMP transicao) {
+    public void setTransicao(TransicaoPost transicao) {
         this.transicao = transicao;
         loadState();
         connectionLabel.setLabel(transicao.getNome());
@@ -38,7 +38,7 @@ public class MyConnectionWidget extends ConnectionWidget {
     public MyConnectionWidget(CustomGraphScene scene, String nome) {
         super(scene);
         try {
-            transicao = new TransicaoMP();
+            transicao = new TransicaoPost();
             transicao.setNome(nome);
         } catch (Exception ex) {
             System.out.println(ex);

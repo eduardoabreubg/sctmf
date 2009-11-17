@@ -4,10 +4,12 @@
  */
 package br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.post;
 
+import br.uem.din.yandre.sctmf.model.pojo.Estado;
+import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
+import br.uem.din.yandre.sctmf.model.pojo.TransicaoPost;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import javax.swing.JOptionPane;
@@ -33,10 +35,8 @@ import org.netbeans.api.visual.widget.Widget;
 
 /**
  *
- * @author gustavo
- */// TODO: Descobrir como associar um nÃ³ com ele mesmo OK-> Se for nulo associa
-// TODO: Interface com propriedades dos widgets para mostrar na tabela
-// TODO: Integrar propriedades com meu modelo
+ * @author michelmenega
+ */
 public class CustomGraphScene extends GraphScene.StringGraph {
 
     private LayerWidget mainLayer;
@@ -48,28 +48,13 @@ public class CustomGraphScene extends GraphScene.StringGraph {
     private Router router;
     private WidgetAction connectAction;
     private SceneTool sceneTool;
-    private int contadorParada = 0;
+    private int contadorAceita = 0;
+    private int contadorRejeita = 0;
     private int contadorLer = 0;
+    PostGUI gui = null;
 
-    public SceneTool getSceneTool() {
-        return sceneTool;
-    }
-
-    public void doGridLayout() {
-        GridGraphLayout<String, String> graphLayout = new GridGraphLayout<String, String>();
-
-        SceneLayout sceneGraphLayout = LayoutFactory.createSceneGraphLayout(this, graphLayout);
-        sceneGraphLayout.invokeLayout();
-        validate();
-    }
-
-    public void setSceneTool(SceneTool sceneTool) {
-        setActiveTool(sceneTool.toString());
-        this.sceneTool = sceneTool;
-
-    }
-
-    public CustomGraphScene() {
+    public CustomGraphScene(PostGUI gui) {
+        this.gui = gui;
 
         mainLayer = new LayerWidget(this);
         addChild(mainLayer);
@@ -93,20 +78,43 @@ public class CustomGraphScene extends GraphScene.StringGraph {
 
     }
 
+    public SceneTool getSceneTool() {
+        return sceneTool;
+    }
+
+    public void doGridLayout() {
+        GridGraphLayout<String, String> graphLayout = new GridGraphLayout<String, String>();
+
+        SceneLayout sceneGraphLayout = LayoutFactory.createSceneGraphLayout(this, graphLayout);
+        sceneGraphLayout.invokeLayout();
+        validate();
+    }
+
+    public void setSceneTool(SceneTool sceneTool) {
+        setActiveTool(sceneTool.toString());
+        this.sceneTool = sceneTool;
+
+    }
+
     public Widget criarNodo() {
-        Widget newNode = null;
+        String nome = null;
+
         if (PostGUI.bEstadoPartida.isSelected()) {
-            newNode = addNode("Partida");
+            nome = "Partida";
             PostGUI.bEstadoPartida.setEnabled(false);
-            PostGUI.bEstadoParada.setSelected(true);
-        } else if (PostGUI.bEstadoParada.isSelected()) {
-            newNode = addNode("Parada " + ++contadorParada);
+            PostGUI.bEstadoAceita.setSelected(true);
+        } else if (PostGUI.bEstadoAceita.isSelected()) {
+            nome = "Aceita " + ++contadorAceita;
+        } else if (PostGUI.bEstadoRejeita.isSelected()) {
+            nome = "Rejeita " + ++contadorRejeita;
         } else if (PostGUI.bEstadoLer.isSelected()) {
-            newNode = addNode("X <- Ler(X) " + ++contadorLer);
+            nome = "X <- Ler(X) " + ++contadorLer;
         } else if (PostGUI.bEstadoAtribuicao.isSelected()) {
             String concatena = JOptionPane.showInputDialog("Digite o Simbolo a ser concatenado a Direita de X");
-            newNode = addNode("X <- X" + concatena.charAt(0));
+            nome = "X <- X" + concatena.charAt(0);
         }
+        gui.addEstado(new Estado(nome));
+        Widget newNode = addNode(nome);
         return newNode;
     }
 
@@ -119,11 +127,27 @@ public class CustomGraphScene extends GraphScene.StringGraph {
         addEdge(name);
         setEdgeSource(name, source);
         setEdgeTarget(name, target);
+        if (source.contains("X <- X")) {
+            gui.addTransicao(new TransicaoPost(new Estado(source), new Estado(target), new Simbolo(source.charAt(source.length() - 1))));
+        } else if (source.contains("Ler")) {
+            name = name.replaceAll(" ", "");
+            if ((name.length() > 1) && name.contains(",")) {
+                String[] simbolo = name.split(",");
+                for (String s : simbolo) {
+                    gui.addTransicao(new TransicaoPost(new Estado(source), new Estado(target), new Simbolo(s.charAt(0))));
+                }
+            } else {
+                gui.addTransicao(new TransicaoPost(new Estado(source), new Estado(target), new Simbolo(name.charAt(0))));
+            }
+        } else {
+            gui.addTransicao(new TransicaoPost(new Estado(source), new Estado(target), new Simbolo(' ')));
+        }
+
         return name;
     }
 
     public String criarTransicao(String source, String target) {
-        if (source.contains("Ler")){
+        if (source.contains("Ler")) {
             String transicao = JOptionPane.showInputDialog("Digite o Simbolo(s) da transição. Utilize virgula para separar.");
             return criarTransicao(source, target, transicao);
         }
@@ -235,17 +259,6 @@ public class CustomGraphScene extends GraphScene.StringGraph {
     return generateNewNodeName();
     }
     }*/
-    private int edgeCount = 0;
-
-    public String generateNewEdgeName() {
-        edgeCount++;
-        String nome = "Transicao" + edgeCount;
-        if (findWidget(nome) == null) {
-            return nome;
-        } else {
-            return generateNewEdgeName();
-        }
-    }
 
     public void deleteSelectedWidgets() {
         Set widgets = getSelectedObjects();
@@ -304,7 +317,7 @@ public class CustomGraphScene extends GraphScene.StringGraph {
             if (sourceWidget == null || targetWidget == null) {
                 return;
             }
-            if((!source.contains("Parada")) && (!target.equals("Partida"))){
+            if ((!source.contains("Aceita")) && (!source.contains("Rejeita")) && (!target.equals("Partida"))) {
                 criarTransicao(source, target);
             }
 
