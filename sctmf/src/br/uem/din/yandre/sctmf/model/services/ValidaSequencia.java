@@ -1387,9 +1387,10 @@ public class ValidaSequencia implements Validacao {
                                 if (trans.getEstadoOrigem().equals(e)) {
                                     System.out.println("unheeeeeeeeee");
 
-                                    Character c = (fita.size() > 0) ? fita.remove(0) : '!';
-
-                                    if (c == trans.getSimbolo().getNome()) {
+                                    Character c = (fita.size() > 0) ? fita.remove(0) : '\u03BB';
+                                    System.out.println("\n"+ Character.getNumericValue(c));
+                                    System.out.println("\n"+ Character.getNumericValue(trans.getSimbolo().getNome()));
+                                    if (Character.getNumericValue(c) == Character.getNumericValue(trans.getSimbolo().getNome())) {
                                         System.out.println("caraio");
                                         estadoAtual = trans.getEstadoDestino();
                                         break;
@@ -1397,6 +1398,7 @@ public class ValidaSequencia implements Validacao {
                                         System.out.println("porra");
                                         fita.add(0, c);
                                     }
+
                                 }
                             }
                             if (t.getEstadoOrigem().equals(estadoAtual)) {
@@ -1415,19 +1417,18 @@ public class ValidaSequencia implements Validacao {
                             return false;
                         }
                         break label;
-                    } else {
-                        System.out.println("OI");
+
                     }
+
+
+                    // caso nao exista nenhuma transicao que o leve ao proximo estado
+
                 }
-
-
-                // caso nao exista nenhuma transicao que o leve ao proximo estado
 
             }
 
+            // return false;
+
         }
-
-        // return false;
-
     }
 }

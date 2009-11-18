@@ -29,6 +29,12 @@ public class Post extends ModeloFormal {
         this.alfabeto = alfabeto;
     }
 
+        public void addSimbolo(Simbolo s){
+        if(!this.alfabeto.contains(s))
+            this.alfabeto.add(s);
+    }
+
+
     public Set<Estado> getEstados() {
         return estados;
     }
@@ -37,8 +43,18 @@ public class Post extends ModeloFormal {
         this.estados = estados;
     }
 
+        public void addEstado(Estado e){
+        if(!this.estados.contains(e))
+            this.estados.add(e);
+    }
+
     public Set<TransicaoPost> getTransicoes() {
         return transicoes;
+    }
+
+    public void addTransicao(TransicaoPost t){
+        if(!this.transicoes.contains(t))
+            this.transicoes.add(t);
     }
 
     public void setTransicoes(Set<TransicaoPost> transicoes) {

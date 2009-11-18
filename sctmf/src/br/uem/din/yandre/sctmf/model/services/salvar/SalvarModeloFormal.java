@@ -20,6 +20,7 @@ import br.uem.din.yandre.sctmf.model.pojo.MT;
 import br.uem.din.yandre.sctmf.model.pojo.Mealy;
 import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;
 import br.uem.din.yandre.sctmf.model.pojo.Moore;
+import br.uem.din.yandre.sctmf.model.pojo.Post;
 import br.uem.din.yandre.sctmf.model.pojo.RegraProducao;
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
 import br.uem.din.yandre.sctmf.model.pojo.SimboloString;
@@ -27,6 +28,7 @@ import br.uem.din.yandre.sctmf.model.pojo.Transicao;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoALL;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoAP;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoMT;
+import br.uem.din.yandre.sctmf.model.pojo.TransicaoPost;
 import java.io.File;
 import java.io.FileWriter;
 
@@ -68,6 +70,8 @@ public class SalvarModeloFormal implements Salvar {
             this.salvarMealy((Mealy) mf);
         } else if (mf instanceof Moore) {
             this.salvarMoore((Moore) mf);
+        } else if (mf instanceof Post) {
+            this.salvarPost((Post) mf);
         }
 
     }
@@ -349,7 +353,11 @@ public class SalvarModeloFormal implements Salvar {
         }
 
         for (TransicaoMT t : mt.getTransicoes()) {
-            sb.append("\nT:").append(t.getEstAtual().getNome()).append("-").append(t.getSimLido().getNome()).append("-").append(t.getEstDestino().getNome()).append("-").append(t.getSimbEscrito().getNome()).append("-").append(t.getDirecao());
+            sb.append("\nT:").append(t.getEstAtual().getNome()).
+                    append("-").append(t.getSimLido().getNome()).
+                    append("-").append(t.getEstDestino().getNome()).
+                    append("-").append(t.getSimbEscrito().getNome()).
+                    append("-").append(t.getDirecao());
         }
 
         try {
@@ -393,7 +401,12 @@ public class SalvarModeloFormal implements Salvar {
         }
 
         for (TransicaoALL t : all.getTransicoes()) {
-            sb.append("\nT:").append(t.getEstAtual().getNome()).append("-").append(t.getSimLido().getNome()).append("-").append(t.getEstDestino().getNome()).append("-").append(t.getSimbEscrito().getNome()).append("-").append(t.getDirecao());
+            sb.append("\nT:").
+                    append(t.getEstAtual().getNome()).
+                    append("-").append(t.getSimLido().getNome()).
+                    append("-").append(t.getEstDestino().getNome()).
+                    append("-").append(t.getSimbEscrito().getNome()).
+                    append("-").append(t.getDirecao());
         }
 
         try {
@@ -501,6 +514,37 @@ public class SalvarModeloFormal implements Salvar {
             this.showOkMessage("Moore");
         } catch (Exception ioex) {
             throw new SalvarException("Erro ao Salvar Moore");
+        }
+    }
+
+    private void salvarPost(Post post) throws SalvarException {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("E:");  // Add Simbolos
+        for (Simbolo s : post.getAlfabeto()) {
+            sb.append(s.getNome() + "-");
+        }
+
+        sb.append("\nS:");
+        for (Estado e : post.getEstados()) {
+            sb.append(e.getNome() + "-");
+        }
+
+        for (TransicaoPost t : post.getTransicoes()) {
+            sb.append("\nT:" +
+                    t.getEstadoOrigem().getNome() + "-" +
+                    t.getSimbolo().getNome() + "-" +
+                    t.getEstadoDestino().getNome());
+        }
+
+        try {
+            this.writeInFile(
+                    new File(
+                    this.file.getPath() + ".post"), sb.toString());
+
+            this.showOkMessage("Post");
+        } catch (Exception ioex) {
+            throw new SalvarException("Erro ao Salvar Post");
         }
     }
 
