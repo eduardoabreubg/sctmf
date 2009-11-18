@@ -1,4 +1,4 @@
-package br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.post;
+package br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.post.util;
 
 import br.uem.din.yandre.sctmf.model.pojo.Estado;
 import java.awt.Color;

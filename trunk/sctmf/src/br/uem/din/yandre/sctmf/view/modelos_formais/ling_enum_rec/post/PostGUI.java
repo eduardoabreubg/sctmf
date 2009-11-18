@@ -1,5 +1,9 @@
 package br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.post;
 
+import br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.post.util.CustomGraphSceneSelectionListener;
+import br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.post.util.MostravelNaTela;
+import br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.post.util.CustomGraphScene;
+import br.uem.din.yandre.sctmf.view.modelos_formais.ling_enum_rec.post.util.SceneTool;
 import br.uem.din.yandre.sctmf.model.pojo.Estado;
 import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;
 import br.uem.din.yandre.sctmf.model.pojo.Post;
@@ -8,6 +12,7 @@ import br.uem.din.yandre.sctmf.model.pojo.TransicaoPost;
 import br.uem.din.yandre.sctmf.view.modelos_formais.ModeloFormalGUI;
 
 import java.awt.BorderLayout;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import javax.swing.JPanel;
@@ -26,6 +31,8 @@ public class PostGUI extends ModeloFormalGUI implements CustomGraphSceneSelectio
     private Set<Simbolo> simbolos = new LinkedHashSet<Simbolo>();
     private Set<TransicaoPost> transicoes = new LinkedHashSet<TransicaoPost>();
     private Set<Estado> estados = new LinkedHashSet<Estado>();
+    private LinkedHashMap<String, SimbolosTransicaoLer> listaTransicaoLer = new LinkedHashMap<String, SimbolosTransicaoLer>();
+    private SimbolosAtribuicao sa = new SimbolosAtribuicao(null, true, this);
     CustomGraphScene scene;
     JScrollPane scrollPane = new JScrollPane();
 
@@ -33,15 +40,13 @@ public class PostGUI extends ModeloFormalGUI implements CustomGraphSceneSelectio
     public PostGUI() {
         initComponents();
         initScene();
-        scene.addSelectionListener(this);
+       // scene.addSelectionListener(this);
         bSelecao.setSelected(true);
     }
 
     private void initScene() {
         CustomGraphScene s = new CustomGraphScene(this);
         scene = s;
-//        Widget oi = s.addNode("oi");
-//        oi.setPreferredLocation(new Point(100, 100));
         scrollPane.setViewportView(scene.createView());
         s.setSceneTool(SceneTool.SELECAO);
         pDiagrama.add(scrollPane, BorderLayout.CENTER);
@@ -83,7 +88,6 @@ public class PostGUI extends ModeloFormalGUI implements CustomGraphSceneSelectio
         bConexao = new javax.swing.JToggleButton();
         bSelecao = new javax.swing.JToggleButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
-        bFix = new javax.swing.JButton();
         pValSeq = new javax.swing.JPanel();
 
         setLayout(new java.awt.BorderLayout());
@@ -183,17 +187,6 @@ public class PostGUI extends ModeloFormalGUI implements CustomGraphSceneSelectio
         jToolBar1.add(bSelecao);
         jToolBar1.add(jSeparator2);
 
-        bFix.setText("Fix");
-        bFix.setFocusable(false);
-        bFix.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        bFix.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        bFix.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bFixActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(bFix);
-
         pDiagrama.add(jToolBar1, java.awt.BorderLayout.PAGE_START);
 
         tpPost.addTab("Diagrama", pDiagrama);
@@ -249,10 +242,6 @@ public class PostGUI extends ModeloFormalGUI implements CustomGraphSceneSelectio
         }
     }//GEN-LAST:event_bEstadoAtribuicaoActionPerformed
 
-    private void bFixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFixActionPerformed
-        scene.doGridLayout();
-    }//GEN-LAST:event_bFixActionPerformed
-
     private void bEstadoRejeitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEstadoRejeitaActionPerformed
         if (bEstadoRejeita.isSelected()) {
             scene.setSceneTool(SceneTool.INSERCAO);
@@ -273,37 +262,40 @@ public class PostGUI extends ModeloFormalGUI implements CustomGraphSceneSelectio
         return post;
     }
 
-    void addSimbolo(Simbolo simbolo, int cod) {
+    public void addSimbolo(Simbolo simbolo, int cod) {
         if (!this.simbolos.contains(simbolo)) {
             this.simbolos.add(simbolo);
+            // this.stl.observer(simbolo,true);
         }
     }
 
-    void removeSimbolo(Simbolo simbolo, int cod) {
+    public void removeSimbolo(Simbolo simbolo, int cod) {
         if (this.simbolos.contains(simbolo)) {
             this.simbolos.remove(simbolo);
+            //this.stl.observer(simbolo,false);
         }
     }
 
-    void addTransicao(TransicaoPost t) {
-
+    public void addTransicao(TransicaoPost t) {
+        if (!this.transicoes.contains(t)) {
             this.transicoes.add(t);
+        }
 
     }
 
-    void removeTransicao(TransicaoPost t) {
-
+    public void removeTransicao(TransicaoPost t) {
+        if (this.transicoes.contains(t)) {
             this.transicoes.remove(t);
-
+        }
     }
 
-    void addEstado(Estado e) {
+    public void addEstado(Estado e) {
         if (!this.estados.contains(e)) {
             this.estados.add(e);
         }
     }
 
-    void removeEstado(Estado e) {
+    public void removeEstado(Estado e) {
         if (!this.estados.contains(e)) {
             this.estados.add(e);
         }
@@ -332,14 +324,22 @@ public class PostGUI extends ModeloFormalGUI implements CustomGraphSceneSelectio
     public void setEstados(Set<Estado> estados) {
         this.estados = estados;
     }
-    /*
-    void addEstado(Estado estado) {
-    this.cadFTrans.observer(estado, true);
+
+    public String showMySimbolosTransicaoLer(String estado) {
+        if (!listaTransicaoLer.containsKey(estado)) {
+            listaTransicaoLer.put(estado, new SimbolosTransicaoLer(null, true, this));
+            listaTransicaoLer.get(estado).setVisible(true);
+        } else {
+            listaTransicaoLer.get(estado).setVisible(true);
+        }
+        return listaTransicaoLer.get(estado).getRetorno();
     }
-    
-    void removeEstado(Estado estado) {
-    this.cadFTrans.observer(estado, false);
-    }    */
+
+    public Character showMySimbolosEstadoAtribuicao() {
+        sa.setVisible(true);
+        return sa.getRetorno();
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JToggleButton bConexao;
     public static javax.swing.JToggleButton bEstadoAceita;
@@ -347,7 +347,6 @@ public class PostGUI extends ModeloFormalGUI implements CustomGraphSceneSelectio
     public static javax.swing.JToggleButton bEstadoLer;
     public static javax.swing.JToggleButton bEstadoPartida;
     public static javax.swing.JToggleButton bEstadoRejeita;
-    private javax.swing.JButton bFix;
     public static javax.swing.JToggleButton bSelecao;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JToolBar.Separator jSeparator1;
@@ -358,4 +357,5 @@ public class PostGUI extends ModeloFormalGUI implements CustomGraphSceneSelectio
     private javax.swing.JPanel pValSeq;
     private javax.swing.JTabbedPane tpPost;
     // End of variables declaration//GEN-END:variables
+
     }

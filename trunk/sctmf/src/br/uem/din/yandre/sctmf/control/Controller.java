@@ -31,7 +31,7 @@ public class Controller {
     private Salvar save = new SalvarModeloFormal();
     private MainWindow gui = null;
     private final String GUI_TITLE = 
-            "* SCTMF - Software de Criação e Teste de Modelos Formais * v2.0";
+            "* SCTMF - Software de Criação e Teste de Modelos Formais * v1.5";
     
     /** Creates a new instance of Controller */
     public Controller() {
