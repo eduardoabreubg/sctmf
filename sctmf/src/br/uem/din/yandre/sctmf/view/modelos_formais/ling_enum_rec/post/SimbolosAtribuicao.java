@@ -127,8 +127,9 @@ public class SimbolosAtribuicao extends javax.swing.JDialog {
     @Override
     public void setVisible(boolean b) {
         for (Simbolo s : post.getSimbolos()) {
-            if ((!this.simbolos.contains(s))) {
+            if (!this.simbolos.contains(s)) {
                 this.cbSimbolos.addItem(s.getNome());
+                this.simbolos.add(s);
             }
         }
         super.setVisible(b);

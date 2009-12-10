@@ -10,6 +10,7 @@ import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoPost;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.util.Set;
 import org.netbeans.api.visual.action.ActionFactory;
 import org.netbeans.api.visual.action.ConnectProvider;
 import org.netbeans.api.visual.action.ConnectorState;
@@ -18,7 +19,9 @@ import org.netbeans.api.visual.anchor.AnchorFactory;
 import org.netbeans.api.visual.anchor.AnchorShape;
 import org.netbeans.api.visual.anchor.PointShape;
 import org.netbeans.api.visual.graph.GraphScene;
+import org.netbeans.api.visual.graph.layout.GridGraphLayout;
 import org.netbeans.api.visual.layout.LayoutFactory;
+import org.netbeans.api.visual.layout.SceneLayout;
 import org.netbeans.api.visual.router.Router;
 import org.netbeans.api.visual.router.RouterFactory;
 import org.netbeans.api.visual.widget.ConnectionWidget;
@@ -47,10 +50,11 @@ public class CustomGraphScene extends GraphScene.StringGraph {
     private int contadorLer = 0;
     private int contadorAtr = 0;
     private PostGUI gui = null;
+    private SceneLayout sceneLayout;
 
     public CustomGraphScene(PostGUI gui) {
         this.gui = gui;
-        
+
 
         mainLayer = new LayerWidget(this);
         addChild(mainLayer);
@@ -70,8 +74,7 @@ public class CustomGraphScene extends GraphScene.StringGraph {
         getActions(sceneTool.INSERCAO.toString()).addAction(new InsercaoWidgetAction());
 
         connectAction = ActionFactory.createConnectAction(connectionLayer, new SceneConnectProvider());
-        router = RouterFactory.createFreeRouter();
-
+        router = RouterFactory.createDirectRouter();
     }
 
     public SceneTool getSceneTool() {
@@ -125,13 +128,14 @@ public class CustomGraphScene extends GraphScene.StringGraph {
         } else {
             gui.addTransicao(new TransicaoPost(new Estado(source), new Estado(target), new Simbolo(' ')));
         }
-        
+
         return name;
     }
 
     public String criarTransicao(String source, String target) {
         if (source.contains("Ler")) {
             String a = this.gui.showMySimbolosTransicaoLer(source);
+            
             return criarTransicao(source, target, a);
         }
         return criarTransicao(source, target, "");
@@ -147,7 +151,7 @@ public class CustomGraphScene extends GraphScene.StringGraph {
         label.getActions(selecaoTool).addAction(moveAction);
         label.getActions(selecaoTool).addAction(createObjectHoverAction());
         label.getActions(selecaoTool).addAction(createSelectAction());
-      //  label.getActions(selecaoTool).addAction(selectAction);
+        //  label.getActions(selecaoTool).addAction(selectAction);
         label.createActions(SceneTool.ASSOCIACAO.toString());
         label.getActions(SceneTool.ASSOCIACAO.toString()).addAction(connectAction);
 
@@ -160,6 +164,7 @@ public class CustomGraphScene extends GraphScene.StringGraph {
         ConnectionWidget connection = new MyConnectionWidget(this, edge);
         connection.setTargetAnchorShape(AnchorShape.TRIANGLE_FILLED);
 
+
         connection.setPaintControlPoints(true);
         connection.setControlPointShape(PointShape.SQUARE_FILLED_SMALL);
         connection.setRouter(router);
@@ -171,7 +176,7 @@ public class CustomGraphScene extends GraphScene.StringGraph {
 
         connection.getActions(selecaoTool).addAction(createObjectHoverAction());
         connection.getActions(selecaoTool).addAction(createSelectAction());
-      //  connection.getActions(selecaoTool).addAction(selectAction);
+        //  connection.getActions(selecaoTool).addAction(selectAction);
         connectionLayer.addChild(connection);
 
         return connection;
@@ -197,8 +202,13 @@ public class CustomGraphScene extends GraphScene.StringGraph {
 
     }
 
-
-
+    public void deleteSelectedWidgets() {
+        Set widgets = getSelectedObjects();
+        for (Object w : widgets) {
+            removeNodeWithEdges((String)w);
+            this.gui.removeTransicao((String) w);
+        }
+    }
 ////////////////
 //inner classes/
 ////////////////
@@ -257,7 +267,6 @@ public class CustomGraphScene extends GraphScene.StringGraph {
             return State.REJECTED;
         }
     }
- 
 }
 
 

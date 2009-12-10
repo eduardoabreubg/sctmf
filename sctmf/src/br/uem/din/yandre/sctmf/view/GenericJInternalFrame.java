@@ -43,7 +43,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        pSalvarAbrir = new javax.swing.JPanel();
         bOpen = new javax.swing.JButton();
         bSave = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -64,7 +64,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
         jLabel4.setPreferredSize(new java.awt.Dimension(15, 0));
         getContentPane().add(jLabel4, java.awt.BorderLayout.WEST);
 
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
+        pSalvarAbrir.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 10, 5));
 
         bOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Open24.gif"))); // NOI18N
         bOpen.setToolTipText("Abir Modelo");
@@ -75,7 +75,7 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
                 bOpenActionPerformed(evt);
             }
         });
-        jPanel1.add(bOpen);
+        pSalvarAbrir.add(bOpen);
 
         bSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/toolbarButtonGraphics/general/Save24.gif"))); // NOI18N
         bSave.setToolTipText("Salvar Modelo");
@@ -86,12 +86,12 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
                 bSaveActionPerformed(evt);
             }
         });
-        jPanel1.add(bSave);
+        pSalvarAbrir.add(bSave);
 
         jLabel1.setPreferredSize(new java.awt.Dimension(15, 0));
-        jPanel1.add(jLabel1);
+        pSalvarAbrir.add(jLabel1);
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.NORTH);
+        getContentPane().add(pSalvarAbrir, java.awt.BorderLayout.NORTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -183,6 +183,6 @@ public class GenericJInternalFrame extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel pSalvarAbrir;
     // End of variables declaration//GEN-END:variables
 }

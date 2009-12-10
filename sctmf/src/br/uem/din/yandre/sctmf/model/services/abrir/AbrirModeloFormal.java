@@ -22,7 +22,7 @@ import br.uem.din.yandre.sctmf.model.pojo.MT;
 import br.uem.din.yandre.sctmf.model.pojo.Mealy;
 import br.uem.din.yandre.sctmf.model.pojo.ModeloFormal;
 import br.uem.din.yandre.sctmf.model.pojo.Moore;
-import br.uem.din.yandre.sctmf.model.pojo.Post;
+
 import br.uem.din.yandre.sctmf.model.pojo.RegraProducao;
 import br.uem.din.yandre.sctmf.model.pojo.Simbolo;
 import br.uem.din.yandre.sctmf.model.pojo.SimboloString;
@@ -30,7 +30,7 @@ import br.uem.din.yandre.sctmf.model.pojo.Transicao;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoALL;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoAP;
 import br.uem.din.yandre.sctmf.model.pojo.TransicaoMT;
-import br.uem.din.yandre.sctmf.model.pojo.TransicaoPost;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -79,8 +79,6 @@ public class AbrirModeloFormal implements Abrir {
             return this.abrirMealy(arquivo);
         } else if (extencionFile.equalsIgnoreCase("moore")) {
             return this.abrirMoore(arquivo);
-        } else if (extencionFile.equalsIgnoreCase("post")) {
-            return this.abrirPost(arquivo);
         } else {
             return null;
         }
@@ -549,7 +547,8 @@ public class AbrirModeloFormal implements Abrir {
                         t.setEstOri(new Estado(str[0]));
                         t.setSimbolo(new Simbolo(str[1].charAt(0)));
                         t.setEstDest(new Estado(str[2]));
-                        t.setSimboloSaida(new Simbolo(str[3].charAt(0)));
+                        char c = str[3].charAt(0);
+                        t.setSimboloSaida(new Simbolo(c == '?' ? '\u03BB' : c));
 
                         mealy.addTransicao(t);
 
@@ -596,6 +595,7 @@ public class AbrirModeloFormal implements Abrir {
             while (br.ready()) {
                 String line = br.readLine();
                 if (line.length() > 2) {
+
                     if (line.startsWith("I")) {
                         moore.setEstadoInicial(
                                 new Estado(line.substring(2)));
@@ -630,8 +630,8 @@ public class AbrirModeloFormal implements Abrir {
                         String str[] = line.split("-");
 
                         Estado e = new Estado(str[0]);
-                        e.setSaida(new Simbolo(str[1].charAt(0)));
-
+                        char c = str[1].charAt(0);
+                        e.setSaida(new Simbolo(c == '?' ? '\u03BB' : c));
                         moore.addEstado(e);
 
                     } else if (line.startsWith("F")) {
@@ -653,50 +653,4 @@ public class AbrirModeloFormal implements Abrir {
         return moore;
     }
 
-    private Post abrirPost(File arquivo) throws AbrirException {
-        Post post = new Post();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(arquivo));
-            while (br.ready()) {
-                String line = br.readLine();
-                if (line.length() > 2) {
-                    if (line.startsWith("T")) {
-                        line = line.substring(2);
-                        String str[] = line.split("-");
-
-                        TransicaoPost t = new TransicaoPost();
-                        t.setEstadoOrigem(new Estado(str[0]));
-                        t.setSimbolo(new Simbolo(str[1].charAt(0)));
-                        t.setEstadoDestino(new Estado(str[2]));
-
-                        post.addTransicao(t);
-
-                        continue;
-
-                    } else if (line.startsWith("E")) {
-                        for (String s : line.substring(2, line.length() - 1).split("-")) {
-                            post.addSimbolo(new Simbolo(s.charAt(0)));
-                        }
-
-
-                    } else if (line.startsWith("S")) {
-                        for (String e : line.substring(2, line.length() - 1).split("-")) {
-                            post.addEstado(new Estado(e));
-                        }
-
-                    }
-
-
-                }
-
-            }//end while
-
-            br.close();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            throw new AbrirException("Erro Ao abrir modelo Formal");
-        }
-
-        return post;
-    }
 }

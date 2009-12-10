@@ -70,7 +70,7 @@ public class ShowFitaLingRegul extends javax.swing.JDialog {
         pLabels = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Fita da Máquina de Turing");
+        setTitle("Fita de Saída");
         getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
         pane.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));

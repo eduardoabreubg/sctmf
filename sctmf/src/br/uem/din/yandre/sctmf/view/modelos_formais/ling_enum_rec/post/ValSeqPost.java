@@ -39,7 +39,7 @@ public class ValSeqPost extends javax.swing.JPanel {
         }
         sb = this.validaSequenciaGUI.formataSb(sb);
 
-        sb.append("Q = {"); // Add Estados
+        sb.append("D = {"); // Add Estados
         for (Estado e : post.getEstados()) {
             sb.append(e.getNome() + "\n, ");
         }

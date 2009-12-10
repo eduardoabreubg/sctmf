@@ -46,4 +46,10 @@ public class Simbolo {
         hash = 59 * hash + (this.nome != null ? this.nome.hashCode() : 0);
         return hash;
     }
+
+    public int compareTo(Character anotherCharacter) {
+        return nome.compareTo(anotherCharacter);
+    }
+
+    
 }
