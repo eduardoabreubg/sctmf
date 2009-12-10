@@ -30,7 +30,7 @@ public class ValSeqMEALY extends javax.swing.JPanel {
     void observer(Mealy mealy) {
         this.validaSequenciaGUI.clearArea();
         this.validaSequenciaGUI.setTextAInf(
-                "M = \u03a3, Q, \u03B4, q\u2080, F, \u0394 \n");
+                "M = \u03a3, S, \u03B4, S\u2080, F, \u0394 \n");
 
         StringBuffer sb = new StringBuffer();
         sb.append("\u03a3 = {");  // Add Simbolos
@@ -39,14 +39,14 @@ public class ValSeqMEALY extends javax.swing.JPanel {
         }
         sb = this.validaSequenciaGUI.formataSb(sb);
 
-        sb.append("Q = {"); // Add Estados
+        sb.append("S = {"); // Add Estados
         for (Estado e : mealy.getEstados()) {
             sb.append(e.getNome() + ", ");
         }
         sb = this.validaSequenciaGUI.formataSb(sb);
 
         Estado aux = mealy.getEstadoInicial(); // Estado Inicial
-        sb.append("Q\u2080 = ");
+        sb.append("S\u2080 = ");
         if (aux != null) {
             sb.append(aux.getNome());
         }

@@ -118,6 +118,10 @@ public class CadEstado extends javax.swing.JPanel
 
         jLabel53.setPreferredSize(new java.awt.Dimension(40, 0));
         jPanel30.add(jLabel53, java.awt.BorderLayout.EAST);
+
+        genericJList.setMaximumSize(new java.awt.Dimension(258, 100));
+        genericJList.setMinimumSize(new java.awt.Dimension(258, 100));
+        genericJList.setPreferredSize(new java.awt.Dimension(258, 100));
         jPanel30.add(genericJList, java.awt.BorderLayout.CENTER);
 
         add(jPanel30);
@@ -152,10 +156,18 @@ public class CadEstado extends javax.swing.JPanel
 
     public void remEstados(Set<Estado> estados) {
         estados = new LinkedHashSet<Estado>();
+        Estado e = null;
         for (Object o : genericJList.removeItens()) {
-            estados.add(new Estado(o.toString()));
-
-
+            if (pSimbSaida.isVisible()) {//se for moore, entao tem q quebrar o nome dos estados
+                String[] nome = o.toString().split(" ");
+                e = new Estado(nome[0]);
+                e.setSaida(new Simbolo(nome[2].charAt(0)));
+            }else{
+                e = new Estado(o.toString());
+            }
+            
+            estados.add(e);
+            this.estados.remove(e.getNome());
         }
         this.component.remEstados(estados);
         //this.estados.removeAll(estados);
@@ -180,7 +192,6 @@ public class CadEstado extends javax.swing.JPanel
             }
             this.estados.add(estado.getNome());
         }
-
     }
 
     public void removeAllItens() {
@@ -191,10 +202,8 @@ public class CadEstado extends javax.swing.JPanel
         Set<Estado> estados = new LinkedHashSet<Estado>();
         if (pSimbSaida.isVisible()) {
             for (Object o : this.genericJList.getAllItens()) {
-                String[] s = o.toString().split(" ");
-                System.out.println(" " + s[0]);
+                String[] s = o.toString().split(" ");   
                 Estado e = CadFTransMOORE.getEstadoCompleto(s[0]);
-                System.out.println("e " + e.getSaida().getNome());
                 estados.add(e);
             }
 

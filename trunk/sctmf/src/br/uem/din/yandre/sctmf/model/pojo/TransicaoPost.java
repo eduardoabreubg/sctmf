@@ -67,5 +67,38 @@ public class TransicaoPost {
         this.simbolo = simbolo;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TransicaoPost other = (TransicaoPost) obj;
+        if ((this.nome == null) ? (other.nome != null) : !this.nome.equals(other.nome)) {
+            return false;
+        }
+        if (this.estadoOrigem != other.estadoOrigem && (this.estadoOrigem == null || !this.estadoOrigem.equals(other.estadoOrigem))) {
+            return false;
+        }
+        if (this.estadoDestino != other.estadoDestino && (this.estadoDestino == null || !this.estadoDestino.equals(other.estadoDestino))) {
+            return false;
+        }
+        if (this.simbolo != other.simbolo && (this.simbolo == null || !this.simbolo.equals(other.simbolo))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 23 * hash + (this.nome != null ? this.nome.hashCode() : 0);
+        hash = 23 * hash + (this.estadoOrigem != null ? this.estadoOrigem.hashCode() : 0);
+        hash = 23 * hash + (this.estadoDestino != null ? this.estadoDestino.hashCode() : 0);
+        hash = 23 * hash + (this.simbolo != null ? this.simbolo.hashCode() : 0);
+        return hash;
+    }
 
 }

@@ -31,7 +31,7 @@ public class ValSeqALL extends javax.swing.JPanel {
     void observer(ALL all) {
         this.validaSequenciaGUI.clearArea();   
         this.validaSequenciaGUI.setTextAInf(
-                "M = \u03a3, Q, \u03B4, q\u2080, F, V, <, >\n");
+                "M = \u03a3, S, \u03B4, S\u2080, F, V, <, >\n");
                 //\u03B2 BETA \u00A4 simbolo inicial
         StringBuffer sb = new StringBuffer();        
         sb.append("\u03a3 = {");  // Add Simbolos
@@ -39,13 +39,13 @@ public class ValSeqALL extends javax.swing.JPanel {
             sb.append(s.getNome()+", ");                
         sb = this.validaSequenciaGUI.formataSb(sb);
                 
-        sb.append("Q = {"); // Add Estados
+        sb.append("S = {"); // Add Estados
         for(Estado e : all.getEstados())
             sb.append(e.getNome()+", ");          
         sb = this.validaSequenciaGUI.formataSb(sb);
         
         Estado aux = all.getEstIni(); // Estado Inicial
-        sb.append("Q\u2080 = ");
+        sb.append("S\u2080 = ");
         if(aux!=null)
              sb.append(aux.getNome());        
         sb.append("\n");

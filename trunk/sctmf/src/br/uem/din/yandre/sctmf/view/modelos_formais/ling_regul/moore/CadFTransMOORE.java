@@ -37,6 +37,7 @@ public class CadFTransMOORE extends javax.swing.JPanel {
         this.gui = gui;
         initComponents();
         posInitComponents();
+        estados.clear();
     }
 
     Set<Transicao> getTransicoes() {
@@ -44,25 +45,18 @@ public class CadFTransMOORE extends javax.swing.JPanel {
         for (Object o : this.listTrans.getAllItens()) {
             Matcher m = this.getMatcher(o.toString());
             Transicao t = new Transicao();
-
             if (m.find()) {
                 t.setEstOri(getEstadoCompleto(m.group(1)));
                 t.setSimbolo(new Simbolo(m.group(2).charAt(0)));
-
                 t.setEstDest(getEstadoCompleto(m.group(3)));
-               
-
                 trans.add(t);
             }
-
         }
-
         return trans;
     }
 
     void setTransicoes(Set<Transicao> transicoes) {
         this.listTrans.removeAllItens();
-
         for (Transicao t : transicoes) {
             this.addActionTrans(t.getEstOri(), t.getSimbolo(),
                     t.getEstDest(), t.getSimboloSaida());
@@ -258,6 +252,11 @@ public class CadFTransMOORE extends javax.swing.JPanel {
 
         cbEstDest.setBackground(new java.awt.Color(204, 204, 255));
         cbEstDest.setToolTipText("Estado de Destino");
+        cbEstDest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEstDestActionPerformed(evt);
+            }
+        });
         jPanel29.add(cbEstDest, java.awt.BorderLayout.CENTER);
 
         jLabel29.setFont(new java.awt.Font("Verdana", 1, 14));
@@ -464,26 +463,27 @@ public class CadFTransMOORE extends javax.swing.JPanel {
         add(jPanel1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-     private void addActionTrans(Estado estOri, Simbolo simbLido,
-            Estado estDest, Simbolo sGrav)
-     {
+    private void addActionTrans(Estado estOri, Simbolo simbLido,
+            Estado estDest, Simbolo sGrav) {
         try {
-                String[] string = fSimASerGravado.getText().split(" ");
+
             if (simbLido == null) {
                 estOri = new Estado(this.cbEstOri.getSelectedItem().toString());
                 simbLido = new Simbolo(this.fSimASerLido.getText().charAt(0));
                 estDest = new Estado(this.cbEstDest.getSelectedItem().toString());
-                
+
             }
             if (!determinismo.containsKey(estOri)) {
                 determinismo.put(estOri, new ArrayList<Simbolo>());
             }
             if (!determinismo.get(estOri).contains(simbLido)) {
                 determinismo.get(estOri).add(simbLido);
+
+                Estado e = getEstadoCompleto(estDest.getNome());
                 StringBuilder sb = new StringBuilder("\u03B4(").append(estOri.getNome()).append(", ").
                         append(simbLido.getNome()).append(") -> ").
-                        append(estDest.getNome()).append("; ").
-                        append(string[0] + " -> " + string[2]);
+                        append(e.getNome()).append("; ").
+                        append(e.getNome()).append(" -> ").append(e.getSaida().getNome());
 
                 this.listTrans.addItem(sb.toString());
             } else {
@@ -495,21 +495,37 @@ public class CadFTransMOORE extends javax.swing.JPanel {
     }
 
     private void removeActionTrans() {
-        this.listTrans.removeItens();
+        Object[] itens = this.listTrans.removeItens();
+        if (itens.length > 0) {
+            for (int i = 0; i < itens.length; i++) {
+                String estado = Character.toString(itens[i].toString().charAt(2));
+                Character simbolo = itens[i].toString().charAt(6);
+                estado = estado.concat(Character.toString(itens[i].toString().charAt(3)));
+                determinismo.get(new Estado(estado)).remove(new Simbolo(simbolo));
+            }
+        }
     }
 
     private void fSimASerGravadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fSimASerGravadoKeyReleased
-        this.controlKeyListener(this.fSimASerGravado,false);
+        this.controlKeyListener(this.fSimASerGravado, false);
     }//GEN-LAST:event_fSimASerGravadoKeyReleased
 
     private void fSimASerLidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fSimASerLidoKeyReleased
-        this.controlKeyListener(this.fSimASerLido,true);
+        this.controlKeyListener(this.fSimASerLido, true);
     }//GEN-LAST:event_fSimASerLidoKeyReleased
 
     private void cbEstOriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstOriActionPerformed
-        Estado e = getEstadoCompleto(cbEstOri.getSelectedItem().toString());
-        this.fSimASerGravado.setText(e.getNome() + " \u2192 " + e.getSaida().getNome());
     }//GEN-LAST:event_cbEstOriActionPerformed
+
+    private void cbEstDestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstDestActionPerformed
+        try {
+            Estado e = getEstadoCompleto(cbEstDest.getSelectedItem().toString());
+            this.fSimASerGravado.setText(e.getNome() + " \u2192 " + e.getSaida().getNome());
+        } catch (Exception e) {
+            System.out.println("era pra dar erro");
+        }
+
+    }//GEN-LAST:event_cbEstDestActionPerformed
 
     private final void controlKeyListener(final javax.swing.JTextField field, boolean principal) {
         String value = field.getText();
@@ -538,7 +554,6 @@ public class CadFTransMOORE extends javax.swing.JPanel {
 
         final String nomeEstado = e.getNome();
         if (oper) {
-            System.out.println("aki " + e.getSaida().getNome());
             estados.add(e);
             this.cbEstOri.addItem(nomeEstado);
             this.cbEstDest.addItem(nomeEstado);
@@ -550,7 +565,7 @@ public class CadFTransMOORE extends javax.swing.JPanel {
         }
     }
 
-    public static Estado getEstadoCompleto(String s){
+    public static Estado getEstadoCompleto(String s) {
         return estados.get(estados.indexOf(new Estado(s)));
     }
 

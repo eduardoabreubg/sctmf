@@ -543,7 +543,15 @@ public class CadFTransMEALY extends javax.swing.JPanel {
     }
 
     private void removeActionTrans() {
-        this.listTrans.removeItens();
+        Object[] itens = this.listTrans.removeItens();
+        if (itens.length > 0) {
+            for (int i = 0; i < itens.length; i++) {
+                String estado = Character.toString(itens[i].toString().charAt(2));
+                Character simbolo = itens[i].toString().charAt(6);
+                estado = estado.concat(Character.toString(itens[i].toString().charAt(3)));
+                determinismo.get(new Estado(estado)).remove(new Simbolo(simbolo));
+            }
+        }
     }
 
     private void fSimASerGravadoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_fSimASerGravadoKeyReleased

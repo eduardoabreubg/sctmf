@@ -161,7 +161,6 @@ public class SimbolosTransicaoLer extends javax.swing.JDialog {
             this.glSimbolos.addItem(s.getNome());
             this.simbolos.add(s);
         }
-
     }
 
     private void removeActionAlf() {
@@ -192,9 +191,13 @@ public class SimbolosTransicaoLer extends javax.swing.JDialog {
         for (Simbolo s : post.getSimbolos()) {
             if ((!this.simbolos.contains(s))) {
                 this.glSimbolos.addItem(s.getNome());
+                this.simbolos.add(s);
             }
         }
         super.setVisible(b);
+    }
 
+    public int getSizeGlSimbolos(){
+       return this.glSimbolos.getAllItens().size();
     }
 }

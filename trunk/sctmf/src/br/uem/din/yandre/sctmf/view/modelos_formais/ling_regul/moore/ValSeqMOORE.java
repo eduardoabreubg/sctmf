@@ -30,7 +30,7 @@ public class ValSeqMOORE extends javax.swing.JPanel {
     void observer(Moore moore) {
         this.validaSequenciaGUI.clearArea();
         this.validaSequenciaGUI.setTextAInf(
-                "M = \u03a3, Q, \u03B4, q\u2080, F, \u0394 \n");
+                "M = \u03a3, S, \u03B4, S\u2080, F, \u0394 \n");
 
         StringBuffer sb = new StringBuffer();
         sb.append("\u03a3 = {");  // Add Simbolos
@@ -39,14 +39,14 @@ public class ValSeqMOORE extends javax.swing.JPanel {
         }
         sb = this.validaSequenciaGUI.formataSb(sb);
 
-        sb.append("Q = {"); // Add Estados
+        sb.append("S = {"); // Add Estados
         for (Estado e : moore.getEstados()) {
             sb.append(e.getNome() + ", ");
         }
         sb = this.validaSequenciaGUI.formataSb(sb);
 
         Estado aux = moore.getEstadoInicial(); // Estado Inicial
-        sb.append("Q\u2080 = ");
+        sb.append("S\u2080 = ");
         if (aux != null) {
             sb.append(aux.getNome());
         }
@@ -67,9 +67,16 @@ public class ValSeqMOORE extends javax.swing.JPanel {
         }
         sb = this.validaSequenciaGUI.formataSb(sb);
 
+
+
         for (Transicao t : moore.getTransicoes()) {
             sb.append("\n") // pula a linha
-                    .append("\u03B4(").append(t.getEstOri().getNome()).append(",").append(t.getSimbolo().getNome()).append(") -> (").append(t.getEstDest().getNome()).append(" ,").append(")");
+                    .append("\u03B4(").append(t.getEstOri().getNome()).append(",").append(t.getSimbolo().getNome()).append(") -> ").append(t.getEstDest().getNome());
+        }
+
+        sb.append("\n");
+        for (Estado e : moore.getEstados()) {
+            sb.append("\n").append("\u03B4\u2080 " + e.getNome() + " -> " + e.getSaida().getNome());
         }
 
         this.validaSequenciaGUI.setTextAInf(sb.toString());

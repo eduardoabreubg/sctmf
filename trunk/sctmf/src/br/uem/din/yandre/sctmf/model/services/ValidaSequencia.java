@@ -645,37 +645,29 @@ public class ValidaSequencia implements Validacao {
         }
         Estado estadoAtual = mt.getEstIni();
         int cursor = 1;
-        //int cursor = (sequencia.length() > 0) ? 1 : 0;
         //adiciona beta na fita se for vazia
         if (sequencia.length() == 0) {
             fita.add(new Simbolo('\u03B2'));
         }
-
         while (true) {
             label:
             {
                 for (TransicaoMT t : mt.getTransicoes()) {
-                    if (t.getEstAtual().getNome().equals(estadoAtual.getNome()) && t.getSimLido().getNome().equals(fita.get(cursor).getNome())) {
+                    if (t.getEstAtual().getNome().equals(estadoAtual.getNome()) &&
+                            t.getSimLido().getNome().equals(fita.get(cursor).getNome())) {
 
-                        /*BEGIN da verificação de looping make by michelmenega*/
-                        Copia c1 = new Copia(cursor, estadoAtual.getNome(), fita.hashCode(), t.hashCode());
-
-//                        System.out.println(c1.getCopiaFita());
-//                        System.out.println(c1.getEstAtual());
-//                        System.out.println(c1.getCursor());
-//                        System.out.println("------------");
+                        /*BEGIN da verificação de looping */
+                        Copia c1 = new Copia(cursor, estadoAtual.getNome(),
+                                fita.hashCode(), t.hashCode());
 
                         if (sera.contains(c1)) {
-                            //System.out.println("OILA");
-                            //System.out.println(sera.toString());
                             JOptionPane.showMessageDialog(null, "MT em Looping", "Atenção",
                                     JOptionPane.INFORMATION_MESSAGE);
                             ShowFitaMT.getInstance().showFitaMT(fita);
                             return false;
                         }
-
                         sera.add(c1);
-                        /*END da verificação de looping make by michelmenega*/
+                        /*END da verificação de looping */
 
                         estadoAtual = t.getEstDestino(); // altera o estado
                         fita.set(cursor, t.getSimbEscrito()); // Escreve o simbolo na fita
@@ -724,12 +716,9 @@ public class ValidaSequencia implements Validacao {
         List<Copia> sera = new ArrayList<Copia>();
         boolean loop = false;
         boolean loop2 = false;
-
-
         int cursorAux;
         fita.add(new Simbolo('<'));
         // Coloca os simbolos na fita da maquina
-
         for (char c : sequencia.toCharArray()) {
             Simbolo s = new Simbolo(c);
             if (all.getAlfabeto().contains(s)) {
@@ -744,38 +733,32 @@ public class ValidaSequencia implements Validacao {
         fita.add(new Simbolo('>'));
         Estado estadoAtual = all.getEstIni();
         int cursor = 1;
-        //int cursor = (sequencia.length() > 0) ? 1 : 0;
-
-        //salva.addLast(new Copia(cursor, estadoAtual, fita));
-        System.out.println(estadoAtual.getNome());
         while (true) {
             label:
             {
                 //para cada transiçao no conjunto de transicoes
-
                 for (TransicaoALL transicaoALL : all.getTransicoes()) {
-
-                    //System.out.println(transicaoALL.getEstAtual().getNome() + " " + transicaoALL.getSimLido().getNome() + " " + transicaoALL.getEstDestino().getNome() + " " + transicaoALL.getSimbEscrito().getNome());
                     //se tiver uma transiçao com o estado igual ao estado atual
                     //e o simblido for igual ao da posiçao atual da fita
-                    if (transicaoALL.getEstAtual().getNome().equals(estadoAtual.getNome()) && transicaoALL.getSimLido().getNome().equals(fita.get(cursor).getNome())) {
-                        //System.out.println("OI");
-                        //estadoAtual = transicaoALL.getEstDestino(); // altera o estado
-                        //System.out.println(transicaoALL.getEstAtual().getNome());
+                    if (transicaoALL.getEstAtual().getNome().
+                            equals(estadoAtual.getNome()) &&
+                            transicaoALL.getSimLido().getNome().
+                            equals(fita.get(cursor).getNome())) {
+
                         if (all.getEstadosND().contains(transicaoALL.getEstAtual())) {//ele esta no grupo de estados ND?
-                            //System.out.println(transicaoALL.getEstAtual().getNome() + "33");
-
+                            //procura outra transicao e faz uma copia para executar depois
                             for (TransicaoALL tALL : all.getTransicoes()) {
-
-                                if ((tALL.getEstAtual().getNome().equals(transicaoALL.getEstAtual().getNome()) && tALL.getSimLido().getNome().equals(fita.get(cursor).getNome())) && tALL != transicaoALL) {
-
-                                    //System.out.println(tALL.getSimbEscrito().getNome());
+                                if ((tALL.getEstAtual().getNome().
+                                        equals(transicaoALL.getEstAtual().getNome()) &&
+                                        tALL.getSimLido().getNome().
+                                        equals(fita.get(cursor).getNome())) &&
+                                        tALL != transicaoALL) {
                                     try {
-                                        fitaAux = (List) fita.getClass().getMethod("clone").invoke(fita);
+                                        fitaAux = (List) fita.getClass().
+                                                getMethod("clone").invoke(fita);
                                     } catch (Exception ex) {
                                         ex.printStackTrace();
                                     }
-
                                     cursorAux = cursor;
                                     // Escreve o simbolo na fita
                                     if (tALL.getDirecao() == Direcao.DIREITA) {
@@ -784,53 +767,31 @@ public class ValidaSequencia implements Validacao {
                                         cursorAux--;
                                     }
                                     fitaAux.set(cursor, tALL.getSimbEscrito());
-                                    salva.addLast(new Copia(cursorAux, tALL.getEstDestino(), fitaAux));
+                                    salva.addLast(new Copia(cursorAux,
+                                            tALL.getEstDestino(), fitaAux));
                                     fitaAux.clear();
-
                                 }
                             }
                         }// fim verificacao de nao determinismo
-                        Copia c1 = new Copia(cursor, estadoAtual.getNome(), fita.hashCode(), transicaoALL.hashCode());
-
-                        /*System.out.println(c1.getFitaInt());
-                        System.out.println(c1.getEstAtualNome());
-                        System.out.println(c1.getCursor());
-                        System.out.println("------------");*/
-
+                        Copia c1 = new Copia(cursor, estadoAtual.getNome(),
+                                fita.hashCode(), transicaoALL.hashCode());
                         if (sera.contains(c1)) {
-                            //System.out.println("OILA");
-                            //System.out.println(sera.toString());
                             loop = true;
                             break;
-
                         }
                         sera.add(c1);
-                        //    System.out.println("NAO determinismo");
-                        //}
                         estadoAtual = transicaoALL.getEstDestino();
-                        //System.out.println(estadoAtual.getNome() + "32");
-
                         fita.set(cursor, transicaoALL.getSimbEscrito()); // Escreve o simbolo na fita
                         if (transicaoALL.getDirecao() == Direcao.DIREITA) {
                             cursor++;
                         } else {
                             cursor--;
                         }
-                        /*System.out.println(fita.get(cursor).getNome());
-                        System.out.println(estadoAtual.getNome());
-                        System.out.println(cursor);
-                        System.out.println(transicaoALL.getDirecao());
-                        System.out.println("_________");*/
 
-                        //System.out.println("break label");
                         break label;
                     }//if
                 }//for
                 sera.clear();
-
-                //System.out.println("saiu do for");
-
-
                 for (Estado e : all.getEstFinais()) {
                     if (e.getNome().equals(estadoAtual.getNome()) && (!loop)) {
                         ShowFitaALL.getInstance().showFitaALL(fita);
@@ -844,19 +805,14 @@ public class ValidaSequencia implements Validacao {
                     Copia copia = salva.removeFirst();
                     try {
                         fita.clear();
-                        fita = (List) copia.getFita().getClass().getMethod("clone").invoke(copia.getFita());
+                        fita = (List) copia.getFita().getClass().
+                                getMethod("clone").invoke(copia.getFita());
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
                     cursor = copia.getCursor();
                     estadoAtual = copia.getEstAtual();
-                    /*System.out.println("__recuperou____");
-                    System.out.println(fita.get(cursor).getNome());
-                    System.out.println(estadoAtual.getNome());
-                    System.out.println(cursor);
-                    System.out.println("__out for____");*/
                 } else {
-
                     if (loop2) {
                         JOptionPane.showMessageDialog(null, "ALL em Looping", "Atenção",
                                 JOptionPane.INFORMATION_MESSAGE);
@@ -871,9 +827,6 @@ public class ValidaSequencia implements Validacao {
         } // while
     }
 
-    /*private boolean naoDeterminismo(){
-
-    }*/
     /**
      * Faz a alteração na pilha do automato com pilha.
      */
@@ -1256,7 +1209,8 @@ public class ValidaSequencia implements Validacao {
                 for (int i = 0; i < list.size(); i++) {
                     char c = list.get(i);
 
-                    if (Character.isLetterOrDigit(c) && i > 0 && Character.isLetterOrDigit(list.get(i - 1))) {
+                    if (Character.isLetterOrDigit(c) && i > 0 &&
+                            Character.isLetterOrDigit(list.get(i - 1))) {
 
                         list.add(i, '|');
                         continue;
@@ -1292,11 +1246,8 @@ public class ValidaSequencia implements Validacao {
                 System.out.println(estadoAtual.getNome());
 
                 // caso nao exista nenhuma transicao que o leve ao proximo estado
-
             }
-
         }
-
         // Verifica se o Estado atual eh algum
         // Dos estados finais
         for (Estado x : mealy.getEstadosFinais()) {
@@ -1310,10 +1261,11 @@ public class ValidaSequencia implements Validacao {
     }
 
     private boolean valida(Moore moore, String sequencia) {
-        // Estado Inicial
-        Estado estadoAtual = moore.getEstadoInicial();
         //fita de saida
         List<Simbolo> fita = new ArrayList<Simbolo>();
+        // Estado Inicial
+        Estado estadoAtual = moore.getEstadoInicial();
+        fita.add(estadoAtual.getSaida());
         for (char c : sequencia.toCharArray()) {
             label:
             {
@@ -1321,8 +1273,8 @@ public class ValidaSequencia implements Validacao {
                     Estado e = t.getEstOri();
                     Simbolo s = t.getSimbolo();
                     if (estadoAtual.getNome().equals(e.getNome()) && c == (s.getNome())) {
+                        fita.add(t.getEstDest().getSaida());
                         estadoAtual = t.getEstDest();
-                        fita.add(estadoAtual.getSaida());
                         break label;
                     }
                 }
@@ -1345,66 +1297,45 @@ public class ValidaSequencia implements Validacao {
     private boolean valida(Post post, String sequencia) {
         // Estado Inicial
         Estado estadoAtual = new Estado("Partida");
-        //System.out.println("seq " + sequencia);
         //fita de saida
         List<Character> fita = new ArrayList<Character>();
-        //Queue<Character> fila = new Queue<Character>();
         for (int i = 0; i < sequencia.length(); i++) {
             fita.add(sequencia.charAt(i));
         }
-        System.out.println("fit " + fita);
-
-        //     for (TransicaoPost t : post.getTransicoes()) {
-        //       System.out.println(" " + t.getEstadoOrigem().getNome());
-        //     System.out.println(" " + t.getEstadoDestino().getNome());
-        //     System.out.println(" " + t.getSimbolo().getNome());
-        //}
-        // for (char c : sequencia.toCharArray()) {
         while (true) {
             label:
             {
-
                 for (TransicaoPost t : post.getTransicoes()) {
-                    // System.out.println(" " + t.getEstadoOrigem().getNome());
-                    // System.out.println(" " + t.getEstadoDestino().getNome());
-                    // System.out.println(" " + t.getSimbolo().getNome());
                     Estado e = t.getEstadoOrigem();
                     if (estadoAtual.getNome().equals(e.getNome())) {
                         //    System.out.println("entrei!! =D");
                         if (e.getNome().contains("X <- X")) { //atribuicao
-                            System.out.println("atribuicao");
                             fita.add(t.getSimbolo().getNome());
-                            System.out.println("f" + fita);
                             estadoAtual = t.getEstadoDestino();
                         } else if (e.getNome().contains("Ler")) { //leitura
-                            System.out.println("ler");
+
                             for (TransicaoPost trans : post.getTransicoes()) {
-                                System.out.println("buaaaaaaaa");
-                                System.out.println(" " + trans.getEstadoOrigem().getNome());
-                                System.out.println(" " + trans.getEstadoDestino().getNome());
-                                System.out.println(" " + trans.getSimbolo().getNome());
 
                                 if (trans.getEstadoOrigem().equals(e)) {
-                                    System.out.println("unheeeeeeeeee");
 
-                                    Character c = (fita.size() > 0) ? fita.remove(0) : '\u03BB';
-                                    System.out.println("\n"+ Character.getNumericValue(c));
-                                    System.out.println("\n"+ Character.getNumericValue(trans.getSimbolo().getNome()));
-                                    if (Character.getNumericValue(c) == Character.getNumericValue(trans.getSimbolo().getNome())) {
-                                        System.out.println("caraio");
+                                    //gambiarra feita para arrumar as passagens do lambda, sempre q chegar aki e o Type for 2 é lambda.
+                                    if ((Character.getType(trans.getSimbolo().getNome()) == 2) &&
+                                            (fita.size() == 0)) {
+                                        estadoAtual = trans.getEstadoDestino();
+                                        break;
+                                    }
+                                    Character c = (fita.size() > 0) ? fita.remove(0) : '\u30BB';
+                                    if (c == trans.getSimbolo().getNome()) {
                                         estadoAtual = trans.getEstadoDestino();
                                         break;
                                     } else {
-                                        System.out.println("porra");
                                         fita.add(0, c);
                                     }
-
                                 }
                             }
                             if (t.getEstadoOrigem().equals(estadoAtual)) {
                                 return false;
                             }
-
                         } else {
                             estadoAtual = t.getEstadoDestino();
                         }
@@ -1417,18 +1348,9 @@ public class ValidaSequencia implements Validacao {
                             return false;
                         }
                         break label;
-
                     }
-
-
-                    // caso nao exista nenhuma transicao que o leve ao proximo estado
-
                 }
-
             }
-
-            // return false;
-
         }
     }
 }
